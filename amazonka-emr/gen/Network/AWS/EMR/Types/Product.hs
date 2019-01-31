@@ -3283,11 +3283,11 @@ instance ToJSON JobFlowInstancesConfig where
 --
 -- /See:/ 'kerberosAttributes' smart constructor.
 data KerberosAttributes = KerberosAttributes'
-  { _kaADDomainJoinPassword             :: !(Maybe Text)
+  { _kaKdcAdminPassword                 :: !(Maybe Text)
+  , _kaRealm                            :: !(Maybe Text)
+  , _kaADDomainJoinPassword             :: !(Maybe Text)
   , _kaCrossRealmTrustPrincipalPassword :: !(Maybe Text)
   , _kaADDomainJoinUser                 :: !(Maybe Text)
-  , _kaRealm                            :: !Text
-  , _kaKdcAdminPassword                 :: !Text
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -3295,28 +3295,34 @@ data KerberosAttributes = KerberosAttributes'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'kaKdcAdminPassword' - The password used within the cluster for the kadmin service on the cluster-dedicated KDC, which maintains Kerberos principals, password policies, and keytabs for the cluster.
+--
+-- * 'kaRealm' - The name of the Kerberos realm to which all nodes in a cluster belong. For example, @EC2.INTERNAL@ .
+--
 -- * 'kaADDomainJoinPassword' - The Active Directory password for @ADDomainJoinUser@ .
 --
 -- * 'kaCrossRealmTrustPrincipalPassword' - Required only when establishing a cross-realm trust with a KDC in a different realm. The cross-realm principal password, which must be identical across realms.
 --
 -- * 'kaADDomainJoinUser' - Required only when establishing a cross-realm trust with an Active Directory domain. A user with sufficient privileges to join resources to the domain.
---
--- * 'kaRealm' - The name of the Kerberos realm to which all nodes in a cluster belong. For example, @EC2.INTERNAL@ .
---
--- * 'kaKdcAdminPassword' - The password used within the cluster for the kadmin service on the cluster-dedicated KDC, which maintains Kerberos principals, password policies, and keytabs for the cluster.
 kerberosAttributes
-    :: Text -- ^ 'kaRealm'
-    -> Text -- ^ 'kaKdcAdminPassword'
-    -> KerberosAttributes
-kerberosAttributes pRealm_ pKdcAdminPassword_ =
+    :: KerberosAttributes
+kerberosAttributes =
   KerberosAttributes'
-    { _kaADDomainJoinPassword = Nothing
+    { _kaKdcAdminPassword = Nothing
+    , _kaRealm = Nothing
+    , _kaADDomainJoinPassword = Nothing
     , _kaCrossRealmTrustPrincipalPassword = Nothing
     , _kaADDomainJoinUser = Nothing
-    , _kaRealm = pRealm_
-    , _kaKdcAdminPassword = pKdcAdminPassword_
     }
 
+
+-- | The password used within the cluster for the kadmin service on the cluster-dedicated KDC, which maintains Kerberos principals, password policies, and keytabs for the cluster.
+kaKdcAdminPassword :: Lens' KerberosAttributes (Maybe Text)
+kaKdcAdminPassword = lens _kaKdcAdminPassword (\ s a -> s{_kaKdcAdminPassword = a})
+
+-- | The name of the Kerberos realm to which all nodes in a cluster belong. For example, @EC2.INTERNAL@ .
+kaRealm :: Lens' KerberosAttributes (Maybe Text)
+kaRealm = lens _kaRealm (\ s a -> s{_kaRealm = a})
 
 -- | The Active Directory password for @ADDomainJoinUser@ .
 kaADDomainJoinPassword :: Lens' KerberosAttributes (Maybe Text)
@@ -3330,24 +3336,15 @@ kaCrossRealmTrustPrincipalPassword = lens _kaCrossRealmTrustPrincipalPassword (\
 kaADDomainJoinUser :: Lens' KerberosAttributes (Maybe Text)
 kaADDomainJoinUser = lens _kaADDomainJoinUser (\ s a -> s{_kaADDomainJoinUser = a})
 
--- | The name of the Kerberos realm to which all nodes in a cluster belong. For example, @EC2.INTERNAL@ .
-kaRealm :: Lens' KerberosAttributes Text
-kaRealm = lens _kaRealm (\ s a -> s{_kaRealm = a})
-
--- | The password used within the cluster for the kadmin service on the cluster-dedicated KDC, which maintains Kerberos principals, password policies, and keytabs for the cluster.
-kaKdcAdminPassword :: Lens' KerberosAttributes Text
-kaKdcAdminPassword = lens _kaKdcAdminPassword (\ s a -> s{_kaKdcAdminPassword = a})
-
 instance FromJSON KerberosAttributes where
         parseJSON
           = withObject "KerberosAttributes"
               (\ x ->
                  KerberosAttributes' <$>
-                   (x .:? "ADDomainJoinPassword") <*>
-                     (x .:? "CrossRealmTrustPrincipalPassword")
-                     <*> (x .:? "ADDomainJoinUser")
-                     <*> (x .: "Realm")
-                     <*> (x .: "KdcAdminPassword"))
+                   (x .:? "KdcAdminPassword") <*> (x .:? "Realm") <*>
+                     (x .:? "ADDomainJoinPassword")
+                     <*> (x .:? "CrossRealmTrustPrincipalPassword")
+                     <*> (x .:? "ADDomainJoinUser"))
 
 instance Hashable KerberosAttributes where
 
@@ -3357,13 +3354,13 @@ instance ToJSON KerberosAttributes where
         toJSON KerberosAttributes'{..}
           = object
               (catMaybes
-                 [("ADDomainJoinPassword" .=) <$>
+                 [("KdcAdminPassword" .=) <$> _kaKdcAdminPassword,
+                  ("Realm" .=) <$> _kaRealm,
+                  ("ADDomainJoinPassword" .=) <$>
                     _kaADDomainJoinPassword,
                   ("CrossRealmTrustPrincipalPassword" .=) <$>
                     _kaCrossRealmTrustPrincipalPassword,
-                  ("ADDomainJoinUser" .=) <$> _kaADDomainJoinUser,
-                  Just ("Realm" .= _kaRealm),
-                  Just ("KdcAdminPassword" .= _kaKdcAdminPassword)])
+                  ("ADDomainJoinUser" .=) <$> _kaADDomainJoinUser])
 
 -- | A key value pair.
 --

@@ -599,11 +599,11 @@ module Network.AWS.EMR
     -- ** KerberosAttributes
     , KerberosAttributes
     , kerberosAttributes
+    , kaKdcAdminPassword
+    , kaRealm
     , kaADDomainJoinPassword
     , kaCrossRealmTrustPrincipalPassword
     , kaADDomainJoinUser
-    , kaRealm
-    , kaKdcAdminPassword
 
     -- ** KeyValue
     , KeyValue
