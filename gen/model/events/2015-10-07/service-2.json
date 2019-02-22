@@ -1425,7 +1425,7 @@
       "members":{
         "Time":{
           "shape":"EventTime",
-          "documentation":"<p>The timestamp of the event, per <a href=\"https://www.rfc-editor.org/rfc/rfc3339.txt\">RFC3339</a>. If no timestamp is provided, the timestamp of the <a>PutEvents</a> call is used.</p>"
+          "documentation":"<p>The time stamp of the event, per <a href=\"https://www.rfc-editor.org/rfc/rfc3339.txt\">RFC3339</a>. If no time stamp is provided, the time stamp of the <a>PutEvents</a> call is used.</p>"
         },
         "Source":{
           "shape":"String",
