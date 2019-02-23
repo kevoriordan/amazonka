@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- uses the acl subresource to set the access control list (ACL) permissions for an object that already exists in a bucket
+--
+--
 module Network.AWS.S3.PutObjectACL
     (
     -- * Creating a Request

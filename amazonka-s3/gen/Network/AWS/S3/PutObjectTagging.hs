@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the supplied tag-set to an object that already exists in a bucket
+--
+--
 module Network.AWS.S3.PutObjectTagging
     (
     -- * Creating a Request

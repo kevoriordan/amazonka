@@ -138,14 +138,16 @@ instance NFData EvaluationResult where
 --
 -- /See:/ 'policy' smart constructor.
 data Policy = Policy'
-  { _pPolicyId                  :: !(Maybe Text)
-  , _pResourceTags              :: !(Maybe [ResourceTag])
-  , _pPolicyUpdateToken         :: !(Maybe Text)
-  , _pPolicyName                :: !Text
+  { _pPolicyId :: !(Maybe Text)
+  , _pResourceTags :: !(Maybe [ResourceTag])
+  , _pPolicyUpdateToken :: !(Maybe Text)
+  , _pExcludeMap :: !(Maybe (Map CustomerPolicyScopeIdType [Text]))
+  , _pIncludeMap :: !(Maybe (Map CustomerPolicyScopeIdType [Text]))
+  , _pPolicyName :: !Text
   , _pSecurityServicePolicyData :: !SecurityServicePolicyData
-  , _pResourceType              :: !Text
-  , _pExcludeResourceTags       :: !Bool
-  , _pRemediationEnabled        :: !Bool
+  , _pResourceType :: !Text
+  , _pExcludeResourceTags :: !Bool
+  , _pRemediationEnabled :: !Bool
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -158,6 +160,10 @@ data Policy = Policy'
 -- * 'pResourceTags' - An array of @ResourceTag@ objects.
 --
 -- * 'pPolicyUpdateToken' - A unique identifier for each update to the policy. When issuing a @PutPolicy@ request, the @PolicyUpdateToken@ in the request must match the @PolicyUpdateToken@ of the current policy version. To get the @PolicyUpdateToken@ of the current policy version, use a @GetPolicy@ request.
+--
+-- * 'pExcludeMap' - Specifies the AWS account IDs to exclude from the policy. The @IncludeMap@ values are evaluated first, with all the appropriate account IDs added to the policy. Then the accounts listed in @ExcludeMap@ are removed, resulting in the final list of accounts to add to the policy. The key to the map is @ACCOUNT@ . For example, a valid @ExcludeMap@ would be @{“ACCOUNT” : [“accountID1”, “accountID2”]}@ .
+--
+-- * 'pIncludeMap' - Specifies the AWS account IDs to include in the policy. If @IncludeMap@ is null, all accounts in the organization in AWS Organizations are included in the policy. If @IncludeMap@ is not null, only values listed in @IncludeMap@ are included in the policy. The key to the map is @ACCOUNT@ . For example, a valid @IncludeMap@ would be @{“ACCOUNT” : [“accountID1”, “accountID2”]}@ .
 --
 -- * 'pPolicyName' - The friendly name of the AWS Firewall Manager policy.
 --
@@ -180,6 +186,8 @@ policy pPolicyName_ pSecurityServicePolicyData_ pResourceType_ pExcludeResourceT
     { _pPolicyId = Nothing
     , _pResourceTags = Nothing
     , _pPolicyUpdateToken = Nothing
+    , _pExcludeMap = Nothing
+    , _pIncludeMap = Nothing
     , _pPolicyName = pPolicyName_
     , _pSecurityServicePolicyData = pSecurityServicePolicyData_
     , _pResourceType = pResourceType_
@@ -199,6 +207,14 @@ pResourceTags = lens _pResourceTags (\ s a -> s{_pResourceTags = a}) . _Default 
 -- | A unique identifier for each update to the policy. When issuing a @PutPolicy@ request, the @PolicyUpdateToken@ in the request must match the @PolicyUpdateToken@ of the current policy version. To get the @PolicyUpdateToken@ of the current policy version, use a @GetPolicy@ request.
 pPolicyUpdateToken :: Lens' Policy (Maybe Text)
 pPolicyUpdateToken = lens _pPolicyUpdateToken (\ s a -> s{_pPolicyUpdateToken = a})
+
+-- | Specifies the AWS account IDs to exclude from the policy. The @IncludeMap@ values are evaluated first, with all the appropriate account IDs added to the policy. Then the accounts listed in @ExcludeMap@ are removed, resulting in the final list of accounts to add to the policy. The key to the map is @ACCOUNT@ . For example, a valid @ExcludeMap@ would be @{“ACCOUNT” : [“accountID1”, “accountID2”]}@ .
+pExcludeMap :: Lens' Policy (HashMap CustomerPolicyScopeIdType [Text])
+pExcludeMap = lens _pExcludeMap (\ s a -> s{_pExcludeMap = a}) . _Default . _Map
+
+-- | Specifies the AWS account IDs to include in the policy. If @IncludeMap@ is null, all accounts in the organization in AWS Organizations are included in the policy. If @IncludeMap@ is not null, only values listed in @IncludeMap@ are included in the policy. The key to the map is @ACCOUNT@ . For example, a valid @IncludeMap@ would be @{“ACCOUNT” : [“accountID1”, “accountID2”]}@ .
+pIncludeMap :: Lens' Policy (HashMap CustomerPolicyScopeIdType [Text])
+pIncludeMap = lens _pIncludeMap (\ s a -> s{_pIncludeMap = a}) . _Default . _Map
 
 -- | The friendly name of the AWS Firewall Manager policy.
 pPolicyName :: Lens' Policy Text
@@ -228,6 +244,8 @@ instance FromJSON Policy where
                    (x .:? "PolicyId") <*>
                      (x .:? "ResourceTags" .!= mempty)
                      <*> (x .:? "PolicyUpdateToken")
+                     <*> (x .:? "ExcludeMap" .!= mempty)
+                     <*> (x .:? "IncludeMap" .!= mempty)
                      <*> (x .: "PolicyName")
                      <*> (x .: "SecurityServicePolicyData")
                      <*> (x .: "ResourceType")
@@ -245,6 +263,8 @@ instance ToJSON Policy where
                  [("PolicyId" .=) <$> _pPolicyId,
                   ("ResourceTags" .=) <$> _pResourceTags,
                   ("PolicyUpdateToken" .=) <$> _pPolicyUpdateToken,
+                  ("ExcludeMap" .=) <$> _pExcludeMap,
+                  ("IncludeMap" .=) <$> _pIncludeMap,
                   Just ("PolicyName" .= _pPolicyName),
                   Just
                     ("SecurityServicePolicyData" .=
@@ -264,6 +284,7 @@ data PolicyComplianceDetail = PolicyComplianceDetail'
   , _pcdPolicyId                :: !(Maybe Text)
   , _pcdViolators               :: !(Maybe [ComplianceViolator])
   , _pcdEvaluationLimitExceeded :: !(Maybe Bool)
+  , _pcdIssueInfoMap            :: !(Maybe (Map DependentServiceName Text))
   , _pcdPolicyOwner             :: !(Maybe Text)
   , _pcdMemberAccount           :: !(Maybe Text)
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
@@ -281,6 +302,8 @@ data PolicyComplianceDetail = PolicyComplianceDetail'
 --
 -- * 'pcdEvaluationLimitExceeded' - Indicates if over 100 resources are non-compliant with the AWS Firewall Manager policy.
 --
+-- * 'pcdIssueInfoMap' - Details about problems with dependent services, such as AWS WAF or AWS Config, that are causing a resource to be non-compliant. The details include the name of the dependent service and the error message received that indicates the problem with the service.
+--
 -- * 'pcdPolicyOwner' - The AWS account that created the AWS Firewall Manager policy.
 --
 -- * 'pcdMemberAccount' - The AWS account ID.
@@ -292,6 +315,7 @@ policyComplianceDetail =
     , _pcdPolicyId = Nothing
     , _pcdViolators = Nothing
     , _pcdEvaluationLimitExceeded = Nothing
+    , _pcdIssueInfoMap = Nothing
     , _pcdPolicyOwner = Nothing
     , _pcdMemberAccount = Nothing
     }
@@ -313,6 +337,10 @@ pcdViolators = lens _pcdViolators (\ s a -> s{_pcdViolators = a}) . _Default . _
 pcdEvaluationLimitExceeded :: Lens' PolicyComplianceDetail (Maybe Bool)
 pcdEvaluationLimitExceeded = lens _pcdEvaluationLimitExceeded (\ s a -> s{_pcdEvaluationLimitExceeded = a})
 
+-- | Details about problems with dependent services, such as AWS WAF or AWS Config, that are causing a resource to be non-compliant. The details include the name of the dependent service and the error message received that indicates the problem with the service.
+pcdIssueInfoMap :: Lens' PolicyComplianceDetail (HashMap DependentServiceName Text)
+pcdIssueInfoMap = lens _pcdIssueInfoMap (\ s a -> s{_pcdIssueInfoMap = a}) . _Default . _Map
+
 -- | The AWS account that created the AWS Firewall Manager policy.
 pcdPolicyOwner :: Lens' PolicyComplianceDetail (Maybe Text)
 pcdPolicyOwner = lens _pcdPolicyOwner (\ s a -> s{_pcdPolicyOwner = a})
@@ -329,6 +357,7 @@ instance FromJSON PolicyComplianceDetail where
                    (x .:? "ExpiredAt") <*> (x .:? "PolicyId") <*>
                      (x .:? "Violators" .!= mempty)
                      <*> (x .:? "EvaluationLimitExceeded")
+                     <*> (x .:? "IssueInfoMap" .!= mempty)
                      <*> (x .:? "PolicyOwner")
                      <*> (x .:? "MemberAccount"))
 
@@ -346,6 +375,7 @@ data PolicyComplianceStatus = PolicyComplianceStatus'
   , _pcsLastUpdated       :: !(Maybe POSIX)
   , _pcsPolicyName        :: !(Maybe Text)
   , _pcsPolicyId          :: !(Maybe Text)
+  , _pcsIssueInfoMap      :: !(Maybe (Map DependentServiceName Text))
   , _pcsPolicyOwner       :: !(Maybe Text)
   , _pcsMemberAccount     :: !(Maybe Text)
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
@@ -363,6 +393,8 @@ data PolicyComplianceStatus = PolicyComplianceStatus'
 --
 -- * 'pcsPolicyId' - The ID of the AWS Firewall Manager policy.
 --
+-- * 'pcsIssueInfoMap' - Details about problems with dependent services, such as AWS WAF or AWS Config, that are causing a resource to be non-compliant. The details include the name of the dependent service and the error message received that indicates the problem with the service.
+--
 -- * 'pcsPolicyOwner' - The AWS account that created the AWS Firewall Manager policy.
 --
 -- * 'pcsMemberAccount' - The member account ID.
@@ -374,6 +406,7 @@ policyComplianceStatus =
     , _pcsLastUpdated = Nothing
     , _pcsPolicyName = Nothing
     , _pcsPolicyId = Nothing
+    , _pcsIssueInfoMap = Nothing
     , _pcsPolicyOwner = Nothing
     , _pcsMemberAccount = Nothing
     }
@@ -395,6 +428,10 @@ pcsPolicyName = lens _pcsPolicyName (\ s a -> s{_pcsPolicyName = a})
 pcsPolicyId :: Lens' PolicyComplianceStatus (Maybe Text)
 pcsPolicyId = lens _pcsPolicyId (\ s a -> s{_pcsPolicyId = a})
 
+-- | Details about problems with dependent services, such as AWS WAF or AWS Config, that are causing a resource to be non-compliant. The details include the name of the dependent service and the error message received that indicates the problem with the service.
+pcsIssueInfoMap :: Lens' PolicyComplianceStatus (HashMap DependentServiceName Text)
+pcsIssueInfoMap = lens _pcsIssueInfoMap (\ s a -> s{_pcsIssueInfoMap = a}) . _Default . _Map
+
 -- | The AWS account that created the AWS Firewall Manager policy.
 pcsPolicyOwner :: Lens' PolicyComplianceStatus (Maybe Text)
 pcsPolicyOwner = lens _pcsPolicyOwner (\ s a -> s{_pcsPolicyOwner = a})
@@ -412,6 +449,7 @@ instance FromJSON PolicyComplianceStatus where
                      (x .:? "LastUpdated")
                      <*> (x .:? "PolicyName")
                      <*> (x .:? "PolicyId")
+                     <*> (x .:? "IssueInfoMap" .!= mempty)
                      <*> (x .:? "PolicyOwner")
                      <*> (x .:? "MemberAccount"))
 

@@ -29,6 +29,12 @@ module Network.AWS.Athena.Types
     -- * QueryExecutionState
     , QueryExecutionState (..)
 
+    -- * StatementType
+    , StatementType (..)
+
+    -- * WorkGroupState
+    , WorkGroupState (..)
+
     -- * ColumnInfo
     , ColumnInfo
     , columnInfo
@@ -59,6 +65,7 @@ module Network.AWS.Athena.Types
     , namedQuery
     , nqNamedQueryId
     , nqDescription
+    , nqWorkGroup
     , nqName
     , nqDatabase
     , nqQueryString
@@ -70,8 +77,10 @@ module Network.AWS.Athena.Types
     , qeQueryExecutionContext
     , qeResultConfiguration
     , qeQuery
+    , qeStatementType
     , qeStatistics
     , qeQueryExecutionId
+    , qeWorkGroup
 
     -- * QueryExecutionContext
     , QueryExecutionContext
@@ -97,6 +106,14 @@ module Network.AWS.Athena.Types
     , resultConfiguration
     , rcEncryptionConfiguration
     , rcOutputLocation
+
+    -- * ResultConfigurationUpdates
+    , ResultConfigurationUpdates
+    , resultConfigurationUpdates
+    , rcuRemoveOutputLocation
+    , rcuRemoveEncryptionConfiguration
+    , rcuEncryptionConfiguration
+    , rcuOutputLocation
 
     -- * ResultSet
     , ResultSet
@@ -127,6 +144,40 @@ module Network.AWS.Athena.Types
     , uqeiErrorCode
     , uqeiQueryExecutionId
     , uqeiErrorMessage
+
+    -- * WorkGroup
+    , WorkGroup
+    , workGroup
+    , wgCreationTime
+    , wgState
+    , wgConfiguration
+    , wgDescription
+    , wgName
+
+    -- * WorkGroupConfiguration
+    , WorkGroupConfiguration
+    , workGroupConfiguration
+    , wgcResultConfiguration
+    , wgcBytesScannedCutoffPerQuery
+    , wgcEnforceWorkGroupConfiguration
+    , wgcPublishCloudWatchMetricsEnabled
+
+    -- * WorkGroupConfigurationUpdates
+    , WorkGroupConfigurationUpdates
+    , workGroupConfigurationUpdates
+    , wgcuResultConfigurationUpdates
+    , wgcuBytesScannedCutoffPerQuery
+    , wgcuRemoveBytesScannedCutoffPerQuery
+    , wgcuEnforceWorkGroupConfiguration
+    , wgcuPublishCloudWatchMetricsEnabled
+
+    -- * WorkGroupSummary
+    , WorkGroupSummary
+    , workGroupSummary
+    , wgsCreationTime
+    , wgsState
+    , wgsName
+    , wgsDescription
     ) where
 
 import Network.AWS.Athena.Types.Product

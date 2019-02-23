@@ -25,8 +25,8 @@ module Network.AWS.GuardDuty.StopMonitoringMembers
       stopMonitoringMembers
     , StopMonitoringMembers
     -- * Request Lenses
-    , smmAccountIds
     , smmDetectorId
+    , smmAccountIds
 
     -- * Destructuring the Response
     , stopMonitoringMembersResponse
@@ -47,8 +47,8 @@ import Network.AWS.Response
 --
 -- /See:/ 'stopMonitoringMembers' smart constructor.
 data StopMonitoringMembers = StopMonitoringMembers'
-  { _smmAccountIds :: !(Maybe [Text])
-  , _smmDetectorId :: !Text
+  { _smmDetectorId :: !Text
+  , _smmAccountIds :: ![Text]
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -56,24 +56,24 @@ data StopMonitoringMembers = StopMonitoringMembers'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'smmAccountIds' - A list of account IDs of the GuardDuty member accounts whose findings you want the master account to stop monitoring.
---
 -- * 'smmDetectorId' - The unique ID of the detector of the GuardDuty account that you want to stop from monitor members' findings.
+--
+-- * 'smmAccountIds' - A list of account IDs of the GuardDuty member accounts whose findings you want the master account to stop monitoring.
 stopMonitoringMembers
     :: Text -- ^ 'smmDetectorId'
     -> StopMonitoringMembers
 stopMonitoringMembers pDetectorId_ =
   StopMonitoringMembers'
-    {_smmAccountIds = Nothing, _smmDetectorId = pDetectorId_}
+    {_smmDetectorId = pDetectorId_, _smmAccountIds = mempty}
 
-
--- | A list of account IDs of the GuardDuty member accounts whose findings you want the master account to stop monitoring.
-smmAccountIds :: Lens' StopMonitoringMembers [Text]
-smmAccountIds = lens _smmAccountIds (\ s a -> s{_smmAccountIds = a}) . _Default . _Coerce
 
 -- | The unique ID of the detector of the GuardDuty account that you want to stop from monitor members' findings.
 smmDetectorId :: Lens' StopMonitoringMembers Text
 smmDetectorId = lens _smmDetectorId (\ s a -> s{_smmDetectorId = a})
+
+-- | A list of account IDs of the GuardDuty member accounts whose findings you want the master account to stop monitoring.
+smmAccountIds :: Lens' StopMonitoringMembers [Text]
+smmAccountIds = lens _smmAccountIds (\ s a -> s{_smmAccountIds = a}) . _Coerce
 
 instance AWSRequest StopMonitoringMembers where
         type Rs StopMonitoringMembers =
@@ -100,7 +100,7 @@ instance ToHeaders StopMonitoringMembers where
 instance ToJSON StopMonitoringMembers where
         toJSON StopMonitoringMembers'{..}
           = object
-              (catMaybes [("accountIds" .=) <$> _smmAccountIds])
+              (catMaybes [Just ("accountIds" .= _smmAccountIds)])
 
 instance ToPath StopMonitoringMembers where
         toPath StopMonitoringMembers'{..}

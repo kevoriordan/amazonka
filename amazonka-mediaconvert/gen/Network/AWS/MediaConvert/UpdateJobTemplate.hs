@@ -25,6 +25,7 @@ module Network.AWS.MediaConvert.UpdateJobTemplate
       updateJobTemplate
     , UpdateJobTemplate
     -- * Request Lenses
+    , ujtAccelerationSettings
     , ujtSettings
     , ujtCategory
     , ujtQueue
@@ -48,17 +49,20 @@ import Network.AWS.Response
 
 -- | /See:/ 'updateJobTemplate' smart constructor.
 data UpdateJobTemplate = UpdateJobTemplate'
-  { _ujtSettings    :: !(Maybe JobTemplateSettings)
-  , _ujtCategory    :: !(Maybe Text)
-  , _ujtQueue       :: !(Maybe Text)
-  , _ujtDescription :: !(Maybe Text)
-  , _ujtName        :: !Text
+  { _ujtAccelerationSettings :: !(Maybe AccelerationSettings)
+  , _ujtSettings             :: !(Maybe JobTemplateSettings)
+  , _ujtCategory             :: !(Maybe Text)
+  , _ujtQueue                :: !(Maybe Text)
+  , _ujtDescription          :: !(Maybe Text)
+  , _ujtName                 :: !Text
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
 -- | Creates a value of 'UpdateJobTemplate' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ujtAccelerationSettings' - This is a beta feature. If you are interested in using this feature, please contact AWS customer support.
 --
 -- * 'ujtSettings' - Undocumented member.
 --
@@ -74,13 +78,18 @@ updateJobTemplate
     -> UpdateJobTemplate
 updateJobTemplate pName_ =
   UpdateJobTemplate'
-    { _ujtSettings = Nothing
+    { _ujtAccelerationSettings = Nothing
+    , _ujtSettings = Nothing
     , _ujtCategory = Nothing
     , _ujtQueue = Nothing
     , _ujtDescription = Nothing
     , _ujtName = pName_
     }
 
+
+-- | This is a beta feature. If you are interested in using this feature, please contact AWS customer support.
+ujtAccelerationSettings :: Lens' UpdateJobTemplate (Maybe AccelerationSettings)
+ujtAccelerationSettings = lens _ujtAccelerationSettings (\ s a -> s{_ujtAccelerationSettings = a})
 
 -- | Undocumented member.
 ujtSettings :: Lens' UpdateJobTemplate (Maybe JobTemplateSettings)
@@ -126,7 +135,9 @@ instance ToJSON UpdateJobTemplate where
         toJSON UpdateJobTemplate'{..}
           = object
               (catMaybes
-                 [("settings" .=) <$> _ujtSettings,
+                 [("accelerationSettings" .=) <$>
+                    _ujtAccelerationSettings,
+                  ("settings" .=) <$> _ujtSettings,
                   ("category" .=) <$> _ujtCategory,
                   ("queue" .=) <$> _ujtQueue,
                   ("description" .=) <$> _ujtDescription])

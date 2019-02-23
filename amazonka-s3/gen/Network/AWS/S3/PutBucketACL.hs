@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the permissions on a bucket using access control lists (ACL).
+--
+--
 module Network.AWS.S3.PutBucketACL
     (
     -- * Creating a Request

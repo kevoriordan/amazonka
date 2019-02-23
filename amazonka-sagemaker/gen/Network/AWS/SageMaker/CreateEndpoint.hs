@@ -29,6 +29,8 @@
 --
 -- For an example, see <http://docs.aws.amazon.com/sagemaker/latest/dg/ex1.html Exercise 1: Using the K-Means Algorithm Provided by Amazon SageMaker> .
 --
+-- If any of the models hosted at this endpoint get model data from an Amazon S3 location, Amazon SageMaker uses AWS Security Token Service to download model artifacts from the S3 path you provided. AWS STS is activated in your IAM user account by default. If you previously deactivated AWS STS for a region, you need to reactivate AWS STS for that region. For more information, see <http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html Activating and Deactivating AWS STS i an AWS Region> in the /AWS Identity and Access Management User Guide/ .
+--
 module Network.AWS.SageMaker.CreateEndpoint
     (
     -- * Creating a Request

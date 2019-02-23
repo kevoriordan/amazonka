@@ -262,6 +262,7 @@ instance NFData ActionContext where
 data ActionDeclaration = ActionDeclaration'
   { _adOutputArtifacts :: !(Maybe [OutputArtifact])
   , _adRunOrder        :: !(Maybe Nat)
+  , _adRegion          :: !(Maybe Text)
   , _adConfiguration   :: !(Maybe (Map Text Text))
   , _adInputArtifacts  :: !(Maybe [InputArtifact])
   , _adRoleARN         :: !(Maybe Text)
@@ -277,6 +278,8 @@ data ActionDeclaration = ActionDeclaration'
 -- * 'adOutputArtifacts' - The name or ID of the result of the action declaration, such as a test or build artifact.
 --
 -- * 'adRunOrder' - The order in which actions are run.
+--
+-- * 'adRegion' - The action declaration's AWS Region, such as us-east-1.
 --
 -- * 'adConfiguration' - The action declaration's configuration.
 --
@@ -295,6 +298,7 @@ actionDeclaration pName_ pActionTypeId_ =
   ActionDeclaration'
     { _adOutputArtifacts = Nothing
     , _adRunOrder = Nothing
+    , _adRegion = Nothing
     , _adConfiguration = Nothing
     , _adInputArtifacts = Nothing
     , _adRoleARN = Nothing
@@ -310,6 +314,10 @@ adOutputArtifacts = lens _adOutputArtifacts (\ s a -> s{_adOutputArtifacts = a})
 -- | The order in which actions are run.
 adRunOrder :: Lens' ActionDeclaration (Maybe Natural)
 adRunOrder = lens _adRunOrder (\ s a -> s{_adRunOrder = a}) . mapping _Nat
+
+-- | The action declaration's AWS Region, such as us-east-1.
+adRegion :: Lens' ActionDeclaration (Maybe Text)
+adRegion = lens _adRegion (\ s a -> s{_adRegion = a})
 
 -- | The action declaration's configuration.
 adConfiguration :: Lens' ActionDeclaration (HashMap Text Text)
@@ -338,6 +346,7 @@ instance FromJSON ActionDeclaration where
                  ActionDeclaration' <$>
                    (x .:? "outputArtifacts" .!= mempty) <*>
                      (x .:? "runOrder")
+                     <*> (x .:? "region")
                      <*> (x .:? "configuration" .!= mempty)
                      <*> (x .:? "inputArtifacts" .!= mempty)
                      <*> (x .:? "roleArn")
@@ -354,6 +363,7 @@ instance ToJSON ActionDeclaration where
               (catMaybes
                  [("outputArtifacts" .=) <$> _adOutputArtifacts,
                   ("runOrder" .=) <$> _adRunOrder,
+                  ("region" .=) <$> _adRegion,
                   ("configuration" .=) <$> _adConfiguration,
                   ("inputArtifacts" .=) <$> _adInputArtifacts,
                   ("roleArn" .=) <$> _adRoleARN,
@@ -1926,11 +1936,12 @@ instance NFData PipelineContext where
 --
 -- /See:/ 'pipelineDeclaration' smart constructor.
 data PipelineDeclaration = PipelineDeclaration'
-  { _pdVersion       :: !(Maybe Nat)
-  , _pdName          :: !Text
-  , _pdRoleARN       :: !Text
-  , _pdArtifactStore :: !ArtifactStore
-  , _pdStages        :: ![StageDeclaration]
+  { _pdArtifactStores :: !(Maybe (Map Text ArtifactStore))
+  , _pdArtifactStore  :: !(Maybe ArtifactStore)
+  , _pdVersion        :: !(Maybe Nat)
+  , _pdName           :: !Text
+  , _pdRoleARN        :: !Text
+  , _pdStages         :: ![StageDeclaration]
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -1938,29 +1949,39 @@ data PipelineDeclaration = PipelineDeclaration'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'pdArtifactStores' - A mapping of artifactStore objects and their corresponding regions. There must be an artifact store for the pipeline region and for each cross-region action within the pipeline. You can only use either artifactStore or artifactStores, not both. If you create a cross-region action in your pipeline, you must use artifactStores.
+--
+-- * 'pdArtifactStore' - Represents information about the Amazon S3 bucket where artifacts are stored for the pipeline.
+--
 -- * 'pdVersion' - The version number of the pipeline. A new pipeline always has a version number of 1. This number is automatically incremented when a pipeline is updated.
 --
 -- * 'pdName' - The name of the action to be performed.
 --
 -- * 'pdRoleARN' - The Amazon Resource Name (ARN) for AWS CodePipeline to use to either perform actions with no actionRoleArn, or to use to assume roles for actions with an actionRoleArn.
 --
--- * 'pdArtifactStore' - Represents information about the Amazon S3 bucket where artifacts are stored for the pipeline.
---
 -- * 'pdStages' - The stage in which to perform the action.
 pipelineDeclaration
     :: Text -- ^ 'pdName'
     -> Text -- ^ 'pdRoleARN'
-    -> ArtifactStore -- ^ 'pdArtifactStore'
     -> PipelineDeclaration
-pipelineDeclaration pName_ pRoleARN_ pArtifactStore_ =
+pipelineDeclaration pName_ pRoleARN_ =
   PipelineDeclaration'
-    { _pdVersion = Nothing
+    { _pdArtifactStores = Nothing
+    , _pdArtifactStore = Nothing
+    , _pdVersion = Nothing
     , _pdName = pName_
     , _pdRoleARN = pRoleARN_
-    , _pdArtifactStore = pArtifactStore_
     , _pdStages = mempty
     }
 
+
+-- | A mapping of artifactStore objects and their corresponding regions. There must be an artifact store for the pipeline region and for each cross-region action within the pipeline. You can only use either artifactStore or artifactStores, not both. If you create a cross-region action in your pipeline, you must use artifactStores.
+pdArtifactStores :: Lens' PipelineDeclaration (HashMap Text ArtifactStore)
+pdArtifactStores = lens _pdArtifactStores (\ s a -> s{_pdArtifactStores = a}) . _Default . _Map
+
+-- | Represents information about the Amazon S3 bucket where artifacts are stored for the pipeline.
+pdArtifactStore :: Lens' PipelineDeclaration (Maybe ArtifactStore)
+pdArtifactStore = lens _pdArtifactStore (\ s a -> s{_pdArtifactStore = a})
 
 -- | The version number of the pipeline. A new pipeline always has a version number of 1. This number is automatically incremented when a pipeline is updated.
 pdVersion :: Lens' PipelineDeclaration (Maybe Natural)
@@ -1974,10 +1995,6 @@ pdName = lens _pdName (\ s a -> s{_pdName = a})
 pdRoleARN :: Lens' PipelineDeclaration Text
 pdRoleARN = lens _pdRoleARN (\ s a -> s{_pdRoleARN = a})
 
--- | Represents information about the Amazon S3 bucket where artifacts are stored for the pipeline.
-pdArtifactStore :: Lens' PipelineDeclaration ArtifactStore
-pdArtifactStore = lens _pdArtifactStore (\ s a -> s{_pdArtifactStore = a})
-
 -- | The stage in which to perform the action.
 pdStages :: Lens' PipelineDeclaration [StageDeclaration]
 pdStages = lens _pdStages (\ s a -> s{_pdStages = a}) . _Coerce
@@ -1987,9 +2004,11 @@ instance FromJSON PipelineDeclaration where
           = withObject "PipelineDeclaration"
               (\ x ->
                  PipelineDeclaration' <$>
-                   (x .:? "version") <*> (x .: "name") <*>
-                     (x .: "roleArn")
-                     <*> (x .: "artifactStore")
+                   (x .:? "artifactStores" .!= mempty) <*>
+                     (x .:? "artifactStore")
+                     <*> (x .:? "version")
+                     <*> (x .: "name")
+                     <*> (x .: "roleArn")
                      <*> (x .:? "stages" .!= mempty))
 
 instance Hashable PipelineDeclaration where
@@ -2000,10 +2019,11 @@ instance ToJSON PipelineDeclaration where
         toJSON PipelineDeclaration'{..}
           = object
               (catMaybes
-                 [("version" .=) <$> _pdVersion,
+                 [("artifactStores" .=) <$> _pdArtifactStores,
+                  ("artifactStore" .=) <$> _pdArtifactStore,
+                  ("version" .=) <$> _pdVersion,
                   Just ("name" .= _pdName),
                   Just ("roleArn" .= _pdRoleARN),
-                  Just ("artifactStore" .= _pdArtifactStore),
                   Just ("stages" .= _pdStages)])
 
 -- | Represents information about an execution of a pipeline.
@@ -2103,7 +2123,7 @@ data PipelineExecutionSummary = PipelineExecutionSummary'
 --
 -- * 'pesPipelineExecutionId' - The ID of the pipeline execution.
 --
--- * 'pesSourceRevisions' - Undocumented member.
+-- * 'pesSourceRevisions' - A list of the source artifact revisions that initiated a pipeline execution.
 --
 -- * 'pesLastUpdateTime' - The date and time of the last change to the pipeline execution, in timestamp format.
 pipelineExecutionSummary
@@ -2130,7 +2150,7 @@ pesStartTime = lens _pesStartTime (\ s a -> s{_pesStartTime = a}) . mapping _Tim
 pesPipelineExecutionId :: Lens' PipelineExecutionSummary (Maybe Text)
 pesPipelineExecutionId = lens _pesPipelineExecutionId (\ s a -> s{_pesPipelineExecutionId = a})
 
--- | Undocumented member.
+-- | A list of the source artifact revisions that initiated a pipeline execution.
 pesSourceRevisions :: Lens' PipelineExecutionSummary [SourceRevision]
 pesSourceRevisions = lens _pesSourceRevisions (\ s a -> s{_pesSourceRevisions = a}) . _Default . _Coerce
 
@@ -2314,7 +2334,11 @@ instance Hashable S3ArtifactLocation where
 
 instance NFData S3ArtifactLocation where
 
--- | /See:/ 'sourceRevision' smart constructor.
+-- | Information about the version (or revision) of a source artifact that initiated a pipeline execution.
+--
+--
+--
+-- /See:/ 'sourceRevision' smart constructor.
 data SourceRevision = SourceRevision'
   { _srRevisionSummary :: !(Maybe Text)
   , _srRevisionURL     :: !(Maybe Text)
@@ -2327,13 +2351,13 @@ data SourceRevision = SourceRevision'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'srRevisionSummary' - Undocumented member.
+-- * 'srRevisionSummary' - Summary information about the most recent revision of the artifact. For GitHub and AWS CodeCommit repositories, the commit message. For Amazon S3 buckets or actions, the user-provided content of a @codepipeline-artifact-revision-summary@ key specified in the object metadata.
 --
--- * 'srRevisionURL' - Undocumented member.
+-- * 'srRevisionURL' - The commit ID for the artifact revision. For artifacts stored in GitHub or AWS CodeCommit repositories, the commit ID is linked to a commit details page.
 --
--- * 'srRevisionId' - Undocumented member.
+-- * 'srRevisionId' - The system-generated unique ID that identifies the revision number of the artifact.
 --
--- * 'srActionName' - Undocumented member.
+-- * 'srActionName' - The name of the action that processed the revision to the source artifact.
 sourceRevision
     :: Text -- ^ 'srActionName'
     -> SourceRevision
@@ -2346,19 +2370,19 @@ sourceRevision pActionName_ =
     }
 
 
--- | Undocumented member.
+-- | Summary information about the most recent revision of the artifact. For GitHub and AWS CodeCommit repositories, the commit message. For Amazon S3 buckets or actions, the user-provided content of a @codepipeline-artifact-revision-summary@ key specified in the object metadata.
 srRevisionSummary :: Lens' SourceRevision (Maybe Text)
 srRevisionSummary = lens _srRevisionSummary (\ s a -> s{_srRevisionSummary = a})
 
--- | Undocumented member.
+-- | The commit ID for the artifact revision. For artifacts stored in GitHub or AWS CodeCommit repositories, the commit ID is linked to a commit details page.
 srRevisionURL :: Lens' SourceRevision (Maybe Text)
 srRevisionURL = lens _srRevisionURL (\ s a -> s{_srRevisionURL = a})
 
--- | Undocumented member.
+-- | The system-generated unique ID that identifies the revision number of the artifact.
 srRevisionId :: Lens' SourceRevision (Maybe Text)
 srRevisionId = lens _srRevisionId (\ s a -> s{_srRevisionId = a})
 
--- | Undocumented member.
+-- | The name of the action that processed the revision to the source artifact.
 srActionName :: Lens' SourceRevision Text
 srActionName = lens _srActionName (\ s a -> s{_srActionName = a})
 
@@ -2838,7 +2862,11 @@ instance Hashable TransitionState where
 
 instance NFData TransitionState where
 
--- | /See:/ 'webhookAuthConfiguration' smart constructor.
+-- | The authentication applied to incoming webhook trigger requests.
+--
+--
+--
+-- /See:/ 'webhookAuthConfiguration' smart constructor.
 data WebhookAuthConfiguration = WebhookAuthConfiguration'
   { _wacAllowedIPRange :: !(Maybe Text)
   , _wacSecretToken    :: !(Maybe Text)
@@ -2849,9 +2877,9 @@ data WebhookAuthConfiguration = WebhookAuthConfiguration'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'wacAllowedIPRange' - Undocumented member.
+-- * 'wacAllowedIPRange' - The property used to configure acceptance of webhooks within a specific IP range. For IP, only the AllowedIPRange property must be set, and this property must be set to a valid CIDR range.
 --
--- * 'wacSecretToken' - Undocumented member.
+-- * 'wacSecretToken' - The property used to configure GitHub authentication. For GITHUB_HMAC, only the SecretToken property must be set.
 webhookAuthConfiguration
     :: WebhookAuthConfiguration
 webhookAuthConfiguration =
@@ -2859,11 +2887,11 @@ webhookAuthConfiguration =
     {_wacAllowedIPRange = Nothing, _wacSecretToken = Nothing}
 
 
--- | Undocumented member.
+-- | The property used to configure acceptance of webhooks within a specific IP range. For IP, only the AllowedIPRange property must be set, and this property must be set to a valid CIDR range.
 wacAllowedIPRange :: Lens' WebhookAuthConfiguration (Maybe Text)
 wacAllowedIPRange = lens _wacAllowedIPRange (\ s a -> s{_wacAllowedIPRange = a})
 
--- | Undocumented member.
+-- | The property used to configure GitHub authentication. For GITHUB_HMAC, only the SecretToken property must be set.
 wacSecretToken :: Lens' WebhookAuthConfiguration (Maybe Text)
 wacSecretToken = lens _wacSecretToken (\ s a -> s{_wacSecretToken = a})
 

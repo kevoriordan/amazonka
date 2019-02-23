@@ -234,6 +234,17 @@ module Network.AWS.CloudDirectory.Types
     , BatchDetachTypedLinkResponse
     , batchDetachTypedLinkResponse
 
+    -- * BatchGetLinkAttributes
+    , BatchGetLinkAttributes
+    , batchGetLinkAttributes
+    , bglaTypedLinkSpecifier
+    , bglaAttributeNames
+
+    -- * BatchGetLinkAttributesResponse
+    , BatchGetLinkAttributesResponse
+    , batchGetLinkAttributesResponse
+    , bglaAttributes
+
     -- * BatchGetObjectAttributes
     , BatchGetObjectAttributes
     , batchGetObjectAttributes
@@ -409,6 +420,7 @@ module Network.AWS.CloudDirectory.Types
     , broListObjectParentPaths
     , broListObjectAttributes
     , broListIncomingTypedLinks
+    , broGetLinkAttributes
     , broGetObjectAttributes
     , broListObjectChildren
     , broListPolicyAttachments
@@ -431,6 +443,7 @@ module Network.AWS.CloudDirectory.Types
     , brsListObjectParentPaths
     , brsListObjectAttributes
     , brsListIncomingTypedLinks
+    , brsGetLinkAttributes
     , brsGetObjectAttributes
     , brsListObjectChildren
     , brsListPolicyAttachments
@@ -446,6 +459,16 @@ module Network.AWS.CloudDirectory.Types
     -- * BatchRemoveFacetFromObjectResponse
     , BatchRemoveFacetFromObjectResponse
     , batchRemoveFacetFromObjectResponse
+
+    -- * BatchUpdateLinkAttributes
+    , BatchUpdateLinkAttributes
+    , batchUpdateLinkAttributes
+    , bulaTypedLinkSpecifier
+    , bulaAttributeUpdates
+
+    -- * BatchUpdateLinkAttributesResponse
+    , BatchUpdateLinkAttributesResponse
+    , batchUpdateLinkAttributesResponse
 
     -- * BatchUpdateObjectAttributes
     , BatchUpdateObjectAttributes
@@ -474,6 +497,7 @@ module Network.AWS.CloudDirectory.Types
     , bDetachTypedLink
     , bUpdateObjectAttributes
     , bAttachPolicy
+    , bUpdateLinkAttributes
     , bAttachToIndex
 
     -- * BatchWriteOperationResponse
@@ -492,6 +516,7 @@ module Network.AWS.CloudDirectory.Types
     , bwoDetachTypedLink
     , bwoUpdateObjectAttributes
     , bwoAttachPolicy
+    , bwoUpdateLinkAttributes
     , bwoAttachToIndex
 
     -- * Directory
@@ -541,6 +566,18 @@ module Network.AWS.CloudDirectory.Types
     , indexAttachment
     , iaIndexedAttributes
     , iaObjectIdentifier
+
+    -- * LinkAttributeAction
+    , LinkAttributeAction
+    , linkAttributeAction
+    , laaAttributeActionType
+    , laaAttributeUpdateValue
+
+    -- * LinkAttributeUpdate
+    , LinkAttributeUpdate
+    , linkAttributeUpdate
+    , lauAttributeAction
+    , lauAttributeKey
 
     -- * ObjectAttributeAction
     , ObjectAttributeAction

@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates a new server-side encryption configuration (or replaces an existing one, if present).
+--
+--
 module Network.AWS.S3.PutBucketEncryption
     (
     -- * Creating a Request

@@ -20,6 +20,8 @@
 --
 -- Lists the parts that have been uploaded for a specific multipart upload.
 --
+--
+--
 -- This operation returns paginated results.
 module Network.AWS.S3.ListParts
     (
@@ -187,7 +189,7 @@ data ListPartsResponse = ListPartsResponse'
   , _lprsMaxParts             :: !(Maybe Int)
   , _lprsInitiator            :: !(Maybe Initiator)
   , _lprsBucket               :: !(Maybe BucketName)
-  , _lprsAbortDate            :: !(Maybe RFC822)
+  , _lprsAbortDate            :: !(Maybe ISO8601)
   , _lprsNextPartNumberMarker :: !(Maybe Int)
   , _lprsAbortRuleId          :: !(Maybe Text)
   , _lprsOwner                :: !(Maybe Owner)

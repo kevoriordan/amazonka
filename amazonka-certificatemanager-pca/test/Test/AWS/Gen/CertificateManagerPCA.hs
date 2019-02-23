@@ -61,6 +61,9 @@ import Test.Tasty
 --         , requestDescribeCertificateAuthority $
 --             describeCertificateAuthority
 --
+--         , requestRestoreCertificateAuthority $
+--             restoreCertificateAuthority
+--
 --         , requestIssueCertificate $
 --             issueCertificate
 --
@@ -111,6 +114,9 @@ import Test.Tasty
 --
 --         , responseDescribeCertificateAuthority $
 --             describeCertificateAuthorityResponse
+--
+--         , responseRestoreCertificateAuthority $
+--             restoreCertificateAuthorityResponse
 --
 --         , responseIssueCertificate $
 --             issueCertificateResponse
@@ -186,6 +192,11 @@ requestDescribeCertificateAuthority :: DescribeCertificateAuthority -> TestTree
 requestDescribeCertificateAuthority = req
     "DescribeCertificateAuthority"
     "fixture/DescribeCertificateAuthority.yaml"
+
+requestRestoreCertificateAuthority :: RestoreCertificateAuthority -> TestTree
+requestRestoreCertificateAuthority = req
+    "RestoreCertificateAuthority"
+    "fixture/RestoreCertificateAuthority.yaml"
 
 requestIssueCertificate :: IssueCertificate -> TestTree
 requestIssueCertificate = req
@@ -290,6 +301,13 @@ responseDescribeCertificateAuthority = res
     "fixture/DescribeCertificateAuthorityResponse.proto"
     certificateManagerPCA
     (Proxy :: Proxy DescribeCertificateAuthority)
+
+responseRestoreCertificateAuthority :: RestoreCertificateAuthorityResponse -> TestTree
+responseRestoreCertificateAuthority = res
+    "RestoreCertificateAuthorityResponse"
+    "fixture/RestoreCertificateAuthorityResponse.proto"
+    certificateManagerPCA
+    (Proxy :: Proxy RestoreCertificateAuthority)
 
 responseIssueCertificate :: IssueCertificateResponse -> TestTree
 responseIssueCertificate = res

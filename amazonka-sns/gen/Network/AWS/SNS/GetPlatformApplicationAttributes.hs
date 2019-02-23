@@ -124,7 +124,7 @@ data GetPlatformApplicationAttributesResponse = GetPlatformApplicationAttributes
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gpaarsAttributes' - Attributes include the following:     * @EventEndpointCreated@ -- Topic ARN to which EndpointCreated event notifications should be sent.     * @EventEndpointDeleted@ -- Topic ARN to which EndpointDeleted event notifications should be sent.     * @EventEndpointUpdated@ -- Topic ARN to which EndpointUpdate event notifications should be sent.     * @EventDeliveryFailure@ -- Topic ARN to which DeliveryFailure event notifications should be sent upon Direct Publish delivery failure (permanent) to one of the application's endpoints.
+-- * 'gpaarsAttributes' - Attributes include the following:     * @EventEndpointCreated@ – Topic ARN to which EndpointCreated event notifications should be sent.     * @EventEndpointDeleted@ – Topic ARN to which EndpointDeleted event notifications should be sent.     * @EventEndpointUpdated@ – Topic ARN to which EndpointUpdate event notifications should be sent.     * @EventDeliveryFailure@ – Topic ARN to which DeliveryFailure event notifications should be sent upon Direct Publish delivery failure (permanent) to one of the application's endpoints.
 --
 -- * 'gpaarsResponseStatus' - -- | The response status code.
 getPlatformApplicationAttributesResponse
@@ -135,7 +135,7 @@ getPlatformApplicationAttributesResponse pResponseStatus_ =
     {_gpaarsAttributes = Nothing, _gpaarsResponseStatus = pResponseStatus_}
 
 
--- | Attributes include the following:     * @EventEndpointCreated@ -- Topic ARN to which EndpointCreated event notifications should be sent.     * @EventEndpointDeleted@ -- Topic ARN to which EndpointDeleted event notifications should be sent.     * @EventEndpointUpdated@ -- Topic ARN to which EndpointUpdate event notifications should be sent.     * @EventDeliveryFailure@ -- Topic ARN to which DeliveryFailure event notifications should be sent upon Direct Publish delivery failure (permanent) to one of the application's endpoints.
+-- | Attributes include the following:     * @EventEndpointCreated@ – Topic ARN to which EndpointCreated event notifications should be sent.     * @EventEndpointDeleted@ – Topic ARN to which EndpointDeleted event notifications should be sent.     * @EventEndpointUpdated@ – Topic ARN to which EndpointUpdate event notifications should be sent.     * @EventDeliveryFailure@ – Topic ARN to which DeliveryFailure event notifications should be sent upon Direct Publish delivery failure (permanent) to one of the application's endpoints.
 gpaarsAttributes :: Lens' GetPlatformApplicationAttributesResponse (HashMap Text Text)
 gpaarsAttributes = lens _gpaarsAttributes (\ s a -> s{_gpaarsAttributes = a}) . _Default . _Map
 

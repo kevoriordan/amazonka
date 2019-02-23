@@ -25,7 +25,7 @@
 --
 --     * <http://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html Operations in AWS Storage Gateway> : Contains detailed descriptions of all AWS Storage Gateway operations, their request parameters, response elements, possible errors, and examples of requests and responses.
 --
---     * <http://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region AWS Storage Gateway Regions and Endpoints:> Provides a list of each region and endpoints available for use with AWS Storage Gateway.
+--     * <http://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region AWS Storage Gateway Regions and Endpoints:> Provides a list of each AWS region and endpoints available for use with AWS Storage Gateway.
 --
 --
 --
@@ -71,6 +71,9 @@ module Network.AWS.StorageGateway
     -- ** CreateNFSFileShare
     , module Network.AWS.StorageGateway.CreateNFSFileShare
 
+    -- ** DetachVolume
+    , module Network.AWS.StorageGateway.DetachVolume
+
     -- ** DescribeChapCredentials
     , module Network.AWS.StorageGateway.DescribeChapCredentials
 
@@ -88,6 +91,9 @@ module Network.AWS.StorageGateway
 
     -- ** ListFileShares
     , module Network.AWS.StorageGateway.ListFileShares
+
+    -- ** JoinDomain
+    , module Network.AWS.StorageGateway.JoinDomain
 
     -- ** DeleteFileShare
     , module Network.AWS.StorageGateway.DeleteFileShare
@@ -131,11 +137,17 @@ module Network.AWS.StorageGateway
     -- ** RemoveTagsFromResource
     , module Network.AWS.StorageGateway.RemoveTagsFromResource
 
+    -- ** CreateSMBFileShare
+    , module Network.AWS.StorageGateway.CreateSMBFileShare
+
     -- ** DeleteChapCredentials
     , module Network.AWS.StorageGateway.DeleteChapCredentials
 
     -- ** UpdateChapCredentials
     , module Network.AWS.StorageGateway.UpdateChapCredentials
+
+    -- ** AttachVolume
+    , module Network.AWS.StorageGateway.AttachVolume
 
     -- ** DescribeUploadBuffer
     , module Network.AWS.StorageGateway.DescribeUploadBuffer
@@ -145,6 +157,9 @@ module Network.AWS.StorageGateway
 
     -- ** DescribeStorediSCSIVolumes
     , module Network.AWS.StorageGateway.DescribeStorediSCSIVolumes
+
+    -- ** SetSMBGuestPassword
+    , module Network.AWS.StorageGateway.SetSMBGuestPassword
 
     -- ** CreateSnapshotFromVolumeRecoveryPoint
     , module Network.AWS.StorageGateway.CreateSnapshotFromVolumeRecoveryPoint
@@ -179,6 +194,9 @@ module Network.AWS.StorageGateway
     -- ** DisableGateway
     , module Network.AWS.StorageGateway.DisableGateway
 
+    -- ** DescribeSMBSettings
+    , module Network.AWS.StorageGateway.DescribeSMBSettings
+
     -- ** DescribeSnapshotSchedule
     , module Network.AWS.StorageGateway.DescribeSnapshotSchedule
 
@@ -206,17 +224,23 @@ module Network.AWS.StorageGateway
     -- ** DeleteTapeArchive
     , module Network.AWS.StorageGateway.DeleteTapeArchive
 
+    -- ** UpdateSMBFileShare
+    , module Network.AWS.StorageGateway.UpdateSMBFileShare
+
     -- ** DescribeNFSFileShares
     , module Network.AWS.StorageGateway.DescribeNFSFileShares
 
     -- ** ListVolumeRecoveryPoints
     , module Network.AWS.StorageGateway.ListVolumeRecoveryPoints
 
-    -- ** ListTapes
+    -- ** ListTapes (Paginated)
     , module Network.AWS.StorageGateway.ListTapes
 
     -- ** ResetCache
     , module Network.AWS.StorageGateway.ResetCache
+
+    -- ** DescribeSMBFileShares
+    , module Network.AWS.StorageGateway.DescribeSMBFileShares
 
     -- ** ListGateways (Paginated)
     , module Network.AWS.StorageGateway.ListGateways
@@ -253,6 +277,9 @@ module Network.AWS.StorageGateway
 
     -- * Types
 
+    -- ** FileShareType
+    , FileShareType (..)
+
     -- ** ObjectACL
     , ObjectACL (..)
 
@@ -262,6 +289,8 @@ module Network.AWS.StorageGateway
     , cscsivVolumeiSCSIAttributes
     , cscsivVolumeStatus
     , cscsivSourceSnapshotId
+    , cscsivKMSKey
+    , cscsivVolumeAttachmentStatus
     , cscsivVolumeARN
     , cscsivVolumeProgress
     , cscsivVolumeSizeInBytes
@@ -269,6 +298,7 @@ module Network.AWS.StorageGateway
     , cscsivCreatedDate
     , cscsivVolumeId
     , cscsivVolumeType
+    , cscsivTargetName
 
     -- ** ChapInfo
     , ChapInfo
@@ -296,6 +326,7 @@ module Network.AWS.StorageGateway
     , dDiskSizeInBytes
     , dDiskStatus
     , dDiskId
+    , dDiskAttributeList
 
     -- ** FileShareInfo
     , FileShareInfo
@@ -304,6 +335,7 @@ module Network.AWS.StorageGateway
     , fsiGatewayARN
     , fsiFileShareId
     , fsiFileShareARN
+    , fsiFileShareType
 
     -- ** GatewayInfo
     , GatewayInfo
@@ -350,6 +382,27 @@ module Network.AWS.StorageGateway
     , niMACAddress
     , niIPv4Address
 
+    -- ** SMBFileShareInfo
+    , SMBFileShareInfo
+    , sMBFileShareInfo
+    , smbfsiFileShareStatus
+    , smbfsiInvalidUserList
+    , smbfsiKMSKey
+    , smbfsiValidUserList
+    , smbfsiGatewayARN
+    , smbfsiPath
+    , smbfsiAuthentication
+    , smbfsiObjectACL
+    , smbfsiKMSEncrypted
+    , smbfsiFileShareId
+    , smbfsiFileShareARN
+    , smbfsiDefaultStorageClass
+    , smbfsiRole
+    , smbfsiRequesterPays
+    , smbfsiLocationARN
+    , smbfsiGuessMIMETypeEnabled
+    , smbfsiReadOnly
+
     -- ** StorediSCSIVolume
     , StorediSCSIVolume
     , storediSCSIVolume
@@ -357,6 +410,8 @@ module Network.AWS.StorageGateway
     , sscsivVolumeStatus
     , sscsivSourceSnapshotId
     , sscsivPreservedExistingData
+    , sscsivKMSKey
+    , sscsivVolumeAttachmentStatus
     , sscsivVolumeARN
     , sscsivVolumeProgress
     , sscsivVolumeSizeInBytes
@@ -365,6 +420,7 @@ module Network.AWS.StorageGateway
     , sscsivVolumeId
     , sscsivVolumeDiskId
     , sscsivVolumeType
+    , sscsivTargetName
 
     -- ** Tag
     , Tag
@@ -377,6 +433,7 @@ module Network.AWS.StorageGateway
     , tape
     , tTapeBarcode
     , tTapeStatus
+    , tKMSKey
     , tTapeARN
     , tProgress
     , tTapeSizeInBytes
@@ -389,6 +446,7 @@ module Network.AWS.StorageGateway
     , tapeArchive
     , taTapeBarcode
     , taTapeStatus
+    , taKMSKey
     , taTapeARN
     , taTapeSizeInBytes
     , taCompletionTime
@@ -426,6 +484,7 @@ module Network.AWS.StorageGateway
     , VolumeInfo
     , volumeInfo
     , viGatewayARN
+    , viVolumeAttachmentStatus
     , viVolumeARN
     , viVolumeSizeInBytes
     , viVolumeId
@@ -455,10 +514,12 @@ import Network.AWS.StorageGateway.AddCache
 import Network.AWS.StorageGateway.AddTagsToResource
 import Network.AWS.StorageGateway.AddUploadBuffer
 import Network.AWS.StorageGateway.AddWorkingStorage
+import Network.AWS.StorageGateway.AttachVolume
 import Network.AWS.StorageGateway.CancelArchival
 import Network.AWS.StorageGateway.CancelRetrieval
 import Network.AWS.StorageGateway.CreateCachediSCSIVolume
 import Network.AWS.StorageGateway.CreateNFSFileShare
+import Network.AWS.StorageGateway.CreateSMBFileShare
 import Network.AWS.StorageGateway.CreateSnapshot
 import Network.AWS.StorageGateway.CreateSnapshotFromVolumeRecoveryPoint
 import Network.AWS.StorageGateway.CreateStorediSCSIVolume
@@ -479,6 +540,8 @@ import Network.AWS.StorageGateway.DescribeChapCredentials
 import Network.AWS.StorageGateway.DescribeGatewayInformation
 import Network.AWS.StorageGateway.DescribeMaintenanceStartTime
 import Network.AWS.StorageGateway.DescribeNFSFileShares
+import Network.AWS.StorageGateway.DescribeSMBFileShares
+import Network.AWS.StorageGateway.DescribeSMBSettings
 import Network.AWS.StorageGateway.DescribeSnapshotSchedule
 import Network.AWS.StorageGateway.DescribeStorediSCSIVolumes
 import Network.AWS.StorageGateway.DescribeTapeArchives
@@ -487,7 +550,9 @@ import Network.AWS.StorageGateway.DescribeTapes
 import Network.AWS.StorageGateway.DescribeUploadBuffer
 import Network.AWS.StorageGateway.DescribeVTLDevices
 import Network.AWS.StorageGateway.DescribeWorkingStorage
+import Network.AWS.StorageGateway.DetachVolume
 import Network.AWS.StorageGateway.DisableGateway
+import Network.AWS.StorageGateway.JoinDomain
 import Network.AWS.StorageGateway.ListFileShares
 import Network.AWS.StorageGateway.ListGateways
 import Network.AWS.StorageGateway.ListLocalDisks
@@ -503,6 +568,7 @@ import Network.AWS.StorageGateway.ResetCache
 import Network.AWS.StorageGateway.RetrieveTapeArchive
 import Network.AWS.StorageGateway.RetrieveTapeRecoveryPoint
 import Network.AWS.StorageGateway.SetLocalConsolePassword
+import Network.AWS.StorageGateway.SetSMBGuestPassword
 import Network.AWS.StorageGateway.ShutdownGateway
 import Network.AWS.StorageGateway.StartGateway
 import Network.AWS.StorageGateway.Types
@@ -512,6 +578,7 @@ import Network.AWS.StorageGateway.UpdateGatewayInformation
 import Network.AWS.StorageGateway.UpdateGatewaySoftwareNow
 import Network.AWS.StorageGateway.UpdateMaintenanceStartTime
 import Network.AWS.StorageGateway.UpdateNFSFileShare
+import Network.AWS.StorageGateway.UpdateSMBFileShare
 import Network.AWS.StorageGateway.UpdateSnapshotSchedule
 import Network.AWS.StorageGateway.UpdateVTLDeviceType
 import Network.AWS.StorageGateway.Waiters

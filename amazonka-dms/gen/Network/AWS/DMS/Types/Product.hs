@@ -307,6 +307,59 @@ instance Hashable Connection where
 
 instance NFData Connection where
 
+-- | The settings in JSON format for the DMS Transfer type source endpoint.
+--
+--
+--
+-- /See:/ 'dmsTransferSettings' smart constructor.
+data DmsTransferSettings = DmsTransferSettings'
+  { _dtsServiceAccessRoleARN :: !(Maybe Text)
+  , _dtsBucketName           :: !(Maybe Text)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DmsTransferSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dtsServiceAccessRoleARN' - The IAM role that has permission to access the Amazon S3 bucket.
+--
+-- * 'dtsBucketName' - The name of the S3 bucket to use.
+dmsTransferSettings
+    :: DmsTransferSettings
+dmsTransferSettings =
+  DmsTransferSettings'
+    {_dtsServiceAccessRoleARN = Nothing, _dtsBucketName = Nothing}
+
+
+-- | The IAM role that has permission to access the Amazon S3 bucket.
+dtsServiceAccessRoleARN :: Lens' DmsTransferSettings (Maybe Text)
+dtsServiceAccessRoleARN = lens _dtsServiceAccessRoleARN (\ s a -> s{_dtsServiceAccessRoleARN = a})
+
+-- | The name of the S3 bucket to use.
+dtsBucketName :: Lens' DmsTransferSettings (Maybe Text)
+dtsBucketName = lens _dtsBucketName (\ s a -> s{_dtsBucketName = a})
+
+instance FromJSON DmsTransferSettings where
+        parseJSON
+          = withObject "DmsTransferSettings"
+              (\ x ->
+                 DmsTransferSettings' <$>
+                   (x .:? "ServiceAccessRoleArn") <*>
+                     (x .:? "BucketName"))
+
+instance Hashable DmsTransferSettings where
+
+instance NFData DmsTransferSettings where
+
+instance ToJSON DmsTransferSettings where
+        toJSON DmsTransferSettings'{..}
+          = object
+              (catMaybes
+                 [("ServiceAccessRoleArn" .=) <$>
+                    _dtsServiceAccessRoleARN,
+                  ("BucketName" .=) <$> _dtsBucketName])
+
 -- |
 --
 --
@@ -355,15 +408,95 @@ instance ToJSON DynamoDBSettings where
 --
 --
 --
+-- /See:/ 'elasticsearchSettings' smart constructor.
+data ElasticsearchSettings = ElasticsearchSettings'
+  { _esFullLoadErrorPercentage :: !(Maybe Int)
+  , _esErrorRetryDuration      :: !(Maybe Int)
+  , _esServiceAccessRoleARN    :: !Text
+  , _esEndpointURI             :: !Text
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ElasticsearchSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'esFullLoadErrorPercentage' - The maximum percentage of records that can fail to be written before a full load operation stops.
+--
+-- * 'esErrorRetryDuration' - The maximum number of seconds that DMS retries failed API requests to the Elasticsearch cluster.
+--
+-- * 'esServiceAccessRoleARN' - The Amazon Resource Name (ARN) used by service to access the IAM role.
+--
+-- * 'esEndpointURI' - The endpoint for the ElasticSearch cluster.
+elasticsearchSettings
+    :: Text -- ^ 'esServiceAccessRoleARN'
+    -> Text -- ^ 'esEndpointURI'
+    -> ElasticsearchSettings
+elasticsearchSettings pServiceAccessRoleARN_ pEndpointURI_ =
+  ElasticsearchSettings'
+    { _esFullLoadErrorPercentage = Nothing
+    , _esErrorRetryDuration = Nothing
+    , _esServiceAccessRoleARN = pServiceAccessRoleARN_
+    , _esEndpointURI = pEndpointURI_
+    }
+
+
+-- | The maximum percentage of records that can fail to be written before a full load operation stops.
+esFullLoadErrorPercentage :: Lens' ElasticsearchSettings (Maybe Int)
+esFullLoadErrorPercentage = lens _esFullLoadErrorPercentage (\ s a -> s{_esFullLoadErrorPercentage = a})
+
+-- | The maximum number of seconds that DMS retries failed API requests to the Elasticsearch cluster.
+esErrorRetryDuration :: Lens' ElasticsearchSettings (Maybe Int)
+esErrorRetryDuration = lens _esErrorRetryDuration (\ s a -> s{_esErrorRetryDuration = a})
+
+-- | The Amazon Resource Name (ARN) used by service to access the IAM role.
+esServiceAccessRoleARN :: Lens' ElasticsearchSettings Text
+esServiceAccessRoleARN = lens _esServiceAccessRoleARN (\ s a -> s{_esServiceAccessRoleARN = a})
+
+-- | The endpoint for the ElasticSearch cluster.
+esEndpointURI :: Lens' ElasticsearchSettings Text
+esEndpointURI = lens _esEndpointURI (\ s a -> s{_esEndpointURI = a})
+
+instance FromJSON ElasticsearchSettings where
+        parseJSON
+          = withObject "ElasticsearchSettings"
+              (\ x ->
+                 ElasticsearchSettings' <$>
+                   (x .:? "FullLoadErrorPercentage") <*>
+                     (x .:? "ErrorRetryDuration")
+                     <*> (x .: "ServiceAccessRoleArn")
+                     <*> (x .: "EndpointUri"))
+
+instance Hashable ElasticsearchSettings where
+
+instance NFData ElasticsearchSettings where
+
+instance ToJSON ElasticsearchSettings where
+        toJSON ElasticsearchSettings'{..}
+          = object
+              (catMaybes
+                 [("FullLoadErrorPercentage" .=) <$>
+                    _esFullLoadErrorPercentage,
+                  ("ErrorRetryDuration" .=) <$> _esErrorRetryDuration,
+                  Just
+                    ("ServiceAccessRoleArn" .= _esServiceAccessRoleARN),
+                  Just ("EndpointUri" .= _esEndpointURI)])
+
+-- |
+--
+--
+--
 -- /See:/ 'endpoint' smart constructor.
 data Endpoint = Endpoint'
   { _eStatus                    :: !(Maybe Text)
+  , _eDmsTransferSettings       :: !(Maybe DmsTransferSettings)
   , _eServerName                :: !(Maybe Text)
   , _eCertificateARN            :: !(Maybe Text)
   , _eServiceAccessRoleARN      :: !(Maybe Text)
   , _eEngineDisplayName         :: !(Maybe Text)
   , _eExtraConnectionAttributes :: !(Maybe Text)
   , _eEndpointType              :: !(Maybe ReplicationEndpointTypeValue)
+  , _eElasticsearchSettings     :: !(Maybe ElasticsearchSettings)
   , _eUsername                  :: !(Maybe Text)
   , _eExternalTableDefinition   :: !(Maybe Text)
   , _eEngineName                :: !(Maybe Text)
@@ -372,6 +505,7 @@ data Endpoint = Endpoint'
   , _eSSLMode                   :: !(Maybe DmsSSLModeValue)
   , _eDatabaseName              :: !(Maybe Text)
   , _eS3Settings                :: !(Maybe S3Settings)
+  , _eKinesisSettings           :: !(Maybe KinesisSettings)
   , _eEndpointIdentifier        :: !(Maybe Text)
   , _eExternalId                :: !(Maybe Text)
   , _eDynamoDBSettings          :: !(Maybe DynamoDBSettings)
@@ -386,6 +520,8 @@ data Endpoint = Endpoint'
 --
 -- * 'eStatus' - The status of the endpoint.
 --
+-- * 'eDmsTransferSettings' - The settings in JSON format for the DMS transfer type of source endpoint.  Possible attributes include the following:     * @serviceAccessRoleArn@ - The IAM role that has permission to access the Amazon S3 bucket.     * @bucketName@ - The name of the S3 bucket to use.     * @compressionType@ - An optional parameter to use GZIP to compress the target files. To use GZIP, set this value to @NONE@ (the default). To keep the files uncompressed, don't use this value.  Shorthand syntax for these attributes is as follows: @ServiceAccessRoleArn=string,BucketName=string,CompressionType=string@  JSON syntax for these attributes is as follows: @{ "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } @
+--
 -- * 'eServerName' - The name of the server at the endpoint.
 --
 -- * 'eCertificateARN' - The Amazon Resource Name (ARN) used for SSL connection to the endpoint.
@@ -398,13 +534,15 @@ data Endpoint = Endpoint'
 --
 -- * 'eEndpointType' - The type of endpoint.
 --
+-- * 'eElasticsearchSettings' - The settings for the Elasticsearch source endpoint. For more information, see the @ElasticsearchSettings@ structure.
+--
 -- * 'eUsername' - The user name used to connect to the endpoint.
 --
 -- * 'eExternalTableDefinition' - The external table definition.
 --
 -- * 'eEngineName' - The database engine name. Valid values, depending on the EndPointType, include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3, db2, azuredb, sybase, sybase, dynamodb, mongodb, and sqlserver.
 --
--- * 'eKMSKeyId' - The KMS key identifier that will be used to encrypt the connection parameters. If you do not specify a value for the KmsKeyId parameter, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.
+-- * 'eKMSKeyId' - The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the @KmsKeyId@ parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
 --
 -- * 'eMongoDBSettings' - The settings for the MongoDB source endpoint. For more information, see the @MongoDbSettings@ structure.
 --
@@ -413,6 +551,8 @@ data Endpoint = Endpoint'
 -- * 'eDatabaseName' - The name of the database at the endpoint.
 --
 -- * 'eS3Settings' - The settings for the S3 target endpoint. For more information, see the @S3Settings@ structure.
+--
+-- * 'eKinesisSettings' - The settings for the Amazon Kinesis source endpoint. For more information, see the @KinesisSettings@ structure.
 --
 -- * 'eEndpointIdentifier' - The database endpoint identifier. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
 --
@@ -428,12 +568,14 @@ endpoint
 endpoint =
   Endpoint'
     { _eStatus = Nothing
+    , _eDmsTransferSettings = Nothing
     , _eServerName = Nothing
     , _eCertificateARN = Nothing
     , _eServiceAccessRoleARN = Nothing
     , _eEngineDisplayName = Nothing
     , _eExtraConnectionAttributes = Nothing
     , _eEndpointType = Nothing
+    , _eElasticsearchSettings = Nothing
     , _eUsername = Nothing
     , _eExternalTableDefinition = Nothing
     , _eEngineName = Nothing
@@ -442,6 +584,7 @@ endpoint =
     , _eSSLMode = Nothing
     , _eDatabaseName = Nothing
     , _eS3Settings = Nothing
+    , _eKinesisSettings = Nothing
     , _eEndpointIdentifier = Nothing
     , _eExternalId = Nothing
     , _eDynamoDBSettings = Nothing
@@ -453,6 +596,10 @@ endpoint =
 -- | The status of the endpoint.
 eStatus :: Lens' Endpoint (Maybe Text)
 eStatus = lens _eStatus (\ s a -> s{_eStatus = a})
+
+-- | The settings in JSON format for the DMS transfer type of source endpoint.  Possible attributes include the following:     * @serviceAccessRoleArn@ - The IAM role that has permission to access the Amazon S3 bucket.     * @bucketName@ - The name of the S3 bucket to use.     * @compressionType@ - An optional parameter to use GZIP to compress the target files. To use GZIP, set this value to @NONE@ (the default). To keep the files uncompressed, don't use this value.  Shorthand syntax for these attributes is as follows: @ServiceAccessRoleArn=string,BucketName=string,CompressionType=string@  JSON syntax for these attributes is as follows: @{ "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } @
+eDmsTransferSettings :: Lens' Endpoint (Maybe DmsTransferSettings)
+eDmsTransferSettings = lens _eDmsTransferSettings (\ s a -> s{_eDmsTransferSettings = a})
 
 -- | The name of the server at the endpoint.
 eServerName :: Lens' Endpoint (Maybe Text)
@@ -478,6 +625,10 @@ eExtraConnectionAttributes = lens _eExtraConnectionAttributes (\ s a -> s{_eExtr
 eEndpointType :: Lens' Endpoint (Maybe ReplicationEndpointTypeValue)
 eEndpointType = lens _eEndpointType (\ s a -> s{_eEndpointType = a})
 
+-- | The settings for the Elasticsearch source endpoint. For more information, see the @ElasticsearchSettings@ structure.
+eElasticsearchSettings :: Lens' Endpoint (Maybe ElasticsearchSettings)
+eElasticsearchSettings = lens _eElasticsearchSettings (\ s a -> s{_eElasticsearchSettings = a})
+
 -- | The user name used to connect to the endpoint.
 eUsername :: Lens' Endpoint (Maybe Text)
 eUsername = lens _eUsername (\ s a -> s{_eUsername = a})
@@ -490,7 +641,7 @@ eExternalTableDefinition = lens _eExternalTableDefinition (\ s a -> s{_eExternal
 eEngineName :: Lens' Endpoint (Maybe Text)
 eEngineName = lens _eEngineName (\ s a -> s{_eEngineName = a})
 
--- | The KMS key identifier that will be used to encrypt the connection parameters. If you do not specify a value for the KmsKeyId parameter, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.
+-- | The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the @KmsKeyId@ parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
 eKMSKeyId :: Lens' Endpoint (Maybe Text)
 eKMSKeyId = lens _eKMSKeyId (\ s a -> s{_eKMSKeyId = a})
 
@@ -509,6 +660,10 @@ eDatabaseName = lens _eDatabaseName (\ s a -> s{_eDatabaseName = a})
 -- | The settings for the S3 target endpoint. For more information, see the @S3Settings@ structure.
 eS3Settings :: Lens' Endpoint (Maybe S3Settings)
 eS3Settings = lens _eS3Settings (\ s a -> s{_eS3Settings = a})
+
+-- | The settings for the Amazon Kinesis source endpoint. For more information, see the @KinesisSettings@ structure.
+eKinesisSettings :: Lens' Endpoint (Maybe KinesisSettings)
+eKinesisSettings = lens _eKinesisSettings (\ s a -> s{_eKinesisSettings = a})
 
 -- | The database endpoint identifier. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
 eEndpointIdentifier :: Lens' Endpoint (Maybe Text)
@@ -535,12 +690,14 @@ instance FromJSON Endpoint where
           = withObject "Endpoint"
               (\ x ->
                  Endpoint' <$>
-                   (x .:? "Status") <*> (x .:? "ServerName") <*>
-                     (x .:? "CertificateArn")
+                   (x .:? "Status") <*> (x .:? "DmsTransferSettings")
+                     <*> (x .:? "ServerName")
+                     <*> (x .:? "CertificateArn")
                      <*> (x .:? "ServiceAccessRoleArn")
                      <*> (x .:? "EngineDisplayName")
                      <*> (x .:? "ExtraConnectionAttributes")
                      <*> (x .:? "EndpointType")
+                     <*> (x .:? "ElasticsearchSettings")
                      <*> (x .:? "Username")
                      <*> (x .:? "ExternalTableDefinition")
                      <*> (x .:? "EngineName")
@@ -549,6 +706,7 @@ instance FromJSON Endpoint where
                      <*> (x .:? "SslMode")
                      <*> (x .:? "DatabaseName")
                      <*> (x .:? "S3Settings")
+                     <*> (x .:? "KinesisSettings")
                      <*> (x .:? "EndpointIdentifier")
                      <*> (x .:? "ExternalId")
                      <*> (x .:? "DynamoDbSettings")
@@ -832,6 +990,71 @@ instance ToJSON Filter where
 --
 --
 --
+-- /See:/ 'kinesisSettings' smart constructor.
+data KinesisSettings = KinesisSettings'
+  { _ksServiceAccessRoleARN :: !(Maybe Text)
+  , _ksStreamARN            :: !(Maybe Text)
+  , _ksMessageFormat        :: !(Maybe MessageFormatValue)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'KinesisSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ksServiceAccessRoleARN' - The Amazon Resource Name (ARN) for the IAM role that DMS uses to write to the Amazon Kinesis data stream.
+--
+-- * 'ksStreamARN' - The Amazon Resource Name (ARN) for the Amazon Kinesis Data Streams endpoint.
+--
+-- * 'ksMessageFormat' - The output format for the records created on the endpoint. The message format is @JSON@ .
+kinesisSettings
+    :: KinesisSettings
+kinesisSettings =
+  KinesisSettings'
+    { _ksServiceAccessRoleARN = Nothing
+    , _ksStreamARN = Nothing
+    , _ksMessageFormat = Nothing
+    }
+
+
+-- | The Amazon Resource Name (ARN) for the IAM role that DMS uses to write to the Amazon Kinesis data stream.
+ksServiceAccessRoleARN :: Lens' KinesisSettings (Maybe Text)
+ksServiceAccessRoleARN = lens _ksServiceAccessRoleARN (\ s a -> s{_ksServiceAccessRoleARN = a})
+
+-- | The Amazon Resource Name (ARN) for the Amazon Kinesis Data Streams endpoint.
+ksStreamARN :: Lens' KinesisSettings (Maybe Text)
+ksStreamARN = lens _ksStreamARN (\ s a -> s{_ksStreamARN = a})
+
+-- | The output format for the records created on the endpoint. The message format is @JSON@ .
+ksMessageFormat :: Lens' KinesisSettings (Maybe MessageFormatValue)
+ksMessageFormat = lens _ksMessageFormat (\ s a -> s{_ksMessageFormat = a})
+
+instance FromJSON KinesisSettings where
+        parseJSON
+          = withObject "KinesisSettings"
+              (\ x ->
+                 KinesisSettings' <$>
+                   (x .:? "ServiceAccessRoleArn") <*>
+                     (x .:? "StreamArn")
+                     <*> (x .:? "MessageFormat"))
+
+instance Hashable KinesisSettings where
+
+instance NFData KinesisSettings where
+
+instance ToJSON KinesisSettings where
+        toJSON KinesisSettings'{..}
+          = object
+              (catMaybes
+                 [("ServiceAccessRoleArn" .=) <$>
+                    _ksServiceAccessRoleARN,
+                  ("StreamArn" .=) <$> _ksStreamARN,
+                  ("MessageFormat" .=) <$> _ksMessageFormat])
+
+-- |
+--
+--
+--
 -- /See:/ 'mongoDBSettings' smart constructor.
 data MongoDBSettings = MongoDBSettings'
   { _mdsServerName        :: !(Maybe Text)
@@ -859,7 +1082,7 @@ data MongoDBSettings = MongoDBSettings'
 --
 -- * 'mdsUsername' - The user name you use to access the MongoDB source endpoint.
 --
--- * 'mdsKMSKeyId' - The KMS key identifier that will be used to encrypt the connection parameters. If you do not specify a value for the KmsKeyId parameter, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.
+-- * 'mdsKMSKeyId' - The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the @KmsKeyId@ parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
 --
 -- * 'mdsPassword' - The password for the user account you use to access the MongoDB source endpoint.
 --
@@ -907,7 +1130,7 @@ mdsAuthMechanism = lens _mdsAuthMechanism (\ s a -> s{_mdsAuthMechanism = a})
 mdsUsername :: Lens' MongoDBSettings (Maybe Text)
 mdsUsername = lens _mdsUsername (\ s a -> s{_mdsUsername = a})
 
--- | The KMS key identifier that will be used to encrypt the connection parameters. If you do not specify a value for the KmsKeyId parameter, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.
+-- | The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the @KmsKeyId@ parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
 mdsKMSKeyId :: Lens' MongoDBSettings (Maybe Text)
 mdsKMSKeyId = lens _mdsKMSKeyId (\ s a -> s{_mdsKMSKeyId = a})
 
@@ -1170,6 +1393,7 @@ data ReplicationInstance = ReplicationInstance'
   , _riSecondaryAvailabilityZone :: !(Maybe Text)
   , _riReplicationInstanceARN :: !(Maybe Text)
   , _riAllocatedStorage :: !(Maybe Int)
+  , _riDNSNameServers :: !(Maybe Text)
   , _riReplicationInstancePublicIPAddress :: !(Maybe Text)
   , _riReplicationInstanceClass :: !(Maybe Text)
   , _riReplicationInstanceIdentifier :: !(Maybe Text)
@@ -1203,7 +1427,7 @@ data ReplicationInstance = ReplicationInstance'
 --
 -- * 'riReplicationInstancePrivateIPAddress' - The private IP address of the replication instance.
 --
--- * 'riKMSKeyId' - The KMS key identifier that is used to encrypt the content on the replication instance. If you do not specify a value for the KmsKeyId parameter, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.
+-- * 'riKMSKeyId' - The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the @KmsKeyId@ parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
 --
 -- * 'riAvailabilityZone' - The Availability Zone for the instance.
 --
@@ -1216,6 +1440,8 @@ data ReplicationInstance = ReplicationInstance'
 -- * 'riReplicationInstanceARN' - The Amazon Resource Name (ARN) of the replication instance.
 --
 -- * 'riAllocatedStorage' - The amount of storage (in gigabytes) that is allocated for the replication instance.
+--
+-- * 'riDNSNameServers' - The DNS name servers for the replication instance.
 --
 -- * 'riReplicationInstancePublicIPAddress' - The public IP address of the replication instance.
 --
@@ -1246,6 +1472,7 @@ replicationInstance =
     , _riSecondaryAvailabilityZone = Nothing
     , _riReplicationInstanceARN = Nothing
     , _riAllocatedStorage = Nothing
+    , _riDNSNameServers = Nothing
     , _riReplicationInstancePublicIPAddress = Nothing
     , _riReplicationInstanceClass = Nothing
     , _riReplicationInstanceIdentifier = Nothing
@@ -1297,7 +1524,7 @@ riPreferredMaintenanceWindow = lens _riPreferredMaintenanceWindow (\ s a -> s{_r
 riReplicationInstancePrivateIPAddress :: Lens' ReplicationInstance (Maybe Text)
 riReplicationInstancePrivateIPAddress = lens _riReplicationInstancePrivateIPAddress (\ s a -> s{_riReplicationInstancePrivateIPAddress = a})
 
--- | The KMS key identifier that is used to encrypt the content on the replication instance. If you do not specify a value for the KmsKeyId parameter, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.
+-- | The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the @KmsKeyId@ parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.
 riKMSKeyId :: Lens' ReplicationInstance (Maybe Text)
 riKMSKeyId = lens _riKMSKeyId (\ s a -> s{_riKMSKeyId = a})
 
@@ -1324,6 +1551,10 @@ riReplicationInstanceARN = lens _riReplicationInstanceARN (\ s a -> s{_riReplica
 -- | The amount of storage (in gigabytes) that is allocated for the replication instance.
 riAllocatedStorage :: Lens' ReplicationInstance (Maybe Int)
 riAllocatedStorage = lens _riAllocatedStorage (\ s a -> s{_riAllocatedStorage = a})
+
+-- | The DNS name servers for the replication instance.
+riDNSNameServers :: Lens' ReplicationInstance (Maybe Text)
+riDNSNameServers = lens _riDNSNameServers (\ s a -> s{_riDNSNameServers = a})
 
 -- | The public IP address of the replication instance.
 riReplicationInstancePublicIPAddress :: Lens' ReplicationInstance (Maybe Text)
@@ -1368,6 +1599,7 @@ instance FromJSON ReplicationInstance where
                      <*> (x .:? "SecondaryAvailabilityZone")
                      <*> (x .:? "ReplicationInstanceArn")
                      <*> (x .:? "AllocatedStorage")
+                     <*> (x .:? "DnsNameServers")
                      <*> (x .:? "ReplicationInstancePublicIpAddress")
                      <*> (x .:? "ReplicationInstanceClass")
                      <*> (x .:? "ReplicationInstanceIdentifier")
@@ -1611,7 +1843,7 @@ data ReplicationTask = ReplicationTask'
 --
 -- * 'rTargetEndpointARN' - The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
 --
--- * 'rReplicationTaskIdentifier' - The replication task identifier. Constraints:     * Must contain from 1 to 255 alphanumeric characters or hyphens.     * First character must be a letter.     * Cannot end with a hyphen or contain two consecutive hyphens.
+-- * 'rReplicationTaskIdentifier' - The user-assigned replication task identifier or name. Constraints:     * Must contain from 1 to 255 alphanumeric characters or hyphens.     * First character must be a letter.     * Cannot end with a hyphen or contain two consecutive hyphens.
 --
 -- * 'rCdcStartPosition' - Indicates when you want a change data capture (CDC) operation to start. Use either CdcStartPosition or CdcStartTime to specify when you want a CDC operation to start. Specifying both values results in an error. The value can be in date, checkpoint, or LSN/SCN format. Date Example: --cdc-start-position “2018-03-08T12:12:12” Checkpoint Example: --cdc-start-position "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93" LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
 --
@@ -1676,7 +1908,7 @@ rStopReason = lens _rStopReason (\ s a -> s{_rStopReason = a})
 rTargetEndpointARN :: Lens' ReplicationTask (Maybe Text)
 rTargetEndpointARN = lens _rTargetEndpointARN (\ s a -> s{_rTargetEndpointARN = a})
 
--- | The replication task identifier. Constraints:     * Must contain from 1 to 255 alphanumeric characters or hyphens.     * First character must be a letter.     * Cannot end with a hyphen or contain two consecutive hyphens.
+-- | The user-assigned replication task identifier or name. Constraints:     * Must contain from 1 to 255 alphanumeric characters or hyphens.     * First character must be a letter.     * Cannot end with a hyphen or contain two consecutive hyphens.
 rReplicationTaskIdentifier :: Lens' ReplicationTask (Maybe Text)
 rReplicationTaskIdentifier = lens _rReplicationTaskIdentifier (\ s a -> s{_rReplicationTaskIdentifier = a})
 
@@ -2171,6 +2403,7 @@ data TableStatistics = TableStatistics'
   , _tsValidationFailedRecords      :: !(Maybe Integer)
   , _tsValidationSuspendedRecords   :: !(Maybe Integer)
   , _tsSchemaName                   :: !(Maybe Text)
+  , _tsValidationStateDetails       :: !(Maybe Text)
   , _tsTableState                   :: !(Maybe Text)
   , _tsFullLoadErrorRows            :: !(Maybe Integer)
   , _tsDdls                         :: !(Maybe Integer)
@@ -2200,6 +2433,8 @@ data TableStatistics = TableStatistics'
 --
 -- * 'tsSchemaName' - The schema name.
 --
+-- * 'tsValidationStateDetails' - Additional details about the state of validation.
+--
 -- * 'tsTableState' - The state of the tables described. Valid states: Table does not exist | Before load | Full load | Table completed | Table cancelled | Table error | Table all | Table updates | Table is being reloaded
 --
 -- * 'tsFullLoadErrorRows' - The number of rows that failed to load during the Full Load operation (valid only for DynamoDB as a target migrations).
@@ -2226,6 +2461,7 @@ tableStatistics =
     , _tsValidationFailedRecords = Nothing
     , _tsValidationSuspendedRecords = Nothing
     , _tsSchemaName = Nothing
+    , _tsValidationStateDetails = Nothing
     , _tsTableState = Nothing
     , _tsFullLoadErrorRows = Nothing
     , _tsDdls = Nothing
@@ -2264,6 +2500,10 @@ tsValidationSuspendedRecords = lens _tsValidationSuspendedRecords (\ s a -> s{_t
 -- | The schema name.
 tsSchemaName :: Lens' TableStatistics (Maybe Text)
 tsSchemaName = lens _tsSchemaName (\ s a -> s{_tsSchemaName = a})
+
+-- | Additional details about the state of validation.
+tsValidationStateDetails :: Lens' TableStatistics (Maybe Text)
+tsValidationStateDetails = lens _tsValidationStateDetails (\ s a -> s{_tsValidationStateDetails = a})
 
 -- | The state of the tables described. Valid states: Table does not exist | Before load | Full load | Table completed | Table cancelled | Table error | Table all | Table updates | Table is being reloaded
 tsTableState :: Lens' TableStatistics (Maybe Text)
@@ -2308,6 +2548,7 @@ instance FromJSON TableStatistics where
                      <*> (x .:? "ValidationFailedRecords")
                      <*> (x .:? "ValidationSuspendedRecords")
                      <*> (x .:? "SchemaName")
+                     <*> (x .:? "ValidationStateDetails")
                      <*> (x .:? "TableState")
                      <*> (x .:? "FullLoadErrorRows")
                      <*> (x .:? "Ddls")

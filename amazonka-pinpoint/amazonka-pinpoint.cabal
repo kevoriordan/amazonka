@@ -64,6 +64,8 @@ library
         , Network.AWS.Pinpoint.DeleteGCMChannel
         , Network.AWS.Pinpoint.DeleteSegment
         , Network.AWS.Pinpoint.DeleteSmsChannel
+        , Network.AWS.Pinpoint.DeleteUserEndpoints
+        , Network.AWS.Pinpoint.DeleteVoiceChannel
         , Network.AWS.Pinpoint.GetADMChannel
         , Network.AWS.Pinpoint.GetAPNSChannel
         , Network.AWS.Pinpoint.GetAPNSSandboxChannel
@@ -78,6 +80,7 @@ library
         , Network.AWS.Pinpoint.GetCampaignVersion
         , Network.AWS.Pinpoint.GetCampaignVersions
         , Network.AWS.Pinpoint.GetCampaigns
+        , Network.AWS.Pinpoint.GetChannels
         , Network.AWS.Pinpoint.GetEmailChannel
         , Network.AWS.Pinpoint.GetEndpoint
         , Network.AWS.Pinpoint.GetEventStream
@@ -93,7 +96,12 @@ library
         , Network.AWS.Pinpoint.GetSegmentVersions
         , Network.AWS.Pinpoint.GetSegments
         , Network.AWS.Pinpoint.GetSmsChannel
+        , Network.AWS.Pinpoint.GetUserEndpoints
+        , Network.AWS.Pinpoint.GetVoiceChannel
+        , Network.AWS.Pinpoint.PhoneNumberValidate
         , Network.AWS.Pinpoint.PutEventStream
+        , Network.AWS.Pinpoint.PutEvents
+        , Network.AWS.Pinpoint.RemoveAttributes
         , Network.AWS.Pinpoint.SendMessages
         , Network.AWS.Pinpoint.SendUsersMessages
         , Network.AWS.Pinpoint.Types
@@ -111,6 +119,7 @@ library
         , Network.AWS.Pinpoint.UpdateGCMChannel
         , Network.AWS.Pinpoint.UpdateSegment
         , Network.AWS.Pinpoint.UpdateSmsChannel
+        , Network.AWS.Pinpoint.UpdateVoiceChannel
         , Network.AWS.Pinpoint.Waiters
 
     other-modules:

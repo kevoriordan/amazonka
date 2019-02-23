@@ -29,8 +29,6 @@
 --
 -- Service limits vary depending on region. Available regions for Amazon GameLift can be found in the AWS Management Console for Amazon GameLift (see the drop-down list in the upper right corner).
 --
--- Fleet-related operations include:
---
 --     * 'CreateFleet'
 --
 --     * 'ListFleets'

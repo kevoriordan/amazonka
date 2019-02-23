@@ -33,6 +33,7 @@ module Network.AWS.Glue.UpdateCrawler
     , uRole
     , uTargets
     , uDatabaseName
+    , uCrawlerSecurityConfiguration
     , uConfiguration
     , uTablePrefix
     , uDescription
@@ -54,16 +55,17 @@ import Network.AWS.Response
 
 -- | /See:/ 'updateCrawler' smart constructor.
 data UpdateCrawler = UpdateCrawler'
-  { _uSchemaChangePolicy :: !(Maybe SchemaChangePolicy)
-  , _uSchedule           :: !(Maybe Text)
-  , _uClassifiers        :: !(Maybe [Text])
-  , _uRole               :: !(Maybe Text)
-  , _uTargets            :: !(Maybe CrawlerTargets)
-  , _uDatabaseName       :: !(Maybe Text)
-  , _uConfiguration      :: !(Maybe Text)
-  , _uTablePrefix        :: !(Maybe Text)
-  , _uDescription        :: !(Maybe Text)
-  , _uName               :: !Text
+  { _uSchemaChangePolicy           :: !(Maybe SchemaChangePolicy)
+  , _uSchedule                     :: !(Maybe Text)
+  , _uClassifiers                  :: !(Maybe [Text])
+  , _uRole                         :: !(Maybe Text)
+  , _uTargets                      :: !(Maybe CrawlerTargets)
+  , _uDatabaseName                 :: !(Maybe Text)
+  , _uCrawlerSecurityConfiguration :: !(Maybe Text)
+  , _uConfiguration                :: !(Maybe Text)
+  , _uTablePrefix                  :: !(Maybe Text)
+  , _uDescription                  :: !(Maybe Text)
+  , _uName                         :: !Text
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -75,7 +77,7 @@ data UpdateCrawler = UpdateCrawler'
 --
 -- * 'uSchedule' - A @cron@ expression used to specify the schedule (see <http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html Time-Based Schedules for Jobs and Crawlers> . For example, to run something every day at 12:15 UTC, you would specify: @cron(15 12 * * ? *)@ .
 --
--- * 'uClassifiers' - A list of custom classifiers that the user has registered. By default, all classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.
+-- * 'uClassifiers' - A list of custom classifiers that the user has registered. By default, all built-in classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.
 --
 -- * 'uRole' - The IAM role (or ARN of an IAM role) used by the new crawler to access customer resources.
 --
@@ -83,7 +85,9 @@ data UpdateCrawler = UpdateCrawler'
 --
 -- * 'uDatabaseName' - The AWS Glue database where results are stored, such as: @arn:aws:daylight:us-east-1::database/sometable/*@ .
 --
--- * 'uConfiguration' - Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example: @'{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }'@
+-- * 'uCrawlerSecurityConfiguration' - The name of the SecurityConfiguration structure to be used by this Crawler.
+--
+-- * 'uConfiguration' - Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html Configuring a Crawler> .
 --
 -- * 'uTablePrefix' - The table prefix used for catalog tables that are created.
 --
@@ -101,6 +105,7 @@ updateCrawler pName_ =
     , _uRole = Nothing
     , _uTargets = Nothing
     , _uDatabaseName = Nothing
+    , _uCrawlerSecurityConfiguration = Nothing
     , _uConfiguration = Nothing
     , _uTablePrefix = Nothing
     , _uDescription = Nothing
@@ -116,7 +121,7 @@ uSchemaChangePolicy = lens _uSchemaChangePolicy (\ s a -> s{_uSchemaChangePolicy
 uSchedule :: Lens' UpdateCrawler (Maybe Text)
 uSchedule = lens _uSchedule (\ s a -> s{_uSchedule = a})
 
--- | A list of custom classifiers that the user has registered. By default, all classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.
+-- | A list of custom classifiers that the user has registered. By default, all built-in classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.
 uClassifiers :: Lens' UpdateCrawler [Text]
 uClassifiers = lens _uClassifiers (\ s a -> s{_uClassifiers = a}) . _Default . _Coerce
 
@@ -132,7 +137,11 @@ uTargets = lens _uTargets (\ s a -> s{_uTargets = a})
 uDatabaseName :: Lens' UpdateCrawler (Maybe Text)
 uDatabaseName = lens _uDatabaseName (\ s a -> s{_uDatabaseName = a})
 
--- | Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example: @'{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }'@
+-- | The name of the SecurityConfiguration structure to be used by this Crawler.
+uCrawlerSecurityConfiguration :: Lens' UpdateCrawler (Maybe Text)
+uCrawlerSecurityConfiguration = lens _uCrawlerSecurityConfiguration (\ s a -> s{_uCrawlerSecurityConfiguration = a})
+
+-- | Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html Configuring a Crawler> .
 uConfiguration :: Lens' UpdateCrawler (Maybe Text)
 uConfiguration = lens _uConfiguration (\ s a -> s{_uConfiguration = a})
 
@@ -178,6 +187,8 @@ instance ToJSON UpdateCrawler where
                   ("Classifiers" .=) <$> _uClassifiers,
                   ("Role" .=) <$> _uRole, ("Targets" .=) <$> _uTargets,
                   ("DatabaseName" .=) <$> _uDatabaseName,
+                  ("CrawlerSecurityConfiguration" .=) <$>
+                    _uCrawlerSecurityConfiguration,
                   ("Configuration" .=) <$> _uConfiguration,
                   ("TablePrefix" .=) <$> _uTablePrefix,
                   ("Description" .=) <$> _uDescription,

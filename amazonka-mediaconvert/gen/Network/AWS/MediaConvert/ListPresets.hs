@@ -53,7 +53,7 @@ data ListPresets = ListPresets'
   , _lpListBy     :: !(Maybe PresetListBy)
   , _lpNextToken  :: !(Maybe Text)
   , _lpOrder      :: !(Maybe Order)
-  , _lpMaxResults :: !(Maybe Int)
+  , _lpMaxResults :: !(Maybe Nat)
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -99,8 +99,8 @@ lpOrder :: Lens' ListPresets (Maybe Order)
 lpOrder = lens _lpOrder (\ s a -> s{_lpOrder = a})
 
 -- | Optional. Number of presets, up to twenty, that will be returned at one time
-lpMaxResults :: Lens' ListPresets (Maybe Int)
-lpMaxResults = lens _lpMaxResults (\ s a -> s{_lpMaxResults = a})
+lpMaxResults :: Lens' ListPresets (Maybe Natural)
+lpMaxResults = lens _lpMaxResults (\ s a -> s{_lpMaxResults = a}) . mapping _Nat
 
 instance AWSRequest ListPresets where
         type Rs ListPresets = ListPresetsResponse

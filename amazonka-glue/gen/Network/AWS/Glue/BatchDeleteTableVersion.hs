@@ -66,7 +66,7 @@ data BatchDeleteTableVersion = BatchDeleteTableVersion'
 --
 -- * 'bdtvTableName' - The name of the table. For Hive compatibility, this name is entirely lowercase.
 --
--- * 'bdtvVersionIds' - A list of the IDs of versions to be deleted.
+-- * 'bdtvVersionIds' - A list of the IDs of versions to be deleted. A @VersionId@ is a string representation of an integer. Each version is incremented by 1.
 batchDeleteTableVersion
     :: Text -- ^ 'bdtvDatabaseName'
     -> Text -- ^ 'bdtvTableName'
@@ -92,7 +92,7 @@ bdtvDatabaseName = lens _bdtvDatabaseName (\ s a -> s{_bdtvDatabaseName = a})
 bdtvTableName :: Lens' BatchDeleteTableVersion Text
 bdtvTableName = lens _bdtvTableName (\ s a -> s{_bdtvTableName = a})
 
--- | A list of the IDs of versions to be deleted.
+-- | A list of the IDs of versions to be deleted. A @VersionId@ is a string representation of an integer. Each version is incremented by 1.
 bdtvVersionIds :: Lens' BatchDeleteTableVersion [Text]
 bdtvVersionIds = lens _bdtvVersionIds (\ s a -> s{_bdtvVersionIds = a}) . _Coerce
 

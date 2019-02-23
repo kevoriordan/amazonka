@@ -27,16 +27,19 @@ import Network.AWS.StorageGateway.Types.Sum
 --
 -- /See:/ 'cachediSCSIVolume' smart constructor.
 data CachediSCSIVolume = CachediSCSIVolume'
-  { _cscsivVolumeiSCSIAttributes :: !(Maybe VolumeiSCSIAttributes)
-  , _cscsivVolumeStatus          :: !(Maybe Text)
-  , _cscsivSourceSnapshotId      :: !(Maybe Text)
-  , _cscsivVolumeARN             :: !(Maybe Text)
-  , _cscsivVolumeProgress        :: !(Maybe Double)
-  , _cscsivVolumeSizeInBytes     :: !(Maybe Integer)
-  , _cscsivVolumeUsedInBytes     :: !(Maybe Integer)
-  , _cscsivCreatedDate           :: !(Maybe POSIX)
-  , _cscsivVolumeId              :: !(Maybe Text)
-  , _cscsivVolumeType            :: !(Maybe Text)
+  { _cscsivVolumeiSCSIAttributes  :: !(Maybe VolumeiSCSIAttributes)
+  , _cscsivVolumeStatus           :: !(Maybe Text)
+  , _cscsivSourceSnapshotId       :: !(Maybe Text)
+  , _cscsivKMSKey                 :: !(Maybe Text)
+  , _cscsivVolumeAttachmentStatus :: !(Maybe Text)
+  , _cscsivVolumeARN              :: !(Maybe Text)
+  , _cscsivVolumeProgress         :: !(Maybe Double)
+  , _cscsivVolumeSizeInBytes      :: !(Maybe Integer)
+  , _cscsivVolumeUsedInBytes      :: !(Maybe Integer)
+  , _cscsivCreatedDate            :: !(Maybe POSIX)
+  , _cscsivVolumeId               :: !(Maybe Text)
+  , _cscsivVolumeType             :: !(Maybe Text)
+  , _cscsivTargetName             :: !(Maybe Text)
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -49,6 +52,10 @@ data CachediSCSIVolume = CachediSCSIVolume'
 -- * 'cscsivVolumeStatus' - One of the VolumeStatus values that indicates the state of the storage volume.
 --
 -- * 'cscsivSourceSnapshotId' - If the cached volume was created from a snapshot, this field contains the snapshot ID used, e.g. snap-78e22663. Otherwise, this field is not included.
+--
+-- * 'cscsivKMSKey' - Undocumented member.
+--
+-- * 'cscsivVolumeAttachmentStatus' - A value that indicates whether a storage volume is attached to or detached from a gateway.
 --
 -- * 'cscsivVolumeARN' - The Amazon Resource Name (ARN) of the storage volume.
 --
@@ -63,6 +70,8 @@ data CachediSCSIVolume = CachediSCSIVolume'
 -- * 'cscsivVolumeId' - The unique identifier of the volume, e.g. vol-AE4B946D.
 --
 -- * 'cscsivVolumeType' - One of the VolumeType enumeration values that describes the type of the volume.
+--
+-- * 'cscsivTargetName' - The name of the iSCSI target that is used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying @TargetName@ as /myvolume/ results in the target ARN of @arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume@ .
 cachediSCSIVolume
     :: CachediSCSIVolume
 cachediSCSIVolume =
@@ -70,6 +79,8 @@ cachediSCSIVolume =
     { _cscsivVolumeiSCSIAttributes = Nothing
     , _cscsivVolumeStatus = Nothing
     , _cscsivSourceSnapshotId = Nothing
+    , _cscsivKMSKey = Nothing
+    , _cscsivVolumeAttachmentStatus = Nothing
     , _cscsivVolumeARN = Nothing
     , _cscsivVolumeProgress = Nothing
     , _cscsivVolumeSizeInBytes = Nothing
@@ -77,6 +88,7 @@ cachediSCSIVolume =
     , _cscsivCreatedDate = Nothing
     , _cscsivVolumeId = Nothing
     , _cscsivVolumeType = Nothing
+    , _cscsivTargetName = Nothing
     }
 
 
@@ -91,6 +103,14 @@ cscsivVolumeStatus = lens _cscsivVolumeStatus (\ s a -> s{_cscsivVolumeStatus = 
 -- | If the cached volume was created from a snapshot, this field contains the snapshot ID used, e.g. snap-78e22663. Otherwise, this field is not included.
 cscsivSourceSnapshotId :: Lens' CachediSCSIVolume (Maybe Text)
 cscsivSourceSnapshotId = lens _cscsivSourceSnapshotId (\ s a -> s{_cscsivSourceSnapshotId = a})
+
+-- | Undocumented member.
+cscsivKMSKey :: Lens' CachediSCSIVolume (Maybe Text)
+cscsivKMSKey = lens _cscsivKMSKey (\ s a -> s{_cscsivKMSKey = a})
+
+-- | A value that indicates whether a storage volume is attached to or detached from a gateway.
+cscsivVolumeAttachmentStatus :: Lens' CachediSCSIVolume (Maybe Text)
+cscsivVolumeAttachmentStatus = lens _cscsivVolumeAttachmentStatus (\ s a -> s{_cscsivVolumeAttachmentStatus = a})
 
 -- | The Amazon Resource Name (ARN) of the storage volume.
 cscsivVolumeARN :: Lens' CachediSCSIVolume (Maybe Text)
@@ -120,6 +140,10 @@ cscsivVolumeId = lens _cscsivVolumeId (\ s a -> s{_cscsivVolumeId = a})
 cscsivVolumeType :: Lens' CachediSCSIVolume (Maybe Text)
 cscsivVolumeType = lens _cscsivVolumeType (\ s a -> s{_cscsivVolumeType = a})
 
+-- | The name of the iSCSI target that is used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying @TargetName@ as /myvolume/ results in the target ARN of @arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume@ .
+cscsivTargetName :: Lens' CachediSCSIVolume (Maybe Text)
+cscsivTargetName = lens _cscsivTargetName (\ s a -> s{_cscsivTargetName = a})
+
 instance FromJSON CachediSCSIVolume where
         parseJSON
           = withObject "CachediSCSIVolume"
@@ -128,13 +152,16 @@ instance FromJSON CachediSCSIVolume where
                    (x .:? "VolumeiSCSIAttributes") <*>
                      (x .:? "VolumeStatus")
                      <*> (x .:? "SourceSnapshotId")
+                     <*> (x .:? "KMSKey")
+                     <*> (x .:? "VolumeAttachmentStatus")
                      <*> (x .:? "VolumeARN")
                      <*> (x .:? "VolumeProgress")
                      <*> (x .:? "VolumeSizeInBytes")
                      <*> (x .:? "VolumeUsedInBytes")
                      <*> (x .:? "CreatedDate")
                      <*> (x .:? "VolumeId")
-                     <*> (x .:? "VolumeType"))
+                     <*> (x .:? "VolumeType")
+                     <*> (x .:? "TargetName"))
 
 instance Hashable CachediSCSIVolume where
 
@@ -222,7 +249,7 @@ data DeviceiSCSIAttributes = DeviceiSCSIAttributes'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dscsiaTargetARN' - Specifies the unique Amazon Resource Name(ARN) that encodes the iSCSI qualified name(iqn) of a tape drive or media changer target.
+-- * 'dscsiaTargetARN' - Specifies the unique Amazon Resource Name (ARN) that encodes the iSCSI qualified name(iqn) of a tape drive or media changer target.
 --
 -- * 'dscsiaChapEnabled' - Indicates whether mutual CHAP is enabled for the iSCSI target.
 --
@@ -240,7 +267,7 @@ deviceiSCSIAttributes =
     }
 
 
--- | Specifies the unique Amazon Resource Name(ARN) that encodes the iSCSI qualified name(iqn) of a tape drive or media changer target.
+-- | Specifies the unique Amazon Resource Name (ARN) that encodes the iSCSI qualified name(iqn) of a tape drive or media changer target.
 dscsiaTargetARN :: Lens' DeviceiSCSIAttributes (Maybe Text)
 dscsiaTargetARN = lens _dscsiaTargetARN (\ s a -> s{_dscsiaTargetARN = a})
 
@@ -269,7 +296,11 @@ instance Hashable DeviceiSCSIAttributes where
 
 instance NFData DeviceiSCSIAttributes where
 
--- | /See:/ 'disk' smart constructor.
+-- | Represents a gateway's local disk.
+--
+--
+--
+-- /See:/ 'disk' smart constructor.
 data Disk = Disk'
   { _dDiskAllocationResource :: !(Maybe Text)
   , _dDiskAllocationType     :: !(Maybe Text)
@@ -278,6 +309,7 @@ data Disk = Disk'
   , _dDiskSizeInBytes        :: !(Maybe Integer)
   , _dDiskStatus             :: !(Maybe Text)
   , _dDiskId                 :: !(Maybe Text)
+  , _dDiskAttributeList      :: !(Maybe [Text])
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -285,19 +317,21 @@ data Disk = Disk'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dDiskAllocationResource' - Undocumented member.
+-- * 'dDiskAllocationResource' - The iSCSI qualified name (IQN) that is defined for a disk. This field is not included in the response if the local disk is not defined as an iSCSI target. The format of this field is /targetIqn::LUNNumber::region-volumeId/ .
 --
 -- * 'dDiskAllocationType' - Undocumented member.
 --
--- * 'dDiskNode' - Undocumented member.
+-- * 'dDiskNode' - The device node of a local disk as assigned by the virtualization environment.
 --
--- * 'dDiskPath' - Undocumented member.
+-- * 'dDiskPath' - The path of a local disk in the gateway virtual machine (VM).
 --
--- * 'dDiskSizeInBytes' - Undocumented member.
+-- * 'dDiskSizeInBytes' - The local disk size in bytes.
 --
--- * 'dDiskStatus' - Undocumented member.
+-- * 'dDiskStatus' - A value that represents the status of a local disk.
 --
--- * 'dDiskId' - Undocumented member.
+-- * 'dDiskId' - The unique device ID or other distinguishing data that identifies a local disk.
+--
+-- * 'dDiskAttributeList' - Undocumented member.
 disk
     :: Disk
 disk =
@@ -309,10 +343,11 @@ disk =
     , _dDiskSizeInBytes = Nothing
     , _dDiskStatus = Nothing
     , _dDiskId = Nothing
+    , _dDiskAttributeList = Nothing
     }
 
 
--- | Undocumented member.
+-- | The iSCSI qualified name (IQN) that is defined for a disk. This field is not included in the response if the local disk is not defined as an iSCSI target. The format of this field is /targetIqn::LUNNumber::region-volumeId/ .
 dDiskAllocationResource :: Lens' Disk (Maybe Text)
 dDiskAllocationResource = lens _dDiskAllocationResource (\ s a -> s{_dDiskAllocationResource = a})
 
@@ -320,25 +355,29 @@ dDiskAllocationResource = lens _dDiskAllocationResource (\ s a -> s{_dDiskAlloca
 dDiskAllocationType :: Lens' Disk (Maybe Text)
 dDiskAllocationType = lens _dDiskAllocationType (\ s a -> s{_dDiskAllocationType = a})
 
--- | Undocumented member.
+-- | The device node of a local disk as assigned by the virtualization environment.
 dDiskNode :: Lens' Disk (Maybe Text)
 dDiskNode = lens _dDiskNode (\ s a -> s{_dDiskNode = a})
 
--- | Undocumented member.
+-- | The path of a local disk in the gateway virtual machine (VM).
 dDiskPath :: Lens' Disk (Maybe Text)
 dDiskPath = lens _dDiskPath (\ s a -> s{_dDiskPath = a})
 
--- | Undocumented member.
+-- | The local disk size in bytes.
 dDiskSizeInBytes :: Lens' Disk (Maybe Integer)
 dDiskSizeInBytes = lens _dDiskSizeInBytes (\ s a -> s{_dDiskSizeInBytes = a})
 
--- | Undocumented member.
+-- | A value that represents the status of a local disk.
 dDiskStatus :: Lens' Disk (Maybe Text)
 dDiskStatus = lens _dDiskStatus (\ s a -> s{_dDiskStatus = a})
 
--- | Undocumented member.
+-- | The unique device ID or other distinguishing data that identifies a local disk.
 dDiskId :: Lens' Disk (Maybe Text)
 dDiskId = lens _dDiskId (\ s a -> s{_dDiskId = a})
+
+-- | Undocumented member.
+dDiskAttributeList :: Lens' Disk [Text]
+dDiskAttributeList = lens _dDiskAttributeList (\ s a -> s{_dDiskAttributeList = a}) . _Default . _Coerce
 
 instance FromJSON Disk where
         parseJSON
@@ -351,7 +390,8 @@ instance FromJSON Disk where
                      <*> (x .:? "DiskPath")
                      <*> (x .:? "DiskSizeInBytes")
                      <*> (x .:? "DiskStatus")
-                     <*> (x .:? "DiskId"))
+                     <*> (x .:? "DiskId")
+                     <*> (x .:? "DiskAttributeList" .!= mempty))
 
 instance Hashable Disk where
 
@@ -367,6 +407,7 @@ data FileShareInfo = FileShareInfo'
   , _fsiGatewayARN      :: !(Maybe Text)
   , _fsiFileShareId     :: !(Maybe Text)
   , _fsiFileShareARN    :: !(Maybe Text)
+  , _fsiFileShareType   :: !(Maybe FileShareType)
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -381,6 +422,8 @@ data FileShareInfo = FileShareInfo'
 -- * 'fsiFileShareId' - Undocumented member.
 --
 -- * 'fsiFileShareARN' - Undocumented member.
+--
+-- * 'fsiFileShareType' - Undocumented member.
 fileShareInfo
     :: FileShareInfo
 fileShareInfo =
@@ -389,6 +432,7 @@ fileShareInfo =
     , _fsiGatewayARN = Nothing
     , _fsiFileShareId = Nothing
     , _fsiFileShareARN = Nothing
+    , _fsiFileShareType = Nothing
     }
 
 
@@ -408,6 +452,10 @@ fsiFileShareId = lens _fsiFileShareId (\ s a -> s{_fsiFileShareId = a})
 fsiFileShareARN :: Lens' FileShareInfo (Maybe Text)
 fsiFileShareARN = lens _fsiFileShareARN (\ s a -> s{_fsiFileShareARN = a})
 
+-- | Undocumented member.
+fsiFileShareType :: Lens' FileShareInfo (Maybe FileShareType)
+fsiFileShareType = lens _fsiFileShareType (\ s a -> s{_fsiFileShareType = a})
+
 instance FromJSON FileShareInfo where
         parseJSON
           = withObject "FileShareInfo"
@@ -415,7 +463,8 @@ instance FromJSON FileShareInfo where
                  FileShareInfo' <$>
                    (x .:? "FileShareStatus") <*> (x .:? "GatewayARN")
                      <*> (x .:? "FileShareId")
-                     <*> (x .:? "FileShareARN"))
+                     <*> (x .:? "FileShareARN")
+                     <*> (x .:? "FileShareType"))
 
 instance Hashable FileShareInfo where
 
@@ -495,7 +544,7 @@ instance Hashable GatewayInfo where
 
 instance NFData GatewayInfo where
 
--- | Describes file share default values. Files and folders stored as Amazon S3 objects in S3 buckets don't, by default, have Unix file permissions assigned to them. Upon discovery in an S3 bucket by Storage Gateway, the S3 objects that represent files and folders are assigned these default Unix permissions. This operation is only supported in the file gateway type.
+-- | Describes Network File System (NFS) file share default values. Files and folders stored as Amazon S3 objects in S3 buckets don't, by default, have Unix file permissions assigned to them. Upon discovery in an S3 bucket by Storage Gateway, the S3 objects that represent files and folders are assigned these default Unix permissions. This operation is only supported for file gateways.
 --
 --
 --
@@ -608,19 +657,19 @@ data NFSFileShareInfo = NFSFileShareInfo'
 --
 -- * 'nfsfsiObjectACL' - Undocumented member.
 --
--- * 'nfsfsiKMSEncrypted' - True to use Amazon S3 server side encryption with your own KMS key, or false to use a key managed by Amazon S3. Optional.
+-- * 'nfsfsiKMSEncrypted' - True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.
 --
 -- * 'nfsfsiFileShareId' - Undocumented member.
 --
 -- * 'nfsfsiFileShareARN' - Undocumented member.
 --
--- * 'nfsfsiDefaultStorageClass' - The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.
+-- * 'nfsfsiDefaultStorageClass' - The default storage class for objects put into an Amazon S3 bucket by the file gateway. Possible values are @S3_STANDARD@ , @S3_STANDARD_IA@ , or @S3_ONEZONE_IA@ . If this field is not populated, the default value @S3_STANDARD@ is used. Optional.
 --
 -- * 'nfsfsiRole' - Undocumented member.
 --
 -- * 'nfsfsiSquash' - Undocumented member.
 --
--- * 'nfsfsiRequesterPays' - Sets who pays the cost of the request and the data download from the Amazon S3 bucket. Set this value to true if you want the requester to pay instead of the bucket owner, and otherwise to false.
+-- * 'nfsfsiRequesterPays' - A value that sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is @private@ .
 --
 -- * 'nfsfsiNFSFileShareDefaults' - Undocumented member.
 --
@@ -628,9 +677,9 @@ data NFSFileShareInfo = NFSFileShareInfo'
 --
 -- * 'nfsfsiClientList' - Undocumented member.
 --
--- * 'nfsfsiGuessMIMETypeEnabled' - Enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.
+-- * 'nfsfsiGuessMIMETypeEnabled' - A value that enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.
 --
--- * 'nfsfsiReadOnly' - Sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.
+-- * 'nfsfsiReadOnly' - A value that sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.
 nFSFileShareInfo
     :: NFSFileShareInfo
 nFSFileShareInfo =
@@ -675,7 +724,7 @@ nfsfsiPath = lens _nfsfsiPath (\ s a -> s{_nfsfsiPath = a})
 nfsfsiObjectACL :: Lens' NFSFileShareInfo (Maybe ObjectACL)
 nfsfsiObjectACL = lens _nfsfsiObjectACL (\ s a -> s{_nfsfsiObjectACL = a})
 
--- | True to use Amazon S3 server side encryption with your own KMS key, or false to use a key managed by Amazon S3. Optional.
+-- | True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.
 nfsfsiKMSEncrypted :: Lens' NFSFileShareInfo (Maybe Bool)
 nfsfsiKMSEncrypted = lens _nfsfsiKMSEncrypted (\ s a -> s{_nfsfsiKMSEncrypted = a})
 
@@ -687,7 +736,7 @@ nfsfsiFileShareId = lens _nfsfsiFileShareId (\ s a -> s{_nfsfsiFileShareId = a})
 nfsfsiFileShareARN :: Lens' NFSFileShareInfo (Maybe Text)
 nfsfsiFileShareARN = lens _nfsfsiFileShareARN (\ s a -> s{_nfsfsiFileShareARN = a})
 
--- | The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.
+-- | The default storage class for objects put into an Amazon S3 bucket by the file gateway. Possible values are @S3_STANDARD@ , @S3_STANDARD_IA@ , or @S3_ONEZONE_IA@ . If this field is not populated, the default value @S3_STANDARD@ is used. Optional.
 nfsfsiDefaultStorageClass :: Lens' NFSFileShareInfo (Maybe Text)
 nfsfsiDefaultStorageClass = lens _nfsfsiDefaultStorageClass (\ s a -> s{_nfsfsiDefaultStorageClass = a})
 
@@ -699,7 +748,7 @@ nfsfsiRole = lens _nfsfsiRole (\ s a -> s{_nfsfsiRole = a})
 nfsfsiSquash :: Lens' NFSFileShareInfo (Maybe Text)
 nfsfsiSquash = lens _nfsfsiSquash (\ s a -> s{_nfsfsiSquash = a})
 
--- | Sets who pays the cost of the request and the data download from the Amazon S3 bucket. Set this value to true if you want the requester to pay instead of the bucket owner, and otherwise to false.
+-- | A value that sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is @private@ .
 nfsfsiRequesterPays :: Lens' NFSFileShareInfo (Maybe Bool)
 nfsfsiRequesterPays = lens _nfsfsiRequesterPays (\ s a -> s{_nfsfsiRequesterPays = a})
 
@@ -715,11 +764,11 @@ nfsfsiLocationARN = lens _nfsfsiLocationARN (\ s a -> s{_nfsfsiLocationARN = a})
 nfsfsiClientList :: Lens' NFSFileShareInfo (Maybe (NonEmpty Text))
 nfsfsiClientList = lens _nfsfsiClientList (\ s a -> s{_nfsfsiClientList = a}) . mapping _List1
 
--- | Enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.
+-- | A value that enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.
 nfsfsiGuessMIMETypeEnabled :: Lens' NFSFileShareInfo (Maybe Bool)
 nfsfsiGuessMIMETypeEnabled = lens _nfsfsiGuessMIMETypeEnabled (\ s a -> s{_nfsfsiGuessMIMETypeEnabled = a})
 
--- | Sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.
+-- | A value that sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.
 nfsfsiReadOnly :: Lens' NFSFileShareInfo (Maybe Bool)
 nfsfsiReadOnly = lens _nfsfsiReadOnly (\ s a -> s{_nfsfsiReadOnly = a})
 
@@ -804,24 +853,209 @@ instance Hashable NetworkInterface where
 
 instance NFData NetworkInterface where
 
+-- | The Windows file permissions and ownership information assigned, by default, to native S3 objects when file gateway discovers them in S3 buckets. This operation is only supported for file gateways.
+--
+--
+--
+-- /See:/ 'sMBFileShareInfo' smart constructor.
+data SMBFileShareInfo = SMBFileShareInfo'
+  { _smbfsiFileShareStatus      :: !(Maybe Text)
+  , _smbfsiInvalidUserList      :: !(Maybe [Text])
+  , _smbfsiKMSKey               :: !(Maybe Text)
+  , _smbfsiValidUserList        :: !(Maybe [Text])
+  , _smbfsiGatewayARN           :: !(Maybe Text)
+  , _smbfsiPath                 :: !(Maybe Text)
+  , _smbfsiAuthentication       :: !(Maybe Text)
+  , _smbfsiObjectACL            :: !(Maybe ObjectACL)
+  , _smbfsiKMSEncrypted         :: !(Maybe Bool)
+  , _smbfsiFileShareId          :: !(Maybe Text)
+  , _smbfsiFileShareARN         :: !(Maybe Text)
+  , _smbfsiDefaultStorageClass  :: !(Maybe Text)
+  , _smbfsiRole                 :: !(Maybe Text)
+  , _smbfsiRequesterPays        :: !(Maybe Bool)
+  , _smbfsiLocationARN          :: !(Maybe Text)
+  , _smbfsiGuessMIMETypeEnabled :: !(Maybe Bool)
+  , _smbfsiReadOnly             :: !(Maybe Bool)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SMBFileShareInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'smbfsiFileShareStatus' - Undocumented member.
+--
+-- * 'smbfsiInvalidUserList' - A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example @@group1@ . Can only be set if Authentication is set to @ActiveDirectory@ .
+--
+-- * 'smbfsiKMSKey' - Undocumented member.
+--
+-- * 'smbfsiValidUserList' - A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. For example @@group1@ . Can only be set if Authentication is set to @ActiveDirectory@ .
+--
+-- * 'smbfsiGatewayARN' - Undocumented member.
+--
+-- * 'smbfsiPath' - The file share path used by the SMB client to identify the mount point.
+--
+-- * 'smbfsiAuthentication' - Undocumented member.
+--
+-- * 'smbfsiObjectACL' - Undocumented member.
+--
+-- * 'smbfsiKMSEncrypted' - True to use Amazon S3 server-side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.
+--
+-- * 'smbfsiFileShareId' - Undocumented member.
+--
+-- * 'smbfsiFileShareARN' - Undocumented member.
+--
+-- * 'smbfsiDefaultStorageClass' - The default storage class for objects put into an Amazon S3 bucket by the file gateway. Possible values are @S3_STANDARD@ , @S3_STANDARD_IA@ , or @S3_ONEZONE_IA@ . If this field is not populated, the default value @S3_STANDARD@ is used. Optional.
+--
+-- * 'smbfsiRole' - Undocumented member.
+--
+-- * 'smbfsiRequesterPays' - A value that sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is @private@ .
+--
+-- * 'smbfsiLocationARN' - Undocumented member.
+--
+-- * 'smbfsiGuessMIMETypeEnabled' - A value that enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.
+--
+-- * 'smbfsiReadOnly' - A value that sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.
+sMBFileShareInfo
+    :: SMBFileShareInfo
+sMBFileShareInfo =
+  SMBFileShareInfo'
+    { _smbfsiFileShareStatus = Nothing
+    , _smbfsiInvalidUserList = Nothing
+    , _smbfsiKMSKey = Nothing
+    , _smbfsiValidUserList = Nothing
+    , _smbfsiGatewayARN = Nothing
+    , _smbfsiPath = Nothing
+    , _smbfsiAuthentication = Nothing
+    , _smbfsiObjectACL = Nothing
+    , _smbfsiKMSEncrypted = Nothing
+    , _smbfsiFileShareId = Nothing
+    , _smbfsiFileShareARN = Nothing
+    , _smbfsiDefaultStorageClass = Nothing
+    , _smbfsiRole = Nothing
+    , _smbfsiRequesterPays = Nothing
+    , _smbfsiLocationARN = Nothing
+    , _smbfsiGuessMIMETypeEnabled = Nothing
+    , _smbfsiReadOnly = Nothing
+    }
+
+
+-- | Undocumented member.
+smbfsiFileShareStatus :: Lens' SMBFileShareInfo (Maybe Text)
+smbfsiFileShareStatus = lens _smbfsiFileShareStatus (\ s a -> s{_smbfsiFileShareStatus = a})
+
+-- | A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example @@group1@ . Can only be set if Authentication is set to @ActiveDirectory@ .
+smbfsiInvalidUserList :: Lens' SMBFileShareInfo [Text]
+smbfsiInvalidUserList = lens _smbfsiInvalidUserList (\ s a -> s{_smbfsiInvalidUserList = a}) . _Default . _Coerce
+
+-- | Undocumented member.
+smbfsiKMSKey :: Lens' SMBFileShareInfo (Maybe Text)
+smbfsiKMSKey = lens _smbfsiKMSKey (\ s a -> s{_smbfsiKMSKey = a})
+
+-- | A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. For example @@group1@ . Can only be set if Authentication is set to @ActiveDirectory@ .
+smbfsiValidUserList :: Lens' SMBFileShareInfo [Text]
+smbfsiValidUserList = lens _smbfsiValidUserList (\ s a -> s{_smbfsiValidUserList = a}) . _Default . _Coerce
+
+-- | Undocumented member.
+smbfsiGatewayARN :: Lens' SMBFileShareInfo (Maybe Text)
+smbfsiGatewayARN = lens _smbfsiGatewayARN (\ s a -> s{_smbfsiGatewayARN = a})
+
+-- | The file share path used by the SMB client to identify the mount point.
+smbfsiPath :: Lens' SMBFileShareInfo (Maybe Text)
+smbfsiPath = lens _smbfsiPath (\ s a -> s{_smbfsiPath = a})
+
+-- | Undocumented member.
+smbfsiAuthentication :: Lens' SMBFileShareInfo (Maybe Text)
+smbfsiAuthentication = lens _smbfsiAuthentication (\ s a -> s{_smbfsiAuthentication = a})
+
+-- | Undocumented member.
+smbfsiObjectACL :: Lens' SMBFileShareInfo (Maybe ObjectACL)
+smbfsiObjectACL = lens _smbfsiObjectACL (\ s a -> s{_smbfsiObjectACL = a})
+
+-- | True to use Amazon S3 server-side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.
+smbfsiKMSEncrypted :: Lens' SMBFileShareInfo (Maybe Bool)
+smbfsiKMSEncrypted = lens _smbfsiKMSEncrypted (\ s a -> s{_smbfsiKMSEncrypted = a})
+
+-- | Undocumented member.
+smbfsiFileShareId :: Lens' SMBFileShareInfo (Maybe Text)
+smbfsiFileShareId = lens _smbfsiFileShareId (\ s a -> s{_smbfsiFileShareId = a})
+
+-- | Undocumented member.
+smbfsiFileShareARN :: Lens' SMBFileShareInfo (Maybe Text)
+smbfsiFileShareARN = lens _smbfsiFileShareARN (\ s a -> s{_smbfsiFileShareARN = a})
+
+-- | The default storage class for objects put into an Amazon S3 bucket by the file gateway. Possible values are @S3_STANDARD@ , @S3_STANDARD_IA@ , or @S3_ONEZONE_IA@ . If this field is not populated, the default value @S3_STANDARD@ is used. Optional.
+smbfsiDefaultStorageClass :: Lens' SMBFileShareInfo (Maybe Text)
+smbfsiDefaultStorageClass = lens _smbfsiDefaultStorageClass (\ s a -> s{_smbfsiDefaultStorageClass = a})
+
+-- | Undocumented member.
+smbfsiRole :: Lens' SMBFileShareInfo (Maybe Text)
+smbfsiRole = lens _smbfsiRole (\ s a -> s{_smbfsiRole = a})
+
+-- | A value that sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is @private@ .
+smbfsiRequesterPays :: Lens' SMBFileShareInfo (Maybe Bool)
+smbfsiRequesterPays = lens _smbfsiRequesterPays (\ s a -> s{_smbfsiRequesterPays = a})
+
+-- | Undocumented member.
+smbfsiLocationARN :: Lens' SMBFileShareInfo (Maybe Text)
+smbfsiLocationARN = lens _smbfsiLocationARN (\ s a -> s{_smbfsiLocationARN = a})
+
+-- | A value that enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.
+smbfsiGuessMIMETypeEnabled :: Lens' SMBFileShareInfo (Maybe Bool)
+smbfsiGuessMIMETypeEnabled = lens _smbfsiGuessMIMETypeEnabled (\ s a -> s{_smbfsiGuessMIMETypeEnabled = a})
+
+-- | A value that sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.
+smbfsiReadOnly :: Lens' SMBFileShareInfo (Maybe Bool)
+smbfsiReadOnly = lens _smbfsiReadOnly (\ s a -> s{_smbfsiReadOnly = a})
+
+instance FromJSON SMBFileShareInfo where
+        parseJSON
+          = withObject "SMBFileShareInfo"
+              (\ x ->
+                 SMBFileShareInfo' <$>
+                   (x .:? "FileShareStatus") <*>
+                     (x .:? "InvalidUserList" .!= mempty)
+                     <*> (x .:? "KMSKey")
+                     <*> (x .:? "ValidUserList" .!= mempty)
+                     <*> (x .:? "GatewayARN")
+                     <*> (x .:? "Path")
+                     <*> (x .:? "Authentication")
+                     <*> (x .:? "ObjectACL")
+                     <*> (x .:? "KMSEncrypted")
+                     <*> (x .:? "FileShareId")
+                     <*> (x .:? "FileShareARN")
+                     <*> (x .:? "DefaultStorageClass")
+                     <*> (x .:? "Role")
+                     <*> (x .:? "RequesterPays")
+                     <*> (x .:? "LocationARN")
+                     <*> (x .:? "GuessMIMETypeEnabled")
+                     <*> (x .:? "ReadOnly"))
+
+instance Hashable SMBFileShareInfo where
+
+instance NFData SMBFileShareInfo where
+
 -- | Describes an iSCSI stored volume.
 --
 --
 --
 -- /See:/ 'storediSCSIVolume' smart constructor.
 data StorediSCSIVolume = StorediSCSIVolume'
-  { _sscsivVolumeiSCSIAttributes :: !(Maybe VolumeiSCSIAttributes)
-  , _sscsivVolumeStatus          :: !(Maybe Text)
-  , _sscsivSourceSnapshotId      :: !(Maybe Text)
-  , _sscsivPreservedExistingData :: !(Maybe Bool)
-  , _sscsivVolumeARN             :: !(Maybe Text)
-  , _sscsivVolumeProgress        :: !(Maybe Double)
-  , _sscsivVolumeSizeInBytes     :: !(Maybe Integer)
-  , _sscsivVolumeUsedInBytes     :: !(Maybe Integer)
-  , _sscsivCreatedDate           :: !(Maybe POSIX)
-  , _sscsivVolumeId              :: !(Maybe Text)
-  , _sscsivVolumeDiskId          :: !(Maybe Text)
-  , _sscsivVolumeType            :: !(Maybe Text)
+  { _sscsivVolumeiSCSIAttributes  :: !(Maybe VolumeiSCSIAttributes)
+  , _sscsivVolumeStatus           :: !(Maybe Text)
+  , _sscsivSourceSnapshotId       :: !(Maybe Text)
+  , _sscsivPreservedExistingData  :: !(Maybe Bool)
+  , _sscsivKMSKey                 :: !(Maybe Text)
+  , _sscsivVolumeAttachmentStatus :: !(Maybe Text)
+  , _sscsivVolumeARN              :: !(Maybe Text)
+  , _sscsivVolumeProgress         :: !(Maybe Double)
+  , _sscsivVolumeSizeInBytes      :: !(Maybe Integer)
+  , _sscsivVolumeUsedInBytes      :: !(Maybe Integer)
+  , _sscsivCreatedDate            :: !(Maybe POSIX)
+  , _sscsivVolumeId               :: !(Maybe Text)
+  , _sscsivVolumeDiskId           :: !(Maybe Text)
+  , _sscsivVolumeType             :: !(Maybe Text)
+  , _sscsivTargetName             :: !(Maybe Text)
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -836,6 +1070,10 @@ data StorediSCSIVolume = StorediSCSIVolume'
 -- * 'sscsivSourceSnapshotId' - If the stored volume was created from a snapshot, this field contains the snapshot ID used, e.g. snap-78e22663. Otherwise, this field is not included.
 --
 -- * 'sscsivPreservedExistingData' - Indicates if when the stored volume was created, existing data on the underlying local disk was preserved. Valid Values: true, false
+--
+-- * 'sscsivKMSKey' - Undocumented member.
+--
+-- * 'sscsivVolumeAttachmentStatus' - A value that indicates whether a storage volume is attached to, detached from, or is in the process of detaching from a gateway.
 --
 -- * 'sscsivVolumeARN' - The Amazon Resource Name (ARN) of the storage volume.
 --
@@ -852,6 +1090,8 @@ data StorediSCSIVolume = StorediSCSIVolume'
 -- * 'sscsivVolumeDiskId' - The ID of the local disk that was specified in the 'CreateStorediSCSIVolume' operation.
 --
 -- * 'sscsivVolumeType' - One of the VolumeType enumeration values describing the type of the volume.
+--
+-- * 'sscsivTargetName' - The name of the iSCSI target that is used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying @TargetName@ as /myvolume/ results in the target ARN of @arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume@ .
 storediSCSIVolume
     :: StorediSCSIVolume
 storediSCSIVolume =
@@ -860,6 +1100,8 @@ storediSCSIVolume =
     , _sscsivVolumeStatus = Nothing
     , _sscsivSourceSnapshotId = Nothing
     , _sscsivPreservedExistingData = Nothing
+    , _sscsivKMSKey = Nothing
+    , _sscsivVolumeAttachmentStatus = Nothing
     , _sscsivVolumeARN = Nothing
     , _sscsivVolumeProgress = Nothing
     , _sscsivVolumeSizeInBytes = Nothing
@@ -868,6 +1110,7 @@ storediSCSIVolume =
     , _sscsivVolumeId = Nothing
     , _sscsivVolumeDiskId = Nothing
     , _sscsivVolumeType = Nothing
+    , _sscsivTargetName = Nothing
     }
 
 
@@ -886,6 +1129,14 @@ sscsivSourceSnapshotId = lens _sscsivSourceSnapshotId (\ s a -> s{_sscsivSourceS
 -- | Indicates if when the stored volume was created, existing data on the underlying local disk was preserved. Valid Values: true, false
 sscsivPreservedExistingData :: Lens' StorediSCSIVolume (Maybe Bool)
 sscsivPreservedExistingData = lens _sscsivPreservedExistingData (\ s a -> s{_sscsivPreservedExistingData = a})
+
+-- | Undocumented member.
+sscsivKMSKey :: Lens' StorediSCSIVolume (Maybe Text)
+sscsivKMSKey = lens _sscsivKMSKey (\ s a -> s{_sscsivKMSKey = a})
+
+-- | A value that indicates whether a storage volume is attached to, detached from, or is in the process of detaching from a gateway.
+sscsivVolumeAttachmentStatus :: Lens' StorediSCSIVolume (Maybe Text)
+sscsivVolumeAttachmentStatus = lens _sscsivVolumeAttachmentStatus (\ s a -> s{_sscsivVolumeAttachmentStatus = a})
 
 -- | The Amazon Resource Name (ARN) of the storage volume.
 sscsivVolumeARN :: Lens' StorediSCSIVolume (Maybe Text)
@@ -919,6 +1170,10 @@ sscsivVolumeDiskId = lens _sscsivVolumeDiskId (\ s a -> s{_sscsivVolumeDiskId = 
 sscsivVolumeType :: Lens' StorediSCSIVolume (Maybe Text)
 sscsivVolumeType = lens _sscsivVolumeType (\ s a -> s{_sscsivVolumeType = a})
 
+-- | The name of the iSCSI target that is used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying @TargetName@ as /myvolume/ results in the target ARN of @arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume@ .
+sscsivTargetName :: Lens' StorediSCSIVolume (Maybe Text)
+sscsivTargetName = lens _sscsivTargetName (\ s a -> s{_sscsivTargetName = a})
+
 instance FromJSON StorediSCSIVolume where
         parseJSON
           = withObject "StorediSCSIVolume"
@@ -928,6 +1183,8 @@ instance FromJSON StorediSCSIVolume where
                      (x .:? "VolumeStatus")
                      <*> (x .:? "SourceSnapshotId")
                      <*> (x .:? "PreservedExistingData")
+                     <*> (x .:? "KMSKey")
+                     <*> (x .:? "VolumeAttachmentStatus")
                      <*> (x .:? "VolumeARN")
                      <*> (x .:? "VolumeProgress")
                      <*> (x .:? "VolumeSizeInBytes")
@@ -935,7 +1192,8 @@ instance FromJSON StorediSCSIVolume where
                      <*> (x .:? "CreatedDate")
                      <*> (x .:? "VolumeId")
                      <*> (x .:? "VolumeDiskId")
-                     <*> (x .:? "VolumeType"))
+                     <*> (x .:? "VolumeType")
+                     <*> (x .:? "TargetName"))
 
 instance Hashable StorediSCSIVolume where
 
@@ -994,6 +1252,7 @@ instance ToJSON Tag where
 data Tape = Tape'
   { _tTapeBarcode     :: !(Maybe Text)
   , _tTapeStatus      :: !(Maybe Text)
+  , _tKMSKey          :: !(Maybe Text)
   , _tTapeARN         :: !(Maybe Text)
   , _tProgress        :: !(Maybe Double)
   , _tTapeSizeInBytes :: !(Maybe Integer)
@@ -1010,6 +1269,8 @@ data Tape = Tape'
 -- * 'tTapeBarcode' - The barcode that identifies a specific virtual tape.
 --
 -- * 'tTapeStatus' - The current state of the virtual tape.
+--
+-- * 'tKMSKey' - Undocumented member.
 --
 -- * 'tTapeARN' - The Amazon Resource Name (ARN) of the virtual tape.
 --
@@ -1028,6 +1289,7 @@ tape =
   Tape'
     { _tTapeBarcode = Nothing
     , _tTapeStatus = Nothing
+    , _tKMSKey = Nothing
     , _tTapeARN = Nothing
     , _tProgress = Nothing
     , _tTapeSizeInBytes = Nothing
@@ -1044,6 +1306,10 @@ tTapeBarcode = lens _tTapeBarcode (\ s a -> s{_tTapeBarcode = a})
 -- | The current state of the virtual tape.
 tTapeStatus :: Lens' Tape (Maybe Text)
 tTapeStatus = lens _tTapeStatus (\ s a -> s{_tTapeStatus = a})
+
+-- | Undocumented member.
+tKMSKey :: Lens' Tape (Maybe Text)
+tKMSKey = lens _tKMSKey (\ s a -> s{_tKMSKey = a})
 
 -- | The Amazon Resource Name (ARN) of the virtual tape.
 tTapeARN :: Lens' Tape (Maybe Text)
@@ -1075,7 +1341,8 @@ instance FromJSON Tape where
               (\ x ->
                  Tape' <$>
                    (x .:? "TapeBarcode") <*> (x .:? "TapeStatus") <*>
-                     (x .:? "TapeARN")
+                     (x .:? "KMSKey")
+                     <*> (x .:? "TapeARN")
                      <*> (x .:? "Progress")
                      <*> (x .:? "TapeSizeInBytes")
                      <*> (x .:? "VTLDevice")
@@ -1094,6 +1361,7 @@ instance NFData Tape where
 data TapeArchive = TapeArchive'
   { _taTapeBarcode     :: !(Maybe Text)
   , _taTapeStatus      :: !(Maybe Text)
+  , _taKMSKey          :: !(Maybe Text)
   , _taTapeARN         :: !(Maybe Text)
   , _taTapeSizeInBytes :: !(Maybe Integer)
   , _taCompletionTime  :: !(Maybe POSIX)
@@ -1111,15 +1379,17 @@ data TapeArchive = TapeArchive'
 --
 -- * 'taTapeStatus' - The current state of the archived virtual tape.
 --
+-- * 'taKMSKey' - Undocumented member.
+--
 -- * 'taTapeARN' - The Amazon Resource Name (ARN) of an archived virtual tape.
 --
 -- * 'taTapeSizeInBytes' - The size, in bytes, of the archived virtual tape.
 --
--- * 'taCompletionTime' - The time that the archiving of the virtual tape was completed. The string format of the completion time is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
+-- * 'taCompletionTime' - The time that the archiving of the virtual tape was completed. The default time stamp format is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
 --
 -- * 'taTapeUsedInBytes' - The size, in bytes, of data stored on the virtual tape.
 --
--- * 'taTapeCreatedDate' - Undocumented member.
+-- * 'taTapeCreatedDate' - The date the virtual tape was created.
 --
 -- * 'taRetrievedTo' - The Amazon Resource Name (ARN) of the tape gateway that the virtual tape is being retrieved to. The virtual tape is retrieved from the virtual tape shelf (VTS).
 tapeArchive
@@ -1128,6 +1398,7 @@ tapeArchive =
   TapeArchive'
     { _taTapeBarcode = Nothing
     , _taTapeStatus = Nothing
+    , _taKMSKey = Nothing
     , _taTapeARN = Nothing
     , _taTapeSizeInBytes = Nothing
     , _taCompletionTime = Nothing
@@ -1145,6 +1416,10 @@ taTapeBarcode = lens _taTapeBarcode (\ s a -> s{_taTapeBarcode = a})
 taTapeStatus :: Lens' TapeArchive (Maybe Text)
 taTapeStatus = lens _taTapeStatus (\ s a -> s{_taTapeStatus = a})
 
+-- | Undocumented member.
+taKMSKey :: Lens' TapeArchive (Maybe Text)
+taKMSKey = lens _taKMSKey (\ s a -> s{_taKMSKey = a})
+
 -- | The Amazon Resource Name (ARN) of an archived virtual tape.
 taTapeARN :: Lens' TapeArchive (Maybe Text)
 taTapeARN = lens _taTapeARN (\ s a -> s{_taTapeARN = a})
@@ -1153,7 +1428,7 @@ taTapeARN = lens _taTapeARN (\ s a -> s{_taTapeARN = a})
 taTapeSizeInBytes :: Lens' TapeArchive (Maybe Integer)
 taTapeSizeInBytes = lens _taTapeSizeInBytes (\ s a -> s{_taTapeSizeInBytes = a})
 
--- | The time that the archiving of the virtual tape was completed. The string format of the completion time is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
+-- | The time that the archiving of the virtual tape was completed. The default time stamp format is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
 taCompletionTime :: Lens' TapeArchive (Maybe UTCTime)
 taCompletionTime = lens _taCompletionTime (\ s a -> s{_taCompletionTime = a}) . mapping _Time
 
@@ -1161,7 +1436,7 @@ taCompletionTime = lens _taCompletionTime (\ s a -> s{_taCompletionTime = a}) . 
 taTapeUsedInBytes :: Lens' TapeArchive (Maybe Integer)
 taTapeUsedInBytes = lens _taTapeUsedInBytes (\ s a -> s{_taTapeUsedInBytes = a})
 
--- | Undocumented member.
+-- | The date the virtual tape was created.
 taTapeCreatedDate :: Lens' TapeArchive (Maybe UTCTime)
 taTapeCreatedDate = lens _taTapeCreatedDate (\ s a -> s{_taTapeCreatedDate = a}) . mapping _Time
 
@@ -1175,7 +1450,8 @@ instance FromJSON TapeArchive where
               (\ x ->
                  TapeArchive' <$>
                    (x .:? "TapeBarcode") <*> (x .:? "TapeStatus") <*>
-                     (x .:? "TapeARN")
+                     (x .:? "KMSKey")
+                     <*> (x .:? "TapeARN")
                      <*> (x .:? "TapeSizeInBytes")
                      <*> (x .:? "CompletionTime")
                      <*> (x .:? "TapeUsedInBytes")
@@ -1278,7 +1554,7 @@ data TapeRecoveryPointInfo = TapeRecoveryPointInfo'
 --
 -- * 'trpiTapeStatus' - Undocumented member.
 --
--- * 'trpiTapeRecoveryPointTime' - The time when the point-in-time view of the virtual tape was replicated for later recovery. The string format of the tape recovery point time is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
+-- * 'trpiTapeRecoveryPointTime' - The time when the point-in-time view of the virtual tape was replicated for later recovery. The default time stamp format of the tape recovery point time is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
 --
 -- * 'trpiTapeARN' - The Amazon Resource Name (ARN) of the virtual tape.
 --
@@ -1298,7 +1574,7 @@ tapeRecoveryPointInfo =
 trpiTapeStatus :: Lens' TapeRecoveryPointInfo (Maybe Text)
 trpiTapeStatus = lens _trpiTapeStatus (\ s a -> s{_trpiTapeStatus = a})
 
--- | The time when the point-in-time view of the virtual tape was replicated for later recovery. The string format of the tape recovery point time is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
+-- | The time when the point-in-time view of the virtual tape was replicated for later recovery. The default time stamp format of the tape recovery point time is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
 trpiTapeRecoveryPointTime :: Lens' TapeRecoveryPointInfo (Maybe UTCTime)
 trpiTapeRecoveryPointTime = lens _trpiTapeRecoveryPointTime (\ s a -> s{_trpiTapeRecoveryPointTime = a}) . mapping _Time
 
@@ -1404,12 +1680,13 @@ instance NFData VTLDevice where
 --
 -- /See:/ 'volumeInfo' smart constructor.
 data VolumeInfo = VolumeInfo'
-  { _viGatewayARN        :: !(Maybe Text)
-  , _viVolumeARN         :: !(Maybe Text)
-  , _viVolumeSizeInBytes :: !(Maybe Integer)
-  , _viVolumeId          :: !(Maybe Text)
-  , _viGatewayId         :: !(Maybe Text)
-  , _viVolumeType        :: !(Maybe Text)
+  { _viGatewayARN             :: !(Maybe Text)
+  , _viVolumeAttachmentStatus :: !(Maybe Text)
+  , _viVolumeARN              :: !(Maybe Text)
+  , _viVolumeSizeInBytes      :: !(Maybe Integer)
+  , _viVolumeId               :: !(Maybe Text)
+  , _viGatewayId              :: !(Maybe Text)
+  , _viVolumeType             :: !(Maybe Text)
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -1418,6 +1695,8 @@ data VolumeInfo = VolumeInfo'
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'viGatewayARN' - Undocumented member.
+--
+-- * 'viVolumeAttachmentStatus' - Undocumented member.
 --
 -- * 'viVolumeARN' - The Amazon Resource Name (ARN) for the storage volume. For example, the following is a valid ARN: @arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB@  Valid Values: 50 to 500 lowercase letters, numbers, periods (.), and hyphens (-).
 --
@@ -1433,6 +1712,7 @@ volumeInfo
 volumeInfo =
   VolumeInfo'
     { _viGatewayARN = Nothing
+    , _viVolumeAttachmentStatus = Nothing
     , _viVolumeARN = Nothing
     , _viVolumeSizeInBytes = Nothing
     , _viVolumeId = Nothing
@@ -1444,6 +1724,10 @@ volumeInfo =
 -- | Undocumented member.
 viGatewayARN :: Lens' VolumeInfo (Maybe Text)
 viGatewayARN = lens _viGatewayARN (\ s a -> s{_viGatewayARN = a})
+
+-- | Undocumented member.
+viVolumeAttachmentStatus :: Lens' VolumeInfo (Maybe Text)
+viVolumeAttachmentStatus = lens _viVolumeAttachmentStatus (\ s a -> s{_viVolumeAttachmentStatus = a})
 
 -- | The Amazon Resource Name (ARN) for the storage volume. For example, the following is a valid ARN: @arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABB@  Valid Values: 50 to 500 lowercase letters, numbers, periods (.), and hyphens (-).
 viVolumeARN :: Lens' VolumeInfo (Maybe Text)
@@ -1470,8 +1754,10 @@ instance FromJSON VolumeInfo where
           = withObject "VolumeInfo"
               (\ x ->
                  VolumeInfo' <$>
-                   (x .:? "GatewayARN") <*> (x .:? "VolumeARN") <*>
-                     (x .:? "VolumeSizeInBytes")
+                   (x .:? "GatewayARN") <*>
+                     (x .:? "VolumeAttachmentStatus")
+                     <*> (x .:? "VolumeARN")
+                     <*> (x .:? "VolumeSizeInBytes")
                      <*> (x .:? "VolumeId")
                      <*> (x .:? "GatewayId")
                      <*> (x .:? "VolumeType"))

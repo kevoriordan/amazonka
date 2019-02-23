@@ -27,9 +27,11 @@ import Network.AWS.Prelude
 --
 -- /See:/ 'action' smart constructor.
 data Action = Action'
-  { _aArguments :: !(Maybe (Map Text Text))
-  , _aJobName   :: !(Maybe Text)
-  , _aTimeout   :: !(Maybe Nat)
+  { _aNotificationProperty  :: !(Maybe NotificationProperty)
+  , _aArguments             :: !(Maybe (Map Text Text))
+  , _aJobName               :: !(Maybe Text)
+  , _aSecurityConfiguration :: !(Maybe Text)
+  , _aTimeout               :: !(Maybe Nat)
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -37,18 +39,32 @@ data Action = Action'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aArguments' - Arguments to be passed to the job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the <http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html Calling AWS Glue APIs in Python> topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the <http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html Special Parameters Used by AWS Glue> topic in the developer guide.
+-- * 'aNotificationProperty' - Specifies configuration properties of a job run notification.
+--
+-- * 'aArguments' - Arguments to be passed to the job run. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the <http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html Calling AWS Glue APIs in Python> topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the <http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html Special Parameters Used by AWS Glue> topic in the developer guide.
 --
 -- * 'aJobName' - The name of a job to be executed.
 --
--- * 'aTimeout' - The job run timeout in minutes. It overrides the timeout value of the job.
+-- * 'aSecurityConfiguration' - The name of the SecurityConfiguration structure to be used with this action.
+--
+-- * 'aTimeout' - The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters @TIMEOUT@ status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.
 action
     :: Action
 action =
-  Action' {_aArguments = Nothing, _aJobName = Nothing, _aTimeout = Nothing}
+  Action'
+    { _aNotificationProperty = Nothing
+    , _aArguments = Nothing
+    , _aJobName = Nothing
+    , _aSecurityConfiguration = Nothing
+    , _aTimeout = Nothing
+    }
 
 
--- | Arguments to be passed to the job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the <http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html Calling AWS Glue APIs in Python> topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the <http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html Special Parameters Used by AWS Glue> topic in the developer guide.
+-- | Specifies configuration properties of a job run notification.
+aNotificationProperty :: Lens' Action (Maybe NotificationProperty)
+aNotificationProperty = lens _aNotificationProperty (\ s a -> s{_aNotificationProperty = a})
+
+-- | Arguments to be passed to the job run. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the <http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html Calling AWS Glue APIs in Python> topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the <http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html Special Parameters Used by AWS Glue> topic in the developer guide.
 aArguments :: Lens' Action (HashMap Text Text)
 aArguments = lens _aArguments (\ s a -> s{_aArguments = a}) . _Default . _Map
 
@@ -56,7 +72,11 @@ aArguments = lens _aArguments (\ s a -> s{_aArguments = a}) . _Default . _Map
 aJobName :: Lens' Action (Maybe Text)
 aJobName = lens _aJobName (\ s a -> s{_aJobName = a})
 
--- | The job run timeout in minutes. It overrides the timeout value of the job.
+-- | The name of the SecurityConfiguration structure to be used with this action.
+aSecurityConfiguration :: Lens' Action (Maybe Text)
+aSecurityConfiguration = lens _aSecurityConfiguration (\ s a -> s{_aSecurityConfiguration = a})
+
+-- | The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters @TIMEOUT@ status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.
 aTimeout :: Lens' Action (Maybe Natural)
 aTimeout = lens _aTimeout (\ s a -> s{_aTimeout = a}) . mapping _Nat
 
@@ -65,7 +85,10 @@ instance FromJSON Action where
           = withObject "Action"
               (\ x ->
                  Action' <$>
-                   (x .:? "Arguments" .!= mempty) <*> (x .:? "JobName")
+                   (x .:? "NotificationProperty") <*>
+                     (x .:? "Arguments" .!= mempty)
+                     <*> (x .:? "JobName")
+                     <*> (x .:? "SecurityConfiguration")
                      <*> (x .:? "Timeout"))
 
 instance Hashable Action where
@@ -76,8 +99,12 @@ instance ToJSON Action where
         toJSON Action'{..}
           = object
               (catMaybes
-                 [("Arguments" .=) <$> _aArguments,
+                 [("NotificationProperty" .=) <$>
+                    _aNotificationProperty,
+                  ("Arguments" .=) <$> _aArguments,
                   ("JobName" .=) <$> _aJobName,
+                  ("SecurityConfiguration" .=) <$>
+                    _aSecurityConfiguration,
                   ("Timeout" .=) <$> _aTimeout])
 
 -- | Records an error that occurred when attempting to stop a specified job run.
@@ -282,10 +309,10 @@ instance Hashable CatalogImportStatus where
 
 instance NFData CatalogImportStatus where
 
--- | Classifiers are written in Python and triggered during a crawl task. You can write your own classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A classifier checks whether a given file is in a format it can handle, and if it is, the classifier creates a schema in the form of a @StructType@ object that matches that data format.
+-- | Classifiers are triggered during a crawl task. A classifier checks whether a given file is in a format it can handle, and if it is, the classifier creates a schema in the form of a @StructType@ object that matches that data format.
 --
 --
--- A classifier can be a @grok@ classifier, an XML classifier, or a JSON classifier, asspecified in one of the fields in the @Classifier@ object.
+-- You can use the standard classifiers that AWS Glue supplies, or you can write your own classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A classifier can be a @grok@ classifier, an @XML@ classifier, or a @JSON@ classifier, as specified in one of the fields in the @Classifier@ object.
 --
 --
 -- /See:/ 'classifier' smart constructor.
@@ -338,6 +365,59 @@ instance FromJSON Classifier where
 instance Hashable Classifier where
 
 instance NFData Classifier where
+
+-- | Specifies how CloudWatch data should be encrypted.
+--
+--
+--
+-- /See:/ 'cloudWatchEncryption' smart constructor.
+data CloudWatchEncryption = CloudWatchEncryption'
+  { _cweCloudWatchEncryptionMode :: !(Maybe CloudWatchEncryptionMode)
+  , _cweKMSKeyARN                :: !(Maybe Text)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CloudWatchEncryption' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cweCloudWatchEncryptionMode' - The encryption mode to use for CloudWatch data.
+--
+-- * 'cweKMSKeyARN' - The AWS ARN of the KMS key to be used to encrypt the data.
+cloudWatchEncryption
+    :: CloudWatchEncryption
+cloudWatchEncryption =
+  CloudWatchEncryption'
+    {_cweCloudWatchEncryptionMode = Nothing, _cweKMSKeyARN = Nothing}
+
+
+-- | The encryption mode to use for CloudWatch data.
+cweCloudWatchEncryptionMode :: Lens' CloudWatchEncryption (Maybe CloudWatchEncryptionMode)
+cweCloudWatchEncryptionMode = lens _cweCloudWatchEncryptionMode (\ s a -> s{_cweCloudWatchEncryptionMode = a})
+
+-- | The AWS ARN of the KMS key to be used to encrypt the data.
+cweKMSKeyARN :: Lens' CloudWatchEncryption (Maybe Text)
+cweKMSKeyARN = lens _cweKMSKeyARN (\ s a -> s{_cweKMSKeyARN = a})
+
+instance FromJSON CloudWatchEncryption where
+        parseJSON
+          = withObject "CloudWatchEncryption"
+              (\ x ->
+                 CloudWatchEncryption' <$>
+                   (x .:? "CloudWatchEncryptionMode") <*>
+                     (x .:? "KmsKeyArn"))
+
+instance Hashable CloudWatchEncryption where
+
+instance NFData CloudWatchEncryption where
+
+instance ToJSON CloudWatchEncryption where
+        toJSON CloudWatchEncryption'{..}
+          = object
+              (catMaybes
+                 [("CloudWatchEncryptionMode" .=) <$>
+                    _cweCloudWatchEncryptionMode,
+                  ("KmsKeyArn" .=) <$> _cweKMSKeyARN])
 
 -- | Represents a directional edge in a directed acyclic graph (DAG).
 --
@@ -685,7 +765,7 @@ data Connection = Connection'
 --
 -- * 'conLastUpdatedBy' - The user, group or role that last updated this connection definition.
 --
--- * 'conConnectionProperties' - A list of key-value pairs used as parameters for this connection.
+-- * 'conConnectionProperties' - These key-value pairs define parameters for the connection:     * @HOST@ - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.     * @PORT@ - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.     * @USER_NAME@ - The name under which to log in to the database. The value string for @USER_NAME@ is "@USERNAME@ ".     * @PASSWORD@ - A password, if one is used, for the user name.     * @ENCRYPTED_PASSWORD@ - When you enable connection password protection by setting @ConnectionPasswordEncryption@ in the Data Catalog encryption settings, this field stores the key you designate to encrypt the password.     * @JDBC_DRIVER_JAR_URI@ - The S3 path of the a jar file that contains the JDBC driver to use.     * @JDBC_DRIVER_CLASS_NAME@ - The class name of the JDBC driver to use.     * @JDBC_ENGINE@ - The name of the JDBC engine to use.     * @JDBC_ENGINE_VERSION@ - The version of the JDBC engine to use.     * @CONFIG_FILES@ - (Reserved for future use).     * @INSTANCE_ID@ - The instance ID to use.     * @JDBC_CONNECTION_URL@ - The URL for the JDBC connection.     * @JDBC_ENFORCE_SSL@ - A Boolean string (true, false) specifying whether SSL with hostname matching will be enforced for the JDBC connection on the client. The default is false.
 --
 -- * 'conLastUpdatedTime' - The last time this connection definition was updated.
 --
@@ -722,7 +802,7 @@ conCreationTime = lens _conCreationTime (\ s a -> s{_conCreationTime = a}) . map
 conLastUpdatedBy :: Lens' Connection (Maybe Text)
 conLastUpdatedBy = lens _conLastUpdatedBy (\ s a -> s{_conLastUpdatedBy = a})
 
--- | A list of key-value pairs used as parameters for this connection.
+-- | These key-value pairs define parameters for the connection:     * @HOST@ - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.     * @PORT@ - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.     * @USER_NAME@ - The name under which to log in to the database. The value string for @USER_NAME@ is "@USERNAME@ ".     * @PASSWORD@ - A password, if one is used, for the user name.     * @ENCRYPTED_PASSWORD@ - When you enable connection password protection by setting @ConnectionPasswordEncryption@ in the Data Catalog encryption settings, this field stores the key you designate to encrypt the password.     * @JDBC_DRIVER_JAR_URI@ - The S3 path of the a jar file that contains the JDBC driver to use.     * @JDBC_DRIVER_CLASS_NAME@ - The class name of the JDBC driver to use.     * @JDBC_ENGINE@ - The name of the JDBC engine to use.     * @JDBC_ENGINE_VERSION@ - The version of the JDBC engine to use.     * @CONFIG_FILES@ - (Reserved for future use).     * @INSTANCE_ID@ - The instance ID to use.     * @JDBC_CONNECTION_URL@ - The URL for the JDBC connection.     * @JDBC_ENFORCE_SSL@ - A Boolean string (true, false) specifying whether SSL with hostname matching will be enforced for the JDBC connection on the client. The default is false.
 conConnectionProperties :: Lens' Connection (HashMap ConnectionPropertyKey Text)
 conConnectionProperties = lens _conConnectionProperties (\ s a -> s{_conConnectionProperties = a}) . _Default . _Map
 
@@ -797,7 +877,7 @@ data ConnectionInput = ConnectionInput'
 --
 -- * 'ciConnectionType' - The type of the connection. Currently, only JDBC is supported; SFTP is not supported.
 --
--- * 'ciConnectionProperties' - A list of key-value pairs used as parameters for this connection.
+-- * 'ciConnectionProperties' - These key-value pairs define parameters for the connection.
 connectionInput
     :: Text -- ^ 'ciName'
     -> ConnectionType -- ^ 'ciConnectionType'
@@ -833,7 +913,7 @@ ciName = lens _ciName (\ s a -> s{_ciName = a})
 ciConnectionType :: Lens' ConnectionInput ConnectionType
 ciConnectionType = lens _ciConnectionType (\ s a -> s{_ciConnectionType = a})
 
--- | A list of key-value pairs used as parameters for this connection.
+-- | These key-value pairs define parameters for the connection.
 ciConnectionProperties :: Lens' ConnectionInput (HashMap ConnectionPropertyKey Text)
 ciConnectionProperties = lens _ciConnectionProperties (\ s a -> s{_ciConnectionProperties = a}) . _Map
 
@@ -853,6 +933,68 @@ instance ToJSON ConnectionInput where
                   Just ("ConnectionType" .= _ciConnectionType),
                   Just
                     ("ConnectionProperties" .= _ciConnectionProperties)])
+
+-- | The data structure used by the Data Catalog to encrypt the password as part of @CreateConnection@ or @UpdateConnection@ and store it in the @ENCRYPTED_PASSWORD@ field in the connection properties. You can enable catalog encryption or only password encryption.
+--
+--
+-- When a @CreationConnection@ request arrives containing a password, the Data Catalog first encrypts the password using your KMS key, and then encrypts the whole connection object again if catalog encryption is also enabled.
+--
+-- This encryption requires that you set KMS key permissions to enable or restrict access on the password key according to your security requirements. For example, you may want only admin users to have decrypt permission on the password key.
+--
+--
+-- /See:/ 'connectionPasswordEncryption' smart constructor.
+data ConnectionPasswordEncryption = ConnectionPasswordEncryption'
+  { _cpeAWSKMSKeyId                       :: !(Maybe Text)
+  , _cpeReturnConnectionPasswordEncrypted :: !Bool
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ConnectionPasswordEncryption' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cpeAWSKMSKeyId' - A KMS key used to protect access to the JDBC source.  All users in your account should be granted the @kms:encrypt@ permission to encrypt passwords before storing them in the Data Catalog (through the AWS Glue @CreateConnection@ operation). The decrypt permission should be granted only to KMS key admins and IAM roles designated for AWS Glue crawlers.
+--
+-- * 'cpeReturnConnectionPasswordEncrypted' - When the @ReturnConnectionPasswordEncrypted@ flag is set to "true", passwords remain encrypted in the responses of @GetConnection@ and @GetConnections@ . This encryption takes effect independently from catalog encryption.
+connectionPasswordEncryption
+    :: Bool -- ^ 'cpeReturnConnectionPasswordEncrypted'
+    -> ConnectionPasswordEncryption
+connectionPasswordEncryption pReturnConnectionPasswordEncrypted_ =
+  ConnectionPasswordEncryption'
+    { _cpeAWSKMSKeyId = Nothing
+    , _cpeReturnConnectionPasswordEncrypted =
+        pReturnConnectionPasswordEncrypted_
+    }
+
+
+-- | A KMS key used to protect access to the JDBC source.  All users in your account should be granted the @kms:encrypt@ permission to encrypt passwords before storing them in the Data Catalog (through the AWS Glue @CreateConnection@ operation). The decrypt permission should be granted only to KMS key admins and IAM roles designated for AWS Glue crawlers.
+cpeAWSKMSKeyId :: Lens' ConnectionPasswordEncryption (Maybe Text)
+cpeAWSKMSKeyId = lens _cpeAWSKMSKeyId (\ s a -> s{_cpeAWSKMSKeyId = a})
+
+-- | When the @ReturnConnectionPasswordEncrypted@ flag is set to "true", passwords remain encrypted in the responses of @GetConnection@ and @GetConnections@ . This encryption takes effect independently from catalog encryption.
+cpeReturnConnectionPasswordEncrypted :: Lens' ConnectionPasswordEncryption Bool
+cpeReturnConnectionPasswordEncrypted = lens _cpeReturnConnectionPasswordEncrypted (\ s a -> s{_cpeReturnConnectionPasswordEncrypted = a})
+
+instance FromJSON ConnectionPasswordEncryption where
+        parseJSON
+          = withObject "ConnectionPasswordEncryption"
+              (\ x ->
+                 ConnectionPasswordEncryption' <$>
+                   (x .:? "AwsKmsKeyId") <*>
+                     (x .: "ReturnConnectionPasswordEncrypted"))
+
+instance Hashable ConnectionPasswordEncryption where
+
+instance NFData ConnectionPasswordEncryption where
+
+instance ToJSON ConnectionPasswordEncryption where
+        toJSON ConnectionPasswordEncryption'{..}
+          = object
+              (catMaybes
+                 [("AwsKmsKeyId" .=) <$> _cpeAWSKMSKeyId,
+                  Just
+                    ("ReturnConnectionPasswordEncrypted" .=
+                       _cpeReturnConnectionPasswordEncrypted)])
 
 -- | Specifies the connections used by a job.
 --
@@ -900,22 +1042,23 @@ instance ToJSON ConnectionsList where
 --
 -- /See:/ 'crawler' smart constructor.
 data Crawler = Crawler'
-  { _craCreationTime       :: !(Maybe POSIX)
-  , _craState              :: !(Maybe CrawlerState)
-  , _craSchemaChangePolicy :: !(Maybe SchemaChangePolicy)
-  , _craLastUpdated        :: !(Maybe POSIX)
-  , _craSchedule           :: !(Maybe Schedule)
-  , _craLastCrawl          :: !(Maybe LastCrawlInfo)
-  , _craCrawlElapsedTime   :: !(Maybe Integer)
-  , _craClassifiers        :: !(Maybe [Text])
-  , _craRole               :: !(Maybe Text)
-  , _craName               :: !(Maybe Text)
-  , _craTargets            :: !(Maybe CrawlerTargets)
-  , _craVersion            :: !(Maybe Integer)
-  , _craDatabaseName       :: !(Maybe Text)
-  , _craConfiguration      :: !(Maybe Text)
-  , _craTablePrefix        :: !(Maybe Text)
-  , _craDescription        :: !(Maybe Text)
+  { _craCreationTime                 :: !(Maybe POSIX)
+  , _craState                        :: !(Maybe CrawlerState)
+  , _craSchemaChangePolicy           :: !(Maybe SchemaChangePolicy)
+  , _craLastUpdated                  :: !(Maybe POSIX)
+  , _craSchedule                     :: !(Maybe Schedule)
+  , _craLastCrawl                    :: !(Maybe LastCrawlInfo)
+  , _craCrawlElapsedTime             :: !(Maybe Integer)
+  , _craClassifiers                  :: !(Maybe [Text])
+  , _craRole                         :: !(Maybe Text)
+  , _craName                         :: !(Maybe Text)
+  , _craTargets                      :: !(Maybe CrawlerTargets)
+  , _craVersion                      :: !(Maybe Integer)
+  , _craDatabaseName                 :: !(Maybe Text)
+  , _craCrawlerSecurityConfiguration :: !(Maybe Text)
+  , _craConfiguration                :: !(Maybe Text)
+  , _craTablePrefix                  :: !(Maybe Text)
+  , _craDescription                  :: !(Maybe Text)
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -949,7 +1092,9 @@ data Crawler = Crawler'
 --
 -- * 'craDatabaseName' - The database where metadata is written by this crawler.
 --
--- * 'craConfiguration' - Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example: @'{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }'@
+-- * 'craCrawlerSecurityConfiguration' - The name of the SecurityConfiguration structure to be used by this Crawler.
+--
+-- * 'craConfiguration' - Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html Configuring a Crawler> .
 --
 -- * 'craTablePrefix' - The prefix added to the names of tables that are created.
 --
@@ -971,6 +1116,7 @@ crawler =
     , _craTargets = Nothing
     , _craVersion = Nothing
     , _craDatabaseName = Nothing
+    , _craCrawlerSecurityConfiguration = Nothing
     , _craConfiguration = Nothing
     , _craTablePrefix = Nothing
     , _craDescription = Nothing
@@ -1029,7 +1175,11 @@ craVersion = lens _craVersion (\ s a -> s{_craVersion = a})
 craDatabaseName :: Lens' Crawler (Maybe Text)
 craDatabaseName = lens _craDatabaseName (\ s a -> s{_craDatabaseName = a})
 
--- | Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example: @'{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }'@
+-- | The name of the SecurityConfiguration structure to be used by this Crawler.
+craCrawlerSecurityConfiguration :: Lens' Crawler (Maybe Text)
+craCrawlerSecurityConfiguration = lens _craCrawlerSecurityConfiguration (\ s a -> s{_craCrawlerSecurityConfiguration = a})
+
+-- | Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html Configuring a Crawler> .
 craConfiguration :: Lens' Crawler (Maybe Text)
 craConfiguration = lens _craConfiguration (\ s a -> s{_craConfiguration = a})
 
@@ -1058,6 +1208,7 @@ instance FromJSON Crawler where
                      <*> (x .:? "Targets")
                      <*> (x .:? "Version")
                      <*> (x .:? "DatabaseName")
+                     <*> (x .:? "CrawlerSecurityConfiguration")
                      <*> (x .:? "Configuration")
                      <*> (x .:? "TablePrefix")
                      <*> (x .:? "Description"))
@@ -1173,8 +1324,9 @@ instance NFData CrawlerMetrics where
 --
 -- /See:/ 'crawlerTargets' smart constructor.
 data CrawlerTargets = CrawlerTargets'
-  { _ctS3Targets   :: !(Maybe [S3Target])
-  , _ctJdbcTargets :: !(Maybe [JdbcTarget])
+  { _ctDynamoDBTargets :: !(Maybe [DynamoDBTarget])
+  , _ctS3Targets       :: !(Maybe [S3Target])
+  , _ctJdbcTargets     :: !(Maybe [JdbcTarget])
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -1182,14 +1334,24 @@ data CrawlerTargets = CrawlerTargets'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ctDynamoDBTargets' - Specifies DynamoDB targets.
+--
 -- * 'ctS3Targets' - Specifies Amazon S3 targets.
 --
 -- * 'ctJdbcTargets' - Specifies JDBC targets.
 crawlerTargets
     :: CrawlerTargets
 crawlerTargets =
-  CrawlerTargets' {_ctS3Targets = Nothing, _ctJdbcTargets = Nothing}
+  CrawlerTargets'
+    { _ctDynamoDBTargets = Nothing
+    , _ctS3Targets = Nothing
+    , _ctJdbcTargets = Nothing
+    }
 
+
+-- | Specifies DynamoDB targets.
+ctDynamoDBTargets :: Lens' CrawlerTargets [DynamoDBTarget]
+ctDynamoDBTargets = lens _ctDynamoDBTargets (\ s a -> s{_ctDynamoDBTargets = a}) . _Default . _Coerce
 
 -- | Specifies Amazon S3 targets.
 ctS3Targets :: Lens' CrawlerTargets [S3Target]
@@ -1204,8 +1366,9 @@ instance FromJSON CrawlerTargets where
           = withObject "CrawlerTargets"
               (\ x ->
                  CrawlerTargets' <$>
-                   (x .:? "S3Targets" .!= mempty) <*>
-                     (x .:? "JdbcTargets" .!= mempty))
+                   (x .:? "DynamoDBTargets" .!= mempty) <*>
+                     (x .:? "S3Targets" .!= mempty)
+                     <*> (x .:? "JdbcTargets" .!= mempty))
 
 instance Hashable CrawlerTargets where
 
@@ -1215,7 +1378,8 @@ instance ToJSON CrawlerTargets where
         toJSON CrawlerTargets'{..}
           = object
               (catMaybes
-                 [("S3Targets" .=) <$> _ctS3Targets,
+                 [("DynamoDBTargets" .=) <$> _ctDynamoDBTargets,
+                  ("S3Targets" .=) <$> _ctS3Targets,
                   ("JdbcTargets" .=) <$> _ctJdbcTargets])
 
 -- | Specifies a @grok@ classifier for @CreateClassifier@ to create.
@@ -1387,6 +1551,61 @@ instance ToJSON CreateXMLClassifierRequest where
                   Just ("Classification" .= _cxcrClassification),
                   Just ("Name" .= _cxcrName)])
 
+-- | Contains configuration information for maintaining Data Catalog security.
+--
+--
+--
+-- /See:/ 'dataCatalogEncryptionSettings' smart constructor.
+data DataCatalogEncryptionSettings = DataCatalogEncryptionSettings'
+  { _dcesEncryptionAtRest             :: !(Maybe EncryptionAtRest)
+  , _dcesConnectionPasswordEncryption :: !(Maybe ConnectionPasswordEncryption)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DataCatalogEncryptionSettings' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dcesEncryptionAtRest' - Specifies encryption-at-rest configuration for the Data Catalog.
+--
+-- * 'dcesConnectionPasswordEncryption' - When password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of @CreateConnection@ or @UpdateConnection@ and store it in the @ENCRYPTED_PASSWORD@ field in the connection properties. You can enable catalog encryption or only password encryption.
+dataCatalogEncryptionSettings
+    :: DataCatalogEncryptionSettings
+dataCatalogEncryptionSettings =
+  DataCatalogEncryptionSettings'
+    { _dcesEncryptionAtRest = Nothing
+    , _dcesConnectionPasswordEncryption = Nothing
+    }
+
+
+-- | Specifies encryption-at-rest configuration for the Data Catalog.
+dcesEncryptionAtRest :: Lens' DataCatalogEncryptionSettings (Maybe EncryptionAtRest)
+dcesEncryptionAtRest = lens _dcesEncryptionAtRest (\ s a -> s{_dcesEncryptionAtRest = a})
+
+-- | When password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of @CreateConnection@ or @UpdateConnection@ and store it in the @ENCRYPTED_PASSWORD@ field in the connection properties. You can enable catalog encryption or only password encryption.
+dcesConnectionPasswordEncryption :: Lens' DataCatalogEncryptionSettings (Maybe ConnectionPasswordEncryption)
+dcesConnectionPasswordEncryption = lens _dcesConnectionPasswordEncryption (\ s a -> s{_dcesConnectionPasswordEncryption = a})
+
+instance FromJSON DataCatalogEncryptionSettings where
+        parseJSON
+          = withObject "DataCatalogEncryptionSettings"
+              (\ x ->
+                 DataCatalogEncryptionSettings' <$>
+                   (x .:? "EncryptionAtRest") <*>
+                     (x .:? "ConnectionPasswordEncryption"))
+
+instance Hashable DataCatalogEncryptionSettings where
+
+instance NFData DataCatalogEncryptionSettings where
+
+instance ToJSON DataCatalogEncryptionSettings where
+        toJSON DataCatalogEncryptionSettings'{..}
+          = object
+              (catMaybes
+                 [("EncryptionAtRest" .=) <$> _dcesEncryptionAtRest,
+                  ("ConnectionPasswordEncryption" .=) <$>
+                    _dcesConnectionPasswordEncryption])
+
 -- | The @Database@ object represents a logical grouping of tables that may reside in a Hive metastore or an RDBMS.
 --
 --
@@ -1407,7 +1626,7 @@ data Database = Database'
 --
 -- * 'dLocationURI' - The location of the database (for example, an HDFS path).
 --
--- * 'dParameters' - A list of key-value pairs that define parameters and properties of the database.
+-- * 'dParameters' - These key-value pairs define parameters and properties of the database.
 --
 -- * 'dDescription' - Description of the database.
 --
@@ -1431,7 +1650,7 @@ database pName_ =
 dLocationURI :: Lens' Database (Maybe Text)
 dLocationURI = lens _dLocationURI (\ s a -> s{_dLocationURI = a})
 
--- | A list of key-value pairs that define parameters and properties of the database.
+-- | These key-value pairs define parameters and properties of the database.
 dParameters :: Lens' Database (HashMap Text Text)
 dParameters = lens _dParameters (\ s a -> s{_dParameters = a}) . _Default . _Map
 
@@ -1481,7 +1700,7 @@ data DatabaseInput = DatabaseInput'
 --
 -- * 'diLocationURI' - The location of the database (for example, an HDFS path).
 --
--- * 'diParameters' - A list of key-value pairs that define parameters and properties of the database.
+-- * 'diParameters' - Thes key-value pairs define parameters and properties of the database.
 --
 -- * 'diDescription' - Description of the database
 --
@@ -1502,7 +1721,7 @@ databaseInput pName_ =
 diLocationURI :: Lens' DatabaseInput (Maybe Text)
 diLocationURI = lens _diLocationURI (\ s a -> s{_diLocationURI = a})
 
--- | A list of key-value pairs that define parameters and properties of the database.
+-- | Thes key-value pairs define parameters and properties of the database.
 diParameters :: Lens' DatabaseInput (HashMap Text Text)
 diParameters = lens _diParameters (\ s a -> s{_diParameters = a}) . _Default . _Map
 
@@ -1540,8 +1759,10 @@ data DevEndpoint = DevEndpoint'
   , _deLastUpdateStatus                   :: !(Maybe Text)
   , _deSecurityGroupIds                   :: !(Maybe [Text])
   , _deLastModifiedTimestamp              :: !(Maybe POSIX)
+  , _dePublicKeys                         :: !(Maybe [Text])
   , _deVPCId                              :: !(Maybe Text)
   , _dePrivateAddress                     :: !(Maybe Text)
+  , _deSecurityConfiguration              :: !(Maybe Text)
   , _dePublicKey                          :: !(Maybe Text)
   , _deSubnetId                           :: !(Maybe Text)
   , _deNumberOfNodes                      :: !(Maybe Int)
@@ -1573,17 +1794,21 @@ data DevEndpoint = DevEndpoint'
 --
 -- * 'deLastModifiedTimestamp' - The point in time at which this DevEndpoint was last modified.
 --
+-- * 'dePublicKeys' - A list of public keys to be used by the DevEndpoints for authentication. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.
+--
 -- * 'deVPCId' - The ID of the virtual private cloud (VPC) used by this DevEndpoint.
 --
--- * 'dePrivateAddress' - The private address used by this DevEndpoint.
+-- * 'dePrivateAddress' - A private IP address to access the DevEndpoint within a VPC, if the DevEndpoint is created within one. The PrivateAddress field is present only when you create the DevEndpoint within your virtual private cloud (VPC).
 --
--- * 'dePublicKey' - The public key to be used by this DevEndpoint for authentication.
+-- * 'deSecurityConfiguration' - The name of the SecurityConfiguration structure to be used with this DevEndpoint.
+--
+-- * 'dePublicKey' - The public key to be used by this DevEndpoint for authentication. This attribute is provided for backward compatibility, as the recommended attribute to use is public keys.
 --
 -- * 'deSubnetId' - The subnet ID for this DevEndpoint.
 --
 -- * 'deNumberOfNodes' - The number of AWS Glue Data Processing Units (DPUs) allocated to this DevEndpoint.
 --
--- * 'dePublicAddress' - The public VPC address used by this DevEndpoint.
+-- * 'dePublicAddress' - The public IP address used by this DevEndpoint. The PublicAddress field is present only when you create a non-VPC (virtual private cloud) DevEndpoint.
 --
 -- * 'deAvailabilityZone' - The AWS availability zone where this DevEndpoint is located.
 --
@@ -1607,8 +1832,10 @@ devEndpoint =
     , _deLastUpdateStatus = Nothing
     , _deSecurityGroupIds = Nothing
     , _deLastModifiedTimestamp = Nothing
+    , _dePublicKeys = Nothing
     , _deVPCId = Nothing
     , _dePrivateAddress = Nothing
+    , _deSecurityConfiguration = Nothing
     , _dePublicKey = Nothing
     , _deSubnetId = Nothing
     , _deNumberOfNodes = Nothing
@@ -1650,15 +1877,23 @@ deSecurityGroupIds = lens _deSecurityGroupIds (\ s a -> s{_deSecurityGroupIds = 
 deLastModifiedTimestamp :: Lens' DevEndpoint (Maybe UTCTime)
 deLastModifiedTimestamp = lens _deLastModifiedTimestamp (\ s a -> s{_deLastModifiedTimestamp = a}) . mapping _Time
 
+-- | A list of public keys to be used by the DevEndpoints for authentication. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.
+dePublicKeys :: Lens' DevEndpoint [Text]
+dePublicKeys = lens _dePublicKeys (\ s a -> s{_dePublicKeys = a}) . _Default . _Coerce
+
 -- | The ID of the virtual private cloud (VPC) used by this DevEndpoint.
 deVPCId :: Lens' DevEndpoint (Maybe Text)
 deVPCId = lens _deVPCId (\ s a -> s{_deVPCId = a})
 
--- | The private address used by this DevEndpoint.
+-- | A private IP address to access the DevEndpoint within a VPC, if the DevEndpoint is created within one. The PrivateAddress field is present only when you create the DevEndpoint within your virtual private cloud (VPC).
 dePrivateAddress :: Lens' DevEndpoint (Maybe Text)
 dePrivateAddress = lens _dePrivateAddress (\ s a -> s{_dePrivateAddress = a})
 
--- | The public key to be used by this DevEndpoint for authentication.
+-- | The name of the SecurityConfiguration structure to be used with this DevEndpoint.
+deSecurityConfiguration :: Lens' DevEndpoint (Maybe Text)
+deSecurityConfiguration = lens _deSecurityConfiguration (\ s a -> s{_deSecurityConfiguration = a})
+
+-- | The public key to be used by this DevEndpoint for authentication. This attribute is provided for backward compatibility, as the recommended attribute to use is public keys.
 dePublicKey :: Lens' DevEndpoint (Maybe Text)
 dePublicKey = lens _dePublicKey (\ s a -> s{_dePublicKey = a})
 
@@ -1670,7 +1905,7 @@ deSubnetId = lens _deSubnetId (\ s a -> s{_deSubnetId = a})
 deNumberOfNodes :: Lens' DevEndpoint (Maybe Int)
 deNumberOfNodes = lens _deNumberOfNodes (\ s a -> s{_deNumberOfNodes = a})
 
--- | The public VPC address used by this DevEndpoint.
+-- | The public IP address used by this DevEndpoint. The PublicAddress field is present only when you create a non-VPC (virtual private cloud) DevEndpoint.
 dePublicAddress :: Lens' DevEndpoint (Maybe Text)
 dePublicAddress = lens _dePublicAddress (\ s a -> s{_dePublicAddress = a})
 
@@ -1709,8 +1944,10 @@ instance FromJSON DevEndpoint where
                      <*> (x .:? "LastUpdateStatus")
                      <*> (x .:? "SecurityGroupIds" .!= mempty)
                      <*> (x .:? "LastModifiedTimestamp")
+                     <*> (x .:? "PublicKeys" .!= mempty)
                      <*> (x .:? "VpcId")
                      <*> (x .:? "PrivateAddress")
+                     <*> (x .:? "SecurityConfiguration")
                      <*> (x .:? "PublicKey")
                      <*> (x .:? "SubnetId")
                      <*> (x .:? "NumberOfNodes")
@@ -1770,6 +2007,166 @@ instance ToJSON DevEndpointCustomLibraries where
                  [("ExtraPythonLibsS3Path" .=) <$>
                     _declExtraPythonLibsS3Path,
                   ("ExtraJarsS3Path" .=) <$> _declExtraJARsS3Path])
+
+-- | Specifies a DynamoDB table to crawl.
+--
+--
+--
+-- /See:/ 'dynamoDBTarget' smart constructor.
+newtype DynamoDBTarget = DynamoDBTarget'
+  { _ddtPath :: Maybe Text
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DynamoDBTarget' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ddtPath' - The name of the DynamoDB table to crawl.
+dynamoDBTarget
+    :: DynamoDBTarget
+dynamoDBTarget = DynamoDBTarget' {_ddtPath = Nothing}
+
+
+-- | The name of the DynamoDB table to crawl.
+ddtPath :: Lens' DynamoDBTarget (Maybe Text)
+ddtPath = lens _ddtPath (\ s a -> s{_ddtPath = a})
+
+instance FromJSON DynamoDBTarget where
+        parseJSON
+          = withObject "DynamoDBTarget"
+              (\ x -> DynamoDBTarget' <$> (x .:? "Path"))
+
+instance Hashable DynamoDBTarget where
+
+instance NFData DynamoDBTarget where
+
+instance ToJSON DynamoDBTarget where
+        toJSON DynamoDBTarget'{..}
+          = object (catMaybes [("Path" .=) <$> _ddtPath])
+
+-- | Specifies encryption-at-rest configuration for the Data Catalog.
+--
+--
+--
+-- /See:/ 'encryptionAtRest' smart constructor.
+data EncryptionAtRest = EncryptionAtRest'
+  { _earSseAWSKMSKeyId        :: !(Maybe Text)
+  , _earCatalogEncryptionMode :: !CatalogEncryptionMode
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'EncryptionAtRest' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'earSseAWSKMSKeyId' - The ID of the AWS KMS key to use for encryption at rest.
+--
+-- * 'earCatalogEncryptionMode' - The encryption-at-rest mode for encrypting Data Catalog data.
+encryptionAtRest
+    :: CatalogEncryptionMode -- ^ 'earCatalogEncryptionMode'
+    -> EncryptionAtRest
+encryptionAtRest pCatalogEncryptionMode_ =
+  EncryptionAtRest'
+    { _earSseAWSKMSKeyId = Nothing
+    , _earCatalogEncryptionMode = pCatalogEncryptionMode_
+    }
+
+
+-- | The ID of the AWS KMS key to use for encryption at rest.
+earSseAWSKMSKeyId :: Lens' EncryptionAtRest (Maybe Text)
+earSseAWSKMSKeyId = lens _earSseAWSKMSKeyId (\ s a -> s{_earSseAWSKMSKeyId = a})
+
+-- | The encryption-at-rest mode for encrypting Data Catalog data.
+earCatalogEncryptionMode :: Lens' EncryptionAtRest CatalogEncryptionMode
+earCatalogEncryptionMode = lens _earCatalogEncryptionMode (\ s a -> s{_earCatalogEncryptionMode = a})
+
+instance FromJSON EncryptionAtRest where
+        parseJSON
+          = withObject "EncryptionAtRest"
+              (\ x ->
+                 EncryptionAtRest' <$>
+                   (x .:? "SseAwsKmsKeyId") <*>
+                     (x .: "CatalogEncryptionMode"))
+
+instance Hashable EncryptionAtRest where
+
+instance NFData EncryptionAtRest where
+
+instance ToJSON EncryptionAtRest where
+        toJSON EncryptionAtRest'{..}
+          = object
+              (catMaybes
+                 [("SseAwsKmsKeyId" .=) <$> _earSseAWSKMSKeyId,
+                  Just
+                    ("CatalogEncryptionMode" .=
+                       _earCatalogEncryptionMode)])
+
+-- | Specifies an encryption configuration.
+--
+--
+--
+-- /See:/ 'encryptionConfiguration' smart constructor.
+data EncryptionConfiguration = EncryptionConfiguration'
+  { _ecS3Encryption           :: !(Maybe [S3Encryption])
+  , _ecJobBookmarksEncryption :: !(Maybe JobBookmarksEncryption)
+  , _ecCloudWatchEncryption   :: !(Maybe CloudWatchEncryption)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'EncryptionConfiguration' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ecS3Encryption' - The encryption configuration for S3 data.
+--
+-- * 'ecJobBookmarksEncryption' - The encryption configuration for Job Bookmarks.
+--
+-- * 'ecCloudWatchEncryption' - The encryption configuration for CloudWatch.
+encryptionConfiguration
+    :: EncryptionConfiguration
+encryptionConfiguration =
+  EncryptionConfiguration'
+    { _ecS3Encryption = Nothing
+    , _ecJobBookmarksEncryption = Nothing
+    , _ecCloudWatchEncryption = Nothing
+    }
+
+
+-- | The encryption configuration for S3 data.
+ecS3Encryption :: Lens' EncryptionConfiguration [S3Encryption]
+ecS3Encryption = lens _ecS3Encryption (\ s a -> s{_ecS3Encryption = a}) . _Default . _Coerce
+
+-- | The encryption configuration for Job Bookmarks.
+ecJobBookmarksEncryption :: Lens' EncryptionConfiguration (Maybe JobBookmarksEncryption)
+ecJobBookmarksEncryption = lens _ecJobBookmarksEncryption (\ s a -> s{_ecJobBookmarksEncryption = a})
+
+-- | The encryption configuration for CloudWatch.
+ecCloudWatchEncryption :: Lens' EncryptionConfiguration (Maybe CloudWatchEncryption)
+ecCloudWatchEncryption = lens _ecCloudWatchEncryption (\ s a -> s{_ecCloudWatchEncryption = a})
+
+instance FromJSON EncryptionConfiguration where
+        parseJSON
+          = withObject "EncryptionConfiguration"
+              (\ x ->
+                 EncryptionConfiguration' <$>
+                   (x .:? "S3Encryption" .!= mempty) <*>
+                     (x .:? "JobBookmarksEncryption")
+                     <*> (x .:? "CloudWatchEncryption"))
+
+instance Hashable EncryptionConfiguration where
+
+instance NFData EncryptionConfiguration where
+
+instance ToJSON EncryptionConfiguration where
+        toJSON EncryptionConfiguration'{..}
+          = object
+              (catMaybes
+                 [("S3Encryption" .=) <$> _ecS3Encryption,
+                  ("JobBookmarksEncryption" .=) <$>
+                    _ecJobBookmarksEncryption,
+                  ("CloudWatchEncryption" .=) <$>
+                    _ecCloudWatchEncryption])
 
 -- | Contains details about an error.
 --
@@ -2132,19 +2529,22 @@ instance ToJSON JdbcTarget where
 --
 -- /See:/ 'job' smart constructor.
 data Job = Job'
-  { _jCommand           :: !(Maybe JobCommand)
-  , _jLastModifiedOn    :: !(Maybe POSIX)
-  , _jConnections       :: !(Maybe ConnectionsList)
-  , _jRole              :: !(Maybe Text)
-  , _jName              :: !(Maybe Text)
-  , _jLogURI            :: !(Maybe Text)
-  , _jMaxRetries        :: !(Maybe Int)
-  , _jExecutionProperty :: !(Maybe ExecutionProperty)
-  , _jAllocatedCapacity :: !(Maybe Int)
-  , _jTimeout           :: !(Maybe Nat)
-  , _jDefaultArguments  :: !(Maybe (Map Text Text))
-  , _jDescription       :: !(Maybe Text)
-  , _jCreatedOn         :: !(Maybe POSIX)
+  { _jCommand               :: !(Maybe JobCommand)
+  , _jNotificationProperty  :: !(Maybe NotificationProperty)
+  , _jLastModifiedOn        :: !(Maybe POSIX)
+  , _jConnections           :: !(Maybe ConnectionsList)
+  , _jSecurityConfiguration :: !(Maybe Text)
+  , _jRole                  :: !(Maybe Text)
+  , _jName                  :: !(Maybe Text)
+  , _jLogURI                :: !(Maybe Text)
+  , _jMaxRetries            :: !(Maybe Int)
+  , _jExecutionProperty     :: !(Maybe ExecutionProperty)
+  , _jAllocatedCapacity     :: !(Maybe Int)
+  , _jMaxCapacity           :: !(Maybe Double)
+  , _jTimeout               :: !(Maybe Nat)
+  , _jDefaultArguments      :: !(Maybe (Map Text Text))
+  , _jDescription           :: !(Maybe Text)
+  , _jCreatedOn             :: !(Maybe POSIX)
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -2154,9 +2554,13 @@ data Job = Job'
 --
 -- * 'jCommand' - The JobCommand that executes this job.
 --
+-- * 'jNotificationProperty' - Specifies configuration properties of a job notification.
+--
 -- * 'jLastModifiedOn' - The last point in time when this job definition was modified.
 --
 -- * 'jConnections' - The connections used for this job.
+--
+-- * 'jSecurityConfiguration' - The name of the SecurityConfiguration structure to be used with this job.
 --
 -- * 'jRole' - The name or ARN of the IAM role associated with this job.
 --
@@ -2168,9 +2572,11 @@ data Job = Job'
 --
 -- * 'jExecutionProperty' - An ExecutionProperty specifying the maximum number of concurrent runs allowed for this job.
 --
--- * 'jAllocatedCapacity' - The number of AWS Glue data processing units (DPUs) allocated to runs of this job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <https://aws.amazon.com/glue/pricing/ AWS Glue pricing page> .
+-- * 'jAllocatedCapacity' - This field is deprecated, use @MaxCapacity@ instead. The number of AWS Glue data processing units (DPUs) allocated to runs of this job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <https://aws.amazon.com/glue/pricing/ AWS Glue pricing page> .
 --
--- * 'jTimeout' - The job timeout in minutes.
+-- * 'jMaxCapacity' - AWS Glue supports running jobs on a @JobCommand.Name@ ="pythonshell" with allocated processing as low as 0.0625 DPU, which can be specified using @MaxCapacity@ . Glue ETL jobs running in any other way cannot have fractional DPU allocations.
+--
+-- * 'jTimeout' - The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters @TIMEOUT@ status. The default is 2,880 minutes (48 hours).
 --
 -- * 'jDefaultArguments' - The default arguments for this job, specified as name-value pairs. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the <http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html Calling AWS Glue APIs in Python> topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the <http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html Special Parameters Used by AWS Glue> topic in the developer guide.
 --
@@ -2182,14 +2588,17 @@ job
 job =
   Job'
     { _jCommand = Nothing
+    , _jNotificationProperty = Nothing
     , _jLastModifiedOn = Nothing
     , _jConnections = Nothing
+    , _jSecurityConfiguration = Nothing
     , _jRole = Nothing
     , _jName = Nothing
     , _jLogURI = Nothing
     , _jMaxRetries = Nothing
     , _jExecutionProperty = Nothing
     , _jAllocatedCapacity = Nothing
+    , _jMaxCapacity = Nothing
     , _jTimeout = Nothing
     , _jDefaultArguments = Nothing
     , _jDescription = Nothing
@@ -2201,6 +2610,10 @@ job =
 jCommand :: Lens' Job (Maybe JobCommand)
 jCommand = lens _jCommand (\ s a -> s{_jCommand = a})
 
+-- | Specifies configuration properties of a job notification.
+jNotificationProperty :: Lens' Job (Maybe NotificationProperty)
+jNotificationProperty = lens _jNotificationProperty (\ s a -> s{_jNotificationProperty = a})
+
 -- | The last point in time when this job definition was modified.
 jLastModifiedOn :: Lens' Job (Maybe UTCTime)
 jLastModifiedOn = lens _jLastModifiedOn (\ s a -> s{_jLastModifiedOn = a}) . mapping _Time
@@ -2208,6 +2621,10 @@ jLastModifiedOn = lens _jLastModifiedOn (\ s a -> s{_jLastModifiedOn = a}) . map
 -- | The connections used for this job.
 jConnections :: Lens' Job (Maybe ConnectionsList)
 jConnections = lens _jConnections (\ s a -> s{_jConnections = a})
+
+-- | The name of the SecurityConfiguration structure to be used with this job.
+jSecurityConfiguration :: Lens' Job (Maybe Text)
+jSecurityConfiguration = lens _jSecurityConfiguration (\ s a -> s{_jSecurityConfiguration = a})
 
 -- | The name or ARN of the IAM role associated with this job.
 jRole :: Lens' Job (Maybe Text)
@@ -2229,11 +2646,15 @@ jMaxRetries = lens _jMaxRetries (\ s a -> s{_jMaxRetries = a})
 jExecutionProperty :: Lens' Job (Maybe ExecutionProperty)
 jExecutionProperty = lens _jExecutionProperty (\ s a -> s{_jExecutionProperty = a})
 
--- | The number of AWS Glue data processing units (DPUs) allocated to runs of this job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <https://aws.amazon.com/glue/pricing/ AWS Glue pricing page> .
+-- | This field is deprecated, use @MaxCapacity@ instead. The number of AWS Glue data processing units (DPUs) allocated to runs of this job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <https://aws.amazon.com/glue/pricing/ AWS Glue pricing page> .
 jAllocatedCapacity :: Lens' Job (Maybe Int)
 jAllocatedCapacity = lens _jAllocatedCapacity (\ s a -> s{_jAllocatedCapacity = a})
 
--- | The job timeout in minutes.
+-- | AWS Glue supports running jobs on a @JobCommand.Name@ ="pythonshell" with allocated processing as low as 0.0625 DPU, which can be specified using @MaxCapacity@ . Glue ETL jobs running in any other way cannot have fractional DPU allocations.
+jMaxCapacity :: Lens' Job (Maybe Double)
+jMaxCapacity = lens _jMaxCapacity (\ s a -> s{_jMaxCapacity = a})
+
+-- | The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters @TIMEOUT@ status. The default is 2,880 minutes (48 hours).
 jTimeout :: Lens' Job (Maybe Natural)
 jTimeout = lens _jTimeout (\ s a -> s{_jTimeout = a}) . mapping _Nat
 
@@ -2254,14 +2675,17 @@ instance FromJSON Job where
           = withObject "Job"
               (\ x ->
                  Job' <$>
-                   (x .:? "Command") <*> (x .:? "LastModifiedOn") <*>
-                     (x .:? "Connections")
+                   (x .:? "Command") <*> (x .:? "NotificationProperty")
+                     <*> (x .:? "LastModifiedOn")
+                     <*> (x .:? "Connections")
+                     <*> (x .:? "SecurityConfiguration")
                      <*> (x .:? "Role")
                      <*> (x .:? "Name")
                      <*> (x .:? "LogUri")
                      <*> (x .:? "MaxRetries")
                      <*> (x .:? "ExecutionProperty")
                      <*> (x .:? "AllocatedCapacity")
+                     <*> (x .:? "MaxCapacity")
                      <*> (x .:? "Timeout")
                      <*> (x .:? "DefaultArguments" .!= mempty)
                      <*> (x .:? "Description")
@@ -2344,6 +2768,59 @@ instance Hashable JobBookmarkEntry where
 
 instance NFData JobBookmarkEntry where
 
+-- | Specifies how Job bookmark data should be encrypted.
+--
+--
+--
+-- /See:/ 'jobBookmarksEncryption' smart constructor.
+data JobBookmarksEncryption = JobBookmarksEncryption'
+  { _jbeJobBookmarksEncryptionMode :: !(Maybe JobBookmarksEncryptionMode)
+  , _jbeKMSKeyARN                  :: !(Maybe Text)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'JobBookmarksEncryption' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'jbeJobBookmarksEncryptionMode' - The encryption mode to use for Job bookmarks data.
+--
+-- * 'jbeKMSKeyARN' - The AWS ARN of the KMS key to be used to encrypt the data.
+jobBookmarksEncryption
+    :: JobBookmarksEncryption
+jobBookmarksEncryption =
+  JobBookmarksEncryption'
+    {_jbeJobBookmarksEncryptionMode = Nothing, _jbeKMSKeyARN = Nothing}
+
+
+-- | The encryption mode to use for Job bookmarks data.
+jbeJobBookmarksEncryptionMode :: Lens' JobBookmarksEncryption (Maybe JobBookmarksEncryptionMode)
+jbeJobBookmarksEncryptionMode = lens _jbeJobBookmarksEncryptionMode (\ s a -> s{_jbeJobBookmarksEncryptionMode = a})
+
+-- | The AWS ARN of the KMS key to be used to encrypt the data.
+jbeKMSKeyARN :: Lens' JobBookmarksEncryption (Maybe Text)
+jbeKMSKeyARN = lens _jbeKMSKeyARN (\ s a -> s{_jbeKMSKeyARN = a})
+
+instance FromJSON JobBookmarksEncryption where
+        parseJSON
+          = withObject "JobBookmarksEncryption"
+              (\ x ->
+                 JobBookmarksEncryption' <$>
+                   (x .:? "JobBookmarksEncryptionMode") <*>
+                     (x .:? "KmsKeyArn"))
+
+instance Hashable JobBookmarksEncryption where
+
+instance NFData JobBookmarksEncryption where
+
+instance ToJSON JobBookmarksEncryption where
+        toJSON JobBookmarksEncryption'{..}
+          = object
+              (catMaybes
+                 [("JobBookmarksEncryptionMode" .=) <$>
+                    _jbeJobBookmarksEncryptionMode,
+                  ("KmsKeyArn" .=) <$> _jbeKMSKeyARN])
+
 -- | Specifies code executed when a job is run.
 --
 --
@@ -2361,7 +2838,7 @@ data JobCommand = JobCommand'
 --
 -- * 'jobScriptLocation' - Specifies the S3 path to a script that executes a job (required).
 --
--- * 'jobName' - The name of the job command: this must be @glueetl@ .
+-- * 'jobName' - The name of the job command: this must be @glueetl@ , for an Apache Spark ETL job, or @pythonshell@ , for a Python shell job.
 jobCommand
     :: JobCommand
 jobCommand = JobCommand' {_jobScriptLocation = Nothing, _jobName = Nothing}
@@ -2371,7 +2848,7 @@ jobCommand = JobCommand' {_jobScriptLocation = Nothing, _jobName = Nothing}
 jobScriptLocation :: Lens' JobCommand (Maybe Text)
 jobScriptLocation = lens _jobScriptLocation (\ s a -> s{_jobScriptLocation = a})
 
--- | The name of the job command: this must be @glueetl@ .
+-- | The name of the job command: this must be @glueetl@ , for an Apache Spark ETL job, or @pythonshell@ , for a Python shell job.
 jobName :: Lens' JobCommand (Maybe Text)
 jobName = lens _jobName (\ s a -> s{_jobName = a})
 
@@ -2399,21 +2876,25 @@ instance ToJSON JobCommand where
 --
 -- /See:/ 'jobRun' smart constructor.
 data JobRun = JobRun'
-  { _jrCompletedOn       :: !(Maybe POSIX)
-  , _jrTriggerName       :: !(Maybe Text)
-  , _jrLastModifiedOn    :: !(Maybe POSIX)
-  , _jrArguments         :: !(Maybe (Map Text Text))
-  , _jrJobName           :: !(Maybe Text)
-  , _jrStartedOn         :: !(Maybe POSIX)
-  , _jrJobRunState       :: !(Maybe JobRunState)
-  , _jrExecutionTime     :: !(Maybe Int)
-  , _jrPredecessorRuns   :: !(Maybe [Predecessor])
-  , _jrPreviousRunId     :: !(Maybe Text)
-  , _jrId                :: !(Maybe Text)
-  , _jrAttempt           :: !(Maybe Int)
-  , _jrAllocatedCapacity :: !(Maybe Int)
-  , _jrTimeout           :: !(Maybe Nat)
-  , _jrErrorMessage      :: !(Maybe Text)
+  { _jrCompletedOn           :: !(Maybe POSIX)
+  , _jrTriggerName           :: !(Maybe Text)
+  , _jrNotificationProperty  :: !(Maybe NotificationProperty)
+  , _jrLastModifiedOn        :: !(Maybe POSIX)
+  , _jrArguments             :: !(Maybe (Map Text Text))
+  , _jrJobName               :: !(Maybe Text)
+  , _jrStartedOn             :: !(Maybe POSIX)
+  , _jrSecurityConfiguration :: !(Maybe Text)
+  , _jrJobRunState           :: !(Maybe JobRunState)
+  , _jrLogGroupName          :: !(Maybe Text)
+  , _jrExecutionTime         :: !(Maybe Int)
+  , _jrPredecessorRuns       :: !(Maybe [Predecessor])
+  , _jrPreviousRunId         :: !(Maybe Text)
+  , _jrId                    :: !(Maybe Text)
+  , _jrAttempt               :: !(Maybe Int)
+  , _jrAllocatedCapacity     :: !(Maybe Int)
+  , _jrMaxCapacity           :: !(Maybe Double)
+  , _jrTimeout               :: !(Maybe Nat)
+  , _jrErrorMessage          :: !(Maybe Text)
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -2425,6 +2906,8 @@ data JobRun = JobRun'
 --
 -- * 'jrTriggerName' - The name of the trigger that started this job run.
 --
+-- * 'jrNotificationProperty' - Specifies configuration properties of a job run notification.
+--
 -- * 'jrLastModifiedOn' - The last time this job run was modified.
 --
 -- * 'jrArguments' - The job arguments associated with this run. These override equivalent default arguments set for the job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own job arguments, see the <http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html Calling AWS Glue APIs in Python> topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the <http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html Special Parameters Used by AWS Glue> topic in the developer guide.
@@ -2433,7 +2916,11 @@ data JobRun = JobRun'
 --
 -- * 'jrStartedOn' - The date and time at which this job run was started.
 --
+-- * 'jrSecurityConfiguration' - The name of the SecurityConfiguration structure to be used with this job run.
+--
 -- * 'jrJobRunState' - The current state of the job run.
+--
+-- * 'jrLogGroupName' - The name of the log group for secure logging, that can be server-side encrypted in CloudWatch using KMS. This name can be @/aws-glue/jobs/@ , in which case the default encryption is @NONE@ . If you add a role name and SecurityConfiguration name (in other words, @/aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/@ ), then that security configuration will be used to encrypt the log group.
 --
 -- * 'jrExecutionTime' - The amount of time (in seconds) that the job run consumed resources.
 --
@@ -2445,9 +2932,11 @@ data JobRun = JobRun'
 --
 -- * 'jrAttempt' - The number of the attempt to run this job.
 --
--- * 'jrAllocatedCapacity' - The number of AWS Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <https://aws.amazon.com/glue/pricing/ AWS Glue pricing page> .
+-- * 'jrAllocatedCapacity' - This field is deprecated, use @MaxCapacity@ instead. The number of AWS Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <https://aws.amazon.com/glue/pricing/ AWS Glue pricing page> .
 --
--- * 'jrTimeout' - The job run timeout in minutes.
+-- * 'jrMaxCapacity' - AWS Glue supports running jobs on a @JobCommand.Name@ ="pythonshell" with allocated processing as low as 0.0625 DPU, which can be specified using @MaxCapacity@ . Glue ETL jobs running in any other way cannot have fractional DPU allocations.
+--
+-- * 'jrTimeout' - The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters @TIMEOUT@ status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.
 --
 -- * 'jrErrorMessage' - An error message associated with this job run.
 jobRun
@@ -2456,17 +2945,21 @@ jobRun =
   JobRun'
     { _jrCompletedOn = Nothing
     , _jrTriggerName = Nothing
+    , _jrNotificationProperty = Nothing
     , _jrLastModifiedOn = Nothing
     , _jrArguments = Nothing
     , _jrJobName = Nothing
     , _jrStartedOn = Nothing
+    , _jrSecurityConfiguration = Nothing
     , _jrJobRunState = Nothing
+    , _jrLogGroupName = Nothing
     , _jrExecutionTime = Nothing
     , _jrPredecessorRuns = Nothing
     , _jrPreviousRunId = Nothing
     , _jrId = Nothing
     , _jrAttempt = Nothing
     , _jrAllocatedCapacity = Nothing
+    , _jrMaxCapacity = Nothing
     , _jrTimeout = Nothing
     , _jrErrorMessage = Nothing
     }
@@ -2479,6 +2972,10 @@ jrCompletedOn = lens _jrCompletedOn (\ s a -> s{_jrCompletedOn = a}) . mapping _
 -- | The name of the trigger that started this job run.
 jrTriggerName :: Lens' JobRun (Maybe Text)
 jrTriggerName = lens _jrTriggerName (\ s a -> s{_jrTriggerName = a})
+
+-- | Specifies configuration properties of a job run notification.
+jrNotificationProperty :: Lens' JobRun (Maybe NotificationProperty)
+jrNotificationProperty = lens _jrNotificationProperty (\ s a -> s{_jrNotificationProperty = a})
 
 -- | The last time this job run was modified.
 jrLastModifiedOn :: Lens' JobRun (Maybe UTCTime)
@@ -2496,9 +2993,17 @@ jrJobName = lens _jrJobName (\ s a -> s{_jrJobName = a})
 jrStartedOn :: Lens' JobRun (Maybe UTCTime)
 jrStartedOn = lens _jrStartedOn (\ s a -> s{_jrStartedOn = a}) . mapping _Time
 
+-- | The name of the SecurityConfiguration structure to be used with this job run.
+jrSecurityConfiguration :: Lens' JobRun (Maybe Text)
+jrSecurityConfiguration = lens _jrSecurityConfiguration (\ s a -> s{_jrSecurityConfiguration = a})
+
 -- | The current state of the job run.
 jrJobRunState :: Lens' JobRun (Maybe JobRunState)
 jrJobRunState = lens _jrJobRunState (\ s a -> s{_jrJobRunState = a})
+
+-- | The name of the log group for secure logging, that can be server-side encrypted in CloudWatch using KMS. This name can be @/aws-glue/jobs/@ , in which case the default encryption is @NONE@ . If you add a role name and SecurityConfiguration name (in other words, @/aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/@ ), then that security configuration will be used to encrypt the log group.
+jrLogGroupName :: Lens' JobRun (Maybe Text)
+jrLogGroupName = lens _jrLogGroupName (\ s a -> s{_jrLogGroupName = a})
 
 -- | The amount of time (in seconds) that the job run consumed resources.
 jrExecutionTime :: Lens' JobRun (Maybe Int)
@@ -2520,11 +3025,15 @@ jrId = lens _jrId (\ s a -> s{_jrId = a})
 jrAttempt :: Lens' JobRun (Maybe Int)
 jrAttempt = lens _jrAttempt (\ s a -> s{_jrAttempt = a})
 
--- | The number of AWS Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <https://aws.amazon.com/glue/pricing/ AWS Glue pricing page> .
+-- | This field is deprecated, use @MaxCapacity@ instead. The number of AWS Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <https://aws.amazon.com/glue/pricing/ AWS Glue pricing page> .
 jrAllocatedCapacity :: Lens' JobRun (Maybe Int)
 jrAllocatedCapacity = lens _jrAllocatedCapacity (\ s a -> s{_jrAllocatedCapacity = a})
 
--- | The job run timeout in minutes.
+-- | AWS Glue supports running jobs on a @JobCommand.Name@ ="pythonshell" with allocated processing as low as 0.0625 DPU, which can be specified using @MaxCapacity@ . Glue ETL jobs running in any other way cannot have fractional DPU allocations.
+jrMaxCapacity :: Lens' JobRun (Maybe Double)
+jrMaxCapacity = lens _jrMaxCapacity (\ s a -> s{_jrMaxCapacity = a})
+
+-- | The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters @TIMEOUT@ status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.
 jrTimeout :: Lens' JobRun (Maybe Natural)
 jrTimeout = lens _jrTimeout (\ s a -> s{_jrTimeout = a}) . mapping _Nat
 
@@ -2538,17 +3047,21 @@ instance FromJSON JobRun where
               (\ x ->
                  JobRun' <$>
                    (x .:? "CompletedOn") <*> (x .:? "TriggerName") <*>
-                     (x .:? "LastModifiedOn")
+                     (x .:? "NotificationProperty")
+                     <*> (x .:? "LastModifiedOn")
                      <*> (x .:? "Arguments" .!= mempty)
                      <*> (x .:? "JobName")
                      <*> (x .:? "StartedOn")
+                     <*> (x .:? "SecurityConfiguration")
                      <*> (x .:? "JobRunState")
+                     <*> (x .:? "LogGroupName")
                      <*> (x .:? "ExecutionTime")
                      <*> (x .:? "PredecessorRuns" .!= mempty)
                      <*> (x .:? "PreviousRunId")
                      <*> (x .:? "Id")
                      <*> (x .:? "Attempt")
                      <*> (x .:? "AllocatedCapacity")
+                     <*> (x .:? "MaxCapacity")
                      <*> (x .:? "Timeout")
                      <*> (x .:? "ErrorMessage"))
 
@@ -2562,16 +3075,19 @@ instance NFData JobRun where
 --
 -- /See:/ 'jobUpdate' smart constructor.
 data JobUpdate = JobUpdate'
-  { _juCommand           :: !(Maybe JobCommand)
-  , _juConnections       :: !(Maybe ConnectionsList)
-  , _juRole              :: !(Maybe Text)
-  , _juLogURI            :: !(Maybe Text)
-  , _juMaxRetries        :: !(Maybe Int)
-  , _juExecutionProperty :: !(Maybe ExecutionProperty)
-  , _juAllocatedCapacity :: !(Maybe Int)
-  , _juTimeout           :: !(Maybe Nat)
-  , _juDefaultArguments  :: !(Maybe (Map Text Text))
-  , _juDescription       :: !(Maybe Text)
+  { _juCommand               :: !(Maybe JobCommand)
+  , _juNotificationProperty  :: !(Maybe NotificationProperty)
+  , _juConnections           :: !(Maybe ConnectionsList)
+  , _juSecurityConfiguration :: !(Maybe Text)
+  , _juRole                  :: !(Maybe Text)
+  , _juLogURI                :: !(Maybe Text)
+  , _juMaxRetries            :: !(Maybe Int)
+  , _juExecutionProperty     :: !(Maybe ExecutionProperty)
+  , _juAllocatedCapacity     :: !(Maybe Int)
+  , _juMaxCapacity           :: !(Maybe Double)
+  , _juTimeout               :: !(Maybe Nat)
+  , _juDefaultArguments      :: !(Maybe (Map Text Text))
+  , _juDescription           :: !(Maybe Text)
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -2581,7 +3097,11 @@ data JobUpdate = JobUpdate'
 --
 -- * 'juCommand' - The JobCommand that executes this job (required).
 --
+-- * 'juNotificationProperty' - Specifies configuration properties of a job notification.
+--
 -- * 'juConnections' - The connections used for this job.
+--
+-- * 'juSecurityConfiguration' - The name of the SecurityConfiguration structure to be used with this job.
 --
 -- * 'juRole' - The name or ARN of the IAM role associated with this job (required).
 --
@@ -2591,9 +3111,11 @@ data JobUpdate = JobUpdate'
 --
 -- * 'juExecutionProperty' - An ExecutionProperty specifying the maximum number of concurrent runs allowed for this job.
 --
--- * 'juAllocatedCapacity' - The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <https://aws.amazon.com/glue/pricing/ AWS Glue pricing page> .
+-- * 'juAllocatedCapacity' - This field is deprecated. Use @MaxCapacity@ instead. The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <https://aws.amazon.com/glue/pricing/ AWS Glue pricing page> .
 --
--- * 'juTimeout' - The job timeout in minutes. The default is 2880 minutes (48 hours).
+-- * 'juMaxCapacity' - AWS Glue supports running jobs on a @JobCommand.Name@ ="pythonshell" with allocated processing as low as 0.0625 DPU, which can be specified using @MaxCapacity@ . Glue ETL jobs running in any other way cannot have fractional DPU allocations.
+--
+-- * 'juTimeout' - The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters @TIMEOUT@ status. The default is 2,880 minutes (48 hours).
 --
 -- * 'juDefaultArguments' - The default arguments for this job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the <http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html Calling AWS Glue APIs in Python> topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the <http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html Special Parameters Used by AWS Glue> topic in the developer guide.
 --
@@ -2603,12 +3125,15 @@ jobUpdate
 jobUpdate =
   JobUpdate'
     { _juCommand = Nothing
+    , _juNotificationProperty = Nothing
     , _juConnections = Nothing
+    , _juSecurityConfiguration = Nothing
     , _juRole = Nothing
     , _juLogURI = Nothing
     , _juMaxRetries = Nothing
     , _juExecutionProperty = Nothing
     , _juAllocatedCapacity = Nothing
+    , _juMaxCapacity = Nothing
     , _juTimeout = Nothing
     , _juDefaultArguments = Nothing
     , _juDescription = Nothing
@@ -2619,9 +3144,17 @@ jobUpdate =
 juCommand :: Lens' JobUpdate (Maybe JobCommand)
 juCommand = lens _juCommand (\ s a -> s{_juCommand = a})
 
+-- | Specifies configuration properties of a job notification.
+juNotificationProperty :: Lens' JobUpdate (Maybe NotificationProperty)
+juNotificationProperty = lens _juNotificationProperty (\ s a -> s{_juNotificationProperty = a})
+
 -- | The connections used for this job.
 juConnections :: Lens' JobUpdate (Maybe ConnectionsList)
 juConnections = lens _juConnections (\ s a -> s{_juConnections = a})
+
+-- | The name of the SecurityConfiguration structure to be used with this job.
+juSecurityConfiguration :: Lens' JobUpdate (Maybe Text)
+juSecurityConfiguration = lens _juSecurityConfiguration (\ s a -> s{_juSecurityConfiguration = a})
 
 -- | The name or ARN of the IAM role associated with this job (required).
 juRole :: Lens' JobUpdate (Maybe Text)
@@ -2639,11 +3172,15 @@ juMaxRetries = lens _juMaxRetries (\ s a -> s{_juMaxRetries = a})
 juExecutionProperty :: Lens' JobUpdate (Maybe ExecutionProperty)
 juExecutionProperty = lens _juExecutionProperty (\ s a -> s{_juExecutionProperty = a})
 
--- | The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <https://aws.amazon.com/glue/pricing/ AWS Glue pricing page> .
+-- | This field is deprecated. Use @MaxCapacity@ instead. The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <https://aws.amazon.com/glue/pricing/ AWS Glue pricing page> .
 juAllocatedCapacity :: Lens' JobUpdate (Maybe Int)
 juAllocatedCapacity = lens _juAllocatedCapacity (\ s a -> s{_juAllocatedCapacity = a})
 
--- | The job timeout in minutes. The default is 2880 minutes (48 hours).
+-- | AWS Glue supports running jobs on a @JobCommand.Name@ ="pythonshell" with allocated processing as low as 0.0625 DPU, which can be specified using @MaxCapacity@ . Glue ETL jobs running in any other way cannot have fractional DPU allocations.
+juMaxCapacity :: Lens' JobUpdate (Maybe Double)
+juMaxCapacity = lens _juMaxCapacity (\ s a -> s{_juMaxCapacity = a})
+
+-- | The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters @TIMEOUT@ status. The default is 2,880 minutes (48 hours).
 juTimeout :: Lens' JobUpdate (Maybe Natural)
 juTimeout = lens _juTimeout (\ s a -> s{_juTimeout = a}) . mapping _Nat
 
@@ -2664,11 +3201,16 @@ instance ToJSON JobUpdate where
           = object
               (catMaybes
                  [("Command" .=) <$> _juCommand,
+                  ("NotificationProperty" .=) <$>
+                    _juNotificationProperty,
                   ("Connections" .=) <$> _juConnections,
+                  ("SecurityConfiguration" .=) <$>
+                    _juSecurityConfiguration,
                   ("Role" .=) <$> _juRole, ("LogUri" .=) <$> _juLogURI,
                   ("MaxRetries" .=) <$> _juMaxRetries,
                   ("ExecutionProperty" .=) <$> _juExecutionProperty,
                   ("AllocatedCapacity" .=) <$> _juAllocatedCapacity,
+                  ("MaxCapacity" .=) <$> _juMaxCapacity,
                   ("Timeout" .=) <$> _juTimeout,
                   ("DefaultArguments" .=) <$> _juDefaultArguments,
                   ("Description" .=) <$> _juDescription])
@@ -2761,8 +3303,9 @@ instance NFData LastCrawlInfo where
 --
 -- /See:/ 'location' smart constructor.
 data Location = Location'
-  { _lJdbc :: !(Maybe [CodeGenNodeArg])
-  , _lS3   :: !(Maybe [CodeGenNodeArg])
+  { _lDynamoDB :: !(Maybe [CodeGenNodeArg])
+  , _lJdbc     :: !(Maybe [CodeGenNodeArg])
+  , _lS3       :: !(Maybe [CodeGenNodeArg])
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -2770,13 +3313,19 @@ data Location = Location'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'lDynamoDB' - A DynamoDB Table location.
+--
 -- * 'lJdbc' - A JDBC location.
 --
 -- * 'lS3' - An Amazon S3 location.
 location
     :: Location
-location = Location' {_lJdbc = Nothing, _lS3 = Nothing}
+location = Location' {_lDynamoDB = Nothing, _lJdbc = Nothing, _lS3 = Nothing}
 
+
+-- | A DynamoDB Table location.
+lDynamoDB :: Lens' Location [CodeGenNodeArg]
+lDynamoDB = lens _lDynamoDB (\ s a -> s{_lDynamoDB = a}) . _Default . _Coerce
 
 -- | A JDBC location.
 lJdbc :: Lens' Location [CodeGenNodeArg]
@@ -2794,7 +3343,8 @@ instance ToJSON Location where
         toJSON Location'{..}
           = object
               (catMaybes
-                 [("Jdbc" .=) <$> _lJdbc, ("S3" .=) <$> _lS3])
+                 [("DynamoDB" .=) <$> _lDynamoDB,
+                  ("Jdbc" .=) <$> _lJdbc, ("S3" .=) <$> _lS3])
 
 -- | Defines a mapping.
 --
@@ -2889,6 +3439,46 @@ instance ToJSON MappingEntry where
                   ("TargetPath" .=) <$> _meTargetPath,
                   ("SourcePath" .=) <$> _meSourcePath])
 
+-- | Specifies configuration properties of a notification.
+--
+--
+--
+-- /See:/ 'notificationProperty' smart constructor.
+newtype NotificationProperty = NotificationProperty'
+  { _npNotifyDelayAfter :: Maybe Nat
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'NotificationProperty' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'npNotifyDelayAfter' - After a job run starts, the number of minutes to wait before sending a job run delay notification.
+notificationProperty
+    :: NotificationProperty
+notificationProperty = NotificationProperty' {_npNotifyDelayAfter = Nothing}
+
+
+-- | After a job run starts, the number of minutes to wait before sending a job run delay notification.
+npNotifyDelayAfter :: Lens' NotificationProperty (Maybe Natural)
+npNotifyDelayAfter = lens _npNotifyDelayAfter (\ s a -> s{_npNotifyDelayAfter = a}) . mapping _Nat
+
+instance FromJSON NotificationProperty where
+        parseJSON
+          = withObject "NotificationProperty"
+              (\ x ->
+                 NotificationProperty' <$> (x .:? "NotifyDelayAfter"))
+
+instance Hashable NotificationProperty where
+
+instance NFData NotificationProperty where
+
+instance ToJSON NotificationProperty where
+        toJSON NotificationProperty'{..}
+          = object
+              (catMaybes
+                 [("NotifyDelayAfter" .=) <$> _npNotifyDelayAfter])
+
 -- | Specifies the sort order of a sorted column.
 --
 --
@@ -2971,7 +3561,7 @@ data Partition = Partition'
 --
 -- * 'pDatabaseName' - The name of the catalog database where the table in question is located.
 --
--- * 'pParameters' - Partition parameters, in the form of a list of key-value pairs.
+-- * 'pParameters' - These key-value pairs define partition parameters.
 --
 -- * 'pLastAccessTime' - The last time at which the partition was accessed.
 --
@@ -3011,7 +3601,7 @@ pStorageDescriptor = lens _pStorageDescriptor (\ s a -> s{_pStorageDescriptor = 
 pDatabaseName :: Lens' Partition (Maybe Text)
 pDatabaseName = lens _pDatabaseName (\ s a -> s{_pDatabaseName = a})
 
--- | Partition parameters, in the form of a list of key-value pairs.
+-- | These key-value pairs define partition parameters.
 pParameters :: Lens' Partition (HashMap Text Text)
 pParameters = lens _pParameters (\ s a -> s{_pParameters = a}) . _Default . _Map
 
@@ -3109,7 +3699,7 @@ data PartitionInput = PartitionInput'
 --
 -- * 'piStorageDescriptor' - Provides information about the physical location where the partition is stored.
 --
--- * 'piParameters' - Partition parameters, in the form of a list of key-value pairs.
+-- * 'piParameters' - These key-value pairs define partition parameters.
 --
 -- * 'piLastAccessTime' - The last time at which the partition was accessed.
 partitionInput
@@ -3136,7 +3726,7 @@ piLastAnalyzedTime = lens _piLastAnalyzedTime (\ s a -> s{_piLastAnalyzedTime = 
 piStorageDescriptor :: Lens' PartitionInput (Maybe StorageDescriptor)
 piStorageDescriptor = lens _piStorageDescriptor (\ s a -> s{_piStorageDescriptor = a})
 
--- | Partition parameters, in the form of a list of key-value pairs.
+-- | These key-value pairs define partition parameters.
 piParameters :: Lens' PartitionInput (HashMap Text Text)
 piParameters = lens _piParameters (\ s a -> s{_piParameters = a}) . _Default . _Map
 
@@ -3216,7 +3806,7 @@ data PhysicalConnectionRequirements = PhysicalConnectionRequirements'
 --
 -- * 'pcrSubnetId' - The subnet ID used by the connection.
 --
--- * 'pcrAvailabilityZone' - The connection's availability zone. This field is deprecated and has no effect.
+-- * 'pcrAvailabilityZone' - The connection's availability zone. This field is redundant, since the specified subnet implies the availability zone to be used. The field must be populated now, but will be deprecated in the future.
 physicalConnectionRequirements
     :: PhysicalConnectionRequirements
 physicalConnectionRequirements =
@@ -3235,7 +3825,7 @@ pcrSecurityGroupIdList = lens _pcrSecurityGroupIdList (\ s a -> s{_pcrSecurityGr
 pcrSubnetId :: Lens' PhysicalConnectionRequirements (Maybe Text)
 pcrSubnetId = lens _pcrSubnetId (\ s a -> s{_pcrSubnetId = a})
 
--- | The connection's availability zone. This field is deprecated and has no effect.
+-- | The connection's availability zone. This field is redundant, since the specified subnet implies the availability zone to be used. The field must be populated now, but will be deprecated in the future.
 pcrAvailabilityZone :: Lens' PhysicalConnectionRequirements (Maybe Text)
 pcrAvailabilityZone = lens _pcrAvailabilityZone (\ s a -> s{_pcrAvailabilityZone = a})
 
@@ -3404,6 +3994,56 @@ instance ToJSON ResourceURI where
                  [("ResourceType" .=) <$> _ruResourceType,
                   ("Uri" .=) <$> _ruURI])
 
+-- | Specifies how S3 data should be encrypted.
+--
+--
+--
+-- /See:/ 's3Encryption' smart constructor.
+data S3Encryption = S3Encryption'
+  { _seS3EncryptionMode :: !(Maybe S3EncryptionMode)
+  , _seKMSKeyARN        :: !(Maybe Text)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'S3Encryption' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'seS3EncryptionMode' - The encryption mode to use for S3 data.
+--
+-- * 'seKMSKeyARN' - The AWS ARN of the KMS key to be used to encrypt the data.
+s3Encryption
+    :: S3Encryption
+s3Encryption =
+  S3Encryption' {_seS3EncryptionMode = Nothing, _seKMSKeyARN = Nothing}
+
+
+-- | The encryption mode to use for S3 data.
+seS3EncryptionMode :: Lens' S3Encryption (Maybe S3EncryptionMode)
+seS3EncryptionMode = lens _seS3EncryptionMode (\ s a -> s{_seS3EncryptionMode = a})
+
+-- | The AWS ARN of the KMS key to be used to encrypt the data.
+seKMSKeyARN :: Lens' S3Encryption (Maybe Text)
+seKMSKeyARN = lens _seKMSKeyARN (\ s a -> s{_seKMSKeyARN = a})
+
+instance FromJSON S3Encryption where
+        parseJSON
+          = withObject "S3Encryption"
+              (\ x ->
+                 S3Encryption' <$>
+                   (x .:? "S3EncryptionMode") <*> (x .:? "KmsKeyArn"))
+
+instance Hashable S3Encryption where
+
+instance NFData S3Encryption where
+
+instance ToJSON S3Encryption where
+        toJSON S3Encryption'{..}
+          = object
+              (catMaybes
+                 [("S3EncryptionMode" .=) <$> _seS3EncryptionMode,
+                  ("KmsKeyArn" .=) <$> _seKMSKeyARN])
+
 -- | Specifies a data store in Amazon S3.
 --
 --
@@ -3547,6 +4187,61 @@ instance ToJSON SchemaChangePolicy where
                  [("DeleteBehavior" .=) <$> _scpDeleteBehavior,
                   ("UpdateBehavior" .=) <$> _scpUpdateBehavior])
 
+-- | Specifies a security configuration.
+--
+--
+--
+-- /See:/ 'securityConfiguration' smart constructor.
+data SecurityConfiguration = SecurityConfiguration'
+  { _sName                    :: !(Maybe Text)
+  , _sEncryptionConfiguration :: !(Maybe EncryptionConfiguration)
+  , _sCreatedTimeStamp        :: !(Maybe POSIX)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'SecurityConfiguration' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'sName' - The name of the security configuration.
+--
+-- * 'sEncryptionConfiguration' - The encryption configuration associated with this security configuration.
+--
+-- * 'sCreatedTimeStamp' - The time at which this security configuration was created.
+securityConfiguration
+    :: SecurityConfiguration
+securityConfiguration =
+  SecurityConfiguration'
+    { _sName = Nothing
+    , _sEncryptionConfiguration = Nothing
+    , _sCreatedTimeStamp = Nothing
+    }
+
+
+-- | The name of the security configuration.
+sName :: Lens' SecurityConfiguration (Maybe Text)
+sName = lens _sName (\ s a -> s{_sName = a})
+
+-- | The encryption configuration associated with this security configuration.
+sEncryptionConfiguration :: Lens' SecurityConfiguration (Maybe EncryptionConfiguration)
+sEncryptionConfiguration = lens _sEncryptionConfiguration (\ s a -> s{_sEncryptionConfiguration = a})
+
+-- | The time at which this security configuration was created.
+sCreatedTimeStamp :: Lens' SecurityConfiguration (Maybe UTCTime)
+sCreatedTimeStamp = lens _sCreatedTimeStamp (\ s a -> s{_sCreatedTimeStamp = a}) . mapping _Time
+
+instance FromJSON SecurityConfiguration where
+        parseJSON
+          = withObject "SecurityConfiguration"
+              (\ x ->
+                 SecurityConfiguration' <$>
+                   (x .:? "Name") <*> (x .:? "EncryptionConfiguration")
+                     <*> (x .:? "CreatedTimeStamp"))
+
+instance Hashable SecurityConfiguration where
+
+instance NFData SecurityConfiguration where
+
 -- | Defines a non-overlapping region of a table's partitions, allowing multiple requests to be executed in parallel.
 --
 --
@@ -3615,7 +4310,7 @@ data SerDeInfo = SerDeInfo'
 --
 -- * 'sdiName' - Name of the SerDe.
 --
--- * 'sdiParameters' - A list of initialization parameters for the SerDe, in key-value form.
+-- * 'sdiParameters' - These key-value pairs define initialization parameters for the SerDe.
 serDeInfo
     :: SerDeInfo
 serDeInfo =
@@ -3634,7 +4329,7 @@ sdiSerializationLibrary = lens _sdiSerializationLibrary (\ s a -> s{_sdiSerializ
 sdiName :: Lens' SerDeInfo (Maybe Text)
 sdiName = lens _sdiName (\ s a -> s{_sdiName = a})
 
--- | A list of initialization parameters for the SerDe, in key-value form.
+-- | These key-value pairs define initialization parameters for the SerDe.
 sdiParameters :: Lens' SerDeInfo (HashMap Text Text)
 sdiParameters = lens _sdiParameters (\ s a -> s{_sdiParameters = a}) . _Default . _Map
 
@@ -3928,13 +4623,13 @@ data Table = Table'
 --
 -- * 'tDatabaseName' - Name of the metadata database where the table metadata resides. For Hive compatibility, this must be all lowercase.
 --
--- * 'tParameters' - Properties associated with this table, as a list of key-value pairs.
+-- * 'tParameters' - These key-value pairs define properties associated with the table.
 --
 -- * 'tLastAccessTime' - Last time the table was accessed. This is usually taken from HDFS, and may not be reliable.
 --
 -- * 'tDescription' - Description of the table.
 --
--- * 'tPartitionKeys' - A list of columns by which the table is partitioned. Only primitive types are supported as partition keys.
+-- * 'tPartitionKeys' - A list of columns by which the table is partitioned. Only primitive types are supported as partition keys. When creating a table used by Athena, and you do not specify any @partitionKeys@ , you must at least set the value of @partitionKeys@ to an empty list. For example: @"PartitionKeys": []@
 --
 -- * 'tCreateTime' - Time when the table definition was created in the Data Catalog.
 --
@@ -4003,7 +4698,7 @@ tStorageDescriptor = lens _tStorageDescriptor (\ s a -> s{_tStorageDescriptor = 
 tDatabaseName :: Lens' Table (Maybe Text)
 tDatabaseName = lens _tDatabaseName (\ s a -> s{_tDatabaseName = a})
 
--- | Properties associated with this table, as a list of key-value pairs.
+-- | These key-value pairs define properties associated with the table.
 tParameters :: Lens' Table (HashMap Text Text)
 tParameters = lens _tParameters (\ s a -> s{_tParameters = a}) . _Default . _Map
 
@@ -4015,7 +4710,7 @@ tLastAccessTime = lens _tLastAccessTime (\ s a -> s{_tLastAccessTime = a}) . map
 tDescription :: Lens' Table (Maybe Text)
 tDescription = lens _tDescription (\ s a -> s{_tDescription = a})
 
--- | A list of columns by which the table is partitioned. Only primitive types are supported as partition keys.
+-- | A list of columns by which the table is partitioned. Only primitive types are supported as partition keys. When creating a table used by Athena, and you do not specify any @partitionKeys@ , you must at least set the value of @partitionKeys@ to an empty list. For example: @"PartitionKeys": []@
 tPartitionKeys :: Lens' Table [Column]
 tPartitionKeys = lens _tPartitionKeys (\ s a -> s{_tPartitionKeys = a}) . _Default . _Coerce
 
@@ -4133,13 +4828,13 @@ data TableInput = TableInput'
 --
 -- * 'tiStorageDescriptor' - A storage descriptor containing information about the physical storage of this table.
 --
--- * 'tiParameters' - Properties associated with this table, as a list of key-value pairs.
+-- * 'tiParameters' - These key-value pairs define properties associated with the table.
 --
 -- * 'tiLastAccessTime' - Last time the table was accessed.
 --
 -- * 'tiDescription' - Description of the table.
 --
--- * 'tiPartitionKeys' - A list of columns by which the table is partitioned. Only primitive types are supported as partition keys.
+-- * 'tiPartitionKeys' - A list of columns by which the table is partitioned. Only primitive types are supported as partition keys. When creating a table used by Athena, and you do not specify any @partitionKeys@ , you must at least set the value of @partitionKeys@ to an empty list. For example: @"PartitionKeys": []@
 --
 -- * 'tiName' - Name of the table. For Hive compatibility, this is folded to lowercase when it is stored.
 tableInput
@@ -4190,7 +4885,7 @@ tiLastAnalyzedTime = lens _tiLastAnalyzedTime (\ s a -> s{_tiLastAnalyzedTime = 
 tiStorageDescriptor :: Lens' TableInput (Maybe StorageDescriptor)
 tiStorageDescriptor = lens _tiStorageDescriptor (\ s a -> s{_tiStorageDescriptor = a})
 
--- | Properties associated with this table, as a list of key-value pairs.
+-- | These key-value pairs define properties associated with the table.
 tiParameters :: Lens' TableInput (HashMap Text Text)
 tiParameters = lens _tiParameters (\ s a -> s{_tiParameters = a}) . _Default . _Map
 
@@ -4202,7 +4897,7 @@ tiLastAccessTime = lens _tiLastAccessTime (\ s a -> s{_tiLastAccessTime = a}) . 
 tiDescription :: Lens' TableInput (Maybe Text)
 tiDescription = lens _tiDescription (\ s a -> s{_tiDescription = a})
 
--- | A list of columns by which the table is partitioned. Only primitive types are supported as partition keys.
+-- | A list of columns by which the table is partitioned. Only primitive types are supported as partition keys. When creating a table used by Athena, and you do not specify any @partitionKeys@ , you must at least set the value of @partitionKeys@ to an empty list. For example: @"PartitionKeys": []@
 tiPartitionKeys :: Lens' TableInput [Column]
 tiPartitionKeys = lens _tiPartitionKeys (\ s a -> s{_tiPartitionKeys = a}) . _Default . _Coerce
 
@@ -4246,7 +4941,7 @@ data TableVersion = TableVersion'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tvVersionId' - The ID value that identifies this table version.
+-- * 'tvVersionId' - The ID value that identifies this table version. A @VersionId@ is a string representation of an integer. Each version is incremented by 1.
 --
 -- * 'tvTable' - The table in question
 tableVersion
@@ -4254,7 +4949,7 @@ tableVersion
 tableVersion = TableVersion' {_tvVersionId = Nothing, _tvTable = Nothing}
 
 
--- | The ID value that identifies this table version.
+-- | The ID value that identifies this table version. A @VersionId@ is a string representation of an integer. Each version is incremented by 1.
 tvVersionId :: Lens' TableVersion (Maybe Text)
 tvVersionId = lens _tvVersionId (\ s a -> s{_tvVersionId = a})
 
@@ -4289,7 +4984,7 @@ data TableVersionError = TableVersionError'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tveVersionId' - The ID value of the version in question.
+-- * 'tveVersionId' - The ID value of the version in question. A @VersionID@ is a string representation of an integer. Each version is incremented by 1.
 --
 -- * 'tveTableName' - The name of the table in question.
 --
@@ -4304,7 +4999,7 @@ tableVersionError =
     }
 
 
--- | The ID value of the version in question.
+-- | The ID value of the version in question. A @VersionID@ is a string representation of an integer. Each version is incremented by 1.
 tveVersionId :: Lens' TableVersionError (Maybe Text)
 tveVersionId = lens _tveVersionId (\ s a -> s{_tveVersionId = a})
 

@@ -29,6 +29,8 @@ module Network.AWS.Glue.CreateDevEndpoint
     -- * Request Lenses
     , cdeExtraPythonLibsS3Path
     , cdeSecurityGroupIds
+    , cdePublicKeys
+    , cdeSecurityConfiguration
     , cdePublicKey
     , cdeSubnetId
     , cdeNumberOfNodes
@@ -46,6 +48,7 @@ module Network.AWS.Glue.CreateDevEndpoint
     , cdersExtraPythonLibsS3Path
     , cdersSecurityGroupIds
     , cdersVPCId
+    , cdersSecurityConfiguration
     , cdersSubnetId
     , cdersNumberOfNodes
     , cdersAvailabilityZone
@@ -68,6 +71,8 @@ import Network.AWS.Response
 data CreateDevEndpoint = CreateDevEndpoint'
   { _cdeExtraPythonLibsS3Path :: !(Maybe Text)
   , _cdeSecurityGroupIds      :: !(Maybe [Text])
+  , _cdePublicKeys            :: !(Maybe [Text])
+  , _cdeSecurityConfiguration :: !(Maybe Text)
   , _cdePublicKey             :: !(Maybe Text)
   , _cdeSubnetId              :: !(Maybe Text)
   , _cdeNumberOfNodes         :: !(Maybe Int)
@@ -85,7 +90,11 @@ data CreateDevEndpoint = CreateDevEndpoint'
 --
 -- * 'cdeSecurityGroupIds' - Security group IDs for the security groups to be used by the new DevEndpoint.
 --
--- * 'cdePublicKey' - The public key to use for authentication.
+-- * 'cdePublicKeys' - A list of public keys to be used by the DevEndpoints for authentication. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.
+--
+-- * 'cdeSecurityConfiguration' - The name of the SecurityConfiguration structure to be used with this DevEndpoint.
+--
+-- * 'cdePublicKey' - The public key to be used by this DevEndpoint for authentication. This attribute is provided for backward compatibility, as the recommended attribute to use is public keys.
 --
 -- * 'cdeSubnetId' - The subnet ID for the new DevEndpoint to use.
 --
@@ -104,6 +113,8 @@ createDevEndpoint pEndpointName_ pRoleARN_ =
   CreateDevEndpoint'
     { _cdeExtraPythonLibsS3Path = Nothing
     , _cdeSecurityGroupIds = Nothing
+    , _cdePublicKeys = Nothing
+    , _cdeSecurityConfiguration = Nothing
     , _cdePublicKey = Nothing
     , _cdeSubnetId = Nothing
     , _cdeNumberOfNodes = Nothing
@@ -121,7 +132,15 @@ cdeExtraPythonLibsS3Path = lens _cdeExtraPythonLibsS3Path (\ s a -> s{_cdeExtraP
 cdeSecurityGroupIds :: Lens' CreateDevEndpoint [Text]
 cdeSecurityGroupIds = lens _cdeSecurityGroupIds (\ s a -> s{_cdeSecurityGroupIds = a}) . _Default . _Coerce
 
--- | The public key to use for authentication.
+-- | A list of public keys to be used by the DevEndpoints for authentication. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.
+cdePublicKeys :: Lens' CreateDevEndpoint [Text]
+cdePublicKeys = lens _cdePublicKeys (\ s a -> s{_cdePublicKeys = a}) . _Default . _Coerce
+
+-- | The name of the SecurityConfiguration structure to be used with this DevEndpoint.
+cdeSecurityConfiguration :: Lens' CreateDevEndpoint (Maybe Text)
+cdeSecurityConfiguration = lens _cdeSecurityConfiguration (\ s a -> s{_cdeSecurityConfiguration = a})
+
+-- | The public key to be used by this DevEndpoint for authentication. This attribute is provided for backward compatibility, as the recommended attribute to use is public keys.
 cdePublicKey :: Lens' CreateDevEndpoint (Maybe Text)
 cdePublicKey = lens _cdePublicKey (\ s a -> s{_cdePublicKey = a})
 
@@ -157,6 +176,7 @@ instance AWSRequest CreateDevEndpoint where
                      <*> (x .?> "ExtraPythonLibsS3Path")
                      <*> (x .?> "SecurityGroupIds" .!@ mempty)
                      <*> (x .?> "VpcId")
+                     <*> (x .?> "SecurityConfiguration")
                      <*> (x .?> "SubnetId")
                      <*> (x .?> "NumberOfNodes")
                      <*> (x .?> "AvailabilityZone")
@@ -187,6 +207,9 @@ instance ToJSON CreateDevEndpoint where
                  [("ExtraPythonLibsS3Path" .=) <$>
                     _cdeExtraPythonLibsS3Path,
                   ("SecurityGroupIds" .=) <$> _cdeSecurityGroupIds,
+                  ("PublicKeys" .=) <$> _cdePublicKeys,
+                  ("SecurityConfiguration" .=) <$>
+                    _cdeSecurityConfiguration,
                   ("PublicKey" .=) <$> _cdePublicKey,
                   ("SubnetId" .=) <$> _cdeSubnetId,
                   ("NumberOfNodes" .=) <$> _cdeNumberOfNodes,
@@ -208,6 +231,7 @@ data CreateDevEndpointResponse = CreateDevEndpointResponse'
   , _cdersExtraPythonLibsS3Path              :: !(Maybe Text)
   , _cdersSecurityGroupIds                   :: !(Maybe [Text])
   , _cdersVPCId                              :: !(Maybe Text)
+  , _cdersSecurityConfiguration              :: !(Maybe Text)
   , _cdersSubnetId                           :: !(Maybe Text)
   , _cdersNumberOfNodes                      :: !(Maybe Int)
   , _cdersAvailabilityZone                   :: !(Maybe Text)
@@ -235,6 +259,8 @@ data CreateDevEndpointResponse = CreateDevEndpointResponse'
 -- * 'cdersSecurityGroupIds' - The security groups assigned to the new DevEndpoint.
 --
 -- * 'cdersVPCId' - The ID of the VPC used by this DevEndpoint.
+--
+-- * 'cdersSecurityConfiguration' - The name of the SecurityConfiguration structure being used with this DevEndpoint.
 --
 -- * 'cdersSubnetId' - The subnet ID assigned to the new DevEndpoint.
 --
@@ -264,6 +290,7 @@ createDevEndpointResponse pResponseStatus_ =
     , _cdersExtraPythonLibsS3Path = Nothing
     , _cdersSecurityGroupIds = Nothing
     , _cdersVPCId = Nothing
+    , _cdersSecurityConfiguration = Nothing
     , _cdersSubnetId = Nothing
     , _cdersNumberOfNodes = Nothing
     , _cdersAvailabilityZone = Nothing
@@ -299,6 +326,10 @@ cdersSecurityGroupIds = lens _cdersSecurityGroupIds (\ s a -> s{_cdersSecurityGr
 -- | The ID of the VPC used by this DevEndpoint.
 cdersVPCId :: Lens' CreateDevEndpointResponse (Maybe Text)
 cdersVPCId = lens _cdersVPCId (\ s a -> s{_cdersVPCId = a})
+
+-- | The name of the SecurityConfiguration structure being used with this DevEndpoint.
+cdersSecurityConfiguration :: Lens' CreateDevEndpointResponse (Maybe Text)
+cdersSecurityConfiguration = lens _cdersSecurityConfiguration (\ s a -> s{_cdersSecurityConfiguration = a})
 
 -- | The subnet ID assigned to the new DevEndpoint.
 cdersSubnetId :: Lens' CreateDevEndpointResponse (Maybe Text)

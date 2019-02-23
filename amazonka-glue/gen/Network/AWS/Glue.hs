@@ -38,6 +38,9 @@ module Network.AWS.Glue
     -- ** SchedulerRunningException
     , _SchedulerRunningException
 
+    -- ** ConditionCheckFailureException
+    , _ConditionCheckFailureException
+
     -- ** ConcurrentRunsExceededException
     , _ConcurrentRunsExceededException
 
@@ -70,6 +73,9 @@ module Network.AWS.Glue
 
     -- ** ResourceNumberLimitExceededException
     , _ResourceNumberLimitExceededException
+
+    -- ** GlueEncryptionException
+    , _GlueEncryptionException
 
     -- ** IdempotentParameterMismatchException
     , _IdempotentParameterMismatchException
@@ -113,6 +119,9 @@ module Network.AWS.Glue
     -- ** GetUserDefinedFunctions (Paginated)
     , module Network.AWS.Glue.GetUserDefinedFunctions
 
+    -- ** GetDataCatalogEncryptionSettings
+    , module Network.AWS.Glue.GetDataCatalogEncryptionSettings
+
     -- ** BatchCreatePartition
     , module Network.AWS.Glue.BatchCreatePartition
 
@@ -121,6 +130,9 @@ module Network.AWS.Glue
 
     -- ** GetTableVersion
     , module Network.AWS.Glue.GetTableVersion
+
+    -- ** CreateSecurityConfiguration
+    , module Network.AWS.Glue.CreateSecurityConfiguration
 
     -- ** GetJobs (Paginated)
     , module Network.AWS.Glue.GetJobs
@@ -145,6 +157,9 @@ module Network.AWS.Glue
 
     -- ** UpdateCrawler
     , module Network.AWS.Glue.UpdateCrawler
+
+    -- ** GetSecurityConfiguration
+    , module Network.AWS.Glue.GetSecurityConfiguration
 
     -- ** GetConnection
     , module Network.AWS.Glue.GetConnection
@@ -215,6 +230,9 @@ module Network.AWS.Glue
     -- ** GetUserDefinedFunction
     , module Network.AWS.Glue.GetUserDefinedFunction
 
+    -- ** GetResourcePolicy
+    , module Network.AWS.Glue.GetResourcePolicy
+
     -- ** DeleteDatabase
     , module Network.AWS.Glue.DeleteDatabase
 
@@ -223,6 +241,9 @@ module Network.AWS.Glue
 
     -- ** StopCrawler
     , module Network.AWS.Glue.StopCrawler
+
+    -- ** DeleteSecurityConfiguration
+    , module Network.AWS.Glue.DeleteSecurityConfiguration
 
     -- ** GetPartitions (Paginated)
     , module Network.AWS.Glue.GetPartitions
@@ -272,6 +293,9 @@ module Network.AWS.Glue
     -- ** CreateDevEndpoint
     , module Network.AWS.Glue.CreateDevEndpoint
 
+    -- ** PutDataCatalogEncryptionSettings
+    , module Network.AWS.Glue.PutDataCatalogEncryptionSettings
+
     -- ** GetDatabase
     , module Network.AWS.Glue.GetDatabase
 
@@ -283,6 +307,15 @@ module Network.AWS.Glue
 
     -- ** CreateScript
     , module Network.AWS.Glue.CreateScript
+
+    -- ** PutResourcePolicy
+    , module Network.AWS.Glue.PutResourcePolicy
+
+    -- ** GetSecurityConfigurations (Paginated)
+    , module Network.AWS.Glue.GetSecurityConfigurations
+
+    -- ** DeleteResourcePolicy
+    , module Network.AWS.Glue.DeleteResourcePolicy
 
     -- ** GetConnections (Paginated)
     , module Network.AWS.Glue.GetConnections
@@ -322,6 +355,12 @@ module Network.AWS.Glue
 
     -- * Types
 
+    -- ** CatalogEncryptionMode
+    , CatalogEncryptionMode (..)
+
+    -- ** CloudWatchEncryptionMode
+    , CloudWatchEncryptionMode (..)
+
     -- ** ConnectionPropertyKey
     , ConnectionPropertyKey (..)
 
@@ -333,6 +372,12 @@ module Network.AWS.Glue
 
     -- ** DeleteBehavior
     , DeleteBehavior (..)
+
+    -- ** ExistCondition
+    , ExistCondition (..)
+
+    -- ** JobBookmarksEncryptionMode
+    , JobBookmarksEncryptionMode (..)
 
     -- ** JobRunState
     , JobRunState (..)
@@ -355,6 +400,9 @@ module Network.AWS.Glue
     -- ** ResourceType
     , ResourceType (..)
 
+    -- ** S3EncryptionMode
+    , S3EncryptionMode (..)
+
     -- ** ScheduleState
     , ScheduleState (..)
 
@@ -370,8 +418,10 @@ module Network.AWS.Glue
     -- ** Action
     , Action
     , action
+    , aNotificationProperty
     , aArguments
     , aJobName
+    , aSecurityConfiguration
     , aTimeout
 
     -- ** BatchStopJobRunError
@@ -406,6 +456,12 @@ module Network.AWS.Glue
     , cGrokClassifier
     , cXMLClassifier
     , cJSONClassifier
+
+    -- ** CloudWatchEncryption
+    , CloudWatchEncryption
+    , cloudWatchEncryption
+    , cweCloudWatchEncryptionMode
+    , cweKMSKeyARN
 
     -- ** CodeGenEdge
     , CodeGenEdge
@@ -466,6 +522,12 @@ module Network.AWS.Glue
     , ciConnectionType
     , ciConnectionProperties
 
+    -- ** ConnectionPasswordEncryption
+    , ConnectionPasswordEncryption
+    , connectionPasswordEncryption
+    , cpeAWSKMSKeyId
+    , cpeReturnConnectionPasswordEncrypted
+
     -- ** ConnectionsList
     , ConnectionsList
     , connectionsList
@@ -487,6 +549,7 @@ module Network.AWS.Glue
     , craTargets
     , craVersion
     , craDatabaseName
+    , craCrawlerSecurityConfiguration
     , craConfiguration
     , craTablePrefix
     , craDescription
@@ -506,6 +569,7 @@ module Network.AWS.Glue
     -- ** CrawlerTargets
     , CrawlerTargets
     , crawlerTargets
+    , ctDynamoDBTargets
     , ctS3Targets
     , ctJdbcTargets
 
@@ -529,6 +593,12 @@ module Network.AWS.Glue
     , cxcrRowTag
     , cxcrClassification
     , cxcrName
+
+    -- ** DataCatalogEncryptionSettings
+    , DataCatalogEncryptionSettings
+    , dataCatalogEncryptionSettings
+    , dcesEncryptionAtRest
+    , dcesConnectionPasswordEncryption
 
     -- ** Database
     , Database
@@ -557,8 +627,10 @@ module Network.AWS.Glue
     , deLastUpdateStatus
     , deSecurityGroupIds
     , deLastModifiedTimestamp
+    , dePublicKeys
     , deVPCId
     , dePrivateAddress
+    , deSecurityConfiguration
     , dePublicKey
     , deSubnetId
     , deNumberOfNodes
@@ -575,6 +647,24 @@ module Network.AWS.Glue
     , devEndpointCustomLibraries
     , declExtraPythonLibsS3Path
     , declExtraJARsS3Path
+
+    -- ** DynamoDBTarget
+    , DynamoDBTarget
+    , dynamoDBTarget
+    , ddtPath
+
+    -- ** EncryptionAtRest
+    , EncryptionAtRest
+    , encryptionAtRest
+    , earSseAWSKMSKeyId
+    , earCatalogEncryptionMode
+
+    -- ** EncryptionConfiguration
+    , EncryptionConfiguration
+    , encryptionConfiguration
+    , ecS3Encryption
+    , ecJobBookmarksEncryption
+    , ecCloudWatchEncryption
 
     -- ** ErrorDetail
     , ErrorDetail
@@ -624,14 +714,17 @@ module Network.AWS.Glue
     , Job
     , job
     , jCommand
+    , jNotificationProperty
     , jLastModifiedOn
     , jConnections
+    , jSecurityConfiguration
     , jRole
     , jName
     , jLogURI
     , jMaxRetries
     , jExecutionProperty
     , jAllocatedCapacity
+    , jMaxCapacity
     , jTimeout
     , jDefaultArguments
     , jDescription
@@ -646,6 +739,12 @@ module Network.AWS.Glue
     , jbeAttempt
     , jbeJobBookmark
 
+    -- ** JobBookmarksEncryption
+    , JobBookmarksEncryption
+    , jobBookmarksEncryption
+    , jbeJobBookmarksEncryptionMode
+    , jbeKMSKeyARN
+
     -- ** JobCommand
     , JobCommand
     , jobCommand
@@ -657,17 +756,21 @@ module Network.AWS.Glue
     , jobRun
     , jrCompletedOn
     , jrTriggerName
+    , jrNotificationProperty
     , jrLastModifiedOn
     , jrArguments
     , jrJobName
     , jrStartedOn
+    , jrSecurityConfiguration
     , jrJobRunState
+    , jrLogGroupName
     , jrExecutionTime
     , jrPredecessorRuns
     , jrPreviousRunId
     , jrId
     , jrAttempt
     , jrAllocatedCapacity
+    , jrMaxCapacity
     , jrTimeout
     , jrErrorMessage
 
@@ -675,12 +778,15 @@ module Network.AWS.Glue
     , JobUpdate
     , jobUpdate
     , juCommand
+    , juNotificationProperty
     , juConnections
+    , juSecurityConfiguration
     , juRole
     , juLogURI
     , juMaxRetries
     , juExecutionProperty
     , juAllocatedCapacity
+    , juMaxCapacity
     , juTimeout
     , juDefaultArguments
     , juDescription
@@ -698,6 +804,7 @@ module Network.AWS.Glue
     -- ** Location
     , Location
     , location
+    , lDynamoDB
     , lJdbc
     , lS3
 
@@ -710,6 +817,11 @@ module Network.AWS.Glue
     , meTargetType
     , meTargetPath
     , meSourcePath
+
+    -- ** NotificationProperty
+    , NotificationProperty
+    , notificationProperty
+    , npNotifyDelayAfter
 
     -- ** Order
     , Order
@@ -774,6 +886,12 @@ module Network.AWS.Glue
     , ruResourceType
     , ruURI
 
+    -- ** S3Encryption
+    , S3Encryption
+    , s3Encryption
+    , seS3EncryptionMode
+    , seKMSKeyARN
+
     -- ** S3Target
     , S3Target
     , s3Target
@@ -791,6 +909,13 @@ module Network.AWS.Glue
     , schemaChangePolicy
     , scpDeleteBehavior
     , scpUpdateBehavior
+
+    -- ** SecurityConfiguration
+    , SecurityConfiguration
+    , securityConfiguration
+    , sName
+    , sEncryptionConfiguration
+    , sCreatedTimeStamp
 
     -- ** Segment
     , Segment
@@ -970,6 +1095,7 @@ import Network.AWS.Glue.CreateDevEndpoint
 import Network.AWS.Glue.CreateJob
 import Network.AWS.Glue.CreatePartition
 import Network.AWS.Glue.CreateScript
+import Network.AWS.Glue.CreateSecurityConfiguration
 import Network.AWS.Glue.CreateTable
 import Network.AWS.Glue.CreateTrigger
 import Network.AWS.Glue.CreateUserDefinedFunction
@@ -980,6 +1106,8 @@ import Network.AWS.Glue.DeleteDatabase
 import Network.AWS.Glue.DeleteDevEndpoint
 import Network.AWS.Glue.DeleteJob
 import Network.AWS.Glue.DeletePartition
+import Network.AWS.Glue.DeleteResourcePolicy
+import Network.AWS.Glue.DeleteSecurityConfiguration
 import Network.AWS.Glue.DeleteTable
 import Network.AWS.Glue.DeleteTableVersion
 import Network.AWS.Glue.DeleteTrigger
@@ -994,6 +1122,7 @@ import Network.AWS.Glue.GetCrawlerMetrics
 import Network.AWS.Glue.GetCrawlers
 import Network.AWS.Glue.GetDatabase
 import Network.AWS.Glue.GetDatabases
+import Network.AWS.Glue.GetDataCatalogEncryptionSettings
 import Network.AWS.Glue.GetDataflowGraph
 import Network.AWS.Glue.GetDevEndpoint
 import Network.AWS.Glue.GetDevEndpoints
@@ -1005,6 +1134,9 @@ import Network.AWS.Glue.GetMapping
 import Network.AWS.Glue.GetPartition
 import Network.AWS.Glue.GetPartitions
 import Network.AWS.Glue.GetPlan
+import Network.AWS.Glue.GetResourcePolicy
+import Network.AWS.Glue.GetSecurityConfiguration
+import Network.AWS.Glue.GetSecurityConfigurations
 import Network.AWS.Glue.GetTable
 import Network.AWS.Glue.GetTables
 import Network.AWS.Glue.GetTableVersion
@@ -1014,6 +1146,8 @@ import Network.AWS.Glue.GetTriggers
 import Network.AWS.Glue.GetUserDefinedFunction
 import Network.AWS.Glue.GetUserDefinedFunctions
 import Network.AWS.Glue.ImportCatalogToGlue
+import Network.AWS.Glue.PutDataCatalogEncryptionSettings
+import Network.AWS.Glue.PutResourcePolicy
 import Network.AWS.Glue.ResetJobBookmark
 import Network.AWS.Glue.StartCrawler
 import Network.AWS.Glue.StartCrawlerSchedule

@@ -15,7 +15,7 @@
 --
 -- AWS Database Migration Service (AWS DMS) can migrate your data to and from the most widely used commercial and open-source databases such as Oracle, PostgreSQL, Microsoft SQL Server, Amazon Redshift, MariaDB, Amazon Aurora, MySQL, and SAP Adaptive Server Enterprise (ASE). The service supports homogeneous migrations such as Oracle to Oracle, as well as heterogeneous migrations between different database platforms, such as Oracle to MySQL or SQL Server to PostgreSQL.
 --
--- For more information about AWS DMS, see the AWS DMS user guide at <http://docs.aws.amazon.com/dms/latest/userguide/Welcome.html What Is AWS Database Migration Service? >
+-- For more information about AWS DMS, see <http://docs.aws.amazon.com/dms/latest/userguide/Welcome.html What Is AWS Database Migration Service?> in the /AWS Database Migration User Guide./
 --
 module Network.AWS.DMS
     (
@@ -222,6 +222,9 @@ module Network.AWS.DMS
     -- ** DmsSSLModeValue
     , DmsSSLModeValue (..)
 
+    -- ** MessageFormatValue
+    , MessageFormatValue (..)
+
     -- ** MigrationTypeValue
     , MigrationTypeValue (..)
 
@@ -230,6 +233,9 @@ module Network.AWS.DMS
 
     -- ** RefreshSchemasStatusTypeValue
     , RefreshSchemasStatusTypeValue (..)
+
+    -- ** ReloadOptionValue
+    , ReloadOptionValue (..)
 
     -- ** ReplicationEndpointTypeValue
     , ReplicationEndpointTypeValue (..)
@@ -276,21 +282,37 @@ module Network.AWS.DMS
     , cEndpointARN
     , cLastFailureMessage
 
+    -- ** DmsTransferSettings
+    , DmsTransferSettings
+    , dmsTransferSettings
+    , dtsServiceAccessRoleARN
+    , dtsBucketName
+
     -- ** DynamoDBSettings
     , DynamoDBSettings
     , dynamoDBSettings
     , ddsServiceAccessRoleARN
 
+    -- ** ElasticsearchSettings
+    , ElasticsearchSettings
+    , elasticsearchSettings
+    , esFullLoadErrorPercentage
+    , esErrorRetryDuration
+    , esServiceAccessRoleARN
+    , esEndpointURI
+
     -- ** Endpoint
     , Endpoint
     , endpoint
     , eStatus
+    , eDmsTransferSettings
     , eServerName
     , eCertificateARN
     , eServiceAccessRoleARN
     , eEngineDisplayName
     , eExtraConnectionAttributes
     , eEndpointType
+    , eElasticsearchSettings
     , eUsername
     , eExternalTableDefinition
     , eEngineName
@@ -299,6 +321,7 @@ module Network.AWS.DMS
     , eSSLMode
     , eDatabaseName
     , eS3Settings
+    , eKinesisSettings
     , eEndpointIdentifier
     , eExternalId
     , eDynamoDBSettings
@@ -338,6 +361,13 @@ module Network.AWS.DMS
     , filter'
     , fName
     , fValues
+
+    -- ** KinesisSettings
+    , KinesisSettings
+    , kinesisSettings
+    , ksServiceAccessRoleARN
+    , ksStreamARN
+    , ksMessageFormat
 
     -- ** MongoDBSettings
     , MongoDBSettings
@@ -396,6 +426,7 @@ module Network.AWS.DMS
     , riSecondaryAvailabilityZone
     , riReplicationInstanceARN
     , riAllocatedStorage
+    , riDNSNameServers
     , riReplicationInstancePublicIPAddress
     , riReplicationInstanceClass
     , riReplicationInstanceIdentifier
@@ -503,6 +534,7 @@ module Network.AWS.DMS
     , tsValidationFailedRecords
     , tsValidationSuspendedRecords
     , tsSchemaName
+    , tsValidationStateDetails
     , tsTableState
     , tsFullLoadErrorRows
     , tsDdls

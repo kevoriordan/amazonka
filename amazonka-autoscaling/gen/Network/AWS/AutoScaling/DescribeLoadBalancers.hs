@@ -21,8 +21,10 @@
 -- Describes the load balancers for the specified Auto Scaling group.
 --
 --
--- Note that this operation describes only Classic Load Balancers. If you have Application Load Balancers, use 'DescribeLoadBalancerTargetGroups' instead.
+-- This operation describes only Classic Load Balancers. If you have Application Load Balancers, use 'DescribeLoadBalancerTargetGroups' instead.
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.AutoScaling.DescribeLoadBalancers
     (
     -- * Creating a Request
@@ -45,6 +47,7 @@ module Network.AWS.AutoScaling.DescribeLoadBalancers
 import Network.AWS.AutoScaling.Types
 import Network.AWS.AutoScaling.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
@@ -88,6 +91,13 @@ dlbMaxRecords = lens _dlbMaxRecords (\ s a -> s{_dlbMaxRecords = a})
 -- | The name of the Auto Scaling group.
 dlbAutoScalingGroupName :: Lens' DescribeLoadBalancers Text
 dlbAutoScalingGroupName = lens _dlbAutoScalingGroupName (\ s a -> s{_dlbAutoScalingGroupName = a})
+
+instance AWSPager DescribeLoadBalancers where
+        page rq rs
+          | stop (rs ^. dlbrsNextToken) = Nothing
+          | stop (rs ^. dlbrsLoadBalancers) = Nothing
+          | otherwise =
+            Just $ rq & dlbNextToken .~ rs ^. dlbrsNextToken
 
 instance AWSRequest DescribeLoadBalancers where
         type Rs DescribeLoadBalancers =

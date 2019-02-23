@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Creates a copy of an object that is already stored in Amazon S3.
+--
+--
 module Network.AWS.S3.CopyObject
     (
     -- * Creating a Request
@@ -30,6 +32,7 @@ module Network.AWS.S3.CopyObject
     , coCopySourceSSECustomerKeyMD5
     , coTaggingDirective
     , coMetadataDirective
+    , coObjectLockMode
     , coExpires
     , coGrantReadACP
     , coCopySourceIfNoneMatch
@@ -46,10 +49,12 @@ module Network.AWS.S3.CopyObject
     , coGrantFullControl
     , coContentEncoding
     , coTagging
+    , coObjectLockRetainUntilDate
     , coMetadata
     , coCacheControl
     , coContentLanguage
     , coCopySourceSSECustomerKey
+    , coObjectLockLegalHoldStatus
     , coCopySourceSSECustomerAlgorithm
     , coACL
     , coContentDisposition
@@ -84,12 +89,13 @@ import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'copyObject' smart constructor.
 data CopyObject = CopyObject'
-  { _coCopySourceIfModifiedSince      :: !(Maybe RFC822)
-  , _coCopySourceIfUnmodifiedSince    :: !(Maybe RFC822)
+  { _coCopySourceIfModifiedSince      :: !(Maybe ISO8601)
+  , _coCopySourceIfUnmodifiedSince    :: !(Maybe ISO8601)
   , _coCopySourceSSECustomerKeyMD5    :: !(Maybe Text)
   , _coTaggingDirective               :: !(Maybe TaggingDirective)
   , _coMetadataDirective              :: !(Maybe MetadataDirective)
-  , _coExpires                        :: !(Maybe RFC822)
+  , _coObjectLockMode                 :: !(Maybe ObjectLockMode)
+  , _coExpires                        :: !(Maybe ISO8601)
   , _coGrantReadACP                   :: !(Maybe Text)
   , _coCopySourceIfNoneMatch          :: !(Maybe Text)
   , _coSSECustomerAlgorithm           :: !(Maybe Text)
@@ -105,10 +111,12 @@ data CopyObject = CopyObject'
   , _coGrantFullControl               :: !(Maybe Text)
   , _coContentEncoding                :: !(Maybe Text)
   , _coTagging                        :: !(Maybe Text)
+  , _coObjectLockRetainUntilDate      :: !(Maybe ISO8601)
   , _coMetadata                       :: !(Map Text Text)
   , _coCacheControl                   :: !(Maybe Text)
   , _coContentLanguage                :: !(Maybe Text)
   , _coCopySourceSSECustomerKey       :: !(Maybe (Sensitive Text))
+  , _coObjectLockLegalHoldStatus      :: !(Maybe ObjectLockLegalHoldStatus)
   , _coCopySourceSSECustomerAlgorithm :: !(Maybe Text)
   , _coACL                            :: !(Maybe ObjectCannedACL)
   , _coContentDisposition             :: !(Maybe Text)
@@ -133,6 +141,8 @@ data CopyObject = CopyObject'
 -- * 'coTaggingDirective' - Specifies whether the object tag-set are copied from the source object or replaced with tag-set provided in the request.
 --
 -- * 'coMetadataDirective' - Specifies whether the metadata is copied from the source object or replaced with metadata provided in the request.
+--
+-- * 'coObjectLockMode' - The Object Lock mode that you want to apply to the copied object.
 --
 -- * 'coExpires' - The date and time at which the object is no longer cacheable.
 --
@@ -166,6 +176,8 @@ data CopyObject = CopyObject'
 --
 -- * 'coTagging' - The tag-set for the object destination object this value must be used in conjunction with the TaggingDirective. The tag-set must be encoded as URL Query parameters
 --
+-- * 'coObjectLockRetainUntilDate' - The date and time when you want the copied object's Object Lock to expire.
+--
 -- * 'coMetadata' - A map of metadata to store with the object in S3.
 --
 -- * 'coCacheControl' - Specifies caching behavior along the request/reply chain.
@@ -173,6 +185,8 @@ data CopyObject = CopyObject'
 -- * 'coContentLanguage' - The language the content is in.
 --
 -- * 'coCopySourceSSECustomerKey' - Specifies the customer-provided encryption key for Amazon S3 to use to decrypt the source object. The encryption key provided in this header must be one that was used when the source object was created.
+--
+-- * 'coObjectLockLegalHoldStatus' - Specifies whether you want to apply a Legal Hold to the copied object.
 --
 -- * 'coCopySourceSSECustomerAlgorithm' - Specifies the algorithm to use when decrypting the source object (e.g., AES256).
 --
@@ -201,6 +215,7 @@ copyObject pBucket_ pCopySource_ pKey_ =
     , _coCopySourceSSECustomerKeyMD5 = Nothing
     , _coTaggingDirective = Nothing
     , _coMetadataDirective = Nothing
+    , _coObjectLockMode = Nothing
     , _coExpires = Nothing
     , _coGrantReadACP = Nothing
     , _coCopySourceIfNoneMatch = Nothing
@@ -217,10 +232,12 @@ copyObject pBucket_ pCopySource_ pKey_ =
     , _coGrantFullControl = Nothing
     , _coContentEncoding = Nothing
     , _coTagging = Nothing
+    , _coObjectLockRetainUntilDate = Nothing
     , _coMetadata = mempty
     , _coCacheControl = Nothing
     , _coContentLanguage = Nothing
     , _coCopySourceSSECustomerKey = Nothing
+    , _coObjectLockLegalHoldStatus = Nothing
     , _coCopySourceSSECustomerAlgorithm = Nothing
     , _coACL = Nothing
     , _coContentDisposition = Nothing
@@ -251,6 +268,10 @@ coTaggingDirective = lens _coTaggingDirective (\ s a -> s{_coTaggingDirective = 
 -- | Specifies whether the metadata is copied from the source object or replaced with metadata provided in the request.
 coMetadataDirective :: Lens' CopyObject (Maybe MetadataDirective)
 coMetadataDirective = lens _coMetadataDirective (\ s a -> s{_coMetadataDirective = a})
+
+-- | The Object Lock mode that you want to apply to the copied object.
+coObjectLockMode :: Lens' CopyObject (Maybe ObjectLockMode)
+coObjectLockMode = lens _coObjectLockMode (\ s a -> s{_coObjectLockMode = a})
 
 -- | The date and time at which the object is no longer cacheable.
 coExpires :: Lens' CopyObject (Maybe UTCTime)
@@ -316,6 +337,10 @@ coContentEncoding = lens _coContentEncoding (\ s a -> s{_coContentEncoding = a})
 coTagging :: Lens' CopyObject (Maybe Text)
 coTagging = lens _coTagging (\ s a -> s{_coTagging = a})
 
+-- | The date and time when you want the copied object's Object Lock to expire.
+coObjectLockRetainUntilDate :: Lens' CopyObject (Maybe UTCTime)
+coObjectLockRetainUntilDate = lens _coObjectLockRetainUntilDate (\ s a -> s{_coObjectLockRetainUntilDate = a}) . mapping _Time
+
 -- | A map of metadata to store with the object in S3.
 coMetadata :: Lens' CopyObject (HashMap Text Text)
 coMetadata = lens _coMetadata (\ s a -> s{_coMetadata = a}) . _Map
@@ -331,6 +356,10 @@ coContentLanguage = lens _coContentLanguage (\ s a -> s{_coContentLanguage = a})
 -- | Specifies the customer-provided encryption key for Amazon S3 to use to decrypt the source object. The encryption key provided in this header must be one that was used when the source object was created.
 coCopySourceSSECustomerKey :: Lens' CopyObject (Maybe Text)
 coCopySourceSSECustomerKey = lens _coCopySourceSSECustomerKey (\ s a -> s{_coCopySourceSSECustomerKey = a}) . mapping _Sensitive
+
+-- | Specifies whether you want to apply a Legal Hold to the copied object.
+coObjectLockLegalHoldStatus :: Lens' CopyObject (Maybe ObjectLockLegalHoldStatus)
+coObjectLockLegalHoldStatus = lens _coObjectLockLegalHoldStatus (\ s a -> s{_coObjectLockLegalHoldStatus = a})
 
 -- | Specifies the algorithm to use when decrypting the source object (e.g., AES256).
 coCopySourceSSECustomerAlgorithm :: Lens' CopyObject (Maybe Text)
@@ -402,6 +431,7 @@ instance ToHeaders CopyObject where
                  =# _coCopySourceSSECustomerKeyMD5,
                "x-amz-tagging-directive" =# _coTaggingDirective,
                "x-amz-metadata-directive" =# _coMetadataDirective,
+               "x-amz-object-lock-mode" =# _coObjectLockMode,
                "Expires" =# _coExpires,
                "x-amz-grant-read-acp" =# _coGrantReadACP,
                "x-amz-copy-source-if-none-match" =#
@@ -424,11 +454,15 @@ instance ToHeaders CopyObject where
                "x-amz-grant-full-control" =# _coGrantFullControl,
                "Content-Encoding" =# _coContentEncoding,
                "x-amz-tagging" =# _coTagging,
+               "x-amz-object-lock-retain-until-date" =#
+                 _coObjectLockRetainUntilDate,
                "x-amz-meta-" =# _coMetadata,
                "Cache-Control" =# _coCacheControl,
                "Content-Language" =# _coContentLanguage,
                "x-amz-copy-source-server-side-encryption-customer-key"
                  =# _coCopySourceSSECustomerKey,
+               "x-amz-object-lock-legal-hold" =#
+                 _coObjectLockLegalHoldStatus,
                "x-amz-copy-source-server-side-encryption-customer-algorithm"
                  =# _coCopySourceSSECustomerAlgorithm,
                "x-amz-acl" =# _coACL,

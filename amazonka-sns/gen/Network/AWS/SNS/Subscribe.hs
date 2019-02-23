@@ -21,12 +21,16 @@
 -- Prepares to subscribe an endpoint by sending the endpoint a confirmation message. To actually create a subscription, the endpoint owner must call the @ConfirmSubscription@ action with the token from the confirmation message. Confirmation tokens are valid for three days.
 --
 --
+-- This action is throttled at 100 transactions per second (TPS).
+--
 module Network.AWS.SNS.Subscribe
     (
     -- * Creating a Request
       subscribe
     , Subscribe
     -- * Request Lenses
+    , subReturnSubscriptionARN
+    , subAttributes
     , subEndpoint
     , subTopicARN
     , subProtocol
@@ -52,9 +56,11 @@ import Network.AWS.SNS.Types.Product
 --
 -- /See:/ 'subscribe' smart constructor.
 data Subscribe = Subscribe'
-  { _subEndpoint :: !(Maybe Text)
-  , _subTopicARN :: !Text
-  , _subProtocol :: !Text
+  { _subReturnSubscriptionARN :: !(Maybe Bool)
+  , _subAttributes            :: !(Maybe (Map Text Text))
+  , _subEndpoint              :: !(Maybe Text)
+  , _subTopicARN              :: !Text
+  , _subProtocol              :: !Text
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -62,22 +68,36 @@ data Subscribe = Subscribe'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'subReturnSubscriptionARN' - Sets whether the response from the @Subscribe@ request includes the subscription ARN, even if the subscription is not yet confirmed. If you set this parameter to @false@ , the response includes the ARN for confirmed subscriptions, but it includes an ARN value of "pending subscription" for subscriptions that are not yet confirmed. A subscription becomes confirmed when the subscriber calls the @ConfirmSubscription@ action with a confirmation token. If you set this parameter to @true@ , the response includes the ARN in all cases, even if the subscription is not yet confirmed. The default value is @false@ .
+--
+-- * 'subAttributes' - A map of attributes with their corresponding values. The following lists the names, descriptions, and values of the special request parameters that the @SetTopicAttributes@ action uses:     * @DeliveryPolicy@ – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.     * @FilterPolicy@ – The simple JSON object that lets your subscriber receive only a subset of messages, rather than receiving every message published to the topic.     * @RawMessageDelivery@ – When set to @true@ , enables raw message delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need for the endpoints to process JSON formatting, which is otherwise created for Amazon SNS metadata.
+--
 -- * 'subEndpoint' - The endpoint that you want to receive notifications. Endpoints vary by protocol:     * For the @http@ protocol, the endpoint is an URL beginning with "http://"     * For the @https@ protocol, the endpoint is a URL beginning with "https://"     * For the @email@ protocol, the endpoint is an email address     * For the @email-json@ protocol, the endpoint is an email address     * For the @sms@ protocol, the endpoint is a phone number of an SMS-enabled device     * For the @sqs@ protocol, the endpoint is the ARN of an Amazon SQS queue     * For the @application@ protocol, the endpoint is the EndpointArn of a mobile app and device.     * For the @lambda@ protocol, the endpoint is the ARN of an AWS Lambda function.
 --
 -- * 'subTopicARN' - The ARN of the topic you want to subscribe to.
 --
--- * 'subProtocol' - The protocol you want to use. Supported protocols include:     * @http@ -- delivery of JSON-encoded message via HTTP POST     * @https@ -- delivery of JSON-encoded message via HTTPS POST     * @email@ -- delivery of message via SMTP     * @email-json@ -- delivery of JSON-encoded message via SMTP     * @sms@ -- delivery of message via SMS     * @sqs@ -- delivery of JSON-encoded message to an Amazon SQS queue     * @application@ -- delivery of JSON-encoded message to an EndpointArn for a mobile app and device.     * @lambda@ -- delivery of JSON-encoded message to an AWS Lambda function.
+-- * 'subProtocol' - The protocol you want to use. Supported protocols include:     * @http@ – delivery of JSON-encoded message via HTTP POST     * @https@ – delivery of JSON-encoded message via HTTPS POST     * @email@ – delivery of message via SMTP     * @email-json@ – delivery of JSON-encoded message via SMTP     * @sms@ – delivery of message via SMS     * @sqs@ – delivery of JSON-encoded message to an Amazon SQS queue     * @application@ – delivery of JSON-encoded message to an EndpointArn for a mobile app and device.     * @lambda@ – delivery of JSON-encoded message to an AWS Lambda function.
 subscribe
     :: Text -- ^ 'subTopicARN'
     -> Text -- ^ 'subProtocol'
     -> Subscribe
 subscribe pTopicARN_ pProtocol_ =
   Subscribe'
-    { _subEndpoint = Nothing
+    { _subReturnSubscriptionARN = Nothing
+    , _subAttributes = Nothing
+    , _subEndpoint = Nothing
     , _subTopicARN = pTopicARN_
     , _subProtocol = pProtocol_
     }
 
+
+-- | Sets whether the response from the @Subscribe@ request includes the subscription ARN, even if the subscription is not yet confirmed. If you set this parameter to @false@ , the response includes the ARN for confirmed subscriptions, but it includes an ARN value of "pending subscription" for subscriptions that are not yet confirmed. A subscription becomes confirmed when the subscriber calls the @ConfirmSubscription@ action with a confirmation token. If you set this parameter to @true@ , the response includes the ARN in all cases, even if the subscription is not yet confirmed. The default value is @false@ .
+subReturnSubscriptionARN :: Lens' Subscribe (Maybe Bool)
+subReturnSubscriptionARN = lens _subReturnSubscriptionARN (\ s a -> s{_subReturnSubscriptionARN = a})
+
+-- | A map of attributes with their corresponding values. The following lists the names, descriptions, and values of the special request parameters that the @SetTopicAttributes@ action uses:     * @DeliveryPolicy@ – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.     * @FilterPolicy@ – The simple JSON object that lets your subscriber receive only a subset of messages, rather than receiving every message published to the topic.     * @RawMessageDelivery@ – When set to @true@ , enables raw message delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need for the endpoints to process JSON formatting, which is otherwise created for Amazon SNS metadata.
+subAttributes :: Lens' Subscribe (HashMap Text Text)
+subAttributes = lens _subAttributes (\ s a -> s{_subAttributes = a}) . _Default . _Map
 
 -- | The endpoint that you want to receive notifications. Endpoints vary by protocol:     * For the @http@ protocol, the endpoint is an URL beginning with "http://"     * For the @https@ protocol, the endpoint is a URL beginning with "https://"     * For the @email@ protocol, the endpoint is an email address     * For the @email-json@ protocol, the endpoint is an email address     * For the @sms@ protocol, the endpoint is a phone number of an SMS-enabled device     * For the @sqs@ protocol, the endpoint is the ARN of an Amazon SQS queue     * For the @application@ protocol, the endpoint is the EndpointArn of a mobile app and device.     * For the @lambda@ protocol, the endpoint is the ARN of an AWS Lambda function.
 subEndpoint :: Lens' Subscribe (Maybe Text)
@@ -87,7 +107,7 @@ subEndpoint = lens _subEndpoint (\ s a -> s{_subEndpoint = a})
 subTopicARN :: Lens' Subscribe Text
 subTopicARN = lens _subTopicARN (\ s a -> s{_subTopicARN = a})
 
--- | The protocol you want to use. Supported protocols include:     * @http@ -- delivery of JSON-encoded message via HTTP POST     * @https@ -- delivery of JSON-encoded message via HTTPS POST     * @email@ -- delivery of message via SMTP     * @email-json@ -- delivery of JSON-encoded message via SMTP     * @sms@ -- delivery of message via SMS     * @sqs@ -- delivery of JSON-encoded message to an Amazon SQS queue     * @application@ -- delivery of JSON-encoded message to an EndpointArn for a mobile app and device.     * @lambda@ -- delivery of JSON-encoded message to an AWS Lambda function.
+-- | The protocol you want to use. Supported protocols include:     * @http@ – delivery of JSON-encoded message via HTTP POST     * @https@ – delivery of JSON-encoded message via HTTPS POST     * @email@ – delivery of message via SMTP     * @email-json@ – delivery of JSON-encoded message via SMTP     * @sms@ – delivery of message via SMS     * @sqs@ – delivery of JSON-encoded message to an Amazon SQS queue     * @application@ – delivery of JSON-encoded message to an EndpointArn for a mobile app and device.     * @lambda@ – delivery of JSON-encoded message to an AWS Lambda function.
 subProtocol :: Lens' Subscribe Text
 subProtocol = lens _subProtocol (\ s a -> s{_subProtocol = a})
 
@@ -115,6 +135,11 @@ instance ToQuery Subscribe where
           = mconcat
               ["Action" =: ("Subscribe" :: ByteString),
                "Version" =: ("2010-03-31" :: ByteString),
+               "ReturnSubscriptionArn" =: _subReturnSubscriptionARN,
+               "Attributes" =:
+                 toQuery
+                   (toQueryMap "entry" "key" "value" <$>
+                      _subAttributes),
                "Endpoint" =: _subEndpoint,
                "TopicArn" =: _subTopicARN,
                "Protocol" =: _subProtocol]
@@ -134,7 +159,7 @@ data SubscribeResponse = SubscribeResponse'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'srsSubscriptionARN' - The ARN of the subscription, if the service was able to create a subscription immediately (without requiring endpoint owner confirmation).
+-- * 'srsSubscriptionARN' - The ARN of the subscription if it is confirmed, or the string "pending confirmation" if the subscription requires confirmation. However, if the API request parameter @ReturnSubscriptionArn@ is true, then the value is always the subscription ARN, even if the subscription requires confirmation.
 --
 -- * 'srsResponseStatus' - -- | The response status code.
 subscribeResponse
@@ -145,7 +170,7 @@ subscribeResponse pResponseStatus_ =
     {_srsSubscriptionARN = Nothing, _srsResponseStatus = pResponseStatus_}
 
 
--- | The ARN of the subscription, if the service was able to create a subscription immediately (without requiring endpoint owner confirmation).
+-- | The ARN of the subscription if it is confirmed, or the string "pending confirmation" if the subscription requires confirmation. However, if the API request parameter @ReturnSubscriptionArn@ is true, then the value is always the subscription ARN, even if the subscription requires confirmation.
 srsSubscriptionARN :: Lens' SubscribeResponse (Maybe Text)
 srsSubscriptionARN = lens _srsSubscriptionARN (\ s a -> s{_srsSubscriptionARN = a})
 

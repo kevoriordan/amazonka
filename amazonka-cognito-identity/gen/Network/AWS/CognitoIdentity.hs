@@ -94,7 +94,7 @@ module Network.AWS.CognitoIdentity
     -- ** GetIdentityPoolRoles
     , module Network.AWS.CognitoIdentity.GetIdentityPoolRoles
 
-    -- ** ListIdentityPools
+    -- ** ListIdentityPools (Paginated)
     , module Network.AWS.CognitoIdentity.ListIdentityPools
 
     -- ** GetCredentialsForIdentity

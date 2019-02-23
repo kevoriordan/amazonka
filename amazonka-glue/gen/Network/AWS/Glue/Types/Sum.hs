@@ -19,13 +19,75 @@ module Network.AWS.Glue.Types.Sum where
 
 import Network.AWS.Prelude
 
+data CatalogEncryptionMode
+  = CEMDisabled
+  | CEMSseKMS
+  deriving (Eq, Ord, Read, Show, Enum, Bounded, Data, Typeable, Generic)
+
+
+instance FromText CatalogEncryptionMode where
+    parser = takeLowerText >>= \case
+        "disabled" -> pure CEMDisabled
+        "sse-kms" -> pure CEMSseKMS
+        e -> fromTextError $ "Failure parsing CatalogEncryptionMode from value: '" <> e
+           <> "'. Accepted values: disabled, sse-kms"
+
+instance ToText CatalogEncryptionMode where
+    toText = \case
+        CEMDisabled -> "DISABLED"
+        CEMSseKMS -> "SSE-KMS"
+
+instance Hashable     CatalogEncryptionMode
+instance NFData       CatalogEncryptionMode
+instance ToByteString CatalogEncryptionMode
+instance ToQuery      CatalogEncryptionMode
+instance ToHeader     CatalogEncryptionMode
+
+instance ToJSON CatalogEncryptionMode where
+    toJSON = toJSONText
+
+instance FromJSON CatalogEncryptionMode where
+    parseJSON = parseJSONText "CatalogEncryptionMode"
+
+data CloudWatchEncryptionMode
+  = CWEMDisabled
+  | CWEMSseKMS
+  deriving (Eq, Ord, Read, Show, Enum, Bounded, Data, Typeable, Generic)
+
+
+instance FromText CloudWatchEncryptionMode where
+    parser = takeLowerText >>= \case
+        "disabled" -> pure CWEMDisabled
+        "sse-kms" -> pure CWEMSseKMS
+        e -> fromTextError $ "Failure parsing CloudWatchEncryptionMode from value: '" <> e
+           <> "'. Accepted values: disabled, sse-kms"
+
+instance ToText CloudWatchEncryptionMode where
+    toText = \case
+        CWEMDisabled -> "DISABLED"
+        CWEMSseKMS -> "SSE-KMS"
+
+instance Hashable     CloudWatchEncryptionMode
+instance NFData       CloudWatchEncryptionMode
+instance ToByteString CloudWatchEncryptionMode
+instance ToQuery      CloudWatchEncryptionMode
+instance ToHeader     CloudWatchEncryptionMode
+
+instance ToJSON CloudWatchEncryptionMode where
+    toJSON = toJSONText
+
+instance FromJSON CloudWatchEncryptionMode where
+    parseJSON = parseJSONText "CloudWatchEncryptionMode"
+
 data ConnectionPropertyKey
   = ConfigFiles
+  | EncryptedPassword
   | Host
   | InstanceId
   | JdbcConnectionURL
   | JdbcDriverClassName
   | JdbcDriverJARURI
+  | JdbcEnforceSSL
   | JdbcEngine
   | JdbcEngineVersion
   | Password
@@ -37,27 +99,31 @@ data ConnectionPropertyKey
 instance FromText ConnectionPropertyKey where
     parser = takeLowerText >>= \case
         "config_files" -> pure ConfigFiles
+        "encrypted_password" -> pure EncryptedPassword
         "host" -> pure Host
         "instance_id" -> pure InstanceId
         "jdbc_connection_url" -> pure JdbcConnectionURL
         "jdbc_driver_class_name" -> pure JdbcDriverClassName
         "jdbc_driver_jar_uri" -> pure JdbcDriverJARURI
+        "jdbc_enforce_ssl" -> pure JdbcEnforceSSL
         "jdbc_engine" -> pure JdbcEngine
         "jdbc_engine_version" -> pure JdbcEngineVersion
         "password" -> pure Password
         "port" -> pure Port
         "username" -> pure Username
         e -> fromTextError $ "Failure parsing ConnectionPropertyKey from value: '" <> e
-           <> "'. Accepted values: config_files, host, instance_id, jdbc_connection_url, jdbc_driver_class_name, jdbc_driver_jar_uri, jdbc_engine, jdbc_engine_version, password, port, username"
+           <> "'. Accepted values: config_files, encrypted_password, host, instance_id, jdbc_connection_url, jdbc_driver_class_name, jdbc_driver_jar_uri, jdbc_enforce_ssl, jdbc_engine, jdbc_engine_version, password, port, username"
 
 instance ToText ConnectionPropertyKey where
     toText = \case
         ConfigFiles -> "CONFIG_FILES"
+        EncryptedPassword -> "ENCRYPTED_PASSWORD"
         Host -> "HOST"
         InstanceId -> "INSTANCE_ID"
         JdbcConnectionURL -> "JDBC_CONNECTION_URL"
         JdbcDriverClassName -> "JDBC_DRIVER_CLASS_NAME"
         JdbcDriverJARURI -> "JDBC_DRIVER_JAR_URI"
+        JdbcEnforceSSL -> "JDBC_ENFORCE_SSL"
         JdbcEngine -> "JDBC_ENGINE"
         JdbcEngineVersion -> "JDBC_ENGINE_VERSION"
         Password -> "PASSWORD"
@@ -168,6 +234,66 @@ instance ToJSON DeleteBehavior where
 
 instance FromJSON DeleteBehavior where
     parseJSON = parseJSONText "DeleteBehavior"
+
+data ExistCondition
+  = MustExist
+  | None
+  | NotExist
+  deriving (Eq, Ord, Read, Show, Enum, Bounded, Data, Typeable, Generic)
+
+
+instance FromText ExistCondition where
+    parser = takeLowerText >>= \case
+        "must_exist" -> pure MustExist
+        "none" -> pure None
+        "not_exist" -> pure NotExist
+        e -> fromTextError $ "Failure parsing ExistCondition from value: '" <> e
+           <> "'. Accepted values: must_exist, none, not_exist"
+
+instance ToText ExistCondition where
+    toText = \case
+        MustExist -> "MUST_EXIST"
+        None -> "NONE"
+        NotExist -> "NOT_EXIST"
+
+instance Hashable     ExistCondition
+instance NFData       ExistCondition
+instance ToByteString ExistCondition
+instance ToQuery      ExistCondition
+instance ToHeader     ExistCondition
+
+instance ToJSON ExistCondition where
+    toJSON = toJSONText
+
+data JobBookmarksEncryptionMode
+  = JBEMCseKMS
+  | JBEMDisabled
+  deriving (Eq, Ord, Read, Show, Enum, Bounded, Data, Typeable, Generic)
+
+
+instance FromText JobBookmarksEncryptionMode where
+    parser = takeLowerText >>= \case
+        "cse-kms" -> pure JBEMCseKMS
+        "disabled" -> pure JBEMDisabled
+        e -> fromTextError $ "Failure parsing JobBookmarksEncryptionMode from value: '" <> e
+           <> "'. Accepted values: cse-kms, disabled"
+
+instance ToText JobBookmarksEncryptionMode where
+    toText = \case
+        JBEMCseKMS -> "CSE-KMS"
+        JBEMDisabled -> "DISABLED"
+
+instance Hashable     JobBookmarksEncryptionMode
+instance NFData       JobBookmarksEncryptionMode
+instance ToByteString JobBookmarksEncryptionMode
+instance ToQuery      JobBookmarksEncryptionMode
+instance ToHeader     JobBookmarksEncryptionMode
+
+instance ToJSON JobBookmarksEncryptionMode where
+    toJSON = toJSONText
+
+instance FromJSON JobBookmarksEncryptionMode where
+    parseJSON = parseJSONText "JobBookmarksEncryptionMode"
 
 data JobRunState
   = Failed
@@ -393,6 +519,39 @@ instance ToJSON ResourceType where
 
 instance FromJSON ResourceType where
     parseJSON = parseJSONText "ResourceType"
+
+data S3EncryptionMode
+  = Disabled
+  | SseKMS
+  | SseS3
+  deriving (Eq, Ord, Read, Show, Enum, Bounded, Data, Typeable, Generic)
+
+
+instance FromText S3EncryptionMode where
+    parser = takeLowerText >>= \case
+        "disabled" -> pure Disabled
+        "sse-kms" -> pure SseKMS
+        "sse-s3" -> pure SseS3
+        e -> fromTextError $ "Failure parsing S3EncryptionMode from value: '" <> e
+           <> "'. Accepted values: disabled, sse-kms, sse-s3"
+
+instance ToText S3EncryptionMode where
+    toText = \case
+        Disabled -> "DISABLED"
+        SseKMS -> "SSE-KMS"
+        SseS3 -> "SSE-S3"
+
+instance Hashable     S3EncryptionMode
+instance NFData       S3EncryptionMode
+instance ToByteString S3EncryptionMode
+instance ToQuery      S3EncryptionMode
+instance ToHeader     S3EncryptionMode
+
+instance ToJSON S3EncryptionMode where
+    toJSON = toJSONText
+
+instance FromJSON S3EncryptionMode where
+    parseJSON = parseJSONText "S3EncryptionMode"
 
 data ScheduleState
   = NotScheduled

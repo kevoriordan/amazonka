@@ -108,7 +108,7 @@ data Blueprint = Blueprint'
 --
 -- * 'bType' - The type of the blueprint (e.g., @os@ or @app@ ).
 --
--- * 'bIsActive' - A Boolean value indicating whether the blueprint is active. When you update your blueprints, you will inactivate old blueprints and keep the most recent versions active.
+-- * 'bIsActive' - A Boolean value indicating whether the blueprint is active. Inactive blueprints are listed to support customers with existing instances but are not necessarily available for launch of new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases.
 --
 -- * 'bDescription' - The description of the blueprint.
 blueprint
@@ -170,7 +170,7 @@ bBlueprintId = lens _bBlueprintId (\ s a -> s{_bBlueprintId = a})
 bType :: Lens' Blueprint (Maybe BlueprintType)
 bType = lens _bType (\ s a -> s{_bType = a})
 
--- | A Boolean value indicating whether the blueprint is active. When you update your blueprints, you will inactivate old blueprints and keep the most recent versions active.
+-- | A Boolean value indicating whether the blueprint is active. Inactive blueprints are listed to support customers with existing instances but are not necessarily available for launch of new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases.
 bIsActive :: Lens' Blueprint (Maybe Bool)
 bIsActive = lens _bIsActive (\ s a -> s{_bIsActive = a})
 
@@ -326,6 +326,205 @@ instance Hashable Bundle where
 
 instance NFData Bundle where
 
+-- | Describes a CloudFormation stack record created as a result of the @create cloud formation stack@ operation.
+--
+--
+-- A CloudFormation stack record provides information about the AWS CloudFormation stack used to create a new Amazon Elastic Compute Cloud instance from an exported Lightsail instance snapshot.
+--
+--
+-- /See:/ 'cloudFormationStackRecord' smart constructor.
+data CloudFormationStackRecord = CloudFormationStackRecord'
+  { _cfsrState           :: !(Maybe RecordState)
+  , _cfsrDestinationInfo :: !(Maybe DestinationInfo)
+  , _cfsrResourceType    :: !(Maybe ResourceType)
+  , _cfsrArn             :: !(Maybe Text)
+  , _cfsrCreatedAt       :: !(Maybe POSIX)
+  , _cfsrLocation        :: !(Maybe ResourceLocation)
+  , _cfsrName            :: !(Maybe Text)
+  , _cfsrSourceInfo      :: !(Maybe [CloudFormationStackRecordSourceInfo])
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CloudFormationStackRecord' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cfsrState' - The current state of the CloudFormation stack record.
+--
+-- * 'cfsrDestinationInfo' - A list of objects describing the destination service, which is AWS CloudFormation, and the Amazon Resource Name (ARN) of the AWS CloudFormation stack.
+--
+-- * 'cfsrResourceType' - The Lightsail resource type (e.g., @CloudFormationStackRecord@ ).
+--
+-- * 'cfsrArn' - The Amazon Resource Name (ARN) of the CloudFormation stack record.
+--
+-- * 'cfsrCreatedAt' - The date when the CloudFormation stack record was created.
+--
+-- * 'cfsrLocation' - A list of objects describing the Availability Zone and AWS Region of the CloudFormation stack record.
+--
+-- * 'cfsrName' - The name of the CloudFormation stack record. It starts with @CloudFormationStackRecord@ followed by a GUID.
+--
+-- * 'cfsrSourceInfo' - A list of objects describing the source of the CloudFormation stack record.
+cloudFormationStackRecord
+    :: CloudFormationStackRecord
+cloudFormationStackRecord =
+  CloudFormationStackRecord'
+    { _cfsrState = Nothing
+    , _cfsrDestinationInfo = Nothing
+    , _cfsrResourceType = Nothing
+    , _cfsrArn = Nothing
+    , _cfsrCreatedAt = Nothing
+    , _cfsrLocation = Nothing
+    , _cfsrName = Nothing
+    , _cfsrSourceInfo = Nothing
+    }
+
+
+-- | The current state of the CloudFormation stack record.
+cfsrState :: Lens' CloudFormationStackRecord (Maybe RecordState)
+cfsrState = lens _cfsrState (\ s a -> s{_cfsrState = a})
+
+-- | A list of objects describing the destination service, which is AWS CloudFormation, and the Amazon Resource Name (ARN) of the AWS CloudFormation stack.
+cfsrDestinationInfo :: Lens' CloudFormationStackRecord (Maybe DestinationInfo)
+cfsrDestinationInfo = lens _cfsrDestinationInfo (\ s a -> s{_cfsrDestinationInfo = a})
+
+-- | The Lightsail resource type (e.g., @CloudFormationStackRecord@ ).
+cfsrResourceType :: Lens' CloudFormationStackRecord (Maybe ResourceType)
+cfsrResourceType = lens _cfsrResourceType (\ s a -> s{_cfsrResourceType = a})
+
+-- | The Amazon Resource Name (ARN) of the CloudFormation stack record.
+cfsrArn :: Lens' CloudFormationStackRecord (Maybe Text)
+cfsrArn = lens _cfsrArn (\ s a -> s{_cfsrArn = a})
+
+-- | The date when the CloudFormation stack record was created.
+cfsrCreatedAt :: Lens' CloudFormationStackRecord (Maybe UTCTime)
+cfsrCreatedAt = lens _cfsrCreatedAt (\ s a -> s{_cfsrCreatedAt = a}) . mapping _Time
+
+-- | A list of objects describing the Availability Zone and AWS Region of the CloudFormation stack record.
+cfsrLocation :: Lens' CloudFormationStackRecord (Maybe ResourceLocation)
+cfsrLocation = lens _cfsrLocation (\ s a -> s{_cfsrLocation = a})
+
+-- | The name of the CloudFormation stack record. It starts with @CloudFormationStackRecord@ followed by a GUID.
+cfsrName :: Lens' CloudFormationStackRecord (Maybe Text)
+cfsrName = lens _cfsrName (\ s a -> s{_cfsrName = a})
+
+-- | A list of objects describing the source of the CloudFormation stack record.
+cfsrSourceInfo :: Lens' CloudFormationStackRecord [CloudFormationStackRecordSourceInfo]
+cfsrSourceInfo = lens _cfsrSourceInfo (\ s a -> s{_cfsrSourceInfo = a}) . _Default . _Coerce
+
+instance FromJSON CloudFormationStackRecord where
+        parseJSON
+          = withObject "CloudFormationStackRecord"
+              (\ x ->
+                 CloudFormationStackRecord' <$>
+                   (x .:? "state") <*> (x .:? "destinationInfo") <*>
+                     (x .:? "resourceType")
+                     <*> (x .:? "arn")
+                     <*> (x .:? "createdAt")
+                     <*> (x .:? "location")
+                     <*> (x .:? "name")
+                     <*> (x .:? "sourceInfo" .!= mempty))
+
+instance Hashable CloudFormationStackRecord where
+
+instance NFData CloudFormationStackRecord where
+
+-- | Describes the source of a CloudFormation stack record (i.e., the export snapshot record).
+--
+--
+--
+-- /See:/ 'cloudFormationStackRecordSourceInfo' smart constructor.
+data CloudFormationStackRecordSourceInfo = CloudFormationStackRecordSourceInfo'
+  { _cfsrsiResourceType :: !(Maybe CloudFormationStackRecordSourceType)
+  , _cfsrsiArn          :: !(Maybe Text)
+  , _cfsrsiName         :: !(Maybe Text)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'CloudFormationStackRecordSourceInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'cfsrsiResourceType' - The Lightsail resource type (e.g., @ExportSnapshotRecord@ ).
+--
+-- * 'cfsrsiArn' - The Amazon Resource Name (ARN) of the export snapshot record.
+--
+-- * 'cfsrsiName' - The name of the record.
+cloudFormationStackRecordSourceInfo
+    :: CloudFormationStackRecordSourceInfo
+cloudFormationStackRecordSourceInfo =
+  CloudFormationStackRecordSourceInfo'
+    {_cfsrsiResourceType = Nothing, _cfsrsiArn = Nothing, _cfsrsiName = Nothing}
+
+
+-- | The Lightsail resource type (e.g., @ExportSnapshotRecord@ ).
+cfsrsiResourceType :: Lens' CloudFormationStackRecordSourceInfo (Maybe CloudFormationStackRecordSourceType)
+cfsrsiResourceType = lens _cfsrsiResourceType (\ s a -> s{_cfsrsiResourceType = a})
+
+-- | The Amazon Resource Name (ARN) of the export snapshot record.
+cfsrsiArn :: Lens' CloudFormationStackRecordSourceInfo (Maybe Text)
+cfsrsiArn = lens _cfsrsiArn (\ s a -> s{_cfsrsiArn = a})
+
+-- | The name of the record.
+cfsrsiName :: Lens' CloudFormationStackRecordSourceInfo (Maybe Text)
+cfsrsiName = lens _cfsrsiName (\ s a -> s{_cfsrsiName = a})
+
+instance FromJSON CloudFormationStackRecordSourceInfo
+         where
+        parseJSON
+          = withObject "CloudFormationStackRecordSourceInfo"
+              (\ x ->
+                 CloudFormationStackRecordSourceInfo' <$>
+                   (x .:? "resourceType") <*> (x .:? "arn") <*>
+                     (x .:? "name"))
+
+instance Hashable CloudFormationStackRecordSourceInfo
+         where
+
+instance NFData CloudFormationStackRecordSourceInfo
+         where
+
+-- | Describes the destination of a record.
+--
+--
+--
+-- /See:/ 'destinationInfo' smart constructor.
+data DestinationInfo = DestinationInfo'
+  { _diService :: !(Maybe Text)
+  , _diId      :: !(Maybe Text)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DestinationInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'diService' - The destination service of the record.
+--
+-- * 'diId' - The ID of the resource created at the destination.
+destinationInfo
+    :: DestinationInfo
+destinationInfo = DestinationInfo' {_diService = Nothing, _diId = Nothing}
+
+
+-- | The destination service of the record.
+diService :: Lens' DestinationInfo (Maybe Text)
+diService = lens _diService (\ s a -> s{_diService = a})
+
+-- | The ID of the resource created at the destination.
+diId :: Lens' DestinationInfo (Maybe Text)
+diId = lens _diId (\ s a -> s{_diId = a})
+
+instance FromJSON DestinationInfo where
+        parseJSON
+          = withObject "DestinationInfo"
+              (\ x ->
+                 DestinationInfo' <$>
+                   (x .:? "service") <*> (x .:? "id"))
+
+instance Hashable DestinationInfo where
+
+instance NFData DestinationInfo where
+
 -- | Describes a system disk or an block storage disk.
 --
 --
@@ -347,6 +546,7 @@ data Disk = Disk'
   , _dIsSystemDisk    :: !(Maybe Bool)
   , _dAttachedTo      :: !(Maybe Text)
   , _dGbInUse         :: !(Maybe Int)
+  , _dTags            :: !(Maybe [Tag])
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -383,6 +583,8 @@ data Disk = Disk'
 -- * 'dAttachedTo' - The resources to which the disk is attached.
 --
 -- * 'dGbInUse' - (Deprecated) The number of GB in use by the disk.
+--
+-- * 'dTags' - The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags Lightsail Dev Guide> .
 disk
     :: Disk
 disk =
@@ -402,6 +604,7 @@ disk =
     , _dIsSystemDisk = Nothing
     , _dAttachedTo = Nothing
     , _dGbInUse = Nothing
+    , _dTags = Nothing
     }
 
 
@@ -465,6 +668,10 @@ dAttachedTo = lens _dAttachedTo (\ s a -> s{_dAttachedTo = a})
 dGbInUse :: Lens' Disk (Maybe Int)
 dGbInUse = lens _dGbInUse (\ s a -> s{_dGbInUse = a})
 
+-- | The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags Lightsail Dev Guide> .
+dTags :: Lens' Disk [Tag]
+dTags = lens _dTags (\ s a -> s{_dTags = a}) . _Default . _Coerce
+
 instance FromJSON Disk where
         parseJSON
           = withObject "Disk"
@@ -483,11 +690,76 @@ instance FromJSON Disk where
                      <*> (x .:? "supportCode")
                      <*> (x .:? "isSystemDisk")
                      <*> (x .:? "attachedTo")
-                     <*> (x .:? "gbInUse"))
+                     <*> (x .:? "gbInUse")
+                     <*> (x .:? "tags" .!= mempty))
 
 instance Hashable Disk where
 
 instance NFData Disk where
+
+-- | Describes a disk.
+--
+--
+--
+-- /See:/ 'diskInfo' smart constructor.
+data DiskInfo = DiskInfo'
+  { _diPath         :: !(Maybe Text)
+  , _diName         :: !(Maybe Text)
+  , _diSizeInGb     :: !(Maybe Int)
+  , _diIsSystemDisk :: !(Maybe Bool)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DiskInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'diPath' - The disk path.
+--
+-- * 'diName' - The disk name.
+--
+-- * 'diSizeInGb' - The size of the disk in GB (e.g., @32@ ).
+--
+-- * 'diIsSystemDisk' - A Boolean value indicating whether this disk is a system disk (has an operating system loaded on it).
+diskInfo
+    :: DiskInfo
+diskInfo =
+  DiskInfo'
+    { _diPath = Nothing
+    , _diName = Nothing
+    , _diSizeInGb = Nothing
+    , _diIsSystemDisk = Nothing
+    }
+
+
+-- | The disk path.
+diPath :: Lens' DiskInfo (Maybe Text)
+diPath = lens _diPath (\ s a -> s{_diPath = a})
+
+-- | The disk name.
+diName :: Lens' DiskInfo (Maybe Text)
+diName = lens _diName (\ s a -> s{_diName = a})
+
+-- | The size of the disk in GB (e.g., @32@ ).
+diSizeInGb :: Lens' DiskInfo (Maybe Int)
+diSizeInGb = lens _diSizeInGb (\ s a -> s{_diSizeInGb = a})
+
+-- | A Boolean value indicating whether this disk is a system disk (has an operating system loaded on it).
+diIsSystemDisk :: Lens' DiskInfo (Maybe Bool)
+diIsSystemDisk = lens _diIsSystemDisk (\ s a -> s{_diIsSystemDisk = a})
+
+instance FromJSON DiskInfo where
+        parseJSON
+          = withObject "DiskInfo"
+              (\ x ->
+                 DiskInfo' <$>
+                   (x .:? "path") <*> (x .:? "name") <*>
+                     (x .:? "sizeInGb")
+                     <*> (x .:? "isSystemDisk"))
+
+instance Hashable DiskInfo where
+
+instance NFData DiskInfo where
 
 -- | Describes a block storage disk mapping.
 --
@@ -537,17 +809,20 @@ instance ToJSON DiskMap where
 --
 -- /See:/ 'diskSnapshot' smart constructor.
 data DiskSnapshot = DiskSnapshot'
-  { _dsFromDiskName :: !(Maybe Text)
-  , _dsState        :: !(Maybe DiskSnapshotState)
-  , _dsResourceType :: !(Maybe ResourceType)
-  , _dsArn          :: !(Maybe Text)
-  , _dsCreatedAt    :: !(Maybe POSIX)
-  , _dsLocation     :: !(Maybe ResourceLocation)
-  , _dsProgress     :: !(Maybe Text)
-  , _dsName         :: !(Maybe Text)
-  , _dsSizeInGb     :: !(Maybe Int)
-  , _dsSupportCode  :: !(Maybe Text)
-  , _dsFromDiskARN  :: !(Maybe Text)
+  { _dsFromDiskName     :: !(Maybe Text)
+  , _dsState            :: !(Maybe DiskSnapshotState)
+  , _dsResourceType     :: !(Maybe ResourceType)
+  , _dsArn              :: !(Maybe Text)
+  , _dsCreatedAt        :: !(Maybe POSIX)
+  , _dsLocation         :: !(Maybe ResourceLocation)
+  , _dsProgress         :: !(Maybe Text)
+  , _dsName             :: !(Maybe Text)
+  , _dsSizeInGb         :: !(Maybe Int)
+  , _dsSupportCode      :: !(Maybe Text)
+  , _dsFromInstanceARN  :: !(Maybe Text)
+  , _dsFromInstanceName :: !(Maybe Text)
+  , _dsFromDiskARN      :: !(Maybe Text)
+  , _dsTags             :: !(Maybe [Tag])
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -555,7 +830,7 @@ data DiskSnapshot = DiskSnapshot'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dsFromDiskName' - The unique name of the source disk from which you are creating the disk snapshot.
+-- * 'dsFromDiskName' - The unique name of the source disk from which the disk snapshot was created.
 --
 -- * 'dsState' - The status of the disk snapshot operation.
 --
@@ -575,7 +850,13 @@ data DiskSnapshot = DiskSnapshot'
 --
 -- * 'dsSupportCode' - The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
 --
--- * 'dsFromDiskARN' - The Amazon Resource Name (ARN) of the source disk from which you are creating the disk snapshot.
+-- * 'dsFromInstanceARN' - The Amazon Resource Name (ARN) of the source instance from which the disk (system volume) snapshot was created.
+--
+-- * 'dsFromInstanceName' - The unique name of the source instance from which the disk (system volume) snapshot was created.
+--
+-- * 'dsFromDiskARN' - The Amazon Resource Name (ARN) of the source disk from which the disk snapshot was created.
+--
+-- * 'dsTags' - The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags Lightsail Dev Guide> .
 diskSnapshot
     :: DiskSnapshot
 diskSnapshot =
@@ -590,11 +871,14 @@ diskSnapshot =
     , _dsName = Nothing
     , _dsSizeInGb = Nothing
     , _dsSupportCode = Nothing
+    , _dsFromInstanceARN = Nothing
+    , _dsFromInstanceName = Nothing
     , _dsFromDiskARN = Nothing
+    , _dsTags = Nothing
     }
 
 
--- | The unique name of the source disk from which you are creating the disk snapshot.
+-- | The unique name of the source disk from which the disk snapshot was created.
 dsFromDiskName :: Lens' DiskSnapshot (Maybe Text)
 dsFromDiskName = lens _dsFromDiskName (\ s a -> s{_dsFromDiskName = a})
 
@@ -634,9 +918,21 @@ dsSizeInGb = lens _dsSizeInGb (\ s a -> s{_dsSizeInGb = a})
 dsSupportCode :: Lens' DiskSnapshot (Maybe Text)
 dsSupportCode = lens _dsSupportCode (\ s a -> s{_dsSupportCode = a})
 
--- | The Amazon Resource Name (ARN) of the source disk from which you are creating the disk snapshot.
+-- | The Amazon Resource Name (ARN) of the source instance from which the disk (system volume) snapshot was created.
+dsFromInstanceARN :: Lens' DiskSnapshot (Maybe Text)
+dsFromInstanceARN = lens _dsFromInstanceARN (\ s a -> s{_dsFromInstanceARN = a})
+
+-- | The unique name of the source instance from which the disk (system volume) snapshot was created.
+dsFromInstanceName :: Lens' DiskSnapshot (Maybe Text)
+dsFromInstanceName = lens _dsFromInstanceName (\ s a -> s{_dsFromInstanceName = a})
+
+-- | The Amazon Resource Name (ARN) of the source disk from which the disk snapshot was created.
 dsFromDiskARN :: Lens' DiskSnapshot (Maybe Text)
 dsFromDiskARN = lens _dsFromDiskARN (\ s a -> s{_dsFromDiskARN = a})
+
+-- | The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags Lightsail Dev Guide> .
+dsTags :: Lens' DiskSnapshot [Tag]
+dsTags = lens _dsTags (\ s a -> s{_dsTags = a}) . _Default . _Coerce
 
 instance FromJSON DiskSnapshot where
         parseJSON
@@ -652,11 +948,47 @@ instance FromJSON DiskSnapshot where
                      <*> (x .:? "name")
                      <*> (x .:? "sizeInGb")
                      <*> (x .:? "supportCode")
-                     <*> (x .:? "fromDiskArn"))
+                     <*> (x .:? "fromInstanceArn")
+                     <*> (x .:? "fromInstanceName")
+                     <*> (x .:? "fromDiskArn")
+                     <*> (x .:? "tags" .!= mempty))
 
 instance Hashable DiskSnapshot where
 
 instance NFData DiskSnapshot where
+
+-- | Describes a disk snapshot.
+--
+--
+--
+-- /See:/ 'diskSnapshotInfo' smart constructor.
+newtype DiskSnapshotInfo = DiskSnapshotInfo'
+  { _dsiSizeInGb :: Maybe Int
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DiskSnapshotInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dsiSizeInGb' - The size of the disk in GB (e.g., @32@ ).
+diskSnapshotInfo
+    :: DiskSnapshotInfo
+diskSnapshotInfo = DiskSnapshotInfo' {_dsiSizeInGb = Nothing}
+
+
+-- | The size of the disk in GB (e.g., @32@ ).
+dsiSizeInGb :: Lens' DiskSnapshotInfo (Maybe Int)
+dsiSizeInGb = lens _dsiSizeInGb (\ s a -> s{_dsiSizeInGb = a})
+
+instance FromJSON DiskSnapshotInfo where
+        parseJSON
+          = withObject "DiskSnapshotInfo"
+              (\ x -> DiskSnapshotInfo' <$> (x .:? "sizeInGb"))
+
+instance Hashable DiskSnapshotInfo where
+
+instance NFData DiskSnapshotInfo where
 
 -- | Describes a domain where you are storing recordsets in Lightsail.
 --
@@ -671,6 +1003,7 @@ data Domain = Domain'
   , _domLocation      :: !(Maybe ResourceLocation)
   , _domName          :: !(Maybe Text)
   , _domSupportCode   :: !(Maybe Text)
+  , _domTags          :: !(Maybe [Tag])
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -691,6 +1024,8 @@ data Domain = Domain'
 -- * 'domName' - The name of the domain.
 --
 -- * 'domSupportCode' - The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+--
+-- * 'domTags' - The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags Lightsail Dev Guide> .
 domain
     :: Domain
 domain =
@@ -702,6 +1037,7 @@ domain =
     , _domLocation = Nothing
     , _domName = Nothing
     , _domSupportCode = Nothing
+    , _domTags = Nothing
     }
 
 
@@ -733,6 +1069,10 @@ domName = lens _domName (\ s a -> s{_domName = a})
 domSupportCode :: Lens' Domain (Maybe Text)
 domSupportCode = lens _domSupportCode (\ s a -> s{_domSupportCode = a})
 
+-- | The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags Lightsail Dev Guide> .
+domTags :: Lens' Domain [Tag]
+domTags = lens _domTags (\ s a -> s{_domTags = a}) . _Default . _Coerce
+
 instance FromJSON Domain where
         parseJSON
           = withObject "Domain"
@@ -744,7 +1084,8 @@ instance FromJSON Domain where
                      <*> (x .:? "createdAt")
                      <*> (x .:? "location")
                      <*> (x .:? "name")
-                     <*> (x .:? "supportCode"))
+                     <*> (x .:? "supportCode")
+                     <*> (x .:? "tags" .!= mempty))
 
 instance Hashable Domain where
 
@@ -841,6 +1182,208 @@ instance ToJSON DomainEntry where
                   ("type" .=) <$> _deType,
                   ("target" .=) <$> _deTarget])
 
+-- | Describes an export snapshot record.
+--
+--
+--
+-- /See:/ 'exportSnapshotRecord' smart constructor.
+data ExportSnapshotRecord = ExportSnapshotRecord'
+  { _esrState           :: !(Maybe RecordState)
+  , _esrDestinationInfo :: !(Maybe DestinationInfo)
+  , _esrResourceType    :: !(Maybe ResourceType)
+  , _esrArn             :: !(Maybe Text)
+  , _esrCreatedAt       :: !(Maybe POSIX)
+  , _esrLocation        :: !(Maybe ResourceLocation)
+  , _esrName            :: !(Maybe Text)
+  , _esrSourceInfo      :: !(Maybe ExportSnapshotRecordSourceInfo)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ExportSnapshotRecord' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'esrState' - The state of the export snapshot record.
+--
+-- * 'esrDestinationInfo' - A list of objects describing the destination of the export snapshot record.
+--
+-- * 'esrResourceType' - The Lightsail resource type (e.g., @ExportSnapshotRecord@ ).
+--
+-- * 'esrArn' - The Amazon Resource Name (ARN) of the export snapshot record.
+--
+-- * 'esrCreatedAt' - The date when the export snapshot record was created.
+--
+-- * 'esrLocation' - The AWS Region and Availability Zone where the export snapshot record is located.
+--
+-- * 'esrName' - The export snapshot record name.
+--
+-- * 'esrSourceInfo' - A list of objects describing the source of the export snapshot record.
+exportSnapshotRecord
+    :: ExportSnapshotRecord
+exportSnapshotRecord =
+  ExportSnapshotRecord'
+    { _esrState = Nothing
+    , _esrDestinationInfo = Nothing
+    , _esrResourceType = Nothing
+    , _esrArn = Nothing
+    , _esrCreatedAt = Nothing
+    , _esrLocation = Nothing
+    , _esrName = Nothing
+    , _esrSourceInfo = Nothing
+    }
+
+
+-- | The state of the export snapshot record.
+esrState :: Lens' ExportSnapshotRecord (Maybe RecordState)
+esrState = lens _esrState (\ s a -> s{_esrState = a})
+
+-- | A list of objects describing the destination of the export snapshot record.
+esrDestinationInfo :: Lens' ExportSnapshotRecord (Maybe DestinationInfo)
+esrDestinationInfo = lens _esrDestinationInfo (\ s a -> s{_esrDestinationInfo = a})
+
+-- | The Lightsail resource type (e.g., @ExportSnapshotRecord@ ).
+esrResourceType :: Lens' ExportSnapshotRecord (Maybe ResourceType)
+esrResourceType = lens _esrResourceType (\ s a -> s{_esrResourceType = a})
+
+-- | The Amazon Resource Name (ARN) of the export snapshot record.
+esrArn :: Lens' ExportSnapshotRecord (Maybe Text)
+esrArn = lens _esrArn (\ s a -> s{_esrArn = a})
+
+-- | The date when the export snapshot record was created.
+esrCreatedAt :: Lens' ExportSnapshotRecord (Maybe UTCTime)
+esrCreatedAt = lens _esrCreatedAt (\ s a -> s{_esrCreatedAt = a}) . mapping _Time
+
+-- | The AWS Region and Availability Zone where the export snapshot record is located.
+esrLocation :: Lens' ExportSnapshotRecord (Maybe ResourceLocation)
+esrLocation = lens _esrLocation (\ s a -> s{_esrLocation = a})
+
+-- | The export snapshot record name.
+esrName :: Lens' ExportSnapshotRecord (Maybe Text)
+esrName = lens _esrName (\ s a -> s{_esrName = a})
+
+-- | A list of objects describing the source of the export snapshot record.
+esrSourceInfo :: Lens' ExportSnapshotRecord (Maybe ExportSnapshotRecordSourceInfo)
+esrSourceInfo = lens _esrSourceInfo (\ s a -> s{_esrSourceInfo = a})
+
+instance FromJSON ExportSnapshotRecord where
+        parseJSON
+          = withObject "ExportSnapshotRecord"
+              (\ x ->
+                 ExportSnapshotRecord' <$>
+                   (x .:? "state") <*> (x .:? "destinationInfo") <*>
+                     (x .:? "resourceType")
+                     <*> (x .:? "arn")
+                     <*> (x .:? "createdAt")
+                     <*> (x .:? "location")
+                     <*> (x .:? "name")
+                     <*> (x .:? "sourceInfo"))
+
+instance Hashable ExportSnapshotRecord where
+
+instance NFData ExportSnapshotRecord where
+
+-- | Describes the source of an export snapshot record.
+--
+--
+--
+-- /See:/ 'exportSnapshotRecordSourceInfo' smart constructor.
+data ExportSnapshotRecordSourceInfo = ExportSnapshotRecordSourceInfo'
+  { _esrsiDiskSnapshotInfo     :: !(Maybe DiskSnapshotInfo)
+  , _esrsiResourceType         :: !(Maybe ExportSnapshotRecordSourceType)
+  , _esrsiArn                  :: !(Maybe Text)
+  , _esrsiCreatedAt            :: !(Maybe POSIX)
+  , _esrsiFromResourceARN      :: !(Maybe Text)
+  , _esrsiName                 :: !(Maybe Text)
+  , _esrsiInstanceSnapshotInfo :: !(Maybe InstanceSnapshotInfo)
+  , _esrsiFromResourceName     :: !(Maybe Text)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'ExportSnapshotRecordSourceInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'esrsiDiskSnapshotInfo' - A list of objects describing a disk snapshot.
+--
+-- * 'esrsiResourceType' - The Lightsail resource type (e.g., @InstanceSnapshot@ or @DiskSnapshot@ ).
+--
+-- * 'esrsiArn' - The Amazon Resource Name (ARN) of the source instance or disk snapshot.
+--
+-- * 'esrsiCreatedAt' - The date when the source instance or disk snapshot was created.
+--
+-- * 'esrsiFromResourceARN' - The Amazon Resource Name (ARN) of the snapshot's source instance or disk.
+--
+-- * 'esrsiName' - The name of the source instance or disk snapshot.
+--
+-- * 'esrsiInstanceSnapshotInfo' - A list of objects describing an instance snapshot.
+--
+-- * 'esrsiFromResourceName' - The name of the snapshot's source instance or disk.
+exportSnapshotRecordSourceInfo
+    :: ExportSnapshotRecordSourceInfo
+exportSnapshotRecordSourceInfo =
+  ExportSnapshotRecordSourceInfo'
+    { _esrsiDiskSnapshotInfo = Nothing
+    , _esrsiResourceType = Nothing
+    , _esrsiArn = Nothing
+    , _esrsiCreatedAt = Nothing
+    , _esrsiFromResourceARN = Nothing
+    , _esrsiName = Nothing
+    , _esrsiInstanceSnapshotInfo = Nothing
+    , _esrsiFromResourceName = Nothing
+    }
+
+
+-- | A list of objects describing a disk snapshot.
+esrsiDiskSnapshotInfo :: Lens' ExportSnapshotRecordSourceInfo (Maybe DiskSnapshotInfo)
+esrsiDiskSnapshotInfo = lens _esrsiDiskSnapshotInfo (\ s a -> s{_esrsiDiskSnapshotInfo = a})
+
+-- | The Lightsail resource type (e.g., @InstanceSnapshot@ or @DiskSnapshot@ ).
+esrsiResourceType :: Lens' ExportSnapshotRecordSourceInfo (Maybe ExportSnapshotRecordSourceType)
+esrsiResourceType = lens _esrsiResourceType (\ s a -> s{_esrsiResourceType = a})
+
+-- | The Amazon Resource Name (ARN) of the source instance or disk snapshot.
+esrsiArn :: Lens' ExportSnapshotRecordSourceInfo (Maybe Text)
+esrsiArn = lens _esrsiArn (\ s a -> s{_esrsiArn = a})
+
+-- | The date when the source instance or disk snapshot was created.
+esrsiCreatedAt :: Lens' ExportSnapshotRecordSourceInfo (Maybe UTCTime)
+esrsiCreatedAt = lens _esrsiCreatedAt (\ s a -> s{_esrsiCreatedAt = a}) . mapping _Time
+
+-- | The Amazon Resource Name (ARN) of the snapshot's source instance or disk.
+esrsiFromResourceARN :: Lens' ExportSnapshotRecordSourceInfo (Maybe Text)
+esrsiFromResourceARN = lens _esrsiFromResourceARN (\ s a -> s{_esrsiFromResourceARN = a})
+
+-- | The name of the source instance or disk snapshot.
+esrsiName :: Lens' ExportSnapshotRecordSourceInfo (Maybe Text)
+esrsiName = lens _esrsiName (\ s a -> s{_esrsiName = a})
+
+-- | A list of objects describing an instance snapshot.
+esrsiInstanceSnapshotInfo :: Lens' ExportSnapshotRecordSourceInfo (Maybe InstanceSnapshotInfo)
+esrsiInstanceSnapshotInfo = lens _esrsiInstanceSnapshotInfo (\ s a -> s{_esrsiInstanceSnapshotInfo = a})
+
+-- | The name of the snapshot's source instance or disk.
+esrsiFromResourceName :: Lens' ExportSnapshotRecordSourceInfo (Maybe Text)
+esrsiFromResourceName = lens _esrsiFromResourceName (\ s a -> s{_esrsiFromResourceName = a})
+
+instance FromJSON ExportSnapshotRecordSourceInfo
+         where
+        parseJSON
+          = withObject "ExportSnapshotRecordSourceInfo"
+              (\ x ->
+                 ExportSnapshotRecordSourceInfo' <$>
+                   (x .:? "diskSnapshotInfo") <*> (x .:? "resourceType")
+                     <*> (x .:? "arn")
+                     <*> (x .:? "createdAt")
+                     <*> (x .:? "fromResourceArn")
+                     <*> (x .:? "name")
+                     <*> (x .:? "instanceSnapshotInfo")
+                     <*> (x .:? "fromResourceName"))
+
+instance Hashable ExportSnapshotRecordSourceInfo
+         where
+
+instance NFData ExportSnapshotRecordSourceInfo where
+
 -- | Describes an instance (a virtual private server).
 --
 --
@@ -865,6 +1408,7 @@ data Instance = Instance'
   , _iIsStaticIP       :: !(Maybe Bool)
   , _iPublicIPAddress  :: !(Maybe Text)
   , _iHardware         :: !(Maybe InstanceHardware)
+  , _iTags             :: !(Maybe [Tag])
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -882,7 +1426,7 @@ data Instance = Instance'
 --
 -- * 'iCreatedAt' - The timestamp when the instance was created (e.g., @1479734909.17@ ).
 --
--- * 'iLocation' - The region name and availability zone where the instance is located.
+-- * 'iLocation' - The region name and Availability Zone where the instance is located.
 --
 -- * 'iSshKeyName' - The name of the SSH key being used to connect to the instance (e.g., @LightsailDefaultKeyPair@ ).
 --
@@ -907,6 +1451,8 @@ data Instance = Instance'
 -- * 'iPublicIPAddress' - The public IP address of the instance.
 --
 -- * 'iHardware' - The size of the vCPU and the amount of RAM for the instance.
+--
+-- * 'iTags' - The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags Lightsail Dev Guide> .
 instance'
     :: Instance
 instance' =
@@ -929,6 +1475,7 @@ instance' =
     , _iIsStaticIP = Nothing
     , _iPublicIPAddress = Nothing
     , _iHardware = Nothing
+    , _iTags = Nothing
     }
 
 
@@ -952,7 +1499,7 @@ iArn = lens _iArn (\ s a -> s{_iArn = a})
 iCreatedAt :: Lens' Instance (Maybe UTCTime)
 iCreatedAt = lens _iCreatedAt (\ s a -> s{_iCreatedAt = a}) . mapping _Time
 
--- | The region name and availability zone where the instance is located.
+-- | The region name and Availability Zone where the instance is located.
 iLocation :: Lens' Instance (Maybe ResourceLocation)
 iLocation = lens _iLocation (\ s a -> s{_iLocation = a})
 
@@ -1004,6 +1551,10 @@ iPublicIPAddress = lens _iPublicIPAddress (\ s a -> s{_iPublicIPAddress = a})
 iHardware :: Lens' Instance (Maybe InstanceHardware)
 iHardware = lens _iHardware (\ s a -> s{_iHardware = a})
 
+-- | The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags Lightsail Dev Guide> .
+iTags :: Lens' Instance [Tag]
+iTags = lens _iTags (\ s a -> s{_iTags = a}) . _Default . _Coerce
+
 instance FromJSON Instance where
         parseJSON
           = withObject "Instance"
@@ -1025,7 +1576,8 @@ instance FromJSON Instance where
                      <*> (x .:? "blueprintName")
                      <*> (x .:? "isStaticIp")
                      <*> (x .:? "publicIpAddress")
-                     <*> (x .:? "hardware"))
+                     <*> (x .:? "hardware")
+                     <*> (x .:? "tags" .!= mempty))
 
 instance Hashable Instance where
 
@@ -1139,6 +1691,83 @@ instance FromJSON InstanceAccessDetails where
 instance Hashable InstanceAccessDetails where
 
 instance NFData InstanceAccessDetails where
+
+-- | Describes the Amazon Elastic Compute Cloud instance and related resources to be created using the @create cloud formation stack@ operation.
+--
+--
+--
+-- /See:/ 'instanceEntry' smart constructor.
+data InstanceEntry = InstanceEntry'
+  { _ieUserData         :: !(Maybe Text)
+  , _ieSourceName       :: !Text
+  , _ieInstanceType     :: !Text
+  , _iePortInfoSource   :: !PortInfoSourceType
+  , _ieAvailabilityZone :: !Text
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'InstanceEntry' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ieUserData' - A launch script you can create that configures a server with additional user data. For example, you might want to run @apt-get -y update@ .
+--
+-- * 'ieSourceName' - The name of the export snapshot record, which contains the exported Lightsail instance snapshot that will be used as the source of the new Amazon EC2 instance. Use the @get export snapshot records@ operation to get a list of export snapshot records that you can use to create a CloudFormation stack.
+--
+-- * 'ieInstanceType' - The instance type (e.g., @t2.micro@ ) to use for the new Amazon EC2 instance.
+--
+-- * 'iePortInfoSource' - The port configuration to use for the new Amazon EC2 instance. The following configuration options are available:     * DEFAULT — Use the default firewall settings from the image.     * INSTANCE — Use the firewall settings from the source Lightsail instance.     * NONE — Default to Amazon EC2.     * CLOSED — All ports closed.
+--
+-- * 'ieAvailabilityZone' - The Availability Zone for the new Amazon EC2 instance.
+instanceEntry
+    :: Text -- ^ 'ieSourceName'
+    -> Text -- ^ 'ieInstanceType'
+    -> PortInfoSourceType -- ^ 'iePortInfoSource'
+    -> Text -- ^ 'ieAvailabilityZone'
+    -> InstanceEntry
+instanceEntry pSourceName_ pInstanceType_ pPortInfoSource_ pAvailabilityZone_ =
+  InstanceEntry'
+    { _ieUserData = Nothing
+    , _ieSourceName = pSourceName_
+    , _ieInstanceType = pInstanceType_
+    , _iePortInfoSource = pPortInfoSource_
+    , _ieAvailabilityZone = pAvailabilityZone_
+    }
+
+
+-- | A launch script you can create that configures a server with additional user data. For example, you might want to run @apt-get -y update@ .
+ieUserData :: Lens' InstanceEntry (Maybe Text)
+ieUserData = lens _ieUserData (\ s a -> s{_ieUserData = a})
+
+-- | The name of the export snapshot record, which contains the exported Lightsail instance snapshot that will be used as the source of the new Amazon EC2 instance. Use the @get export snapshot records@ operation to get a list of export snapshot records that you can use to create a CloudFormation stack.
+ieSourceName :: Lens' InstanceEntry Text
+ieSourceName = lens _ieSourceName (\ s a -> s{_ieSourceName = a})
+
+-- | The instance type (e.g., @t2.micro@ ) to use for the new Amazon EC2 instance.
+ieInstanceType :: Lens' InstanceEntry Text
+ieInstanceType = lens _ieInstanceType (\ s a -> s{_ieInstanceType = a})
+
+-- | The port configuration to use for the new Amazon EC2 instance. The following configuration options are available:     * DEFAULT — Use the default firewall settings from the image.     * INSTANCE — Use the firewall settings from the source Lightsail instance.     * NONE — Default to Amazon EC2.     * CLOSED — All ports closed.
+iePortInfoSource :: Lens' InstanceEntry PortInfoSourceType
+iePortInfoSource = lens _iePortInfoSource (\ s a -> s{_iePortInfoSource = a})
+
+-- | The Availability Zone for the new Amazon EC2 instance.
+ieAvailabilityZone :: Lens' InstanceEntry Text
+ieAvailabilityZone = lens _ieAvailabilityZone (\ s a -> s{_ieAvailabilityZone = a})
+
+instance Hashable InstanceEntry where
+
+instance NFData InstanceEntry where
+
+instance ToJSON InstanceEntry where
+        toJSON InstanceEntry'{..}
+          = object
+              (catMaybes
+                 [("userData" .=) <$> _ieUserData,
+                  Just ("sourceName" .= _ieSourceName),
+                  Just ("instanceType" .= _ieInstanceType),
+                  Just ("portInfoSource" .= _iePortInfoSource),
+                  Just ("availabilityZone" .= _ieAvailabilityZone)])
 
 -- | Describes the hardware for the instance.
 --
@@ -1466,6 +2095,7 @@ data InstanceSnapshot = InstanceSnapshot'
   , _insSupportCode       :: !(Maybe Text)
   , _insFromInstanceARN   :: !(Maybe Text)
   , _insFromInstanceName  :: !(Maybe Text)
+  , _insTags              :: !(Maybe [Tag])
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -1485,7 +2115,7 @@ data InstanceSnapshot = InstanceSnapshot'
 --
 -- * 'insCreatedAt' - The timestamp when the snapshot was created (e.g., @1479907467.024@ ).
 --
--- * 'insLocation' - The region name and availability zone where you created the snapshot.
+-- * 'insLocation' - The region name and Availability Zone where you created the snapshot.
 --
 -- * 'insProgress' - The progress of the snapshot.
 --
@@ -1500,6 +2130,8 @@ data InstanceSnapshot = InstanceSnapshot'
 -- * 'insFromInstanceARN' - The Amazon Resource Name (ARN) of the instance from which the snapshot was created (e.g., @arn:aws:lightsail:us-east-2:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE@ ).
 --
 -- * 'insFromInstanceName' - The instance from which the snapshot was created.
+--
+-- * 'insTags' - The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags Lightsail Dev Guide> .
 instanceSnapshot
     :: InstanceSnapshot
 instanceSnapshot =
@@ -1518,6 +2150,7 @@ instanceSnapshot =
     , _insSupportCode = Nothing
     , _insFromInstanceARN = Nothing
     , _insFromInstanceName = Nothing
+    , _insTags = Nothing
     }
 
 
@@ -1545,7 +2178,7 @@ insArn = lens _insArn (\ s a -> s{_insArn = a})
 insCreatedAt :: Lens' InstanceSnapshot (Maybe UTCTime)
 insCreatedAt = lens _insCreatedAt (\ s a -> s{_insCreatedAt = a}) . mapping _Time
 
--- | The region name and availability zone where you created the snapshot.
+-- | The region name and Availability Zone where you created the snapshot.
 insLocation :: Lens' InstanceSnapshot (Maybe ResourceLocation)
 insLocation = lens _insLocation (\ s a -> s{_insLocation = a})
 
@@ -1577,6 +2210,10 @@ insFromInstanceARN = lens _insFromInstanceARN (\ s a -> s{_insFromInstanceARN = 
 insFromInstanceName :: Lens' InstanceSnapshot (Maybe Text)
 insFromInstanceName = lens _insFromInstanceName (\ s a -> s{_insFromInstanceName = a})
 
+-- | The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags Lightsail Dev Guide> .
+insTags :: Lens' InstanceSnapshot [Tag]
+insTags = lens _insTags (\ s a -> s{_insTags = a}) . _Default . _Coerce
+
 instance FromJSON InstanceSnapshot where
         parseJSON
           = withObject "InstanceSnapshot"
@@ -1594,11 +2231,67 @@ instance FromJSON InstanceSnapshot where
                      <*> (x .:? "sizeInGb")
                      <*> (x .:? "supportCode")
                      <*> (x .:? "fromInstanceArn")
-                     <*> (x .:? "fromInstanceName"))
+                     <*> (x .:? "fromInstanceName")
+                     <*> (x .:? "tags" .!= mempty))
 
 instance Hashable InstanceSnapshot where
 
 instance NFData InstanceSnapshot where
+
+-- | Describes an instance snapshot.
+--
+--
+--
+-- /See:/ 'instanceSnapshotInfo' smart constructor.
+data InstanceSnapshotInfo = InstanceSnapshotInfo'
+  { _isiFromBlueprintId :: !(Maybe Text)
+  , _isiFromBundleId    :: !(Maybe Text)
+  , _isiFromDiskInfo    :: !(Maybe [DiskInfo])
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'InstanceSnapshotInfo' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'isiFromBlueprintId' - The blueprint ID from which the source instance (e.g., @os_debian_8_3@ ).
+--
+-- * 'isiFromBundleId' - The bundle ID from which the source instance was created (e.g., @micro_1_0@ ).
+--
+-- * 'isiFromDiskInfo' - A list of objects describing the disks that were attached to the source instance.
+instanceSnapshotInfo
+    :: InstanceSnapshotInfo
+instanceSnapshotInfo =
+  InstanceSnapshotInfo'
+    { _isiFromBlueprintId = Nothing
+    , _isiFromBundleId = Nothing
+    , _isiFromDiskInfo = Nothing
+    }
+
+
+-- | The blueprint ID from which the source instance (e.g., @os_debian_8_3@ ).
+isiFromBlueprintId :: Lens' InstanceSnapshotInfo (Maybe Text)
+isiFromBlueprintId = lens _isiFromBlueprintId (\ s a -> s{_isiFromBlueprintId = a})
+
+-- | The bundle ID from which the source instance was created (e.g., @micro_1_0@ ).
+isiFromBundleId :: Lens' InstanceSnapshotInfo (Maybe Text)
+isiFromBundleId = lens _isiFromBundleId (\ s a -> s{_isiFromBundleId = a})
+
+-- | A list of objects describing the disks that were attached to the source instance.
+isiFromDiskInfo :: Lens' InstanceSnapshotInfo [DiskInfo]
+isiFromDiskInfo = lens _isiFromDiskInfo (\ s a -> s{_isiFromDiskInfo = a}) . _Default . _Coerce
+
+instance FromJSON InstanceSnapshotInfo where
+        parseJSON
+          = withObject "InstanceSnapshotInfo"
+              (\ x ->
+                 InstanceSnapshotInfo' <$>
+                   (x .:? "fromBlueprintId") <*> (x .:? "fromBundleId")
+                     <*> (x .:? "fromDiskInfo" .!= mempty))
+
+instance Hashable InstanceSnapshotInfo where
+
+instance NFData InstanceSnapshotInfo where
 
 -- | Describes the virtual private server (or /instance/ ) status.
 --
@@ -1654,6 +2347,7 @@ data KeyPair = KeyPair'
   , _kpFingerprint  :: !(Maybe Text)
   , _kpName         :: !(Maybe Text)
   , _kpSupportCode  :: !(Maybe Text)
+  , _kpTags         :: !(Maybe [Tag])
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -1674,6 +2368,8 @@ data KeyPair = KeyPair'
 -- * 'kpName' - The friendly name of the SSH key pair.
 --
 -- * 'kpSupportCode' - The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+--
+-- * 'kpTags' - The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags Lightsail Dev Guide> .
 keyPair
     :: KeyPair
 keyPair =
@@ -1685,6 +2381,7 @@ keyPair =
     , _kpFingerprint = Nothing
     , _kpName = Nothing
     , _kpSupportCode = Nothing
+    , _kpTags = Nothing
     }
 
 
@@ -1716,6 +2413,10 @@ kpName = lens _kpName (\ s a -> s{_kpName = a})
 kpSupportCode :: Lens' KeyPair (Maybe Text)
 kpSupportCode = lens _kpSupportCode (\ s a -> s{_kpSupportCode = a})
 
+-- | The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags Lightsail Dev Guide> .
+kpTags :: Lens' KeyPair [Tag]
+kpTags = lens _kpTags (\ s a -> s{_kpTags = a}) . _Default . _Coerce
+
 instance FromJSON KeyPair where
         parseJSON
           = withObject "KeyPair"
@@ -1726,7 +2427,8 @@ instance FromJSON KeyPair where
                      <*> (x .:? "location")
                      <*> (x .:? "fingerprint")
                      <*> (x .:? "name")
-                     <*> (x .:? "supportCode"))
+                     <*> (x .:? "supportCode")
+                     <*> (x .:? "tags" .!= mempty))
 
 instance Hashable KeyPair where
 
@@ -1753,6 +2455,7 @@ data LoadBalancer = LoadBalancer'
   , _lbPublicPorts             :: !(Maybe [Nat])
   , _lbDnsName                 :: !(Maybe Text)
   , _lbInstanceHealthSummary   :: !(Maybe [InstanceHealthSummary])
+  , _lbTags                    :: !(Maybe [Tag])
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -1789,6 +2492,8 @@ data LoadBalancer = LoadBalancer'
 -- * 'lbDnsName' - The DNS name of your Lightsail load balancer.
 --
 -- * 'lbInstanceHealthSummary' - An array of InstanceHealthSummary objects describing the health of the load balancer.
+--
+-- * 'lbTags' - The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags Lightsail Dev Guide> .
 loadBalancer
     :: LoadBalancer
 loadBalancer =
@@ -1808,6 +2513,7 @@ loadBalancer =
     , _lbPublicPorts = Nothing
     , _lbDnsName = Nothing
     , _lbInstanceHealthSummary = Nothing
+    , _lbTags = Nothing
     }
 
 
@@ -1871,6 +2577,10 @@ lbDnsName = lens _lbDnsName (\ s a -> s{_lbDnsName = a})
 lbInstanceHealthSummary :: Lens' LoadBalancer [InstanceHealthSummary]
 lbInstanceHealthSummary = lens _lbInstanceHealthSummary (\ s a -> s{_lbInstanceHealthSummary = a}) . _Default . _Coerce
 
+-- | The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags Lightsail Dev Guide> .
+lbTags :: Lens' LoadBalancer [Tag]
+lbTags = lens _lbTags (\ s a -> s{_lbTags = a}) . _Default . _Coerce
+
 instance FromJSON LoadBalancer where
         parseJSON
           = withObject "LoadBalancer"
@@ -1889,7 +2599,8 @@ instance FromJSON LoadBalancer where
                      <*> (x .:? "supportCode")
                      <*> (x .:? "publicPorts" .!= mempty)
                      <*> (x .:? "dnsName")
-                     <*> (x .:? "instanceHealthSummary" .!= mempty))
+                     <*> (x .:? "instanceHealthSummary" .!= mempty)
+                     <*> (x .:? "tags" .!= mempty))
 
 instance Hashable LoadBalancer where
 
@@ -1926,6 +2637,7 @@ data LoadBalancerTLSCertificate = LoadBalancerTLSCertificate'
   , _lbtcKeyAlgorithm :: !(Maybe Text)
   , _lbtcSignatureAlgorithm :: !(Maybe Text)
   , _lbtcIssuer :: !(Maybe Text)
+  , _lbtcTags :: !(Maybe [Tag])
   , _lbtcNotAfter :: !(Maybe POSIX)
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
@@ -1980,6 +2692,8 @@ data LoadBalancerTLSCertificate = LoadBalancerTLSCertificate'
 --
 -- * 'lbtcIssuer' - The issuer of the certificate.
 --
+-- * 'lbtcTags' - The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags Lightsail Dev Guide> .
+--
 -- * 'lbtcNotAfter' - The timestamp when the SSL/TLS certificate expires.
 loadBalancerTLSCertificate
     :: LoadBalancerTLSCertificate
@@ -2008,6 +2722,7 @@ loadBalancerTLSCertificate =
     , _lbtcKeyAlgorithm = Nothing
     , _lbtcSignatureAlgorithm = Nothing
     , _lbtcIssuer = Nothing
+    , _lbtcTags = Nothing
     , _lbtcNotAfter = Nothing
     }
 
@@ -2104,6 +2819,10 @@ lbtcSignatureAlgorithm = lens _lbtcSignatureAlgorithm (\ s a -> s{_lbtcSignature
 lbtcIssuer :: Lens' LoadBalancerTLSCertificate (Maybe Text)
 lbtcIssuer = lens _lbtcIssuer (\ s a -> s{_lbtcIssuer = a})
 
+-- | The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags Lightsail Dev Guide> .
+lbtcTags :: Lens' LoadBalancerTLSCertificate [Tag]
+lbtcTags = lens _lbtcTags (\ s a -> s{_lbtcTags = a}) . _Default . _Coerce
+
 -- | The timestamp when the SSL/TLS certificate expires.
 lbtcNotAfter :: Lens' LoadBalancerTLSCertificate (Maybe UTCTime)
 lbtcNotAfter = lens _lbtcNotAfter (\ s a -> s{_lbtcNotAfter = a}) . mapping _Time
@@ -2135,6 +2854,7 @@ instance FromJSON LoadBalancerTLSCertificate where
                      <*> (x .:? "keyAlgorithm")
                      <*> (x .:? "signatureAlgorithm")
                      <*> (x .:? "issuer")
+                     <*> (x .:? "tags" .!= mempty)
                      <*> (x .:? "notAfter"))
 
 instance Hashable LoadBalancerTLSCertificate where
@@ -2370,6 +3090,48 @@ instance Hashable LoadBalancerTLSCertificateSummary
 
 instance NFData LoadBalancerTLSCertificateSummary
          where
+
+-- | Describes a database log event.
+--
+--
+--
+-- /See:/ 'logEvent' smart constructor.
+data LogEvent = LogEvent'
+  { _leCreatedAt :: !(Maybe POSIX)
+  , _leMessage   :: !(Maybe Text)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'LogEvent' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'leCreatedAt' - The timestamp when the database log event was created.
+--
+-- * 'leMessage' - The message of the database log event.
+logEvent
+    :: LogEvent
+logEvent = LogEvent' {_leCreatedAt = Nothing, _leMessage = Nothing}
+
+
+-- | The timestamp when the database log event was created.
+leCreatedAt :: Lens' LogEvent (Maybe UTCTime)
+leCreatedAt = lens _leCreatedAt (\ s a -> s{_leCreatedAt = a}) . mapping _Time
+
+-- | The message of the database log event.
+leMessage :: Lens' LogEvent (Maybe Text)
+leMessage = lens _leMessage (\ s a -> s{_leMessage = a})
+
+instance FromJSON LogEvent where
+        parseJSON
+          = withObject "LogEvent"
+              (\ x ->
+                 LogEvent' <$>
+                   (x .:? "createdAt") <*> (x .:? "message"))
+
+instance Hashable LogEvent where
+
+instance NFData LogEvent where
 
 -- | Describes the metric data point.
 --
@@ -2674,6 +3436,124 @@ instance Hashable PasswordData where
 
 instance NFData PasswordData where
 
+-- | Describes a pending database maintenance action.
+--
+--
+--
+-- /See:/ 'pendingMaintenanceAction' smart constructor.
+data PendingMaintenanceAction = PendingMaintenanceAction'
+  { _pmaAction           :: !(Maybe Text)
+  , _pmaDescription      :: !(Maybe Text)
+  , _pmaCurrentApplyDate :: !(Maybe POSIX)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PendingMaintenanceAction' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pmaAction' - The type of pending database maintenance action.
+--
+-- * 'pmaDescription' - Additional detail about the pending database maintenance action.
+--
+-- * 'pmaCurrentApplyDate' - The effective date of the pending database maintenance action.
+pendingMaintenanceAction
+    :: PendingMaintenanceAction
+pendingMaintenanceAction =
+  PendingMaintenanceAction'
+    { _pmaAction = Nothing
+    , _pmaDescription = Nothing
+    , _pmaCurrentApplyDate = Nothing
+    }
+
+
+-- | The type of pending database maintenance action.
+pmaAction :: Lens' PendingMaintenanceAction (Maybe Text)
+pmaAction = lens _pmaAction (\ s a -> s{_pmaAction = a})
+
+-- | Additional detail about the pending database maintenance action.
+pmaDescription :: Lens' PendingMaintenanceAction (Maybe Text)
+pmaDescription = lens _pmaDescription (\ s a -> s{_pmaDescription = a})
+
+-- | The effective date of the pending database maintenance action.
+pmaCurrentApplyDate :: Lens' PendingMaintenanceAction (Maybe UTCTime)
+pmaCurrentApplyDate = lens _pmaCurrentApplyDate (\ s a -> s{_pmaCurrentApplyDate = a}) . mapping _Time
+
+instance FromJSON PendingMaintenanceAction where
+        parseJSON
+          = withObject "PendingMaintenanceAction"
+              (\ x ->
+                 PendingMaintenanceAction' <$>
+                   (x .:? "action") <*> (x .:? "description") <*>
+                     (x .:? "currentApplyDate"))
+
+instance Hashable PendingMaintenanceAction where
+
+instance NFData PendingMaintenanceAction where
+
+-- | Describes a pending database value modification.
+--
+--
+--
+-- /See:/ 'pendingModifiedRelationalDatabaseValues' smart constructor.
+data PendingModifiedRelationalDatabaseValues = PendingModifiedRelationalDatabaseValues'
+  { _pmrdvEngineVersion          :: !(Maybe Text)
+  , _pmrdvMasterUserPassword     :: !(Maybe Text)
+  , _pmrdvBackupRetentionEnabled :: !(Maybe Bool)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'PendingModifiedRelationalDatabaseValues' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'pmrdvEngineVersion' - The database engine version.
+--
+-- * 'pmrdvMasterUserPassword' - The password for the master user of the database.
+--
+-- * 'pmrdvBackupRetentionEnabled' - A Boolean value indicating whether automated backup retention is enabled.
+pendingModifiedRelationalDatabaseValues
+    :: PendingModifiedRelationalDatabaseValues
+pendingModifiedRelationalDatabaseValues =
+  PendingModifiedRelationalDatabaseValues'
+    { _pmrdvEngineVersion = Nothing
+    , _pmrdvMasterUserPassword = Nothing
+    , _pmrdvBackupRetentionEnabled = Nothing
+    }
+
+
+-- | The database engine version.
+pmrdvEngineVersion :: Lens' PendingModifiedRelationalDatabaseValues (Maybe Text)
+pmrdvEngineVersion = lens _pmrdvEngineVersion (\ s a -> s{_pmrdvEngineVersion = a})
+
+-- | The password for the master user of the database.
+pmrdvMasterUserPassword :: Lens' PendingModifiedRelationalDatabaseValues (Maybe Text)
+pmrdvMasterUserPassword = lens _pmrdvMasterUserPassword (\ s a -> s{_pmrdvMasterUserPassword = a})
+
+-- | A Boolean value indicating whether automated backup retention is enabled.
+pmrdvBackupRetentionEnabled :: Lens' PendingModifiedRelationalDatabaseValues (Maybe Bool)
+pmrdvBackupRetentionEnabled = lens _pmrdvBackupRetentionEnabled (\ s a -> s{_pmrdvBackupRetentionEnabled = a})
+
+instance FromJSON
+           PendingModifiedRelationalDatabaseValues
+         where
+        parseJSON
+          = withObject
+              "PendingModifiedRelationalDatabaseValues"
+              (\ x ->
+                 PendingModifiedRelationalDatabaseValues' <$>
+                   (x .:? "engineVersion") <*>
+                     (x .:? "masterUserPassword")
+                     <*> (x .:? "backupRetentionEnabled"))
+
+instance Hashable
+           PendingModifiedRelationalDatabaseValues
+         where
+
+instance NFData
+           PendingModifiedRelationalDatabaseValues
+         where
+
 -- | Describes information about the ports on your virtual private server (or /instance/ ).
 --
 --
@@ -2731,11 +3611,12 @@ instance ToJSON PortInfo where
 --
 -- /See:/ 'regionInfo' smart constructor.
 data RegionInfo = RegionInfo'
-  { _riAvailabilityZones :: !(Maybe [AvailabilityZone])
-  , _riName              :: !(Maybe RegionName)
-  , _riDisplayName       :: !(Maybe Text)
-  , _riContinentCode     :: !(Maybe Text)
-  , _riDescription       :: !(Maybe Text)
+  { _riAvailabilityZones                   :: !(Maybe [AvailabilityZone])
+  , _riName                                :: !(Maybe RegionName)
+  , _riRelationalDatabaseAvailabilityZones :: !(Maybe [AvailabilityZone])
+  , _riDisplayName                         :: !(Maybe Text)
+  , _riContinentCode                       :: !(Maybe Text)
+  , _riDescription                         :: !(Maybe Text)
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -2746,6 +3627,8 @@ data RegionInfo = RegionInfo'
 -- * 'riAvailabilityZones' - The Availability Zones. Follows the format @us-east-2a@ (case-sensitive).
 --
 -- * 'riName' - The region name (e.g., @us-east-2@ ).
+--
+-- * 'riRelationalDatabaseAvailabilityZones' - The Availability Zones for databases. Follows the format @us-east-2a@ (case-sensitive).
 --
 -- * 'riDisplayName' - The display name (e.g., @Ohio@ ).
 --
@@ -2758,6 +3641,7 @@ regionInfo =
   RegionInfo'
     { _riAvailabilityZones = Nothing
     , _riName = Nothing
+    , _riRelationalDatabaseAvailabilityZones = Nothing
     , _riDisplayName = Nothing
     , _riContinentCode = Nothing
     , _riDescription = Nothing
@@ -2771,6 +3655,10 @@ riAvailabilityZones = lens _riAvailabilityZones (\ s a -> s{_riAvailabilityZones
 -- | The region name (e.g., @us-east-2@ ).
 riName :: Lens' RegionInfo (Maybe RegionName)
 riName = lens _riName (\ s a -> s{_riName = a})
+
+-- | The Availability Zones for databases. Follows the format @us-east-2a@ (case-sensitive).
+riRelationalDatabaseAvailabilityZones :: Lens' RegionInfo [AvailabilityZone]
+riRelationalDatabaseAvailabilityZones = lens _riRelationalDatabaseAvailabilityZones (\ s a -> s{_riRelationalDatabaseAvailabilityZones = a}) . _Default . _Coerce
 
 -- | The display name (e.g., @Ohio@ ).
 riDisplayName :: Lens' RegionInfo (Maybe Text)
@@ -2791,6 +3679,9 @@ instance FromJSON RegionInfo where
                  RegionInfo' <$>
                    (x .:? "availabilityZones" .!= mempty) <*>
                      (x .:? "name")
+                     <*>
+                     (x .:? "relationalDatabaseAvailabilityZones" .!=
+                        mempty)
                      <*> (x .:? "displayName")
                      <*> (x .:? "continentCode")
                      <*> (x .:? "description"))
@@ -2798,6 +3689,890 @@ instance FromJSON RegionInfo where
 instance Hashable RegionInfo where
 
 instance NFData RegionInfo where
+
+-- | Describes a database.
+--
+--
+--
+-- /See:/ 'relationalDatabase' smart constructor.
+data RelationalDatabase = RelationalDatabase'
+  { _rdEngineVersion :: !(Maybe Text)
+  , _rdRelationalDatabaseBundleId :: !(Maybe Text)
+  , _rdMasterEndpoint :: !(Maybe RelationalDatabaseEndpoint)
+  , _rdState :: !(Maybe Text)
+  , _rdResourceType :: !(Maybe ResourceType)
+  , _rdPubliclyAccessible :: !(Maybe Bool)
+  , _rdMasterUsername :: !(Maybe Text)
+  , _rdArn :: !(Maybe Text)
+  , _rdCreatedAt :: !(Maybe POSIX)
+  , _rdLocation :: !(Maybe ResourceLocation)
+  , _rdEngine :: !(Maybe Text)
+  , _rdLatestRestorableTime :: !(Maybe POSIX)
+  , _rdPreferredMaintenanceWindow :: !(Maybe Text)
+  , _rdRelationalDatabaseBlueprintId :: !(Maybe Text)
+  , _rdName :: !(Maybe Text)
+  , _rdBackupRetentionEnabled :: !(Maybe Bool)
+  , _rdPreferredBackupWindow :: !(Maybe Text)
+  , _rdPendingMaintenanceActions :: !(Maybe [PendingMaintenanceAction])
+  , _rdSupportCode :: !(Maybe Text)
+  , _rdSecondaryAvailabilityZone :: !(Maybe Text)
+  , _rdPendingModifiedValues :: !(Maybe PendingModifiedRelationalDatabaseValues)
+  , _rdMasterDatabaseName :: !(Maybe Text)
+  , _rdHardware :: !(Maybe RelationalDatabaseHardware)
+  , _rdParameterApplyStatus :: !(Maybe Text)
+  , _rdTags :: !(Maybe [Tag])
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RelationalDatabase' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdEngineVersion' - The database engine version (for example, @5.7.23@ ).
+--
+-- * 'rdRelationalDatabaseBundleId' - The bundle ID for the database. A bundle describes the performance specifications for your database.
+--
+-- * 'rdMasterEndpoint' - The master endpoint for the database.
+--
+-- * 'rdState' - Describes the current state of the database.
+--
+-- * 'rdResourceType' - The Lightsail resource type for the database (for example, @RelationalDatabase@ ).
+--
+-- * 'rdPubliclyAccessible' - A Boolean value indicating whether the database is publicly accessible.
+--
+-- * 'rdMasterUsername' - The master user name of the database.
+--
+-- * 'rdArn' - The Amazon Resource Name (ARN) of the database.
+--
+-- * 'rdCreatedAt' - The timestamp when the database was created. Formatted in Unix time.
+--
+-- * 'rdLocation' - The Region name and Availability Zone where the database is located.
+--
+-- * 'rdEngine' - The database software (for example, @MySQL@ ).
+--
+-- * 'rdLatestRestorableTime' - The latest point in time to which the database can be restored. Formatted in Unix time.
+--
+-- * 'rdPreferredMaintenanceWindow' - The weekly time range during which system maintenance can occur on the database. In the format @ddd:hh24:mi-ddd:hh24:mi@ . For example, @Tue:17:00-Tue:17:30@ .
+--
+-- * 'rdRelationalDatabaseBlueprintId' - The blueprint ID for the database. A blueprint describes the major engine version of a database.
+--
+-- * 'rdName' - The unique name of the database resource in Lightsail.
+--
+-- * 'rdBackupRetentionEnabled' - A Boolean value indicating whether automated backup retention is enabled for the database.
+--
+-- * 'rdPreferredBackupWindow' - The daily time range during which automated backups are created for the database (for example, @16:00-16:30@ ).
+--
+-- * 'rdPendingMaintenanceActions' - Describes the pending maintenance actions for the database.
+--
+-- * 'rdSupportCode' - The support code for the database. Include this code in your email to support when you have questions about a database in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+--
+-- * 'rdSecondaryAvailabilityZone' - Describes the secondary Availability Zone of a high availability database. The secondary database is used for failover support of a high availability database.
+--
+-- * 'rdPendingModifiedValues' - Describes pending database value modifications.
+--
+-- * 'rdMasterDatabaseName' - The name of the master database created when the Lightsail database resource is created.
+--
+-- * 'rdHardware' - Describes the hardware of the database.
+--
+-- * 'rdParameterApplyStatus' - The status of parameter updates for the database.
+--
+-- * 'rdTags' - The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags Lightsail Dev Guide> .
+relationalDatabase
+    :: RelationalDatabase
+relationalDatabase =
+  RelationalDatabase'
+    { _rdEngineVersion = Nothing
+    , _rdRelationalDatabaseBundleId = Nothing
+    , _rdMasterEndpoint = Nothing
+    , _rdState = Nothing
+    , _rdResourceType = Nothing
+    , _rdPubliclyAccessible = Nothing
+    , _rdMasterUsername = Nothing
+    , _rdArn = Nothing
+    , _rdCreatedAt = Nothing
+    , _rdLocation = Nothing
+    , _rdEngine = Nothing
+    , _rdLatestRestorableTime = Nothing
+    , _rdPreferredMaintenanceWindow = Nothing
+    , _rdRelationalDatabaseBlueprintId = Nothing
+    , _rdName = Nothing
+    , _rdBackupRetentionEnabled = Nothing
+    , _rdPreferredBackupWindow = Nothing
+    , _rdPendingMaintenanceActions = Nothing
+    , _rdSupportCode = Nothing
+    , _rdSecondaryAvailabilityZone = Nothing
+    , _rdPendingModifiedValues = Nothing
+    , _rdMasterDatabaseName = Nothing
+    , _rdHardware = Nothing
+    , _rdParameterApplyStatus = Nothing
+    , _rdTags = Nothing
+    }
+
+
+-- | The database engine version (for example, @5.7.23@ ).
+rdEngineVersion :: Lens' RelationalDatabase (Maybe Text)
+rdEngineVersion = lens _rdEngineVersion (\ s a -> s{_rdEngineVersion = a})
+
+-- | The bundle ID for the database. A bundle describes the performance specifications for your database.
+rdRelationalDatabaseBundleId :: Lens' RelationalDatabase (Maybe Text)
+rdRelationalDatabaseBundleId = lens _rdRelationalDatabaseBundleId (\ s a -> s{_rdRelationalDatabaseBundleId = a})
+
+-- | The master endpoint for the database.
+rdMasterEndpoint :: Lens' RelationalDatabase (Maybe RelationalDatabaseEndpoint)
+rdMasterEndpoint = lens _rdMasterEndpoint (\ s a -> s{_rdMasterEndpoint = a})
+
+-- | Describes the current state of the database.
+rdState :: Lens' RelationalDatabase (Maybe Text)
+rdState = lens _rdState (\ s a -> s{_rdState = a})
+
+-- | The Lightsail resource type for the database (for example, @RelationalDatabase@ ).
+rdResourceType :: Lens' RelationalDatabase (Maybe ResourceType)
+rdResourceType = lens _rdResourceType (\ s a -> s{_rdResourceType = a})
+
+-- | A Boolean value indicating whether the database is publicly accessible.
+rdPubliclyAccessible :: Lens' RelationalDatabase (Maybe Bool)
+rdPubliclyAccessible = lens _rdPubliclyAccessible (\ s a -> s{_rdPubliclyAccessible = a})
+
+-- | The master user name of the database.
+rdMasterUsername :: Lens' RelationalDatabase (Maybe Text)
+rdMasterUsername = lens _rdMasterUsername (\ s a -> s{_rdMasterUsername = a})
+
+-- | The Amazon Resource Name (ARN) of the database.
+rdArn :: Lens' RelationalDatabase (Maybe Text)
+rdArn = lens _rdArn (\ s a -> s{_rdArn = a})
+
+-- | The timestamp when the database was created. Formatted in Unix time.
+rdCreatedAt :: Lens' RelationalDatabase (Maybe UTCTime)
+rdCreatedAt = lens _rdCreatedAt (\ s a -> s{_rdCreatedAt = a}) . mapping _Time
+
+-- | The Region name and Availability Zone where the database is located.
+rdLocation :: Lens' RelationalDatabase (Maybe ResourceLocation)
+rdLocation = lens _rdLocation (\ s a -> s{_rdLocation = a})
+
+-- | The database software (for example, @MySQL@ ).
+rdEngine :: Lens' RelationalDatabase (Maybe Text)
+rdEngine = lens _rdEngine (\ s a -> s{_rdEngine = a})
+
+-- | The latest point in time to which the database can be restored. Formatted in Unix time.
+rdLatestRestorableTime :: Lens' RelationalDatabase (Maybe UTCTime)
+rdLatestRestorableTime = lens _rdLatestRestorableTime (\ s a -> s{_rdLatestRestorableTime = a}) . mapping _Time
+
+-- | The weekly time range during which system maintenance can occur on the database. In the format @ddd:hh24:mi-ddd:hh24:mi@ . For example, @Tue:17:00-Tue:17:30@ .
+rdPreferredMaintenanceWindow :: Lens' RelationalDatabase (Maybe Text)
+rdPreferredMaintenanceWindow = lens _rdPreferredMaintenanceWindow (\ s a -> s{_rdPreferredMaintenanceWindow = a})
+
+-- | The blueprint ID for the database. A blueprint describes the major engine version of a database.
+rdRelationalDatabaseBlueprintId :: Lens' RelationalDatabase (Maybe Text)
+rdRelationalDatabaseBlueprintId = lens _rdRelationalDatabaseBlueprintId (\ s a -> s{_rdRelationalDatabaseBlueprintId = a})
+
+-- | The unique name of the database resource in Lightsail.
+rdName :: Lens' RelationalDatabase (Maybe Text)
+rdName = lens _rdName (\ s a -> s{_rdName = a})
+
+-- | A Boolean value indicating whether automated backup retention is enabled for the database.
+rdBackupRetentionEnabled :: Lens' RelationalDatabase (Maybe Bool)
+rdBackupRetentionEnabled = lens _rdBackupRetentionEnabled (\ s a -> s{_rdBackupRetentionEnabled = a})
+
+-- | The daily time range during which automated backups are created for the database (for example, @16:00-16:30@ ).
+rdPreferredBackupWindow :: Lens' RelationalDatabase (Maybe Text)
+rdPreferredBackupWindow = lens _rdPreferredBackupWindow (\ s a -> s{_rdPreferredBackupWindow = a})
+
+-- | Describes the pending maintenance actions for the database.
+rdPendingMaintenanceActions :: Lens' RelationalDatabase [PendingMaintenanceAction]
+rdPendingMaintenanceActions = lens _rdPendingMaintenanceActions (\ s a -> s{_rdPendingMaintenanceActions = a}) . _Default . _Coerce
+
+-- | The support code for the database. Include this code in your email to support when you have questions about a database in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+rdSupportCode :: Lens' RelationalDatabase (Maybe Text)
+rdSupportCode = lens _rdSupportCode (\ s a -> s{_rdSupportCode = a})
+
+-- | Describes the secondary Availability Zone of a high availability database. The secondary database is used for failover support of a high availability database.
+rdSecondaryAvailabilityZone :: Lens' RelationalDatabase (Maybe Text)
+rdSecondaryAvailabilityZone = lens _rdSecondaryAvailabilityZone (\ s a -> s{_rdSecondaryAvailabilityZone = a})
+
+-- | Describes pending database value modifications.
+rdPendingModifiedValues :: Lens' RelationalDatabase (Maybe PendingModifiedRelationalDatabaseValues)
+rdPendingModifiedValues = lens _rdPendingModifiedValues (\ s a -> s{_rdPendingModifiedValues = a})
+
+-- | The name of the master database created when the Lightsail database resource is created.
+rdMasterDatabaseName :: Lens' RelationalDatabase (Maybe Text)
+rdMasterDatabaseName = lens _rdMasterDatabaseName (\ s a -> s{_rdMasterDatabaseName = a})
+
+-- | Describes the hardware of the database.
+rdHardware :: Lens' RelationalDatabase (Maybe RelationalDatabaseHardware)
+rdHardware = lens _rdHardware (\ s a -> s{_rdHardware = a})
+
+-- | The status of parameter updates for the database.
+rdParameterApplyStatus :: Lens' RelationalDatabase (Maybe Text)
+rdParameterApplyStatus = lens _rdParameterApplyStatus (\ s a -> s{_rdParameterApplyStatus = a})
+
+-- | The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags Lightsail Dev Guide> .
+rdTags :: Lens' RelationalDatabase [Tag]
+rdTags = lens _rdTags (\ s a -> s{_rdTags = a}) . _Default . _Coerce
+
+instance FromJSON RelationalDatabase where
+        parseJSON
+          = withObject "RelationalDatabase"
+              (\ x ->
+                 RelationalDatabase' <$>
+                   (x .:? "engineVersion") <*>
+                     (x .:? "relationalDatabaseBundleId")
+                     <*> (x .:? "masterEndpoint")
+                     <*> (x .:? "state")
+                     <*> (x .:? "resourceType")
+                     <*> (x .:? "publiclyAccessible")
+                     <*> (x .:? "masterUsername")
+                     <*> (x .:? "arn")
+                     <*> (x .:? "createdAt")
+                     <*> (x .:? "location")
+                     <*> (x .:? "engine")
+                     <*> (x .:? "latestRestorableTime")
+                     <*> (x .:? "preferredMaintenanceWindow")
+                     <*> (x .:? "relationalDatabaseBlueprintId")
+                     <*> (x .:? "name")
+                     <*> (x .:? "backupRetentionEnabled")
+                     <*> (x .:? "preferredBackupWindow")
+                     <*> (x .:? "pendingMaintenanceActions" .!= mempty)
+                     <*> (x .:? "supportCode")
+                     <*> (x .:? "secondaryAvailabilityZone")
+                     <*> (x .:? "pendingModifiedValues")
+                     <*> (x .:? "masterDatabaseName")
+                     <*> (x .:? "hardware")
+                     <*> (x .:? "parameterApplyStatus")
+                     <*> (x .:? "tags" .!= mempty))
+
+instance Hashable RelationalDatabase where
+
+instance NFData RelationalDatabase where
+
+-- | Describes a database image, or blueprint. A blueprint describes the major engine version of a database.
+--
+--
+--
+-- /See:/ 'relationalDatabaseBlueprint' smart constructor.
+data RelationalDatabaseBlueprint = RelationalDatabaseBlueprint'
+  { _rdbEngineVersion            :: !(Maybe Text)
+  , _rdbIsEngineDefault          :: !(Maybe Bool)
+  , _rdbEngineVersionDescription :: !(Maybe Text)
+  , _rdbEngine                   :: !(Maybe RelationalDatabaseEngine)
+  , _rdbBlueprintId              :: !(Maybe Text)
+  , _rdbEngineDescription        :: !(Maybe Text)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RelationalDatabaseBlueprint' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdbEngineVersion' - The database engine version for the database blueprint (for example, @5.7.23@ ).
+--
+-- * 'rdbIsEngineDefault' - A Boolean value indicating whether the engine version is the default for the database blueprint.
+--
+-- * 'rdbEngineVersionDescription' - The description of the database engine version for the database blueprint.
+--
+-- * 'rdbEngine' - The database software of the database blueprint (for example, @MySQL@ ).
+--
+-- * 'rdbBlueprintId' - The ID for the database blueprint.
+--
+-- * 'rdbEngineDescription' - The description of the database engine for the database blueprint.
+relationalDatabaseBlueprint
+    :: RelationalDatabaseBlueprint
+relationalDatabaseBlueprint =
+  RelationalDatabaseBlueprint'
+    { _rdbEngineVersion = Nothing
+    , _rdbIsEngineDefault = Nothing
+    , _rdbEngineVersionDescription = Nothing
+    , _rdbEngine = Nothing
+    , _rdbBlueprintId = Nothing
+    , _rdbEngineDescription = Nothing
+    }
+
+
+-- | The database engine version for the database blueprint (for example, @5.7.23@ ).
+rdbEngineVersion :: Lens' RelationalDatabaseBlueprint (Maybe Text)
+rdbEngineVersion = lens _rdbEngineVersion (\ s a -> s{_rdbEngineVersion = a})
+
+-- | A Boolean value indicating whether the engine version is the default for the database blueprint.
+rdbIsEngineDefault :: Lens' RelationalDatabaseBlueprint (Maybe Bool)
+rdbIsEngineDefault = lens _rdbIsEngineDefault (\ s a -> s{_rdbIsEngineDefault = a})
+
+-- | The description of the database engine version for the database blueprint.
+rdbEngineVersionDescription :: Lens' RelationalDatabaseBlueprint (Maybe Text)
+rdbEngineVersionDescription = lens _rdbEngineVersionDescription (\ s a -> s{_rdbEngineVersionDescription = a})
+
+-- | The database software of the database blueprint (for example, @MySQL@ ).
+rdbEngine :: Lens' RelationalDatabaseBlueprint (Maybe RelationalDatabaseEngine)
+rdbEngine = lens _rdbEngine (\ s a -> s{_rdbEngine = a})
+
+-- | The ID for the database blueprint.
+rdbBlueprintId :: Lens' RelationalDatabaseBlueprint (Maybe Text)
+rdbBlueprintId = lens _rdbBlueprintId (\ s a -> s{_rdbBlueprintId = a})
+
+-- | The description of the database engine for the database blueprint.
+rdbEngineDescription :: Lens' RelationalDatabaseBlueprint (Maybe Text)
+rdbEngineDescription = lens _rdbEngineDescription (\ s a -> s{_rdbEngineDescription = a})
+
+instance FromJSON RelationalDatabaseBlueprint where
+        parseJSON
+          = withObject "RelationalDatabaseBlueprint"
+              (\ x ->
+                 RelationalDatabaseBlueprint' <$>
+                   (x .:? "engineVersion") <*> (x .:? "isEngineDefault")
+                     <*> (x .:? "engineVersionDescription")
+                     <*> (x .:? "engine")
+                     <*> (x .:? "blueprintId")
+                     <*> (x .:? "engineDescription"))
+
+instance Hashable RelationalDatabaseBlueprint where
+
+instance NFData RelationalDatabaseBlueprint where
+
+-- | Describes a database bundle. A bundle describes the performance specifications of the database.
+--
+--
+--
+-- /See:/ 'relationalDatabaseBundle' smart constructor.
+data RelationalDatabaseBundle = RelationalDatabaseBundle'
+  { _rdbIsEncrypted          :: !(Maybe Bool)
+  , _rdbCpuCount             :: !(Maybe Int)
+  , _rdbTransferPerMonthInGb :: !(Maybe Int)
+  , _rdbBundleId             :: !(Maybe Text)
+  , _rdbName                 :: !(Maybe Text)
+  , _rdbDiskSizeInGb         :: !(Maybe Int)
+  , _rdbPrice                :: !(Maybe Double)
+  , _rdbIsActive             :: !(Maybe Bool)
+  , _rdbRamSizeInGb          :: !(Maybe Double)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RelationalDatabaseBundle' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdbIsEncrypted' - A Boolean value indicating whether the database bundle is encrypted.
+--
+-- * 'rdbCpuCount' - The number of virtual CPUs (vCPUs) for the database bundle.
+--
+-- * 'rdbTransferPerMonthInGb' - The data transfer rate per month in GB for the database bundle.
+--
+-- * 'rdbBundleId' - The ID for the database bundle.
+--
+-- * 'rdbName' - The name for the database bundle.
+--
+-- * 'rdbDiskSizeInGb' - The size of the disk for the database bundle.
+--
+-- * 'rdbPrice' - The cost of the database bundle in US currency.
+--
+-- * 'rdbIsActive' - A Boolean value indicating whether the database bundle is active.
+--
+-- * 'rdbRamSizeInGb' - The amount of RAM in GB (for example, @2.0@ ) for the database bundle.
+relationalDatabaseBundle
+    :: RelationalDatabaseBundle
+relationalDatabaseBundle =
+  RelationalDatabaseBundle'
+    { _rdbIsEncrypted = Nothing
+    , _rdbCpuCount = Nothing
+    , _rdbTransferPerMonthInGb = Nothing
+    , _rdbBundleId = Nothing
+    , _rdbName = Nothing
+    , _rdbDiskSizeInGb = Nothing
+    , _rdbPrice = Nothing
+    , _rdbIsActive = Nothing
+    , _rdbRamSizeInGb = Nothing
+    }
+
+
+-- | A Boolean value indicating whether the database bundle is encrypted.
+rdbIsEncrypted :: Lens' RelationalDatabaseBundle (Maybe Bool)
+rdbIsEncrypted = lens _rdbIsEncrypted (\ s a -> s{_rdbIsEncrypted = a})
+
+-- | The number of virtual CPUs (vCPUs) for the database bundle.
+rdbCpuCount :: Lens' RelationalDatabaseBundle (Maybe Int)
+rdbCpuCount = lens _rdbCpuCount (\ s a -> s{_rdbCpuCount = a})
+
+-- | The data transfer rate per month in GB for the database bundle.
+rdbTransferPerMonthInGb :: Lens' RelationalDatabaseBundle (Maybe Int)
+rdbTransferPerMonthInGb = lens _rdbTransferPerMonthInGb (\ s a -> s{_rdbTransferPerMonthInGb = a})
+
+-- | The ID for the database bundle.
+rdbBundleId :: Lens' RelationalDatabaseBundle (Maybe Text)
+rdbBundleId = lens _rdbBundleId (\ s a -> s{_rdbBundleId = a})
+
+-- | The name for the database bundle.
+rdbName :: Lens' RelationalDatabaseBundle (Maybe Text)
+rdbName = lens _rdbName (\ s a -> s{_rdbName = a})
+
+-- | The size of the disk for the database bundle.
+rdbDiskSizeInGb :: Lens' RelationalDatabaseBundle (Maybe Int)
+rdbDiskSizeInGb = lens _rdbDiskSizeInGb (\ s a -> s{_rdbDiskSizeInGb = a})
+
+-- | The cost of the database bundle in US currency.
+rdbPrice :: Lens' RelationalDatabaseBundle (Maybe Double)
+rdbPrice = lens _rdbPrice (\ s a -> s{_rdbPrice = a})
+
+-- | A Boolean value indicating whether the database bundle is active.
+rdbIsActive :: Lens' RelationalDatabaseBundle (Maybe Bool)
+rdbIsActive = lens _rdbIsActive (\ s a -> s{_rdbIsActive = a})
+
+-- | The amount of RAM in GB (for example, @2.0@ ) for the database bundle.
+rdbRamSizeInGb :: Lens' RelationalDatabaseBundle (Maybe Double)
+rdbRamSizeInGb = lens _rdbRamSizeInGb (\ s a -> s{_rdbRamSizeInGb = a})
+
+instance FromJSON RelationalDatabaseBundle where
+        parseJSON
+          = withObject "RelationalDatabaseBundle"
+              (\ x ->
+                 RelationalDatabaseBundle' <$>
+                   (x .:? "isEncrypted") <*> (x .:? "cpuCount") <*>
+                     (x .:? "transferPerMonthInGb")
+                     <*> (x .:? "bundleId")
+                     <*> (x .:? "name")
+                     <*> (x .:? "diskSizeInGb")
+                     <*> (x .:? "price")
+                     <*> (x .:? "isActive")
+                     <*> (x .:? "ramSizeInGb"))
+
+instance Hashable RelationalDatabaseBundle where
+
+instance NFData RelationalDatabaseBundle where
+
+-- | Describes an endpoint for a database.
+--
+--
+--
+-- /See:/ 'relationalDatabaseEndpoint' smart constructor.
+data RelationalDatabaseEndpoint = RelationalDatabaseEndpoint'
+  { _rdeAddress :: !(Maybe Text)
+  , _rdePort    :: !(Maybe Int)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RelationalDatabaseEndpoint' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdeAddress' - Specifies the DNS address of the database.
+--
+-- * 'rdePort' - Specifies the port that the database is listening on.
+relationalDatabaseEndpoint
+    :: RelationalDatabaseEndpoint
+relationalDatabaseEndpoint =
+  RelationalDatabaseEndpoint' {_rdeAddress = Nothing, _rdePort = Nothing}
+
+
+-- | Specifies the DNS address of the database.
+rdeAddress :: Lens' RelationalDatabaseEndpoint (Maybe Text)
+rdeAddress = lens _rdeAddress (\ s a -> s{_rdeAddress = a})
+
+-- | Specifies the port that the database is listening on.
+rdePort :: Lens' RelationalDatabaseEndpoint (Maybe Int)
+rdePort = lens _rdePort (\ s a -> s{_rdePort = a})
+
+instance FromJSON RelationalDatabaseEndpoint where
+        parseJSON
+          = withObject "RelationalDatabaseEndpoint"
+              (\ x ->
+                 RelationalDatabaseEndpoint' <$>
+                   (x .:? "address") <*> (x .:? "port"))
+
+instance Hashable RelationalDatabaseEndpoint where
+
+instance NFData RelationalDatabaseEndpoint where
+
+-- | Describes an event for a database.
+--
+--
+--
+-- /See:/ 'relationalDatabaseEvent' smart constructor.
+data RelationalDatabaseEvent = RelationalDatabaseEvent'
+  { _rdeCreatedAt       :: !(Maybe POSIX)
+  , _rdeEventCategories :: !(Maybe [Text])
+  , _rdeResource        :: !(Maybe Text)
+  , _rdeMessage         :: !(Maybe Text)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RelationalDatabaseEvent' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdeCreatedAt' - The timestamp when the database event was created.
+--
+-- * 'rdeEventCategories' - The category that the database event belongs to.
+--
+-- * 'rdeResource' - The database that the database event relates to.
+--
+-- * 'rdeMessage' - The message of the database event.
+relationalDatabaseEvent
+    :: RelationalDatabaseEvent
+relationalDatabaseEvent =
+  RelationalDatabaseEvent'
+    { _rdeCreatedAt = Nothing
+    , _rdeEventCategories = Nothing
+    , _rdeResource = Nothing
+    , _rdeMessage = Nothing
+    }
+
+
+-- | The timestamp when the database event was created.
+rdeCreatedAt :: Lens' RelationalDatabaseEvent (Maybe UTCTime)
+rdeCreatedAt = lens _rdeCreatedAt (\ s a -> s{_rdeCreatedAt = a}) . mapping _Time
+
+-- | The category that the database event belongs to.
+rdeEventCategories :: Lens' RelationalDatabaseEvent [Text]
+rdeEventCategories = lens _rdeEventCategories (\ s a -> s{_rdeEventCategories = a}) . _Default . _Coerce
+
+-- | The database that the database event relates to.
+rdeResource :: Lens' RelationalDatabaseEvent (Maybe Text)
+rdeResource = lens _rdeResource (\ s a -> s{_rdeResource = a})
+
+-- | The message of the database event.
+rdeMessage :: Lens' RelationalDatabaseEvent (Maybe Text)
+rdeMessage = lens _rdeMessage (\ s a -> s{_rdeMessage = a})
+
+instance FromJSON RelationalDatabaseEvent where
+        parseJSON
+          = withObject "RelationalDatabaseEvent"
+              (\ x ->
+                 RelationalDatabaseEvent' <$>
+                   (x .:? "createdAt") <*>
+                     (x .:? "eventCategories" .!= mempty)
+                     <*> (x .:? "resource")
+                     <*> (x .:? "message"))
+
+instance Hashable RelationalDatabaseEvent where
+
+instance NFData RelationalDatabaseEvent where
+
+-- | Describes the hardware of a database.
+--
+--
+--
+-- /See:/ 'relationalDatabaseHardware' smart constructor.
+data RelationalDatabaseHardware = RelationalDatabaseHardware'
+  { _rdhCpuCount     :: !(Maybe Int)
+  , _rdhDiskSizeInGb :: !(Maybe Int)
+  , _rdhRamSizeInGb  :: !(Maybe Double)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RelationalDatabaseHardware' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdhCpuCount' - The number of vCPUs for the database.
+--
+-- * 'rdhDiskSizeInGb' - The size of the disk for the database.
+--
+-- * 'rdhRamSizeInGb' - The amount of RAM in GB for the database.
+relationalDatabaseHardware
+    :: RelationalDatabaseHardware
+relationalDatabaseHardware =
+  RelationalDatabaseHardware'
+    { _rdhCpuCount = Nothing
+    , _rdhDiskSizeInGb = Nothing
+    , _rdhRamSizeInGb = Nothing
+    }
+
+
+-- | The number of vCPUs for the database.
+rdhCpuCount :: Lens' RelationalDatabaseHardware (Maybe Int)
+rdhCpuCount = lens _rdhCpuCount (\ s a -> s{_rdhCpuCount = a})
+
+-- | The size of the disk for the database.
+rdhDiskSizeInGb :: Lens' RelationalDatabaseHardware (Maybe Int)
+rdhDiskSizeInGb = lens _rdhDiskSizeInGb (\ s a -> s{_rdhDiskSizeInGb = a})
+
+-- | The amount of RAM in GB for the database.
+rdhRamSizeInGb :: Lens' RelationalDatabaseHardware (Maybe Double)
+rdhRamSizeInGb = lens _rdhRamSizeInGb (\ s a -> s{_rdhRamSizeInGb = a})
+
+instance FromJSON RelationalDatabaseHardware where
+        parseJSON
+          = withObject "RelationalDatabaseHardware"
+              (\ x ->
+                 RelationalDatabaseHardware' <$>
+                   (x .:? "cpuCount") <*> (x .:? "diskSizeInGb") <*>
+                     (x .:? "ramSizeInGb"))
+
+instance Hashable RelationalDatabaseHardware where
+
+instance NFData RelationalDatabaseHardware where
+
+-- | Describes the parameters of a database.
+--
+--
+--
+-- /See:/ 'relationalDatabaseParameter' smart constructor.
+data RelationalDatabaseParameter = RelationalDatabaseParameter'
+  { _rdpApplyType      :: !(Maybe Text)
+  , _rdpParameterValue :: !(Maybe Text)
+  , _rdpApplyMethod    :: !(Maybe Text)
+  , _rdpDataType       :: !(Maybe Text)
+  , _rdpIsModifiable   :: !(Maybe Bool)
+  , _rdpAllowedValues  :: !(Maybe Text)
+  , _rdpParameterName  :: !(Maybe Text)
+  , _rdpDescription    :: !(Maybe Text)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RelationalDatabaseParameter' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdpApplyType' - Specifies the engine-specific parameter type.
+--
+-- * 'rdpParameterValue' - Specifies the value of the parameter.
+--
+-- * 'rdpApplyMethod' - Indicates when parameter updates are applied. Can be @immediate@ or @pending-reboot@ .
+--
+-- * 'rdpDataType' - Specifies the valid data type for the parameter.
+--
+-- * 'rdpIsModifiable' - A Boolean value indicating whether the parameter can be modified.
+--
+-- * 'rdpAllowedValues' - Specifies the valid range of values for the parameter.
+--
+-- * 'rdpParameterName' - Specifies the name of the parameter.
+--
+-- * 'rdpDescription' - Provides a description of the parameter.
+relationalDatabaseParameter
+    :: RelationalDatabaseParameter
+relationalDatabaseParameter =
+  RelationalDatabaseParameter'
+    { _rdpApplyType = Nothing
+    , _rdpParameterValue = Nothing
+    , _rdpApplyMethod = Nothing
+    , _rdpDataType = Nothing
+    , _rdpIsModifiable = Nothing
+    , _rdpAllowedValues = Nothing
+    , _rdpParameterName = Nothing
+    , _rdpDescription = Nothing
+    }
+
+
+-- | Specifies the engine-specific parameter type.
+rdpApplyType :: Lens' RelationalDatabaseParameter (Maybe Text)
+rdpApplyType = lens _rdpApplyType (\ s a -> s{_rdpApplyType = a})
+
+-- | Specifies the value of the parameter.
+rdpParameterValue :: Lens' RelationalDatabaseParameter (Maybe Text)
+rdpParameterValue = lens _rdpParameterValue (\ s a -> s{_rdpParameterValue = a})
+
+-- | Indicates when parameter updates are applied. Can be @immediate@ or @pending-reboot@ .
+rdpApplyMethod :: Lens' RelationalDatabaseParameter (Maybe Text)
+rdpApplyMethod = lens _rdpApplyMethod (\ s a -> s{_rdpApplyMethod = a})
+
+-- | Specifies the valid data type for the parameter.
+rdpDataType :: Lens' RelationalDatabaseParameter (Maybe Text)
+rdpDataType = lens _rdpDataType (\ s a -> s{_rdpDataType = a})
+
+-- | A Boolean value indicating whether the parameter can be modified.
+rdpIsModifiable :: Lens' RelationalDatabaseParameter (Maybe Bool)
+rdpIsModifiable = lens _rdpIsModifiable (\ s a -> s{_rdpIsModifiable = a})
+
+-- | Specifies the valid range of values for the parameter.
+rdpAllowedValues :: Lens' RelationalDatabaseParameter (Maybe Text)
+rdpAllowedValues = lens _rdpAllowedValues (\ s a -> s{_rdpAllowedValues = a})
+
+-- | Specifies the name of the parameter.
+rdpParameterName :: Lens' RelationalDatabaseParameter (Maybe Text)
+rdpParameterName = lens _rdpParameterName (\ s a -> s{_rdpParameterName = a})
+
+-- | Provides a description of the parameter.
+rdpDescription :: Lens' RelationalDatabaseParameter (Maybe Text)
+rdpDescription = lens _rdpDescription (\ s a -> s{_rdpDescription = a})
+
+instance FromJSON RelationalDatabaseParameter where
+        parseJSON
+          = withObject "RelationalDatabaseParameter"
+              (\ x ->
+                 RelationalDatabaseParameter' <$>
+                   (x .:? "applyType") <*> (x .:? "parameterValue") <*>
+                     (x .:? "applyMethod")
+                     <*> (x .:? "dataType")
+                     <*> (x .:? "isModifiable")
+                     <*> (x .:? "allowedValues")
+                     <*> (x .:? "parameterName")
+                     <*> (x .:? "description"))
+
+instance Hashable RelationalDatabaseParameter where
+
+instance NFData RelationalDatabaseParameter where
+
+instance ToJSON RelationalDatabaseParameter where
+        toJSON RelationalDatabaseParameter'{..}
+          = object
+              (catMaybes
+                 [("applyType" .=) <$> _rdpApplyType,
+                  ("parameterValue" .=) <$> _rdpParameterValue,
+                  ("applyMethod" .=) <$> _rdpApplyMethod,
+                  ("dataType" .=) <$> _rdpDataType,
+                  ("isModifiable" .=) <$> _rdpIsModifiable,
+                  ("allowedValues" .=) <$> _rdpAllowedValues,
+                  ("parameterName" .=) <$> _rdpParameterName,
+                  ("description" .=) <$> _rdpDescription])
+
+-- | Describes a database snapshot.
+--
+--
+--
+-- /See:/ 'relationalDatabaseSnapshot' smart constructor.
+data RelationalDatabaseSnapshot = RelationalDatabaseSnapshot'
+  { _rdsEngineVersion                     :: !(Maybe Text)
+  , _rdsState                             :: !(Maybe Text)
+  , _rdsFromRelationalDatabaseName        :: !(Maybe Text)
+  , _rdsResourceType                      :: !(Maybe ResourceType)
+  , _rdsFromRelationalDatabaseBlueprintId :: !(Maybe Text)
+  , _rdsArn                               :: !(Maybe Text)
+  , _rdsCreatedAt                         :: !(Maybe POSIX)
+  , _rdsLocation                          :: !(Maybe ResourceLocation)
+  , _rdsEngine                            :: !(Maybe Text)
+  , _rdsName                              :: !(Maybe Text)
+  , _rdsSizeInGb                          :: !(Maybe Int)
+  , _rdsSupportCode                       :: !(Maybe Text)
+  , _rdsFromRelationalDatabaseARN         :: !(Maybe Text)
+  , _rdsFromRelationalDatabaseBundleId    :: !(Maybe Text)
+  , _rdsTags                              :: !(Maybe [Tag])
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'RelationalDatabaseSnapshot' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'rdsEngineVersion' - The database engine version for the database snapshot (for example, @5.7.23@ ).
+--
+-- * 'rdsState' - The state of the database snapshot.
+--
+-- * 'rdsFromRelationalDatabaseName' - The name of the source database from which the database snapshot was created.
+--
+-- * 'rdsResourceType' - The Lightsail resource type.
+--
+-- * 'rdsFromRelationalDatabaseBlueprintId' - The blueprint ID of the database from which the database snapshot was created. A blueprint describes the major engine version of a database.
+--
+-- * 'rdsArn' - The Amazon Resource Name (ARN) of the database snapshot.
+--
+-- * 'rdsCreatedAt' - The timestamp when the database snapshot was created.
+--
+-- * 'rdsLocation' - The Region name and Availability Zone where the database snapshot is located.
+--
+-- * 'rdsEngine' - The software of the database snapshot (for example, @MySQL@ )
+--
+-- * 'rdsName' - The name of the database snapshot.
+--
+-- * 'rdsSizeInGb' - The size of the disk in GB (for example, @32@ ) for the database snapshot.
+--
+-- * 'rdsSupportCode' - The support code for the database snapshot. Include this code in your email to support when you have questions about a database snapshot in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+--
+-- * 'rdsFromRelationalDatabaseARN' - The Amazon Resource Name (ARN) of the database from which the database snapshot was created.
+--
+-- * 'rdsFromRelationalDatabaseBundleId' - The bundle ID of the database from which the database snapshot was created.
+--
+-- * 'rdsTags' - The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags Lightsail Dev Guide> .
+relationalDatabaseSnapshot
+    :: RelationalDatabaseSnapshot
+relationalDatabaseSnapshot =
+  RelationalDatabaseSnapshot'
+    { _rdsEngineVersion = Nothing
+    , _rdsState = Nothing
+    , _rdsFromRelationalDatabaseName = Nothing
+    , _rdsResourceType = Nothing
+    , _rdsFromRelationalDatabaseBlueprintId = Nothing
+    , _rdsArn = Nothing
+    , _rdsCreatedAt = Nothing
+    , _rdsLocation = Nothing
+    , _rdsEngine = Nothing
+    , _rdsName = Nothing
+    , _rdsSizeInGb = Nothing
+    , _rdsSupportCode = Nothing
+    , _rdsFromRelationalDatabaseARN = Nothing
+    , _rdsFromRelationalDatabaseBundleId = Nothing
+    , _rdsTags = Nothing
+    }
+
+
+-- | The database engine version for the database snapshot (for example, @5.7.23@ ).
+rdsEngineVersion :: Lens' RelationalDatabaseSnapshot (Maybe Text)
+rdsEngineVersion = lens _rdsEngineVersion (\ s a -> s{_rdsEngineVersion = a})
+
+-- | The state of the database snapshot.
+rdsState :: Lens' RelationalDatabaseSnapshot (Maybe Text)
+rdsState = lens _rdsState (\ s a -> s{_rdsState = a})
+
+-- | The name of the source database from which the database snapshot was created.
+rdsFromRelationalDatabaseName :: Lens' RelationalDatabaseSnapshot (Maybe Text)
+rdsFromRelationalDatabaseName = lens _rdsFromRelationalDatabaseName (\ s a -> s{_rdsFromRelationalDatabaseName = a})
+
+-- | The Lightsail resource type.
+rdsResourceType :: Lens' RelationalDatabaseSnapshot (Maybe ResourceType)
+rdsResourceType = lens _rdsResourceType (\ s a -> s{_rdsResourceType = a})
+
+-- | The blueprint ID of the database from which the database snapshot was created. A blueprint describes the major engine version of a database.
+rdsFromRelationalDatabaseBlueprintId :: Lens' RelationalDatabaseSnapshot (Maybe Text)
+rdsFromRelationalDatabaseBlueprintId = lens _rdsFromRelationalDatabaseBlueprintId (\ s a -> s{_rdsFromRelationalDatabaseBlueprintId = a})
+
+-- | The Amazon Resource Name (ARN) of the database snapshot.
+rdsArn :: Lens' RelationalDatabaseSnapshot (Maybe Text)
+rdsArn = lens _rdsArn (\ s a -> s{_rdsArn = a})
+
+-- | The timestamp when the database snapshot was created.
+rdsCreatedAt :: Lens' RelationalDatabaseSnapshot (Maybe UTCTime)
+rdsCreatedAt = lens _rdsCreatedAt (\ s a -> s{_rdsCreatedAt = a}) . mapping _Time
+
+-- | The Region name and Availability Zone where the database snapshot is located.
+rdsLocation :: Lens' RelationalDatabaseSnapshot (Maybe ResourceLocation)
+rdsLocation = lens _rdsLocation (\ s a -> s{_rdsLocation = a})
+
+-- | The software of the database snapshot (for example, @MySQL@ )
+rdsEngine :: Lens' RelationalDatabaseSnapshot (Maybe Text)
+rdsEngine = lens _rdsEngine (\ s a -> s{_rdsEngine = a})
+
+-- | The name of the database snapshot.
+rdsName :: Lens' RelationalDatabaseSnapshot (Maybe Text)
+rdsName = lens _rdsName (\ s a -> s{_rdsName = a})
+
+-- | The size of the disk in GB (for example, @32@ ) for the database snapshot.
+rdsSizeInGb :: Lens' RelationalDatabaseSnapshot (Maybe Int)
+rdsSizeInGb = lens _rdsSizeInGb (\ s a -> s{_rdsSizeInGb = a})
+
+-- | The support code for the database snapshot. Include this code in your email to support when you have questions about a database snapshot in Lightsail. This code enables our support team to look up your Lightsail information more easily.
+rdsSupportCode :: Lens' RelationalDatabaseSnapshot (Maybe Text)
+rdsSupportCode = lens _rdsSupportCode (\ s a -> s{_rdsSupportCode = a})
+
+-- | The Amazon Resource Name (ARN) of the database from which the database snapshot was created.
+rdsFromRelationalDatabaseARN :: Lens' RelationalDatabaseSnapshot (Maybe Text)
+rdsFromRelationalDatabaseARN = lens _rdsFromRelationalDatabaseARN (\ s a -> s{_rdsFromRelationalDatabaseARN = a})
+
+-- | The bundle ID of the database from which the database snapshot was created.
+rdsFromRelationalDatabaseBundleId :: Lens' RelationalDatabaseSnapshot (Maybe Text)
+rdsFromRelationalDatabaseBundleId = lens _rdsFromRelationalDatabaseBundleId (\ s a -> s{_rdsFromRelationalDatabaseBundleId = a})
+
+-- | The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags Lightsail Dev Guide> .
+rdsTags :: Lens' RelationalDatabaseSnapshot [Tag]
+rdsTags = lens _rdsTags (\ s a -> s{_rdsTags = a}) . _Default . _Coerce
+
+instance FromJSON RelationalDatabaseSnapshot where
+        parseJSON
+          = withObject "RelationalDatabaseSnapshot"
+              (\ x ->
+                 RelationalDatabaseSnapshot' <$>
+                   (x .:? "engineVersion") <*> (x .:? "state") <*>
+                     (x .:? "fromRelationalDatabaseName")
+                     <*> (x .:? "resourceType")
+                     <*> (x .:? "fromRelationalDatabaseBlueprintId")
+                     <*> (x .:? "arn")
+                     <*> (x .:? "createdAt")
+                     <*> (x .:? "location")
+                     <*> (x .:? "engine")
+                     <*> (x .:? "name")
+                     <*> (x .:? "sizeInGb")
+                     <*> (x .:? "supportCode")
+                     <*> (x .:? "fromRelationalDatabaseArn")
+                     <*> (x .:? "fromRelationalDatabaseBundleId")
+                     <*> (x .:? "tags" .!= mempty))
+
+instance Hashable RelationalDatabaseSnapshot where
+
+instance NFData RelationalDatabaseSnapshot where
 
 -- | Describes the resource location.
 --
@@ -2950,3 +4725,51 @@ instance FromJSON StaticIP where
 instance Hashable StaticIP where
 
 instance NFData StaticIP where
+
+-- | Describes a tag key and optional value assigned to an Amazon Lightsail resource.
+--
+--
+-- For more information about tags in Lightsail, see the <https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags Lightsail Dev Guide> .
+--
+--
+-- /See:/ 'tag' smart constructor.
+data Tag = Tag'
+  { _tagValue :: !(Maybe Text)
+  , _tagKey   :: !(Maybe Text)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'Tag' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'tagValue' - The value of the tag. Constraints: Tag values accept a maximum of 256 letters, numbers, spaces in UTF-8, or the following characters: + - = . _ : / @
+--
+-- * 'tagKey' - The key of the tag. Constraints: Tag keys accept a maximum of 128 letters, numbers, spaces in UTF-8, or the following characters: + - = . _ : / @
+tag
+    :: Tag
+tag = Tag' {_tagValue = Nothing, _tagKey = Nothing}
+
+
+-- | The value of the tag. Constraints: Tag values accept a maximum of 256 letters, numbers, spaces in UTF-8, or the following characters: + - = . _ : / @
+tagValue :: Lens' Tag (Maybe Text)
+tagValue = lens _tagValue (\ s a -> s{_tagValue = a})
+
+-- | The key of the tag. Constraints: Tag keys accept a maximum of 128 letters, numbers, spaces in UTF-8, or the following characters: + - = . _ : / @
+tagKey :: Lens' Tag (Maybe Text)
+tagKey = lens _tagKey (\ s a -> s{_tagKey = a})
+
+instance FromJSON Tag where
+        parseJSON
+          = withObject "Tag"
+              (\ x -> Tag' <$> (x .:? "value") <*> (x .:? "key"))
+
+instance Hashable Tag where
+
+instance NFData Tag where
+
+instance ToJSON Tag where
+        toJSON Tag'{..}
+          = object
+              (catMaybes
+                 [("value" .=) <$> _tagValue, ("key" .=) <$> _tagKey])

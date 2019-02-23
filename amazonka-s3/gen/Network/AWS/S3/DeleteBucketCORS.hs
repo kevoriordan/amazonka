@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Deletes the cors configuration information set for the bucket.
+-- Deletes the CORS configuration information set for the bucket.
+--
+--
 module Network.AWS.S3.DeleteBucketCORS
     (
     -- * Creating a Request

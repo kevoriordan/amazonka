@@ -34,6 +34,9 @@ import Test.Tasty
 --         , requestUpdateUserPool $
 --             updateUserPool
 --
+--         , requestUpdateUserPoolDomain $
+--             updateUserPoolDomain
+--
 --         , requestDeleteUserPoolDomain $
 --             deleteUserPoolDomain
 --
@@ -321,6 +324,9 @@ import Test.Tasty
 --
 --         , responseUpdateUserPool $
 --             updateUserPoolResponse
+--
+--         , responseUpdateUserPoolDomain $
+--             updateUserPoolDomainResponse
 --
 --         , responseDeleteUserPoolDomain $
 --             deleteUserPoolDomainResponse
@@ -615,6 +621,11 @@ requestUpdateUserPool :: UpdateUserPool -> TestTree
 requestUpdateUserPool = req
     "UpdateUserPool"
     "fixture/UpdateUserPool.yaml"
+
+requestUpdateUserPoolDomain :: UpdateUserPoolDomain -> TestTree
+requestUpdateUserPoolDomain = req
+    "UpdateUserPoolDomain"
+    "fixture/UpdateUserPoolDomain.yaml"
 
 requestDeleteUserPoolDomain :: DeleteUserPoolDomain -> TestTree
 requestDeleteUserPoolDomain = req
@@ -1096,6 +1107,13 @@ responseUpdateUserPool = res
     "fixture/UpdateUserPoolResponse.proto"
     cognitoIdentityProvider
     (Proxy :: Proxy UpdateUserPool)
+
+responseUpdateUserPoolDomain :: UpdateUserPoolDomainResponse -> TestTree
+responseUpdateUserPoolDomain = res
+    "UpdateUserPoolDomainResponse"
+    "fixture/UpdateUserPoolDomainResponse.proto"
+    cognitoIdentityProvider
+    (Proxy :: Proxy UpdateUserPoolDomain)
 
 responseDeleteUserPoolDomain :: DeleteUserPoolDomainResponse -> TestTree
 responseDeleteUserPoolDomain = res

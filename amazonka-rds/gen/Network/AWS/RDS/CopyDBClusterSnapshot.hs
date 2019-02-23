@@ -49,9 +49,9 @@
 --
 -- To cancel the copy operation once it is in progress, delete the target DB cluster snapshot identified by @TargetDBClusterSnapshotIdentifier@ while that DB cluster snapshot is in "copying" status.
 --
--- For more information on copying encrypted DB cluster snapshots from one AWS Region to another, see <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopyDBClusterSnapshot.CrossRegion Copying a DB Cluster Snapshot in the Same Account, Either in the Same Region or Across Regions> in the Amazon RDS User Guide.
+-- For more information on copying encrypted DB cluster snapshots from one AWS Region to another, see <http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_CopySnapshot.html Copying a Snapshot> in the /Amazon Aurora User Guide./
 --
--- For more information on Amazon Aurora, see <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html Aurora on Amazon RDS> in the /Amazon RDS User Guide./
+-- For more information on Amazon Aurora, see <http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html What Is Amazon Aurora?> in the /Amazon Aurora User Guide./
 --
 module Network.AWS.RDS.CopyDBClusterSnapshot
     (
@@ -108,9 +108,9 @@ data CopyDBClusterSnapshot = CopyDBClusterSnapshot'
 --
 -- * 'cdbcsTags' - Undocumented member.
 --
--- * 'cdbcsSourceDBClusterSnapshotIdentifier' - The identifier of the DB cluster snapshot to copy. This parameter is not case-sensitive. You can't copy an encrypted, shared DB cluster snapshot from one AWS Region to another. Constraints:     * Must specify a valid system snapshot in the "available" state.     * If the source snapshot is in the same AWS Region as the copy, specify a valid DB snapshot identifier.     * If the source snapshot is in a different AWS Region than the copy, specify a valid DB cluster snapshot ARN. For more information, go to <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html Copying a DB Snapshot or DB Cluster Snapshot> . Example: @my-cluster-snapshot1@
+-- * 'cdbcsSourceDBClusterSnapshotIdentifier' - The identifier of the DB cluster snapshot to copy. This parameter is not case-sensitive. You can't copy an encrypted, shared DB cluster snapshot from one AWS Region to another. Constraints:     * Must specify a valid system snapshot in the "available" state.     * If the source snapshot is in the same AWS Region as the copy, specify a valid DB snapshot identifier.     * If the source snapshot is in a different AWS Region than the copy, specify a valid DB cluster snapshot ARN. For more information, go to <http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_CopySnapshot.html#USER_CopySnapshot.AcrossRegions Copying Snapshots Across AWS Regions> in the /Amazon Aurora User Guide./  Example: @my-cluster-snapshot1@
 --
--- * 'cdbcsTargetDBClusterSnapshotIdentifier' - The identifier of the new DB cluster snapshot to create from the source DB cluster snapshot. This parameter is not case-sensitive. Constraints:     * Must contain from 1 to 63 letters, numbers, or hyphens.     * First character must be a letter.     * Cannot end with a hyphen or contain two consecutive hyphens. Example: @my-cluster-snapshot2@
+-- * 'cdbcsTargetDBClusterSnapshotIdentifier' - The identifier of the new DB cluster snapshot to create from the source DB cluster snapshot. This parameter is not case-sensitive. Constraints:     * Must contain from 1 to 63 letters, numbers, or hyphens.     * First character must be a letter.     * Can't end with a hyphen or contain two consecutive hyphens. Example: @my-cluster-snapshot2@
 copyDBClusterSnapshot
     :: Text -- ^ 'cdbcsSourceDBClusterSnapshotIdentifier'
     -> Text -- ^ 'cdbcsTargetDBClusterSnapshotIdentifier'
@@ -144,11 +144,11 @@ cdbcsKMSKeyId = lens _cdbcsKMSKeyId (\ s a -> s{_cdbcsKMSKeyId = a})
 cdbcsTags :: Lens' CopyDBClusterSnapshot [Tag]
 cdbcsTags = lens _cdbcsTags (\ s a -> s{_cdbcsTags = a}) . _Default . _Coerce
 
--- | The identifier of the DB cluster snapshot to copy. This parameter is not case-sensitive. You can't copy an encrypted, shared DB cluster snapshot from one AWS Region to another. Constraints:     * Must specify a valid system snapshot in the "available" state.     * If the source snapshot is in the same AWS Region as the copy, specify a valid DB snapshot identifier.     * If the source snapshot is in a different AWS Region than the copy, specify a valid DB cluster snapshot ARN. For more information, go to <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html Copying a DB Snapshot or DB Cluster Snapshot> . Example: @my-cluster-snapshot1@
+-- | The identifier of the DB cluster snapshot to copy. This parameter is not case-sensitive. You can't copy an encrypted, shared DB cluster snapshot from one AWS Region to another. Constraints:     * Must specify a valid system snapshot in the "available" state.     * If the source snapshot is in the same AWS Region as the copy, specify a valid DB snapshot identifier.     * If the source snapshot is in a different AWS Region than the copy, specify a valid DB cluster snapshot ARN. For more information, go to <http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_CopySnapshot.html#USER_CopySnapshot.AcrossRegions Copying Snapshots Across AWS Regions> in the /Amazon Aurora User Guide./  Example: @my-cluster-snapshot1@
 cdbcsSourceDBClusterSnapshotIdentifier :: Lens' CopyDBClusterSnapshot Text
 cdbcsSourceDBClusterSnapshotIdentifier = lens _cdbcsSourceDBClusterSnapshotIdentifier (\ s a -> s{_cdbcsSourceDBClusterSnapshotIdentifier = a})
 
--- | The identifier of the new DB cluster snapshot to create from the source DB cluster snapshot. This parameter is not case-sensitive. Constraints:     * Must contain from 1 to 63 letters, numbers, or hyphens.     * First character must be a letter.     * Cannot end with a hyphen or contain two consecutive hyphens. Example: @my-cluster-snapshot2@
+-- | The identifier of the new DB cluster snapshot to create from the source DB cluster snapshot. This parameter is not case-sensitive. Constraints:     * Must contain from 1 to 63 letters, numbers, or hyphens.     * First character must be a letter.     * Can't end with a hyphen or contain two consecutive hyphens. Example: @my-cluster-snapshot2@
 cdbcsTargetDBClusterSnapshotIdentifier :: Lens' CopyDBClusterSnapshot Text
 cdbcsTargetDBClusterSnapshotIdentifier = lens _cdbcsTargetDBClusterSnapshotIdentifier (\ s a -> s{_cdbcsTargetDBClusterSnapshotIdentifier = a})
 

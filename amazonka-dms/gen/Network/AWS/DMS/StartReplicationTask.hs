@@ -21,7 +21,7 @@
 -- Starts the replication task.
 --
 --
--- For more information about AWS DMS tasks, see the AWS DMS user guide at <http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html Working with Migration Tasks >
+-- For more information about AWS DMS tasks, see <http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html Working with Migration Tasks > in the /AWS Database Migration Service User Guide./
 --
 module Network.AWS.DMS.StartReplicationTask
     (
@@ -72,7 +72,7 @@ data StartReplicationTask = StartReplicationTask'
 --
 -- * 'srtCdcStopPosition' - Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “
 --
--- * 'srtCdcStartTime' - Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.
+-- * 'srtCdcStartTime' - Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error. Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”
 --
 -- * 'srtReplicationTaskARN' - The Amazon Resource Name (ARN) of the replication task to be started.
 --
@@ -99,7 +99,7 @@ srtCdcStartPosition = lens _srtCdcStartPosition (\ s a -> s{_srtCdcStartPosition
 srtCdcStopPosition :: Lens' StartReplicationTask (Maybe Text)
 srtCdcStopPosition = lens _srtCdcStopPosition (\ s a -> s{_srtCdcStopPosition = a})
 
--- | Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.
+-- | Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error. Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”
 srtCdcStartTime :: Lens' StartReplicationTask (Maybe UTCTime)
 srtCdcStartTime = lens _srtCdcStartTime (\ s a -> s{_srtCdcStartTime = a}) . mapping _Time
 

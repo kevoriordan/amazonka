@@ -23,8 +23,6 @@
 --
 -- This action removes the fleet's resources and the fleet record. Once a fleet is deleted, you can no longer use that fleet.
 --
--- Fleet-related operations include:
---
 --     * 'CreateFleet'
 --
 --     * 'ListFleets'

@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Uploads an object to the specified path. Object sizes are limited to 10 MB.
+-- Uploads an object to the specified path. Object sizes are limited to 25 MB.
 --
 --
 module Network.AWS.MediaStoreData.PutObject
@@ -149,7 +149,7 @@ data PutObjectResponse = PutObjectResponse'
 --
 -- * 'porsETag' - Unique identifier of the object in the container.
 --
--- * 'porsStorageClass' - The storage class where the object was persisted. Should be “Temporal”.
+-- * 'porsStorageClass' - The storage class where the object was persisted. The class should be “Temporal”.
 --
 -- * 'porsContentSHA256' - The SHA256 digest of the object that is persisted.
 --
@@ -170,7 +170,7 @@ putObjectResponse pResponseStatus_ =
 porsETag :: Lens' PutObjectResponse (Maybe Text)
 porsETag = lens _porsETag (\ s a -> s{_porsETag = a})
 
--- | The storage class where the object was persisted. Should be “Temporal”.
+-- | The storage class where the object was persisted. The class should be “Temporal”.
 porsStorageClass :: Lens' PutObjectResponse (Maybe StorageClass)
 porsStorageClass = lens _porsStorageClass (\ s a -> s{_porsStorageClass = a})
 

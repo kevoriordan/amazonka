@@ -124,6 +124,7 @@ module Network.AWS.CodePipeline.Types
     , actionDeclaration
     , adOutputArtifacts
     , adRunOrder
+    , adRegion
     , adConfiguration
     , adInputArtifacts
     , adRoleARN
@@ -323,10 +324,11 @@ module Network.AWS.CodePipeline.Types
     -- * PipelineDeclaration
     , PipelineDeclaration
     , pipelineDeclaration
+    , pdArtifactStores
+    , pdArtifactStore
     , pdVersion
     , pdName
     , pdRoleARN
-    , pdArtifactStore
     , pdStages
 
     -- * PipelineExecution

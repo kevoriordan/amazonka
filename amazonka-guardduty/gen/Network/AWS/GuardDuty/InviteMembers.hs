@@ -25,10 +25,10 @@ module Network.AWS.GuardDuty.InviteMembers
       inviteMembers
     , InviteMembers
     -- * Request Lenses
-    , imAccountIds
     , imDisableEmailNotification
     , imMessage
     , imDetectorId
+    , imAccountIds
 
     -- * Destructuring the Response
     , inviteMembersResponse
@@ -49,10 +49,10 @@ import Network.AWS.Response
 --
 -- /See:/ 'inviteMembers' smart constructor.
 data InviteMembers = InviteMembers'
-  { _imAccountIds               :: !(Maybe [Text])
-  , _imDisableEmailNotification :: !(Maybe Bool)
+  { _imDisableEmailNotification :: !(Maybe Bool)
   , _imMessage                  :: !(Maybe Text)
   , _imDetectorId               :: !Text
+  , _imAccountIds               :: ![Text]
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -60,28 +60,24 @@ data InviteMembers = InviteMembers'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'imAccountIds' - A list of account IDs of the accounts that you want to invite to GuardDuty as members.
---
 -- * 'imDisableEmailNotification' - A boolean value that specifies whether you want to disable email notification to the accounts that you’re inviting to GuardDuty as members.
 --
 -- * 'imMessage' - The invitation message that you want to send to the accounts that you’re inviting to GuardDuty as members.
 --
 -- * 'imDetectorId' - The unique ID of the detector of the GuardDuty account with which you want to invite members.
+--
+-- * 'imAccountIds' - A list of account IDs of the accounts that you want to invite to GuardDuty as members.
 inviteMembers
     :: Text -- ^ 'imDetectorId'
     -> InviteMembers
 inviteMembers pDetectorId_ =
   InviteMembers'
-    { _imAccountIds = Nothing
-    , _imDisableEmailNotification = Nothing
+    { _imDisableEmailNotification = Nothing
     , _imMessage = Nothing
     , _imDetectorId = pDetectorId_
+    , _imAccountIds = mempty
     }
 
-
--- | A list of account IDs of the accounts that you want to invite to GuardDuty as members.
-imAccountIds :: Lens' InviteMembers [Text]
-imAccountIds = lens _imAccountIds (\ s a -> s{_imAccountIds = a}) . _Default . _Coerce
 
 -- | A boolean value that specifies whether you want to disable email notification to the accounts that you’re inviting to GuardDuty as members.
 imDisableEmailNotification :: Lens' InviteMembers (Maybe Bool)
@@ -94,6 +90,10 @@ imMessage = lens _imMessage (\ s a -> s{_imMessage = a})
 -- | The unique ID of the detector of the GuardDuty account with which you want to invite members.
 imDetectorId :: Lens' InviteMembers Text
 imDetectorId = lens _imDetectorId (\ s a -> s{_imDetectorId = a})
+
+-- | A list of account IDs of the accounts that you want to invite to GuardDuty as members.
+imAccountIds :: Lens' InviteMembers [Text]
+imAccountIds = lens _imAccountIds (\ s a -> s{_imAccountIds = a}) . _Coerce
 
 instance AWSRequest InviteMembers where
         type Rs InviteMembers = InviteMembersResponse
@@ -120,10 +120,10 @@ instance ToJSON InviteMembers where
         toJSON InviteMembers'{..}
           = object
               (catMaybes
-                 [("accountIds" .=) <$> _imAccountIds,
-                  ("disableEmailNotification" .=) <$>
+                 [("disableEmailNotification" .=) <$>
                     _imDisableEmailNotification,
-                  ("message" .=) <$> _imMessage])
+                  ("message" .=) <$> _imMessage,
+                  Just ("accountIds" .= _imAccountIds)])
 
 instance ToPath InviteMembers where
         toPath InviteMembers'{..}

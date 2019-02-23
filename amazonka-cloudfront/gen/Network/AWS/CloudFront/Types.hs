@@ -57,7 +57,6 @@ module Network.AWS.CloudFront.Types
     , _TooManyFieldLevelEncryptionEncryptionEntities
     , _TooManyStreamingDistributionCNAMEs
     , _FieldLevelEncryptionProfileAlreadyExists
-    , _ResourceInUse
     , _InvalidRequiredProtocol
     , _TooManyDistributions
     , _TooManyCertificates
@@ -1083,11 +1082,6 @@ _FieldLevelEncryptionProfileAlreadyExists :: AsError a => Getting (First Service
 _FieldLevelEncryptionProfileAlreadyExists =
   _MatchServiceError cloudFront "FieldLevelEncryptionProfileAlreadyExists" .
   hasStatus 409
-
-
--- | Prism for ResourceInUse' errors.
-_ResourceInUse :: AsError a => Getting (First ServiceError) a ServiceError
-_ResourceInUse = _MatchServiceError cloudFront "ResourceInUse" . hasStatus 409
 
 
 -- | This operation requires the HTTPS protocol. Ensure that you specify the HTTPS protocol in your request, or omit the @RequiredProtocols@ element from your distribution configuration.

@@ -143,9 +143,6 @@ module Network.AWS.CloudFront
     -- ** FieldLevelEncryptionProfileAlreadyExists
     , _FieldLevelEncryptionProfileAlreadyExists
 
-    -- ** ResourceInUse
-    , _ResourceInUse
-
     -- ** InvalidRequiredProtocol
     , _InvalidRequiredProtocol
 
@@ -334,9 +331,6 @@ module Network.AWS.CloudFront
 
     -- ** UpdateFieldLevelEncryptionProfile
     , module Network.AWS.CloudFront.UpdateFieldLevelEncryptionProfile
-
-    -- ** DeleteServiceLinkedRole
-    , module Network.AWS.CloudFront.DeleteServiceLinkedRole
 
     -- ** CreateFieldLevelEncryptionProfile
     , module Network.AWS.CloudFront.CreateFieldLevelEncryptionProfile
@@ -1066,7 +1060,6 @@ import Network.AWS.CloudFront.DeleteDistribution
 import Network.AWS.CloudFront.DeleteFieldLevelEncryptionConfig
 import Network.AWS.CloudFront.DeleteFieldLevelEncryptionProfile
 import Network.AWS.CloudFront.DeletePublicKey
-import Network.AWS.CloudFront.DeleteServiceLinkedRole
 import Network.AWS.CloudFront.DeleteStreamingDistribution
 import Network.AWS.CloudFront.GetCloudFrontOriginAccessIdentity
 import Network.AWS.CloudFront.GetCloudFrontOriginAccessIdentityConfig

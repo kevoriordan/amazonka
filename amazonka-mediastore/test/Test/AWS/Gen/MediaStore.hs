@@ -28,7 +28,13 @@ import Test.Tasty
 -- fixtures :: TestTree
 -- fixtures =
 --     [ testGroup "request"
---         [ requestCreateContainer $
+--         [ requestPutLifecyclePolicy $
+--             putLifecyclePolicy
+--
+--         , requestDeleteLifecyclePolicy $
+--             deleteLifecyclePolicy
+--
+--         , requestCreateContainer $
 --             createContainer
 --
 --         , requestListContainers $
@@ -46,6 +52,9 @@ import Test.Tasty
 --         , requestDescribeContainer $
 --             describeContainer
 --
+--         , requestGetLifecyclePolicy $
+--             getLifecyclePolicy
+--
 --         , requestGetCORSPolicy $
 --             getCORSPolicy
 --
@@ -61,7 +70,13 @@ import Test.Tasty
 --           ]
 
 --     , testGroup "response"
---         [ responseCreateContainer $
+--         [ responsePutLifecyclePolicy $
+--             putLifecyclePolicyResponse
+--
+--         , responseDeleteLifecyclePolicy $
+--             deleteLifecyclePolicyResponse
+--
+--         , responseCreateContainer $
 --             createContainerResponse
 --
 --         , responseListContainers $
@@ -79,6 +94,9 @@ import Test.Tasty
 --         , responseDescribeContainer $
 --             describeContainerResponse
 --
+--         , responseGetLifecyclePolicy $
+--             getLifecyclePolicyResponse
+--
 --         , responseGetCORSPolicy $
 --             getCORSPolicyResponse
 --
@@ -95,6 +113,16 @@ import Test.Tasty
 --     ]
 
 -- Requests
+
+requestPutLifecyclePolicy :: PutLifecyclePolicy -> TestTree
+requestPutLifecyclePolicy = req
+    "PutLifecyclePolicy"
+    "fixture/PutLifecyclePolicy.yaml"
+
+requestDeleteLifecyclePolicy :: DeleteLifecyclePolicy -> TestTree
+requestDeleteLifecyclePolicy = req
+    "DeleteLifecyclePolicy"
+    "fixture/DeleteLifecyclePolicy.yaml"
 
 requestCreateContainer :: CreateContainer -> TestTree
 requestCreateContainer = req
@@ -126,6 +154,11 @@ requestDescribeContainer = req
     "DescribeContainer"
     "fixture/DescribeContainer.yaml"
 
+requestGetLifecyclePolicy :: GetLifecyclePolicy -> TestTree
+requestGetLifecyclePolicy = req
+    "GetLifecyclePolicy"
+    "fixture/GetLifecyclePolicy.yaml"
+
 requestGetCORSPolicy :: GetCORSPolicy -> TestTree
 requestGetCORSPolicy = req
     "GetCORSPolicy"
@@ -147,6 +180,20 @@ requestGetContainerPolicy = req
     "fixture/GetContainerPolicy.yaml"
 
 -- Responses
+
+responsePutLifecyclePolicy :: PutLifecyclePolicyResponse -> TestTree
+responsePutLifecyclePolicy = res
+    "PutLifecyclePolicyResponse"
+    "fixture/PutLifecyclePolicyResponse.proto"
+    mediaStore
+    (Proxy :: Proxy PutLifecyclePolicy)
+
+responseDeleteLifecyclePolicy :: DeleteLifecyclePolicyResponse -> TestTree
+responseDeleteLifecyclePolicy = res
+    "DeleteLifecyclePolicyResponse"
+    "fixture/DeleteLifecyclePolicyResponse.proto"
+    mediaStore
+    (Proxy :: Proxy DeleteLifecyclePolicy)
 
 responseCreateContainer :: CreateContainerResponse -> TestTree
 responseCreateContainer = res
@@ -189,6 +236,13 @@ responseDescribeContainer = res
     "fixture/DescribeContainerResponse.proto"
     mediaStore
     (Proxy :: Proxy DescribeContainer)
+
+responseGetLifecyclePolicy :: GetLifecyclePolicyResponse -> TestTree
+responseGetLifecyclePolicy = res
+    "GetLifecyclePolicyResponse"
+    "fixture/GetLifecyclePolicyResponse.proto"
+    mediaStore
+    (Proxy :: Proxy GetLifecyclePolicy)
 
 responseGetCORSPolicy :: GetCORSPolicyResponse -> TestTree
 responseGetCORSPolicy = res

@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Describes available AWS services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service. A prefix list ID is required for creating an outbound security group rule that allows traffic from a VPC to access an AWS service through a gateway VPC endpoint.
+-- Describes available AWS services in a prefix list format, which includes the prefix list name and prefix list ID of the service and the IP address range for the service. A prefix list ID is required for creating an outbound security group rule that allows traffic from a VPC to access an AWS service through a gateway VPC endpoint. Currently, the services that support this action are Amazon S3 and Amazon DynamoDB.
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.EC2.DescribePrefixLists
     (
     -- * Creating a Request
@@ -45,15 +47,12 @@ module Network.AWS.EC2.DescribePrefixLists
 import Network.AWS.EC2.Types
 import Network.AWS.EC2.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for DescribePrefixLists.
---
---
---
--- /See:/ 'describePrefixLists' smart constructor.
+-- | /See:/ 'describePrefixLists' smart constructor.
 data DescribePrefixLists = DescribePrefixLists'
   { _dplFilters       :: !(Maybe [Filter])
   , _dplPrefixListIds :: !(Maybe [Text])
@@ -108,6 +107,13 @@ dplDryRun = lens _dplDryRun (\ s a -> s{_dplDryRun = a})
 dplMaxResults :: Lens' DescribePrefixLists (Maybe Int)
 dplMaxResults = lens _dplMaxResults (\ s a -> s{_dplMaxResults = a})
 
+instance AWSPager DescribePrefixLists where
+        page rq rs
+          | stop (rs ^. dplrsNextToken) = Nothing
+          | stop (rs ^. dplrsPrefixLists) = Nothing
+          | otherwise =
+            Just $ rq & dplNextToken .~ rs ^. dplrsNextToken
+
 instance AWSRequest DescribePrefixLists where
         type Rs DescribePrefixLists =
              DescribePrefixListsResponse
@@ -142,11 +148,7 @@ instance ToQuery DescribePrefixLists where
                "NextToken" =: _dplNextToken, "DryRun" =: _dplDryRun,
                "MaxResults" =: _dplMaxResults]
 
--- | Contains the output of DescribePrefixLists.
---
---
---
--- /See:/ 'describePrefixListsResponse' smart constructor.
+-- | /See:/ 'describePrefixListsResponse' smart constructor.
 data DescribePrefixListsResponse = DescribePrefixListsResponse'
   { _dplrsNextToken      :: !(Maybe Text)
   , _dplrsPrefixLists    :: !(Maybe [PrefixList])

@@ -233,6 +233,9 @@ module Network.AWS.CloudDirectory
     -- ** CreateFacet
     , module Network.AWS.CloudDirectory.CreateFacet
 
+    -- ** GetLinkAttributes
+    , module Network.AWS.CloudDirectory.GetLinkAttributes
+
     -- ** GetObjectAttributes
     , module Network.AWS.CloudDirectory.GetObjectAttributes
 
@@ -316,6 +319,9 @@ module Network.AWS.CloudDirectory
 
     -- ** PutSchemaFromJSON
     , module Network.AWS.CloudDirectory.PutSchemaFromJSON
+
+    -- ** UpdateLinkAttributes
+    , module Network.AWS.CloudDirectory.UpdateLinkAttributes
 
     -- ** AttachToIndex
     , module Network.AWS.CloudDirectory.AttachToIndex
@@ -507,6 +513,17 @@ module Network.AWS.CloudDirectory
     , BatchDetachTypedLinkResponse
     , batchDetachTypedLinkResponse
 
+    -- ** BatchGetLinkAttributes
+    , BatchGetLinkAttributes
+    , batchGetLinkAttributes
+    , bglaTypedLinkSpecifier
+    , bglaAttributeNames
+
+    -- ** BatchGetLinkAttributesResponse
+    , BatchGetLinkAttributesResponse
+    , batchGetLinkAttributesResponse
+    , bglaAttributes
+
     -- ** BatchGetObjectAttributes
     , BatchGetObjectAttributes
     , batchGetObjectAttributes
@@ -682,6 +699,7 @@ module Network.AWS.CloudDirectory
     , broListObjectParentPaths
     , broListObjectAttributes
     , broListIncomingTypedLinks
+    , broGetLinkAttributes
     , broGetObjectAttributes
     , broListObjectChildren
     , broListPolicyAttachments
@@ -704,6 +722,7 @@ module Network.AWS.CloudDirectory
     , brsListObjectParentPaths
     , brsListObjectAttributes
     , brsListIncomingTypedLinks
+    , brsGetLinkAttributes
     , brsGetObjectAttributes
     , brsListObjectChildren
     , brsListPolicyAttachments
@@ -719,6 +738,16 @@ module Network.AWS.CloudDirectory
     -- ** BatchRemoveFacetFromObjectResponse
     , BatchRemoveFacetFromObjectResponse
     , batchRemoveFacetFromObjectResponse
+
+    -- ** BatchUpdateLinkAttributes
+    , BatchUpdateLinkAttributes
+    , batchUpdateLinkAttributes
+    , bulaTypedLinkSpecifier
+    , bulaAttributeUpdates
+
+    -- ** BatchUpdateLinkAttributesResponse
+    , BatchUpdateLinkAttributesResponse
+    , batchUpdateLinkAttributesResponse
 
     -- ** BatchUpdateObjectAttributes
     , BatchUpdateObjectAttributes
@@ -747,6 +776,7 @@ module Network.AWS.CloudDirectory
     , bDetachTypedLink
     , bUpdateObjectAttributes
     , bAttachPolicy
+    , bUpdateLinkAttributes
     , bAttachToIndex
 
     -- ** BatchWriteOperationResponse
@@ -765,6 +795,7 @@ module Network.AWS.CloudDirectory
     , bwoDetachTypedLink
     , bwoUpdateObjectAttributes
     , bwoAttachPolicy
+    , bwoUpdateLinkAttributes
     , bwoAttachToIndex
 
     -- ** Directory
@@ -814,6 +845,18 @@ module Network.AWS.CloudDirectory
     , indexAttachment
     , iaIndexedAttributes
     , iaObjectIdentifier
+
+    -- ** LinkAttributeAction
+    , LinkAttributeAction
+    , linkAttributeAction
+    , laaAttributeActionType
+    , laaAttributeUpdateValue
+
+    -- ** LinkAttributeUpdate
+    , LinkAttributeUpdate
+    , linkAttributeUpdate
+    , lauAttributeAction
+    , lauAttributeKey
 
     -- ** ObjectAttributeAction
     , ObjectAttributeAction
@@ -964,6 +1007,7 @@ import Network.AWS.CloudDirectory.EnableDirectory
 import Network.AWS.CloudDirectory.GetAppliedSchemaVersion
 import Network.AWS.CloudDirectory.GetDirectory
 import Network.AWS.CloudDirectory.GetFacet
+import Network.AWS.CloudDirectory.GetLinkAttributes
 import Network.AWS.CloudDirectory.GetObjectAttributes
 import Network.AWS.CloudDirectory.GetObjectInformation
 import Network.AWS.CloudDirectory.GetSchemaAsJSON
@@ -995,6 +1039,7 @@ import Network.AWS.CloudDirectory.TagResource
 import Network.AWS.CloudDirectory.Types
 import Network.AWS.CloudDirectory.UntagResource
 import Network.AWS.CloudDirectory.UpdateFacet
+import Network.AWS.CloudDirectory.UpdateLinkAttributes
 import Network.AWS.CloudDirectory.UpdateObjectAttributes
 import Network.AWS.CloudDirectory.UpdateSchema
 import Network.AWS.CloudDirectory.UpdateTypedLinkFacet

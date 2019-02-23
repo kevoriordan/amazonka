@@ -25,11 +25,13 @@ module Network.AWS.MediaConvert.CreateJobTemplate
       createJobTemplate
     , CreateJobTemplate
     -- * Request Lenses
-    , cjtSettings
+    , cjtAccelerationSettings
     , cjtCategory
     , cjtQueue
-    , cjtName
     , cjtDescription
+    , cjtTags
+    , cjtSettings
+    , cjtName
 
     -- * Destructuring the Response
     , createJobTemplateResponse
@@ -48,11 +50,13 @@ import Network.AWS.Response
 
 -- | /See:/ 'createJobTemplate' smart constructor.
 data CreateJobTemplate = CreateJobTemplate'
-  { _cjtSettings    :: !(Maybe JobTemplateSettings)
-  , _cjtCategory    :: !(Maybe Text)
-  , _cjtQueue       :: !(Maybe Text)
-  , _cjtName        :: !(Maybe Text)
-  , _cjtDescription :: !(Maybe Text)
+  { _cjtAccelerationSettings :: !(Maybe AccelerationSettings)
+  , _cjtCategory             :: !(Maybe Text)
+  , _cjtQueue                :: !(Maybe Text)
+  , _cjtDescription          :: !(Maybe Text)
+  , _cjtTags                 :: !(Maybe (Map Text Text))
+  , _cjtSettings             :: !JobTemplateSettings
+  , _cjtName                 :: !Text
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -60,30 +64,38 @@ data CreateJobTemplate = CreateJobTemplate'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cjtSettings' - Undocumented member.
+-- * 'cjtAccelerationSettings' - This is a beta feature. If you are interested in using this feature please contact AWS customer support.
 --
 -- * 'cjtCategory' - Optional. A category for the job template you are creating
 --
 -- * 'cjtQueue' - Optional. The queue that jobs created from this template are assigned to. If you don't specify this, jobs will go to the default queue.
 --
--- * 'cjtName' - The name of the job template you are creating.
---
 -- * 'cjtDescription' - Optional. A description of the job template you are creating.
+--
+-- * 'cjtTags' - The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
+--
+-- * 'cjtSettings' - Undocumented member.
+--
+-- * 'cjtName' - The name of the job template you are creating.
 createJobTemplate
-    :: CreateJobTemplate
-createJobTemplate =
+    :: JobTemplateSettings -- ^ 'cjtSettings'
+    -> Text -- ^ 'cjtName'
+    -> CreateJobTemplate
+createJobTemplate pSettings_ pName_ =
   CreateJobTemplate'
-    { _cjtSettings = Nothing
+    { _cjtAccelerationSettings = Nothing
     , _cjtCategory = Nothing
     , _cjtQueue = Nothing
-    , _cjtName = Nothing
     , _cjtDescription = Nothing
+    , _cjtTags = Nothing
+    , _cjtSettings = pSettings_
+    , _cjtName = pName_
     }
 
 
--- | Undocumented member.
-cjtSettings :: Lens' CreateJobTemplate (Maybe JobTemplateSettings)
-cjtSettings = lens _cjtSettings (\ s a -> s{_cjtSettings = a})
+-- | This is a beta feature. If you are interested in using this feature please contact AWS customer support.
+cjtAccelerationSettings :: Lens' CreateJobTemplate (Maybe AccelerationSettings)
+cjtAccelerationSettings = lens _cjtAccelerationSettings (\ s a -> s{_cjtAccelerationSettings = a})
 
 -- | Optional. A category for the job template you are creating
 cjtCategory :: Lens' CreateJobTemplate (Maybe Text)
@@ -93,13 +105,21 @@ cjtCategory = lens _cjtCategory (\ s a -> s{_cjtCategory = a})
 cjtQueue :: Lens' CreateJobTemplate (Maybe Text)
 cjtQueue = lens _cjtQueue (\ s a -> s{_cjtQueue = a})
 
--- | The name of the job template you are creating.
-cjtName :: Lens' CreateJobTemplate (Maybe Text)
-cjtName = lens _cjtName (\ s a -> s{_cjtName = a})
-
 -- | Optional. A description of the job template you are creating.
 cjtDescription :: Lens' CreateJobTemplate (Maybe Text)
 cjtDescription = lens _cjtDescription (\ s a -> s{_cjtDescription = a})
+
+-- | The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
+cjtTags :: Lens' CreateJobTemplate (HashMap Text Text)
+cjtTags = lens _cjtTags (\ s a -> s{_cjtTags = a}) . _Default . _Map
+
+-- | Undocumented member.
+cjtSettings :: Lens' CreateJobTemplate JobTemplateSettings
+cjtSettings = lens _cjtSettings (\ s a -> s{_cjtSettings = a})
+
+-- | The name of the job template you are creating.
+cjtName :: Lens' CreateJobTemplate Text
+cjtName = lens _cjtName (\ s a -> s{_cjtName = a})
 
 instance AWSRequest CreateJobTemplate where
         type Rs CreateJobTemplate = CreateJobTemplateResponse
@@ -125,10 +145,14 @@ instance ToJSON CreateJobTemplate where
         toJSON CreateJobTemplate'{..}
           = object
               (catMaybes
-                 [("settings" .=) <$> _cjtSettings,
+                 [("accelerationSettings" .=) <$>
+                    _cjtAccelerationSettings,
                   ("category" .=) <$> _cjtCategory,
-                  ("queue" .=) <$> _cjtQueue, ("name" .=) <$> _cjtName,
-                  ("description" .=) <$> _cjtDescription])
+                  ("queue" .=) <$> _cjtQueue,
+                  ("description" .=) <$> _cjtDescription,
+                  ("tags" .=) <$> _cjtTags,
+                  Just ("settings" .= _cjtSettings),
+                  Just ("name" .= _cjtName)])
 
 instance ToPath CreateJobTemplate where
         toPath = const "/2017-08-29/jobTemplates"

@@ -21,7 +21,13 @@
 -- Modifies the settings for a replication group.
 --
 --
--- /Important:/ Due to current limitations on Redis (cluster mode disabled), this operation or parameter is not supported on Redis (cluster mode enabled) replication groups.
+-- For Redis (cluster mode enabled) clusters, this operation cannot be used to change a cluster's node type or engine version. For more information, see:
+--
+--     * <http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/scaling-redis-cluster-mode-enabled.html Scaling for Amazon ElastiCache for Redis—Redis (cluster mode enabled)> in the ElastiCache User Guide
+--
+--     * <http://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyReplicationGroupShardConfiguration.html ModifyReplicationGroupShardConfiguration> in the ElastiCache API Reference
+--
+--
 --
 module Network.AWS.ElastiCache.ModifyReplicationGroup
     (
@@ -96,7 +102,7 @@ data ModifyReplicationGroup = ModifyReplicationGroup'
 --
 -- * 'mrgAutomaticFailoverEnabled' - Determines whether a read replica is automatically promoted to read/write primary if the existing primary encounters a failure. Valid values: @true@ | @false@  Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover on:     * Redis versions earlier than 2.8.6.     * Redis (cluster mode disabled): T1 and T2 cache node types.     * Redis (cluster mode enabled): T1 node types.
 --
--- * 'mrgEngineVersion' - The upgraded version of the cache engine to be run on the clusters in the replication group. __Important:__ You can upgrade to a newer engine version (see <http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement Selecting a Cache Engine and Version> ), but you cannot downgrade to an earlier engine version. If you want to use an earlier engine version, you must delete the existing replication group and create it anew with the earlier engine version.
+-- * 'mrgEngineVersion' - The upgraded version of the cache engine to be run on the clusters in the replication group. __Important:__ You can upgrade to a newer engine version (see <http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement Selecting a Cache Engine and Version> ), but you cannot downgrade to an earlier engine version. If you want to use an earlier engine version, you must delete the existing replication group and create it anew with the earlier engine version.
 --
 -- * 'mrgCacheNodeType' - A valid cache node type that you want to scale this replication group to.
 --
@@ -116,7 +122,7 @@ data ModifyReplicationGroup = ModifyReplicationGroup'
 --
 -- * 'mrgPreferredMaintenanceWindow' - Specifies the weekly time range during which maintenance on the cluster is performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Valid values for @ddd@ are:     * @sun@      * @mon@      * @tue@      * @wed@      * @thu@      * @fri@      * @sat@  Example: @sun:23:00-mon:01:30@
 --
--- * 'mrgNodeGroupId' - The name of the Node Group (called shard in the console).
+-- * 'mrgNodeGroupId' - Deprecated. This parameter is not used.
 --
 -- * 'mrgSnapshotRetentionLimit' - The number of days for which ElastiCache retains automatic node group (shard) snapshots before deleting them. For example, if you set @SnapshotRetentionLimit@ to 5, a snapshot that was taken today is retained for 5 days before being deleted. __Important__ If the value of SnapshotRetentionLimit is set to zero (0), backups are turned off.
 --
@@ -159,7 +165,7 @@ modifyReplicationGroup pReplicationGroupId_ =
 mrgAutomaticFailoverEnabled :: Lens' ModifyReplicationGroup (Maybe Bool)
 mrgAutomaticFailoverEnabled = lens _mrgAutomaticFailoverEnabled (\ s a -> s{_mrgAutomaticFailoverEnabled = a})
 
--- | The upgraded version of the cache engine to be run on the clusters in the replication group. __Important:__ You can upgrade to a newer engine version (see <http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SelectEngine.html#VersionManagement Selecting a Cache Engine and Version> ), but you cannot downgrade to an earlier engine version. If you want to use an earlier engine version, you must delete the existing replication group and create it anew with the earlier engine version.
+-- | The upgraded version of the cache engine to be run on the clusters in the replication group. __Important:__ You can upgrade to a newer engine version (see <http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement Selecting a Cache Engine and Version> ), but you cannot downgrade to an earlier engine version. If you want to use an earlier engine version, you must delete the existing replication group and create it anew with the earlier engine version.
 mrgEngineVersion :: Lens' ModifyReplicationGroup (Maybe Text)
 mrgEngineVersion = lens _mrgEngineVersion (\ s a -> s{_mrgEngineVersion = a})
 
@@ -199,7 +205,7 @@ mrgPrimaryClusterId = lens _mrgPrimaryClusterId (\ s a -> s{_mrgPrimaryClusterId
 mrgPreferredMaintenanceWindow :: Lens' ModifyReplicationGroup (Maybe Text)
 mrgPreferredMaintenanceWindow = lens _mrgPreferredMaintenanceWindow (\ s a -> s{_mrgPreferredMaintenanceWindow = a})
 
--- | The name of the Node Group (called shard in the console).
+-- | Deprecated. This parameter is not used.
 mrgNodeGroupId :: Lens' ModifyReplicationGroup (Maybe Text)
 mrgNodeGroupId = lens _mrgNodeGroupId (\ s a -> s{_mrgNodeGroupId = a})
 

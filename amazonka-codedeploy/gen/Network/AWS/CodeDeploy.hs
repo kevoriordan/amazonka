@@ -13,9 +13,9 @@
 --
 -- __AWS CodeDeploy__
 --
--- AWS CodeDeploy is a deployment service that automates application deployments to Amazon EC2 instances, on-premises instances running in your own facility, or serverless AWS Lambda functions.
+-- AWS CodeDeploy is a deployment service that automates application deployments to Amazon EC2 instances, on-premises instances running in your own facility, serverless AWS Lambda functions, or applications in an Amazon ECS service.
 --
--- You can deploy a nearly unlimited variety of application content, such as an updated Lambda function, code, web and configuration files, executables, packages, scripts, multimedia files, and so on. AWS CodeDeploy can deploy application content stored in Amazon S3 buckets, GitHub repositories, or Bitbucket repositories. You do not need to make changes to your existing code before you can use AWS CodeDeploy.
+-- You can deploy a nearly unlimited variety of application content, such as an updated Lambda function, updated applications in an Amazon ECS service, code, web and configuration files, executables, packages, scripts, multimedia files, and so on. AWS CodeDeploy can deploy application content stored in Amazon S3 buckets, GitHub repositories, or Bitbucket repositories. You do not need to make changes to your existing code before you can use AWS CodeDeploy.
 --
 -- AWS CodeDeploy makes it easier for you to rapidly release new features, helps you avoid downtime during application deployment, and handles the complexity of updating your applications, without many of the risks associated with error-prone manual deployments.
 --
@@ -25,17 +25,17 @@
 --
 --     * __Application__ : A name that uniquely identifies the application you want to deploy. AWS CodeDeploy uses this name, which functions as a container, to ensure the correct combination of revision, deployment configuration, and deployment group are referenced during a deployment.
 --
---     * __Deployment group__ : A set of individual instances or CodeDeploy Lambda applications. A Lambda deployment group contains a group of applications. An EC2/On-premises deployment group contains individually tagged instances, Amazon EC2 instances in Auto Scaling groups, or both.
+--     * __Deployment group__ : A set of individual instances, CodeDeploy Lambda deployment configuration settings, or an Amazon ECS service and network details. A Lambda deployment group specifies how to route traffic to a new version of a Lambda function. An Amazon ECS deployment group specifies the service created in Amazon ECS to deploy, a load balancer, and a listener to reroute production traffic to an updated containerized application. An EC2/On-premises deployment group contains individually tagged instances, Amazon EC2 instances in Amazon EC2 Auto Scaling groups, or both. All deployment groups can specify optional trigger, alarm, and rollback settings.
 --
 --     * __Deployment configuration__ : A set of deployment rules and deployment success and failure conditions used by AWS CodeDeploy during a deployment.
 --
---     * __Deployment__ : The process and the components used in the process of updating a Lambda function or of installing content on one or more instances.
+--     * __Deployment__ : The process and the components used when updating a Lambda function, a containerized application in an Amazon ECS service, or of installing content on one or more instances.
 --
---     * __Application revisions__ : For an AWS Lambda deployment, this is an AppSpec file that specifies the Lambda function to update and one or more functions to validate deployment lifecycle events. For an EC2/On-premises deployment, this is an archive file containing source content—source code, web pages, executable files, and deployment scripts—along with an AppSpec file. Revisions are stored in Amazon S3 buckets or GitHub repositories. For Amazon S3, a revision is uniquely identified by its Amazon S3 object key and its ETag, version, or both. For GitHub, a revision is uniquely identified by its commit ID.
+--     * __Application revisions__ : For an AWS Lambda deployment, this is an AppSpec file that specifies the Lambda function to be updated and one or more functions to validate deployment lifecycle events. For an Amazon ECS deployment, this is an AppSpec file that specifies the Amazon ECS task definition, container, and port where production traffic is rerouted. For an EC2/On-premises deployment, this is an archive file that contains source content—source code, webpages, executable files, and deployment scripts—along with an AppSpec file. Revisions are stored in Amazon S3 buckets or GitHub repositories. For Amazon S3, a revision is uniquely identified by its Amazon S3 object key and its ETag, version, or both. For GitHub, a revision is uniquely identified by its commit ID.
 --
 --
 --
--- This guide also contains information to help you get details about the instances in your deployments, to make on-premises instances available for AWS CodeDeploy deployments, and to get details about a Lambda function deployment.
+-- This guide also contains information to help you get details about the instances in your deployments, to make on-premises instances available for AWS CodeDeploy deployments, to get details about a Lambda function deployment, and to get details about Amazon ECS service deployments.
 --
 -- __AWS CodeDeploy Information Resources__
 --
@@ -144,6 +144,12 @@ module Network.AWS.CodeDeploy
     -- ** InvalidDeploymentStyleException
     , _InvalidDeploymentStyleException
 
+    -- ** InvalidTargetFilterNameException
+    , _InvalidTargetFilterNameException
+
+    -- ** DeploymentTargetListSizeExceededException
+    , _DeploymentTargetListSizeExceededException
+
     -- ** InvalidDeployedStateFilterException
     , _InvalidDeployedStateFilterException
 
@@ -183,11 +189,17 @@ module Network.AWS.CodeDeploy
     -- ** OperationNotSupportedException
     , _OperationNotSupportedException
 
+    -- ** DeploymentTargetDoesNotExistException
+    , _DeploymentTargetDoesNotExistException
+
     -- ** InvalidTagFilterException
     , _InvalidTagFilterException
 
     -- ** InvalidTriggerConfigException
     , _InvalidTriggerConfigException
+
+    -- ** InvalidDeploymentWaitTypeException
+    , _InvalidDeploymentWaitTypeException
 
     -- ** InvalidIgnoreApplicationStopFailuresValueException
     , _InvalidIgnoreApplicationStopFailuresValueException
@@ -219,6 +231,9 @@ module Network.AWS.CodeDeploy
     -- ** RevisionDoesNotExistException
     , _RevisionDoesNotExistException
 
+    -- ** InvalidTargetException
+    , _InvalidTargetException
+
     -- ** DeploymentGroupLimitExceededException
     , _DeploymentGroupLimitExceededException
 
@@ -243,6 +258,9 @@ module Network.AWS.CodeDeploy
     -- ** DeploymentIsNotInReadyStateException
     , _DeploymentIsNotInReadyStateException
 
+    -- ** InvalidTargetGroupPairException
+    , _InvalidTargetGroupPairException
+
     -- ** InvalidNextTokenException
     , _InvalidNextTokenException
 
@@ -260,6 +278,9 @@ module Network.AWS.CodeDeploy
 
     -- ** DeploymentAlreadyCompletedException
     , _DeploymentAlreadyCompletedException
+
+    -- ** ECSServiceMappingLimitExceededException
+    , _ECSServiceMappingLimitExceededException
 
     -- ** DeploymentDoesNotExistException
     , _DeploymentDoesNotExistException
@@ -315,6 +336,9 @@ module Network.AWS.CodeDeploy
     -- ** InvalidInstanceStatusException
     , _InvalidInstanceStatusException
 
+    -- ** InvalidDeploymentTargetIdException
+    , _InvalidDeploymentTargetIdException
+
     -- ** TagLimitExceededException
     , _TagLimitExceededException
 
@@ -327,8 +351,14 @@ module Network.AWS.CodeDeploy
     -- ** InvalidOperationException
     , _InvalidOperationException
 
+    -- ** DeploymentTargetIdRequiredException
+    , _DeploymentTargetIdRequiredException
+
     -- ** GitHubAccountTokenNameRequiredException
     , _GitHubAccountTokenNameRequiredException
+
+    -- ** InvalidECSServiceException
+    , _InvalidECSServiceException
 
     -- ** InvalidDeploymentInstanceTypeException
     , _InvalidDeploymentInstanceTypeException
@@ -344,6 +374,9 @@ module Network.AWS.CodeDeploy
 
     -- ** InvalidKeyPrefixFilterException
     , _InvalidKeyPrefixFilterException
+
+    -- ** DeploymentAlreadyStartedException
+    , _DeploymentAlreadyStartedException
 
     -- * Waiters
     -- $waiters
@@ -366,7 +399,7 @@ module Network.AWS.CodeDeploy
     -- ** UpdateDeploymentGroup
     , module Network.AWS.CodeDeploy.UpdateDeploymentGroup
 
-    -- ** ListOnPremisesInstances
+    -- ** ListOnPremisesInstances (Paginated)
     , module Network.AWS.CodeDeploy.ListOnPremisesInstances
 
     -- ** CreateDeploymentConfig
@@ -414,29 +447,26 @@ module Network.AWS.CodeDeploy
     -- ** DeleteGitHubAccountToken
     , module Network.AWS.CodeDeploy.DeleteGitHubAccountToken
 
-    -- ** GetDeploymentInstance
-    , module Network.AWS.CodeDeploy.GetDeploymentInstance
-
     -- ** DeregisterOnPremisesInstance
     , module Network.AWS.CodeDeploy.DeregisterOnPremisesInstance
 
     -- ** PutLifecycleEventHookExecutionStatus
     , module Network.AWS.CodeDeploy.PutLifecycleEventHookExecutionStatus
 
+    -- ** GetDeploymentTarget
+    , module Network.AWS.CodeDeploy.GetDeploymentTarget
+
     -- ** CreateApplication
     , module Network.AWS.CodeDeploy.CreateApplication
+
+    -- ** BatchGetDeploymentTargets
+    , module Network.AWS.CodeDeploy.BatchGetDeploymentTargets
 
     -- ** StopDeployment
     , module Network.AWS.CodeDeploy.StopDeployment
 
-    -- ** ListGitHubAccountTokenNames
+    -- ** ListGitHubAccountTokenNames (Paginated)
     , module Network.AWS.CodeDeploy.ListGitHubAccountTokenNames
-
-    -- ** BatchGetDeploymentInstances
-    , module Network.AWS.CodeDeploy.BatchGetDeploymentInstances
-
-    -- ** SkipWaitTimeForInstanceTermination
-    , module Network.AWS.CodeDeploy.SkipWaitTimeForInstanceTermination
 
     -- ** GetApplication
     , module Network.AWS.CodeDeploy.GetApplication
@@ -471,8 +501,8 @@ module Network.AWS.CodeDeploy
     -- ** AddTagsToOnPremisesInstances
     , module Network.AWS.CodeDeploy.AddTagsToOnPremisesInstances
 
-    -- ** ListDeploymentInstances (Paginated)
-    , module Network.AWS.CodeDeploy.ListDeploymentInstances
+    -- ** ListDeploymentTargets (Paginated)
+    , module Network.AWS.CodeDeploy.ListDeploymentTargets
 
     -- * Types
 
@@ -503,8 +533,14 @@ module Network.AWS.CodeDeploy
     -- ** DeploymentStatus
     , DeploymentStatus (..)
 
+    -- ** DeploymentTargetType
+    , DeploymentTargetType (..)
+
     -- ** DeploymentType
     , DeploymentType (..)
+
+    -- ** DeploymentWaitType
+    , DeploymentWaitType (..)
 
     -- ** EC2TagFilterType
     , EC2TagFilterType (..)
@@ -517,12 +553,6 @@ module Network.AWS.CodeDeploy
 
     -- ** InstanceAction
     , InstanceAction (..)
-
-    -- ** InstanceStatus
-    , InstanceStatus (..)
-
-    -- ** InstanceType
-    , InstanceType (..)
 
     -- ** LifecycleErrorCode
     , LifecycleErrorCode (..)
@@ -551,6 +581,15 @@ module Network.AWS.CodeDeploy
     -- ** TagFilterType
     , TagFilterType (..)
 
+    -- ** TargetFilterName
+    , TargetFilterName (..)
+
+    -- ** TargetLabel
+    , TargetLabel (..)
+
+    -- ** TargetStatus
+    , TargetStatus (..)
+
     -- ** TrafficRoutingType
     , TrafficRoutingType (..)
 
@@ -568,6 +607,12 @@ module Network.AWS.CodeDeploy
     , acIgnorePollAlarmFailure
     , acEnabled
     , acAlarms
+
+    -- ** AppSpecContent
+    , AppSpecContent
+    , appSpecContent
+    , ascContent
+    , ascSha256
 
     -- ** ApplicationInfo
     , ApplicationInfo
@@ -625,6 +670,7 @@ module Network.AWS.CodeDeploy
     , dgiComputePlatform
     , dgiTargetRevision
     , dgiEc2TagFilters
+    , dgiEcsServices
     , dgiBlueGreenDeploymentConfiguration
     , dgiLoadBalancerInfo
     , dgiOnPremisesInstanceTagFilters
@@ -691,6 +737,14 @@ module Network.AWS.CodeDeploy
     , dsDeploymentOption
     , dsDeploymentType
 
+    -- ** DeploymentTarget
+    , DeploymentTarget
+    , deploymentTarget
+    , dtInstanceTarget
+    , dtEcsTarget
+    , dtDeploymentTargetType
+    , dtLambdaTarget
+
     -- ** Diagnostics
     , Diagnostics
     , diagnostics
@@ -710,6 +764,35 @@ module Network.AWS.CodeDeploy
     , EC2TagSet
     , ec2TagSet
     , etsEc2TagSetList
+
+    -- ** ECSService
+    , ECSService
+    , eCSService
+    , ecssServiceName
+    , ecssClusterName
+
+    -- ** ECSTarget
+    , ECSTarget
+    , eCSTarget
+    , ecstTargetARN
+    , ecstTargetId
+    , ecstStatus
+    , ecstDeploymentId
+    , ecstLastUpdatedAt
+    , ecstTaskSetsInfo
+    , ecstLifecycleEvents
+
+    -- ** ECSTaskSet
+    , ECSTaskSet
+    , eCSTaskSet
+    , ecstsRunningCount
+    , ecstsStatus
+    , ecstsIdentifer
+    , ecstsDesiredCount
+    , ecstsPendingCount
+    , ecstsTrafficWeight
+    , ecstsTargetGroup
+    , ecstsTaskSetLabel
 
     -- ** ELBInfo
     , ELBInfo
@@ -753,15 +836,26 @@ module Network.AWS.CodeDeploy
     , iiIamSessionARN
     , iiTags
 
-    -- ** InstanceSummary
-    , InstanceSummary
-    , instanceSummary
-    , isInstanceId
-    , isStatus
-    , isDeploymentId
-    , isLastUpdatedAt
-    , isLifecycleEvents
-    , isInstanceType
+    -- ** InstanceTarget
+    , InstanceTarget
+    , instanceTarget
+    , itTargetARN
+    , itTargetId
+    , itStatus
+    , itDeploymentId
+    , itInstanceLabel
+    , itLastUpdatedAt
+    , itLifecycleEvents
+
+    -- ** LambdaTarget
+    , LambdaTarget
+    , lambdaTarget
+    , ltTargetARN
+    , ltTargetId
+    , ltStatus
+    , ltDeploymentId
+    , ltLastUpdatedAt
+    , ltLifecycleEvents
 
     -- ** LastDeploymentInfo
     , LastDeploymentInfo
@@ -785,6 +879,7 @@ module Network.AWS.CodeDeploy
     , loadBalancerInfo
     , lbiElbInfoList
     , lbiTargetGroupInfoList
+    , lbiTargetGroupPairInfoList
 
     -- ** MinimumHealthyHosts
     , MinimumHealthyHosts
@@ -815,6 +910,7 @@ module Network.AWS.CodeDeploy
     , rlString
     , rlRevisionType
     , rlS3Location
+    , rlAppSpecContent
     , rlGitHubLocation
 
     -- ** RollbackInfo
@@ -851,6 +947,13 @@ module Network.AWS.CodeDeploy
     , targetGroupInfo
     , tgiName
 
+    -- ** TargetGroupPairInfo
+    , TargetGroupPairInfo
+    , targetGroupPairInfo
+    , tgpiProdTrafficRoute
+    , tgpiTestTrafficRoute
+    , tgpiTargetGroups
+
     -- ** TargetInstances
     , TargetInstances
     , targetInstances
@@ -876,6 +979,11 @@ module Network.AWS.CodeDeploy
     , trStart
     , trEnd
 
+    -- ** TrafficRoute
+    , TrafficRoute
+    , trafficRoute
+    , trListenerARNs
+
     -- ** TrafficRoutingConfig
     , TrafficRoutingConfig
     , trafficRoutingConfig
@@ -895,8 +1003,8 @@ import Network.AWS.CodeDeploy.AddTagsToOnPremisesInstances
 import Network.AWS.CodeDeploy.BatchGetApplicationRevisions
 import Network.AWS.CodeDeploy.BatchGetApplications
 import Network.AWS.CodeDeploy.BatchGetDeploymentGroups
-import Network.AWS.CodeDeploy.BatchGetDeploymentInstances
 import Network.AWS.CodeDeploy.BatchGetDeployments
+import Network.AWS.CodeDeploy.BatchGetDeploymentTargets
 import Network.AWS.CodeDeploy.BatchGetOnPremisesInstances
 import Network.AWS.CodeDeploy.ContinueDeployment
 import Network.AWS.CodeDeploy.CreateApplication
@@ -913,21 +1021,20 @@ import Network.AWS.CodeDeploy.GetApplicationRevision
 import Network.AWS.CodeDeploy.GetDeployment
 import Network.AWS.CodeDeploy.GetDeploymentConfig
 import Network.AWS.CodeDeploy.GetDeploymentGroup
-import Network.AWS.CodeDeploy.GetDeploymentInstance
+import Network.AWS.CodeDeploy.GetDeploymentTarget
 import Network.AWS.CodeDeploy.GetOnPremisesInstance
 import Network.AWS.CodeDeploy.ListApplicationRevisions
 import Network.AWS.CodeDeploy.ListApplications
 import Network.AWS.CodeDeploy.ListDeploymentConfigs
 import Network.AWS.CodeDeploy.ListDeploymentGroups
-import Network.AWS.CodeDeploy.ListDeploymentInstances
 import Network.AWS.CodeDeploy.ListDeployments
+import Network.AWS.CodeDeploy.ListDeploymentTargets
 import Network.AWS.CodeDeploy.ListGitHubAccountTokenNames
 import Network.AWS.CodeDeploy.ListOnPremisesInstances
 import Network.AWS.CodeDeploy.PutLifecycleEventHookExecutionStatus
 import Network.AWS.CodeDeploy.RegisterApplicationRevision
 import Network.AWS.CodeDeploy.RegisterOnPremisesInstance
 import Network.AWS.CodeDeploy.RemoveTagsFromOnPremisesInstances
-import Network.AWS.CodeDeploy.SkipWaitTimeForInstanceTermination
 import Network.AWS.CodeDeploy.StopDeployment
 import Network.AWS.CodeDeploy.Types
 import Network.AWS.CodeDeploy.UpdateApplication

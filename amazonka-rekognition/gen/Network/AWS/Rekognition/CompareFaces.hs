@@ -21,7 +21,7 @@
 -- Compares a face in the /source/ input image with each of the 100 largest faces detected in the /target/ input image.
 --
 --
--- You pass the input and target images either as base64-encoded image bytes or as a references to images in an Amazon S3 bucket. If you use the Amazon CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.
+-- You pass the input and target images either as base64-encoded image bytes or as references to images in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn't supported. The image must be formatted as a PNG or JPEG file.
 --
 -- In response, the operation returns an array of face matches ordered by similarity score in descending order. For each face match, the response provides a bounding box of the face, facial landmarks, pose details (pitch, role, and yaw), quality (brightness and sharpness), and confidence value (indicating the level of confidence that the bounding box contains a face). The response also provides a similarity score, which indicates how closely the faces match.
 --
@@ -31,7 +31,7 @@
 --
 -- If no faces are detected in the source or target images, @CompareFaces@ returns an @InvalidParameterException@ error.
 --
--- For an example, see 'faces-compare-images' .
+-- For an example, see Comparing Faces in Images in the Amazon Rekognition Developer Guide.
 --
 -- This operation requires permissions to perform the @rekognition:CompareFaces@ action.
 --
@@ -78,9 +78,9 @@ data CompareFaces = CompareFaces'
 --
 -- * 'cfSimilarityThreshold' - The minimum level of confidence in the face matches that a match must meet to be included in the @FaceMatches@ array.
 --
--- * 'cfSourceImage' - The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is not supported.
+-- * 'cfSourceImage' - The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is not supported.  If you are using an AWS SDK to call Amazon Rekognition, you might not need to base64-encode image bytes passed using the @Bytes@ field. For more information, see Images in the Amazon Rekognition developer guide.
 --
--- * 'cfTargetImage' - The target image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is not supported.
+-- * 'cfTargetImage' - The target image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is not supported.  If you are using an AWS SDK to call Amazon Rekognition, you might not need to base64-encode image bytes passed using the @Bytes@ field. For more information, see Images in the Amazon Rekognition developer guide.
 compareFaces
     :: Image -- ^ 'cfSourceImage'
     -> Image -- ^ 'cfTargetImage'
@@ -97,11 +97,11 @@ compareFaces pSourceImage_ pTargetImage_ =
 cfSimilarityThreshold :: Lens' CompareFaces (Maybe Double)
 cfSimilarityThreshold = lens _cfSimilarityThreshold (\ s a -> s{_cfSimilarityThreshold = a})
 
--- | The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is not supported.
+-- | The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is not supported.  If you are using an AWS SDK to call Amazon Rekognition, you might not need to base64-encode image bytes passed using the @Bytes@ field. For more information, see Images in the Amazon Rekognition developer guide.
 cfSourceImage :: Lens' CompareFaces Image
 cfSourceImage = lens _cfSourceImage (\ s a -> s{_cfSourceImage = a})
 
--- | The target image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is not supported.
+-- | The target image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call Amazon Rekognition operations, passing base64-encoded image bytes is not supported.  If you are using an AWS SDK to call Amazon Rekognition, you might not need to base64-encode image bytes passed using the @Bytes@ field. For more information, see Images in the Amazon Rekognition developer guide.
 cfTargetImage :: Lens' CompareFaces Image
 cfTargetImage = lens _cfTargetImage (\ s a -> s{_cfTargetImage = a})
 
@@ -166,9 +166,9 @@ data CompareFacesResponse = CompareFacesResponse'
 --
 -- * 'cfrsUnmatchedFaces' - An array of faces in the target image that did not match the source image face.
 --
--- * 'cfrsTargetImageOrientationCorrection' - The orientation of the target image (in counterclockwise direction). If your application displays the target image, you can use this value to correct the orientation of the image. The bounding box coordinates returned in @FaceMatches@ and @UnmatchedFaces@ represent face locations before the image orientation is corrected.
+-- * 'cfrsTargetImageOrientationCorrection' - The value of @TargetImageOrientationCorrection@ is always null. If the input image is in .jpeg format, it might contain exchangeable image file format (Exif) metadata that includes the image's orientation. Amazon Rekognition uses this orientation information to perform image correction. The bounding box coordinates are translated to represent object locations after the orientation information in the Exif metadata is used to correct the image orientation. Images in .png format don't contain Exif metadata. Amazon Rekognition doesn’t perform image correction for images in .png format and .jpeg images without orientation information in the image Exif metadata. The bounding box coordinates aren't translated and represent the object locations before the image is rotated.
 --
--- * 'cfrsSourceImageOrientationCorrection' - The orientation of the source image (counterclockwise direction). If your application displays the source image, you can use this value to correct image orientation. The bounding box coordinates returned in @SourceImageFace@ represent the location of the face before the image orientation is corrected.
+-- * 'cfrsSourceImageOrientationCorrection' - The value of @SourceImageOrientationCorrection@ is always null. If the input image is in .jpeg format, it might contain exchangeable image file format (Exif) metadata that includes the image's orientation. Amazon Rekognition uses this orientation information to perform image correction. The bounding box coordinates are translated to represent object locations after the orientation information in the Exif metadata is used to correct the image orientation. Images in .png format don't contain Exif metadata. Amazon Rekognition doesn’t perform image correction for images in .png format and .jpeg images without orientation information in the image Exif metadata. The bounding box coordinates aren't translated and represent the object locations before the image is rotated.
 --
 -- * 'cfrsSourceImageFace' - The face in the source image that was used for comparison.
 --
@@ -195,11 +195,11 @@ cfrsFaceMatches = lens _cfrsFaceMatches (\ s a -> s{_cfrsFaceMatches = a}) . _De
 cfrsUnmatchedFaces :: Lens' CompareFacesResponse [ComparedFace]
 cfrsUnmatchedFaces = lens _cfrsUnmatchedFaces (\ s a -> s{_cfrsUnmatchedFaces = a}) . _Default . _Coerce
 
--- | The orientation of the target image (in counterclockwise direction). If your application displays the target image, you can use this value to correct the orientation of the image. The bounding box coordinates returned in @FaceMatches@ and @UnmatchedFaces@ represent face locations before the image orientation is corrected.
+-- | The value of @TargetImageOrientationCorrection@ is always null. If the input image is in .jpeg format, it might contain exchangeable image file format (Exif) metadata that includes the image's orientation. Amazon Rekognition uses this orientation information to perform image correction. The bounding box coordinates are translated to represent object locations after the orientation information in the Exif metadata is used to correct the image orientation. Images in .png format don't contain Exif metadata. Amazon Rekognition doesn’t perform image correction for images in .png format and .jpeg images without orientation information in the image Exif metadata. The bounding box coordinates aren't translated and represent the object locations before the image is rotated.
 cfrsTargetImageOrientationCorrection :: Lens' CompareFacesResponse (Maybe OrientationCorrection)
 cfrsTargetImageOrientationCorrection = lens _cfrsTargetImageOrientationCorrection (\ s a -> s{_cfrsTargetImageOrientationCorrection = a})
 
--- | The orientation of the source image (counterclockwise direction). If your application displays the source image, you can use this value to correct image orientation. The bounding box coordinates returned in @SourceImageFace@ represent the location of the face before the image orientation is corrected.
+-- | The value of @SourceImageOrientationCorrection@ is always null. If the input image is in .jpeg format, it might contain exchangeable image file format (Exif) metadata that includes the image's orientation. Amazon Rekognition uses this orientation information to perform image correction. The bounding box coordinates are translated to represent object locations after the orientation information in the Exif metadata is used to correct the image orientation. Images in .png format don't contain Exif metadata. Amazon Rekognition doesn’t perform image correction for images in .png format and .jpeg images without orientation information in the image Exif metadata. The bounding box coordinates aren't translated and represent the object locations before the image is rotated.
 cfrsSourceImageOrientationCorrection :: Lens' CompareFacesResponse (Maybe OrientationCorrection)
 cfrsSourceImageOrientationCorrection = lens _cfrsSourceImageOrientationCorrection (\ s a -> s{_cfrsSourceImageOrientationCorrection = a})
 

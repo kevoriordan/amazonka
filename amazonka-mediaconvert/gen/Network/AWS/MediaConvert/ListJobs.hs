@@ -53,7 +53,7 @@ data ListJobs = ListJobs'
   , _ljQueue      :: !(Maybe Text)
   , _ljNextToken  :: !(Maybe Text)
   , _ljOrder      :: !(Maybe Order)
-  , _ljMaxResults :: !(Maybe Int)
+  , _ljMaxResults :: !(Maybe Nat)
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -99,8 +99,8 @@ ljOrder :: Lens' ListJobs (Maybe Order)
 ljOrder = lens _ljOrder (\ s a -> s{_ljOrder = a})
 
 -- | Optional. Number of jobs, up to twenty, that will be returned at one time.
-ljMaxResults :: Lens' ListJobs (Maybe Int)
-ljMaxResults = lens _ljMaxResults (\ s a -> s{_ljMaxResults = a})
+ljMaxResults :: Lens' ListJobs (Maybe Natural)
+ljMaxResults = lens _ljMaxResults (\ s a -> s{_ljMaxResults = a}) . mapping _Nat
 
 instance AWSRequest ListJobs where
         type Rs ListJobs = ListJobsResponse

@@ -27,8 +27,10 @@ module Network.AWS.Glue.UpdateDevEndpoint
       updateDevEndpoint
     , UpdateDevEndpoint
     -- * Request Lenses
+    , udeAddPublicKeys
     , udeCustomLibraries
     , udePublicKey
+    , udeDeletePublicKeys
     , udeUpdateEtlLibraries
     , udeEndpointName
 
@@ -48,8 +50,10 @@ import Network.AWS.Response
 
 -- | /See:/ 'updateDevEndpoint' smart constructor.
 data UpdateDevEndpoint = UpdateDevEndpoint'
-  { _udeCustomLibraries    :: !(Maybe DevEndpointCustomLibraries)
+  { _udeAddPublicKeys      :: !(Maybe [Text])
+  , _udeCustomLibraries    :: !(Maybe DevEndpointCustomLibraries)
   , _udePublicKey          :: !(Maybe Text)
+  , _udeDeletePublicKeys   :: !(Maybe [Text])
   , _udeUpdateEtlLibraries :: !(Maybe Bool)
   , _udeEndpointName       :: !Text
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
@@ -59,9 +63,13 @@ data UpdateDevEndpoint = UpdateDevEndpoint'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'udeAddPublicKeys' - The list of public keys for the DevEndpoint to use.
+--
 -- * 'udeCustomLibraries' - Custom Python or Java libraries to be loaded in the DevEndpoint.
 --
 -- * 'udePublicKey' - The public key for the DevEndpoint to use.
+--
+-- * 'udeDeletePublicKeys' - The list of public keys to be deleted from the DevEndpoint.
 --
 -- * 'udeUpdateEtlLibraries' - True if the list of custom libraries to be loaded in the development endpoint needs to be updated, or False otherwise.
 --
@@ -71,12 +79,18 @@ updateDevEndpoint
     -> UpdateDevEndpoint
 updateDevEndpoint pEndpointName_ =
   UpdateDevEndpoint'
-    { _udeCustomLibraries = Nothing
+    { _udeAddPublicKeys = Nothing
+    , _udeCustomLibraries = Nothing
     , _udePublicKey = Nothing
+    , _udeDeletePublicKeys = Nothing
     , _udeUpdateEtlLibraries = Nothing
     , _udeEndpointName = pEndpointName_
     }
 
+
+-- | The list of public keys for the DevEndpoint to use.
+udeAddPublicKeys :: Lens' UpdateDevEndpoint [Text]
+udeAddPublicKeys = lens _udeAddPublicKeys (\ s a -> s{_udeAddPublicKeys = a}) . _Default . _Coerce
 
 -- | Custom Python or Java libraries to be loaded in the DevEndpoint.
 udeCustomLibraries :: Lens' UpdateDevEndpoint (Maybe DevEndpointCustomLibraries)
@@ -85,6 +99,10 @@ udeCustomLibraries = lens _udeCustomLibraries (\ s a -> s{_udeCustomLibraries = 
 -- | The public key for the DevEndpoint to use.
 udePublicKey :: Lens' UpdateDevEndpoint (Maybe Text)
 udePublicKey = lens _udePublicKey (\ s a -> s{_udePublicKey = a})
+
+-- | The list of public keys to be deleted from the DevEndpoint.
+udeDeletePublicKeys :: Lens' UpdateDevEndpoint [Text]
+udeDeletePublicKeys = lens _udeDeletePublicKeys (\ s a -> s{_udeDeletePublicKeys = a}) . _Default . _Coerce
 
 -- | True if the list of custom libraries to be loaded in the development endpoint needs to be updated, or False otherwise.
 udeUpdateEtlLibraries :: Lens' UpdateDevEndpoint (Maybe Bool)
@@ -119,8 +137,10 @@ instance ToJSON UpdateDevEndpoint where
         toJSON UpdateDevEndpoint'{..}
           = object
               (catMaybes
-                 [("CustomLibraries" .=) <$> _udeCustomLibraries,
+                 [("AddPublicKeys" .=) <$> _udeAddPublicKeys,
+                  ("CustomLibraries" .=) <$> _udeCustomLibraries,
                   ("PublicKey" .=) <$> _udePublicKey,
+                  ("DeletePublicKeys" .=) <$> _udeDeletePublicKeys,
                   ("UpdateEtlLibraries" .=) <$> _udeUpdateEtlLibraries,
                   Just ("EndpointName" .= _udeEndpointName)])
 

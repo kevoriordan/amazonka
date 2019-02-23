@@ -43,6 +43,9 @@ module Network.AWS.WAFRegional
     -- ** WAFInvalidParameterException
     , _WAFInvalidParameterException
 
+    -- ** WAFServiceLinkedRoleErrorException
+    , _WAFServiceLinkedRoleErrorException
+
     -- ** WAFLimitsExceededException
     , _WAFLimitsExceededException
 
@@ -118,17 +121,26 @@ module Network.AWS.WAFRegional
     -- ** CreateRule
     , module Network.AWS.WAFRegional.CreateRule
 
+    -- ** DeleteLoggingConfiguration
+    , module Network.AWS.WAFRegional.DeleteLoggingConfiguration
+
     -- ** CreateWebACL
     , module Network.AWS.WAFRegional.CreateWebACL
 
     -- ** GetGeoMatchSet
     , module Network.AWS.WAFRegional.GetGeoMatchSet
 
+    -- ** PutLoggingConfiguration
+    , module Network.AWS.WAFRegional.PutLoggingConfiguration
+
     -- ** ListByteMatchSets
     , module Network.AWS.WAFRegional.ListByteMatchSets
 
     -- ** ListGeoMatchSets
     , module Network.AWS.WAFRegional.ListGeoMatchSets
+
+    -- ** GetLoggingConfiguration
+    , module Network.AWS.WAFRegional.GetLoggingConfiguration
 
     -- ** CreateRuleGroup
     , module Network.AWS.WAFRegional.CreateRuleGroup
@@ -201,6 +213,9 @@ module Network.AWS.WAFRegional
 
     -- ** PutPermissionPolicy
     , module Network.AWS.WAFRegional.PutPermissionPolicy
+
+    -- ** ListLoggingConfigurations
+    , module Network.AWS.WAFRegional.ListLoggingConfigurations
 
     -- ** GetRateBasedRuleManagedKeys
     , module Network.AWS.WAFRegional.GetRateBasedRuleManagedKeys
@@ -324,6 +339,9 @@ module Network.AWS.WAFRegional
     -- ** RateKey
     , RateKey (..)
 
+    -- ** ResourceType
+    , ResourceType (..)
+
     -- ** TextTransformation
     , TextTransformation (..)
 
@@ -341,6 +359,7 @@ module Network.AWS.WAFRegional
     , activatedRule
     , arOverrideAction
     , arAction
+    , arExcludedRules
     , arType
     , arPriority
     , arRuleId
@@ -371,6 +390,11 @@ module Network.AWS.WAFRegional
     , bmtTargetString
     , bmtTextTransformation
     , bmtPositionalConstraint
+
+    -- ** ExcludedRule
+    , ExcludedRule
+    , excludedRule
+    , erRuleId
 
     -- ** FieldToMatch
     , FieldToMatch
@@ -443,6 +467,13 @@ module Network.AWS.WAFRegional
     , ipSetUpdate
     , isuAction
     , isuIPSetDescriptor
+
+    -- ** LoggingConfiguration
+    , LoggingConfiguration
+    , loggingConfiguration
+    , lcRedactedFields
+    , lcResourceARN
+    , lcLogDestinationConfigs
 
     -- ** Predicate
     , Predicate
@@ -634,6 +665,7 @@ module Network.AWS.WAFRegional
     , webACL
     , waMetricName
     , waName
+    , waWebACLARN
     , waWebACLId
     , waDefaultAction
     , waRules
@@ -692,6 +724,7 @@ import Network.AWS.WAFRegional.CreateXSSMatchSet
 import Network.AWS.WAFRegional.DeleteByteMatchSet
 import Network.AWS.WAFRegional.DeleteGeoMatchSet
 import Network.AWS.WAFRegional.DeleteIPSet
+import Network.AWS.WAFRegional.DeleteLoggingConfiguration
 import Network.AWS.WAFRegional.DeletePermissionPolicy
 import Network.AWS.WAFRegional.DeleteRateBasedRule
 import Network.AWS.WAFRegional.DeleteRegexMatchSet
@@ -708,6 +741,7 @@ import Network.AWS.WAFRegional.GetChangeToken
 import Network.AWS.WAFRegional.GetChangeTokenStatus
 import Network.AWS.WAFRegional.GetGeoMatchSet
 import Network.AWS.WAFRegional.GetIPSet
+import Network.AWS.WAFRegional.GetLoggingConfiguration
 import Network.AWS.WAFRegional.GetPermissionPolicy
 import Network.AWS.WAFRegional.GetRateBasedRule
 import Network.AWS.WAFRegional.GetRateBasedRuleManagedKeys
@@ -725,6 +759,7 @@ import Network.AWS.WAFRegional.ListActivatedRulesInRuleGroup
 import Network.AWS.WAFRegional.ListByteMatchSets
 import Network.AWS.WAFRegional.ListGeoMatchSets
 import Network.AWS.WAFRegional.ListIPSets
+import Network.AWS.WAFRegional.ListLoggingConfigurations
 import Network.AWS.WAFRegional.ListRateBasedRules
 import Network.AWS.WAFRegional.ListRegexMatchSets
 import Network.AWS.WAFRegional.ListRegexPatternSets
@@ -736,6 +771,7 @@ import Network.AWS.WAFRegional.ListSqlInjectionMatchSets
 import Network.AWS.WAFRegional.ListSubscribedRuleGroups
 import Network.AWS.WAFRegional.ListWebACLs
 import Network.AWS.WAFRegional.ListXSSMatchSets
+import Network.AWS.WAFRegional.PutLoggingConfiguration
 import Network.AWS.WAFRegional.PutPermissionPolicy
 import Network.AWS.WAFRegional.Types
 import Network.AWS.WAFRegional.UpdateByteMatchSet

@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Deletes the lifecycle configuration from the bucket.
+--
+--
 module Network.AWS.S3.DeleteBucketLifecycle
     (
     -- * Creating a Request

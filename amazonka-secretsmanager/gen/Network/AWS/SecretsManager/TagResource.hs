@@ -89,7 +89,7 @@ data TagResource = TagResource'
 --
 -- * 'trSecretId' - The identifier for the secret that you want to attach tags to. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret.
 --
--- * 'trTags' - The tags to attach to the secret. Each element in the list consists of a @Key@ and a @Value@ . This parameter to the API requires a JSON text string argument. For information on how to format a JSON parameter for the various command line tool environments, see <http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json Using JSON for Parameters> in the /AWS CLI User Guide/ . For the AWS CLI, you can also use the syntax: @--Tags Key="Key1",Value="Value1",Key="Key2",Value="Value2"[,…]@
+-- * 'trTags' - The tags to attach to the secret. Each element in the list consists of a @Key@ and a @Value@ . This parameter to the API requires a JSON text string argument. For information on how to format a JSON parameter for the various command line tool environments, see <https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json Using JSON for Parameters> in the /AWS CLI User Guide/ . For the AWS CLI, you can also use the syntax: @--Tags Key="Key1",Value="Value1",Key="Key2",Value="Value2"[,…]@
 tagResource
     :: Text -- ^ 'trSecretId'
     -> TagResource
@@ -101,7 +101,7 @@ tagResource pSecretId_ =
 trSecretId :: Lens' TagResource Text
 trSecretId = lens _trSecretId (\ s a -> s{_trSecretId = a})
 
--- | The tags to attach to the secret. Each element in the list consists of a @Key@ and a @Value@ . This parameter to the API requires a JSON text string argument. For information on how to format a JSON parameter for the various command line tool environments, see <http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json Using JSON for Parameters> in the /AWS CLI User Guide/ . For the AWS CLI, you can also use the syntax: @--Tags Key="Key1",Value="Value1",Key="Key2",Value="Value2"[,…]@
+-- | The tags to attach to the secret. Each element in the list consists of a @Key@ and a @Value@ . This parameter to the API requires a JSON text string argument. For information on how to format a JSON parameter for the various command line tool environments, see <https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json Using JSON for Parameters> in the /AWS CLI User Guide/ . For the AWS CLI, you can also use the syntax: @--Tags Key="Key1",Value="Value1",Key="Key2",Value="Value2"[,…]@
 trTags :: Lens' TagResource [Tag]
 trTags = lens _trTags (\ s a -> s{_trTags = a}) . _Coerce
 
