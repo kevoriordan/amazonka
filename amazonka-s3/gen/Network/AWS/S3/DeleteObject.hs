@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, Amazon S3 does not remove any objects.
+--
+--
 module Network.AWS.S3.DeleteObject
     (
     -- * Creating a Request
@@ -28,6 +30,7 @@ module Network.AWS.S3.DeleteObject
     , doVersionId
     , doMFA
     , doRequestPayer
+    , doBypassGovernanceRetention
     , doBucket
     , doKey
 
@@ -50,11 +53,12 @@ import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'deleteObject' smart constructor.
 data DeleteObject = DeleteObject'
-  { _doVersionId    :: !(Maybe ObjectVersionId)
-  , _doMFA          :: !(Maybe Text)
-  , _doRequestPayer :: !(Maybe RequestPayer)
-  , _doBucket       :: !BucketName
-  , _doKey          :: !ObjectKey
+  { _doVersionId                 :: !(Maybe ObjectVersionId)
+  , _doMFA                       :: !(Maybe Text)
+  , _doRequestPayer              :: !(Maybe RequestPayer)
+  , _doBypassGovernanceRetention :: !(Maybe Bool)
+  , _doBucket                    :: !BucketName
+  , _doKey                       :: !ObjectKey
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -68,6 +72,8 @@ data DeleteObject = DeleteObject'
 --
 -- * 'doRequestPayer' - Undocumented member.
 --
+-- * 'doBypassGovernanceRetention' - Indicates whether S3 Object Lock should bypass Governance-mode restrictions to process this operation.
+--
 -- * 'doBucket' - Undocumented member.
 --
 -- * 'doKey' - Undocumented member.
@@ -80,6 +86,7 @@ deleteObject pBucket_ pKey_ =
     { _doVersionId = Nothing
     , _doMFA = Nothing
     , _doRequestPayer = Nothing
+    , _doBypassGovernanceRetention = Nothing
     , _doBucket = pBucket_
     , _doKey = pKey_
     }
@@ -96,6 +103,10 @@ doMFA = lens _doMFA (\ s a -> s{_doMFA = a})
 -- | Undocumented member.
 doRequestPayer :: Lens' DeleteObject (Maybe RequestPayer)
 doRequestPayer = lens _doRequestPayer (\ s a -> s{_doRequestPayer = a})
+
+-- | Indicates whether S3 Object Lock should bypass Governance-mode restrictions to process this operation.
+doBypassGovernanceRetention :: Lens' DeleteObject (Maybe Bool)
+doBypassGovernanceRetention = lens _doBypassGovernanceRetention (\ s a -> s{_doBypassGovernanceRetention = a})
 
 -- | Undocumented member.
 doBucket :: Lens' DeleteObject BucketName
@@ -125,7 +136,9 @@ instance ToHeaders DeleteObject where
         toHeaders DeleteObject'{..}
           = mconcat
               ["x-amz-mfa" =# _doMFA,
-               "x-amz-request-payer" =# _doRequestPayer]
+               "x-amz-request-payer" =# _doRequestPayer,
+               "x-amz-bypass-governance-retention" =#
+                 _doBypassGovernanceRetention]
 
 instance ToPath DeleteObject where
         toPath DeleteObject'{..}

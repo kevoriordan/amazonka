@@ -65,7 +65,7 @@ data DeleteTableVersion = DeleteTableVersion'
 --
 -- * 'dtvTableName' - The name of the table. For Hive compatibility, this name is entirely lowercase.
 --
--- * 'dtvVersionId' - The ID of the table version to be deleted.
+-- * 'dtvVersionId' - The ID of the table version to be deleted. A @VersionID@ is a string representation of an integer. Each version is incremented by 1.
 deleteTableVersion
     :: Text -- ^ 'dtvDatabaseName'
     -> Text -- ^ 'dtvTableName'
@@ -92,7 +92,7 @@ dtvDatabaseName = lens _dtvDatabaseName (\ s a -> s{_dtvDatabaseName = a})
 dtvTableName :: Lens' DeleteTableVersion Text
 dtvTableName = lens _dtvTableName (\ s a -> s{_dtvTableName = a})
 
--- | The ID of the table version to be deleted.
+-- | The ID of the table version to be deleted. A @VersionID@ is a string representation of an integer. Each version is incremented by 1.
 dtvVersionId :: Lens' DeleteTableVersion Text
 dtvVersionId = lens _dtvVersionId (\ s a -> s{_dtvVersionId = a})
 

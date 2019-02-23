@@ -78,7 +78,7 @@ data DescribeScheduledActions = DescribeScheduledActions'
 --
 -- * 'dsasEndTime' - The latest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.
 --
--- * 'dsasScheduledActionNames' - Describes one or more scheduled actions. If you omit this parameter, all scheduled actions are described. If you specify an unknown scheduled action, it is ignored with no error. You can describe up to a maximum of 50 instances with a single call. If there are more items to return, the call returns a token. To get the next set of items, repeat the call with the returned token.
+-- * 'dsasScheduledActionNames' - The names of one or more scheduled actions. You can specify up to 50 actions. If you omit this parameter, all scheduled actions are described. If you specify an unknown scheduled action, it is ignored with no error.
 describeScheduledActions
     :: DescribeScheduledActions
 describeScheduledActions =
@@ -112,7 +112,7 @@ dsasMaxRecords = lens _dsasMaxRecords (\ s a -> s{_dsasMaxRecords = a})
 dsasEndTime :: Lens' DescribeScheduledActions (Maybe UTCTime)
 dsasEndTime = lens _dsasEndTime (\ s a -> s{_dsasEndTime = a}) . mapping _Time
 
--- | Describes one or more scheduled actions. If you omit this parameter, all scheduled actions are described. If you specify an unknown scheduled action, it is ignored with no error. You can describe up to a maximum of 50 instances with a single call. If there are more items to return, the call returns a token. To get the next set of items, repeat the call with the returned token.
+-- | The names of one or more scheduled actions. You can specify up to 50 actions. If you omit this parameter, all scheduled actions are described. If you specify an unknown scheduled action, it is ignored with no error.
 dsasScheduledActionNames :: Lens' DescribeScheduledActions [Text]
 dsasScheduledActionNames = lens _dsasScheduledActionNames (\ s a -> s{_dsasScheduledActionNames = a}) . _Default . _Coerce
 

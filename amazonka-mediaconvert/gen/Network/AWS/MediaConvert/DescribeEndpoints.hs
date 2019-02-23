@@ -25,6 +25,7 @@ module Network.AWS.MediaConvert.DescribeEndpoints
       describeEndpoints
     , DescribeEndpoints
     -- * Request Lenses
+    , deMode
     , deNextToken
     , deMaxResults
 
@@ -48,7 +49,8 @@ import Network.AWS.Response
 --
 -- /See:/ 'describeEndpoints' smart constructor.
 data DescribeEndpoints = DescribeEndpoints'
-  { _deNextToken  :: !(Maybe Text)
+  { _deMode       :: !(Maybe DescribeEndpointsMode)
+  , _deNextToken  :: !(Maybe Text)
   , _deMaxResults :: !(Maybe Int)
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
@@ -57,14 +59,21 @@ data DescribeEndpoints = DescribeEndpoints'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'deMode' - Undocumented member.
+--
 -- * 'deNextToken' - Use this string, provided with the response to a previous request, to request the next batch of endpoints.
 --
 -- * 'deMaxResults' - Optional. Max number of endpoints, up to twenty, that will be returned at one time.
 describeEndpoints
     :: DescribeEndpoints
 describeEndpoints =
-  DescribeEndpoints' {_deNextToken = Nothing, _deMaxResults = Nothing}
+  DescribeEndpoints'
+    {_deMode = Nothing, _deNextToken = Nothing, _deMaxResults = Nothing}
 
+
+-- | Undocumented member.
+deMode :: Lens' DescribeEndpoints (Maybe DescribeEndpointsMode)
+deMode = lens _deMode (\ s a -> s{_deMode = a})
 
 -- | Use this string, provided with the response to a previous request, to request the next batch of endpoints.
 deNextToken :: Lens' DescribeEndpoints (Maybe Text)
@@ -100,7 +109,8 @@ instance ToJSON DescribeEndpoints where
         toJSON DescribeEndpoints'{..}
           = object
               (catMaybes
-                 [("nextToken" .=) <$> _deNextToken,
+                 [("mode" .=) <$> _deMode,
+                  ("nextToken" .=) <$> _deNextToken,
                   ("maxResults" .=) <$> _deMaxResults])
 
 instance ToPath DescribeEndpoints where

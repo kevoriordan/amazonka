@@ -51,7 +51,7 @@ data ListQueues = ListQueues'
   { _lqListBy     :: !(Maybe QueueListBy)
   , _lqNextToken  :: !(Maybe Text)
   , _lqOrder      :: !(Maybe Order)
-  , _lqMaxResults :: !(Maybe Int)
+  , _lqMaxResults :: !(Maybe Nat)
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -90,8 +90,8 @@ lqOrder :: Lens' ListQueues (Maybe Order)
 lqOrder = lens _lqOrder (\ s a -> s{_lqOrder = a})
 
 -- | Optional. Number of queues, up to twenty, that will be returned at one time.
-lqMaxResults :: Lens' ListQueues (Maybe Int)
-lqMaxResults = lens _lqMaxResults (\ s a -> s{_lqMaxResults = a})
+lqMaxResults :: Lens' ListQueues (Maybe Natural)
+lqMaxResults = lens _lqMaxResults (\ s a -> s{_lqMaxResults = a}) . mapping _Nat
 
 instance AWSRequest ListQueues where
         type Rs ListQueues = ListQueuesResponse
@@ -135,7 +135,7 @@ data ListQueuesResponse = ListQueuesResponse'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lqrsQueues' - List of queues
+-- * 'lqrsQueues' - List of queues.
 --
 -- * 'lqrsNextToken' - Use this string to request the next batch of queues.
 --
@@ -151,7 +151,7 @@ listQueuesResponse pResponseStatus_ =
     }
 
 
--- | List of queues
+-- | List of queues.
 lqrsQueues :: Lens' ListQueuesResponse [Queue]
 lqrsQueues = lens _lqrsQueues (\ s a -> s{_lqrsQueues = a}) . _Default . _Coerce
 

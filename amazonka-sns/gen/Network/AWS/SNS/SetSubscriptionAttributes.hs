@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Allows a subscription owner to set an attribute of the topic to a new value.
+-- Allows a subscription owner to set an attribute of the subscription to a new value.
 --
 --
 module Network.AWS.SNS.SetSubscriptionAttributes
@@ -63,7 +63,7 @@ data SetSubscriptionAttributes = SetSubscriptionAttributes'
 --
 -- * 'ssaSubscriptionARN' - The ARN of the subscription to modify.
 --
--- * 'ssaAttributeName' - The name of the attribute you want to set. Only a subset of the subscriptions attributes are mutable. Valid values: @DeliveryPolicy@ | @RawMessageDelivery@
+-- * 'ssaAttributeName' - A map of attributes with their corresponding values. The following lists the names, descriptions, and values of the special request parameters that the @SetTopicAttributes@ action uses:     * @DeliveryPolicy@ – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.     * @FilterPolicy@ – The simple JSON object that lets your subscriber receive only a subset of messages, rather than receiving every message published to the topic.     * @RawMessageDelivery@ – When set to @true@ , enables raw message delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need for the endpoints to process JSON formatting, which is otherwise created for Amazon SNS metadata.
 setSubscriptionAttributes
     :: Text -- ^ 'ssaSubscriptionARN'
     -> Text -- ^ 'ssaAttributeName'
@@ -84,7 +84,7 @@ ssaAttributeValue = lens _ssaAttributeValue (\ s a -> s{_ssaAttributeValue = a})
 ssaSubscriptionARN :: Lens' SetSubscriptionAttributes Text
 ssaSubscriptionARN = lens _ssaSubscriptionARN (\ s a -> s{_ssaSubscriptionARN = a})
 
--- | The name of the attribute you want to set. Only a subset of the subscriptions attributes are mutable. Valid values: @DeliveryPolicy@ | @RawMessageDelivery@
+-- | A map of attributes with their corresponding values. The following lists the names, descriptions, and values of the special request parameters that the @SetTopicAttributes@ action uses:     * @DeliveryPolicy@ – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.     * @FilterPolicy@ – The simple JSON object that lets your subscriber receive only a subset of messages, rather than receiving every message published to the topic.     * @RawMessageDelivery@ – When set to @true@ , enables raw message delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need for the endpoints to process JSON formatting, which is otherwise created for Amazon SNS metadata.
 ssaAttributeName :: Lens' SetSubscriptionAttributes Text
 ssaAttributeName = lens _ssaAttributeName (\ s a -> s{_ssaAttributeName = a})
 

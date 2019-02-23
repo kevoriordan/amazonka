@@ -76,6 +76,7 @@ module Network.AWS.IoTJobsData
     , jeStatus
     , jeJobId
     , jeLastUpdatedAt
+    , jeApproximateSecondsBeforeTimedOut
     , jeQueuedAt
     , jeJobDocument
     , jeStatusDetails

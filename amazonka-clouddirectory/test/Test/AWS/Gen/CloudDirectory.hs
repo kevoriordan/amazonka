@@ -127,6 +127,9 @@ import Test.Tasty
 --         , requestCreateFacet $
 --             createFacet
 --
+--         , requestGetLinkAttributes $
+--             getLinkAttributes
+--
 --         , requestGetObjectAttributes $
 --             getObjectAttributes
 --
@@ -210,6 +213,9 @@ import Test.Tasty
 --
 --         , requestPutSchemaFromJSON $
 --             putSchemaFromJSON
+--
+--         , requestUpdateLinkAttributes $
+--             updateLinkAttributes
 --
 --         , requestAttachToIndex $
 --             attachToIndex
@@ -319,6 +325,9 @@ import Test.Tasty
 --         , responseCreateFacet $
 --             createFacetResponse
 --
+--         , responseGetLinkAttributes $
+--             getLinkAttributesResponse
+--
 --         , responseGetObjectAttributes $
 --             getObjectAttributesResponse
 --
@@ -402,6 +411,9 @@ import Test.Tasty
 --
 --         , responsePutSchemaFromJSON $
 --             putSchemaFromJSONResponse
+--
+--         , responseUpdateLinkAttributes $
+--             updateLinkAttributesResponse
 --
 --         , responseAttachToIndex $
 --             attachToIndexResponse
@@ -579,6 +591,11 @@ requestCreateFacet = req
     "CreateFacet"
     "fixture/CreateFacet.yaml"
 
+requestGetLinkAttributes :: GetLinkAttributes -> TestTree
+requestGetLinkAttributes = req
+    "GetLinkAttributes"
+    "fixture/GetLinkAttributes.yaml"
+
 requestGetObjectAttributes :: GetObjectAttributes -> TestTree
 requestGetObjectAttributes = req
     "GetObjectAttributes"
@@ -718,6 +735,11 @@ requestPutSchemaFromJSON :: PutSchemaFromJSON -> TestTree
 requestPutSchemaFromJSON = req
     "PutSchemaFromJSON"
     "fixture/PutSchemaFromJSON.yaml"
+
+requestUpdateLinkAttributes :: UpdateLinkAttributes -> TestTree
+requestUpdateLinkAttributes = req
+    "UpdateLinkAttributes"
+    "fixture/UpdateLinkAttributes.yaml"
 
 requestAttachToIndex :: AttachToIndex -> TestTree
 requestAttachToIndex = req
@@ -962,6 +984,13 @@ responseCreateFacet = res
     cloudDirectory
     (Proxy :: Proxy CreateFacet)
 
+responseGetLinkAttributes :: GetLinkAttributesResponse -> TestTree
+responseGetLinkAttributes = res
+    "GetLinkAttributesResponse"
+    "fixture/GetLinkAttributesResponse.proto"
+    cloudDirectory
+    (Proxy :: Proxy GetLinkAttributes)
+
 responseGetObjectAttributes :: GetObjectAttributesResponse -> TestTree
 responseGetObjectAttributes = res
     "GetObjectAttributesResponse"
@@ -1157,6 +1186,13 @@ responsePutSchemaFromJSON = res
     "fixture/PutSchemaFromJSONResponse.proto"
     cloudDirectory
     (Proxy :: Proxy PutSchemaFromJSON)
+
+responseUpdateLinkAttributes :: UpdateLinkAttributesResponse -> TestTree
+responseUpdateLinkAttributes = res
+    "UpdateLinkAttributesResponse"
+    "fixture/UpdateLinkAttributesResponse.proto"
+    cloudDirectory
+    (Proxy :: Proxy UpdateLinkAttributes)
 
 responseAttachToIndex :: AttachToIndexResponse -> TestTree
 responseAttachToIndex = res

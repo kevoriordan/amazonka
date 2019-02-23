@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Sets the cors configuration for a bucket.
+-- Sets the CORS configuration for a bucket.
+--
+--
 module Network.AWS.S3.PutBucketCORS
     (
     -- * Creating a Request

@@ -28,7 +28,13 @@ import Test.Tasty
 -- fixtures :: TestTree
 -- fixtures =
 --     [ testGroup "request"
---         [ requestGetNamedQuery $
+--         [ requestDeleteWorkGroup $
+--             deleteWorkGroup
+--
+--         , requestUpdateWorkGroup $
+--             updateWorkGroup
+--
+--         , requestGetNamedQuery $
 --             getNamedQuery
 --
 --         , requestCreateNamedQuery $
@@ -49,11 +55,20 @@ import Test.Tasty
 --         , requestGetQueryExecution $
 --             getQueryExecution
 --
+--         , requestListWorkGroups $
+--             listWorkGroups
+--
+--         , requestCreateWorkGroup $
+--             createWorkGroup
+--
 --         , requestBatchGetQueryExecution $
 --             batchGetQueryExecution
 --
 --         , requestStopQueryExecution $
 --             stopQueryExecution
+--
+--         , requestGetWorkGroup $
+--             getWorkGroup
 --
 --         , requestGetQueryResults $
 --             getQueryResults
@@ -64,7 +79,13 @@ import Test.Tasty
 --           ]
 
 --     , testGroup "response"
---         [ responseGetNamedQuery $
+--         [ responseDeleteWorkGroup $
+--             deleteWorkGroupResponse
+--
+--         , responseUpdateWorkGroup $
+--             updateWorkGroupResponse
+--
+--         , responseGetNamedQuery $
 --             getNamedQueryResponse
 --
 --         , responseCreateNamedQuery $
@@ -85,11 +106,20 @@ import Test.Tasty
 --         , responseGetQueryExecution $
 --             getQueryExecutionResponse
 --
+--         , responseListWorkGroups $
+--             listWorkGroupsResponse
+--
+--         , responseCreateWorkGroup $
+--             createWorkGroupResponse
+--
 --         , responseBatchGetQueryExecution $
 --             batchGetQueryExecutionResponse
 --
 --         , responseStopQueryExecution $
 --             stopQueryExecutionResponse
+--
+--         , responseGetWorkGroup $
+--             getWorkGroupResponse
 --
 --         , responseGetQueryResults $
 --             getQueryResultsResponse
@@ -101,6 +131,16 @@ import Test.Tasty
 --     ]
 
 -- Requests
+
+requestDeleteWorkGroup :: DeleteWorkGroup -> TestTree
+requestDeleteWorkGroup = req
+    "DeleteWorkGroup"
+    "fixture/DeleteWorkGroup.yaml"
+
+requestUpdateWorkGroup :: UpdateWorkGroup -> TestTree
+requestUpdateWorkGroup = req
+    "UpdateWorkGroup"
+    "fixture/UpdateWorkGroup.yaml"
 
 requestGetNamedQuery :: GetNamedQuery -> TestTree
 requestGetNamedQuery = req
@@ -137,6 +177,16 @@ requestGetQueryExecution = req
     "GetQueryExecution"
     "fixture/GetQueryExecution.yaml"
 
+requestListWorkGroups :: ListWorkGroups -> TestTree
+requestListWorkGroups = req
+    "ListWorkGroups"
+    "fixture/ListWorkGroups.yaml"
+
+requestCreateWorkGroup :: CreateWorkGroup -> TestTree
+requestCreateWorkGroup = req
+    "CreateWorkGroup"
+    "fixture/CreateWorkGroup.yaml"
+
 requestBatchGetQueryExecution :: BatchGetQueryExecution -> TestTree
 requestBatchGetQueryExecution = req
     "BatchGetQueryExecution"
@@ -146,6 +196,11 @@ requestStopQueryExecution :: StopQueryExecution -> TestTree
 requestStopQueryExecution = req
     "StopQueryExecution"
     "fixture/StopQueryExecution.yaml"
+
+requestGetWorkGroup :: GetWorkGroup -> TestTree
+requestGetWorkGroup = req
+    "GetWorkGroup"
+    "fixture/GetWorkGroup.yaml"
 
 requestGetQueryResults :: GetQueryResults -> TestTree
 requestGetQueryResults = req
@@ -158,6 +213,20 @@ requestListQueryExecutions = req
     "fixture/ListQueryExecutions.yaml"
 
 -- Responses
+
+responseDeleteWorkGroup :: DeleteWorkGroupResponse -> TestTree
+responseDeleteWorkGroup = res
+    "DeleteWorkGroupResponse"
+    "fixture/DeleteWorkGroupResponse.proto"
+    athena
+    (Proxy :: Proxy DeleteWorkGroup)
+
+responseUpdateWorkGroup :: UpdateWorkGroupResponse -> TestTree
+responseUpdateWorkGroup = res
+    "UpdateWorkGroupResponse"
+    "fixture/UpdateWorkGroupResponse.proto"
+    athena
+    (Proxy :: Proxy UpdateWorkGroup)
 
 responseGetNamedQuery :: GetNamedQueryResponse -> TestTree
 responseGetNamedQuery = res
@@ -208,6 +277,20 @@ responseGetQueryExecution = res
     athena
     (Proxy :: Proxy GetQueryExecution)
 
+responseListWorkGroups :: ListWorkGroupsResponse -> TestTree
+responseListWorkGroups = res
+    "ListWorkGroupsResponse"
+    "fixture/ListWorkGroupsResponse.proto"
+    athena
+    (Proxy :: Proxy ListWorkGroups)
+
+responseCreateWorkGroup :: CreateWorkGroupResponse -> TestTree
+responseCreateWorkGroup = res
+    "CreateWorkGroupResponse"
+    "fixture/CreateWorkGroupResponse.proto"
+    athena
+    (Proxy :: Proxy CreateWorkGroup)
+
 responseBatchGetQueryExecution :: BatchGetQueryExecutionResponse -> TestTree
 responseBatchGetQueryExecution = res
     "BatchGetQueryExecutionResponse"
@@ -221,6 +304,13 @@ responseStopQueryExecution = res
     "fixture/StopQueryExecutionResponse.proto"
     athena
     (Proxy :: Proxy StopQueryExecution)
+
+responseGetWorkGroup :: GetWorkGroupResponse -> TestTree
+responseGetWorkGroup = res
+    "GetWorkGroupResponse"
+    "fixture/GetWorkGroupResponse.proto"
+    athena
+    (Proxy :: Proxy GetWorkGroup)
 
 responseGetQueryResults :: GetQueryResultsResponse -> TestTree
 responseGetQueryResults = res

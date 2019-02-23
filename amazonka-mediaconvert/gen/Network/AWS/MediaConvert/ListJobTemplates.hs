@@ -53,7 +53,7 @@ data ListJobTemplates = ListJobTemplates'
   , _ljtListBy     :: !(Maybe JobTemplateListBy)
   , _ljtNextToken  :: !(Maybe Text)
   , _ljtOrder      :: !(Maybe Order)
-  , _ljtMaxResults :: !(Maybe Int)
+  , _ljtMaxResults :: !(Maybe Nat)
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -99,8 +99,8 @@ ljtOrder :: Lens' ListJobTemplates (Maybe Order)
 ljtOrder = lens _ljtOrder (\ s a -> s{_ljtOrder = a})
 
 -- | Optional. Number of job templates, up to twenty, that will be returned at one time.
-ljtMaxResults :: Lens' ListJobTemplates (Maybe Int)
-ljtMaxResults = lens _ljtMaxResults (\ s a -> s{_ljtMaxResults = a})
+ljtMaxResults :: Lens' ListJobTemplates (Maybe Natural)
+ljtMaxResults = lens _ljtMaxResults (\ s a -> s{_ljtMaxResults = a}) . mapping _Nat
 
 instance AWSRequest ListJobTemplates where
         type Rs ListJobTemplates = ListJobTemplatesResponse

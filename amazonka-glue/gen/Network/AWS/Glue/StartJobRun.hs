@@ -27,8 +27,11 @@ module Network.AWS.Glue.StartJobRun
       startJobRun
     , StartJobRun
     -- * Request Lenses
+    , sjrNotificationProperty
     , sjrArguments
+    , sjrSecurityConfiguration
     , sjrAllocatedCapacity
+    , sjrMaxCapacity
     , sjrTimeout
     , sjrJobRunId
     , sjrJobName
@@ -50,11 +53,14 @@ import Network.AWS.Response
 
 -- | /See:/ 'startJobRun' smart constructor.
 data StartJobRun = StartJobRun'
-  { _sjrArguments         :: !(Maybe (Map Text Text))
-  , _sjrAllocatedCapacity :: !(Maybe Int)
-  , _sjrTimeout           :: !(Maybe Nat)
-  , _sjrJobRunId          :: !(Maybe Text)
-  , _sjrJobName           :: !Text
+  { _sjrNotificationProperty  :: !(Maybe NotificationProperty)
+  , _sjrArguments             :: !(Maybe (Map Text Text))
+  , _sjrSecurityConfiguration :: !(Maybe Text)
+  , _sjrAllocatedCapacity     :: !(Maybe Int)
+  , _sjrMaxCapacity           :: !(Maybe Double)
+  , _sjrTimeout               :: !(Maybe Nat)
+  , _sjrJobRunId              :: !(Maybe Text)
+  , _sjrJobName               :: !Text
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -62,11 +68,17 @@ data StartJobRun = StartJobRun'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'sjrNotificationProperty' - Specifies configuration properties of a job run notification.
+--
 -- * 'sjrArguments' - The job arguments specifically for this run. They override the equivalent default arguments set for in the job definition itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the <http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html Calling AWS Glue APIs in Python> topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the <http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html Special Parameters Used by AWS Glue> topic in the developer guide.
 --
--- * 'sjrAllocatedCapacity' - The number of AWS Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <https://aws.amazon.com/glue/pricing/ AWS Glue pricing page> .
+-- * 'sjrSecurityConfiguration' - The name of the SecurityConfiguration structure to be used with this job run.
 --
--- * 'sjrTimeout' - The job run timeout in minutes. It overrides the timeout value of the job.
+-- * 'sjrAllocatedCapacity' - This field is deprecated, use @MaxCapacity@ instead. The number of AWS Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <https://aws.amazon.com/glue/pricing/ AWS Glue pricing page> .
+--
+-- * 'sjrMaxCapacity' - AWS Glue supports running jobs on a @JobCommand.Name@ ="pythonshell" with allocated processing as low as 0.0625 DPU, which can be specified using @MaxCapacity@ . Glue ETL jobs running in any other way cannot have fractional DPU allocations.
+--
+-- * 'sjrTimeout' - The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters @TIMEOUT@ status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.
 --
 -- * 'sjrJobRunId' - The ID of a previous JobRun to retry.
 --
@@ -76,23 +88,38 @@ startJobRun
     -> StartJobRun
 startJobRun pJobName_ =
   StartJobRun'
-    { _sjrArguments = Nothing
+    { _sjrNotificationProperty = Nothing
+    , _sjrArguments = Nothing
+    , _sjrSecurityConfiguration = Nothing
     , _sjrAllocatedCapacity = Nothing
+    , _sjrMaxCapacity = Nothing
     , _sjrTimeout = Nothing
     , _sjrJobRunId = Nothing
     , _sjrJobName = pJobName_
     }
 
 
+-- | Specifies configuration properties of a job run notification.
+sjrNotificationProperty :: Lens' StartJobRun (Maybe NotificationProperty)
+sjrNotificationProperty = lens _sjrNotificationProperty (\ s a -> s{_sjrNotificationProperty = a})
+
 -- | The job arguments specifically for this run. They override the equivalent default arguments set for in the job definition itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the <http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html Calling AWS Glue APIs in Python> topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the <http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html Special Parameters Used by AWS Glue> topic in the developer guide.
 sjrArguments :: Lens' StartJobRun (HashMap Text Text)
 sjrArguments = lens _sjrArguments (\ s a -> s{_sjrArguments = a}) . _Default . _Map
 
--- | The number of AWS Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <https://aws.amazon.com/glue/pricing/ AWS Glue pricing page> .
+-- | The name of the SecurityConfiguration structure to be used with this job run.
+sjrSecurityConfiguration :: Lens' StartJobRun (Maybe Text)
+sjrSecurityConfiguration = lens _sjrSecurityConfiguration (\ s a -> s{_sjrSecurityConfiguration = a})
+
+-- | This field is deprecated, use @MaxCapacity@ instead. The number of AWS Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <https://aws.amazon.com/glue/pricing/ AWS Glue pricing page> .
 sjrAllocatedCapacity :: Lens' StartJobRun (Maybe Int)
 sjrAllocatedCapacity = lens _sjrAllocatedCapacity (\ s a -> s{_sjrAllocatedCapacity = a})
 
--- | The job run timeout in minutes. It overrides the timeout value of the job.
+-- | AWS Glue supports running jobs on a @JobCommand.Name@ ="pythonshell" with allocated processing as low as 0.0625 DPU, which can be specified using @MaxCapacity@ . Glue ETL jobs running in any other way cannot have fractional DPU allocations.
+sjrMaxCapacity :: Lens' StartJobRun (Maybe Double)
+sjrMaxCapacity = lens _sjrMaxCapacity (\ s a -> s{_sjrMaxCapacity = a})
+
+-- | The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters @TIMEOUT@ status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.
 sjrTimeout :: Lens' StartJobRun (Maybe Natural)
 sjrTimeout = lens _sjrTimeout (\ s a -> s{_sjrTimeout = a}) . mapping _Nat
 
@@ -130,8 +157,13 @@ instance ToJSON StartJobRun where
         toJSON StartJobRun'{..}
           = object
               (catMaybes
-                 [("Arguments" .=) <$> _sjrArguments,
+                 [("NotificationProperty" .=) <$>
+                    _sjrNotificationProperty,
+                  ("Arguments" .=) <$> _sjrArguments,
+                  ("SecurityConfiguration" .=) <$>
+                    _sjrSecurityConfiguration,
                   ("AllocatedCapacity" .=) <$> _sjrAllocatedCapacity,
+                  ("MaxCapacity" .=) <$> _sjrMaxCapacity,
                   ("Timeout" .=) <$> _sjrTimeout,
                   ("JobRunId" .=) <$> _sjrJobRunId,
                   Just ("JobName" .= _sjrJobName)])

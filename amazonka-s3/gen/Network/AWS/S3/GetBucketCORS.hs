@@ -18,7 +18,9 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Returns the cors configuration for the bucket.
+-- Returns the CORS configuration for the bucket.
+--
+--
 module Network.AWS.S3.GetBucketCORS
     (
     -- * Creating a Request

@@ -31,8 +31,14 @@ module Network.AWS.CodeBuild.Types
     -- * ArtifactsType
     , ArtifactsType (..)
 
+    -- * AuthType
+    , AuthType (..)
+
     -- * BuildPhaseType
     , BuildPhaseType (..)
+
+    -- * CacheMode
+    , CacheMode (..)
 
     -- * CacheType
     , CacheType (..)
@@ -40,20 +46,32 @@ module Network.AWS.CodeBuild.Types
     -- * ComputeType
     , ComputeType (..)
 
+    -- * CredentialProviderType
+    , CredentialProviderType (..)
+
     -- * EnvironmentType
     , EnvironmentType (..)
 
     -- * EnvironmentVariableType
     , EnvironmentVariableType (..)
 
+    -- * ImagePullCredentialsType
+    , ImagePullCredentialsType (..)
+
     -- * LanguageType
     , LanguageType (..)
+
+    -- * LogsConfigStatusType
+    , LogsConfigStatusType (..)
 
     -- * PlatformType
     , PlatformType (..)
 
     -- * ProjectSortByType
     , ProjectSortByType (..)
+
+    -- * ServerType
+    , ServerType (..)
 
     -- * SortOrderType
     , SortOrderType (..)
@@ -67,27 +85,37 @@ module Network.AWS.CodeBuild.Types
     -- * StatusType
     , StatusType (..)
 
+    -- * WebhookFilterType
+    , WebhookFilterType (..)
+
     -- * Build
     , Build
     , build
     , bPhases
     , bBuildComplete
+    , bSecondaryArtifacts
     , bArn
     , bStartTime
     , bArtifacts
     , bEnvironment
     , bInitiator
     , bNetworkInterface
+    , bSecondarySourceVersions
     , bCurrentPhase
+    , bQueuedTimeoutInMinutes
     , bCache
+    , bSecondarySources
     , bSourceVersion
     , bLogs
+    , bResolvedSourceVersion
     , bVpcConfig
     , bEndTime
     , bProjectName
     , bBuildStatus
     , bSource
     , bId
+    , bEncryptionKey
+    , bServiceRole
     , bTimeoutInMinutes
 
     -- * BuildArtifacts
@@ -95,6 +123,9 @@ module Network.AWS.CodeBuild.Types
     , buildArtifacts
     , baLocation
     , baMd5sum
+    , baEncryptionDisabled
+    , baOverrideArtifactName
+    , baArtifactIdentifier
     , baSha256sum
 
     -- * BuildNotDeleted
@@ -112,6 +143,13 @@ module Network.AWS.CodeBuild.Types
     , bpPhaseType
     , bpEndTime
     , bpDurationInSeconds
+
+    -- * CloudWatchLogsConfig
+    , CloudWatchLogsConfig
+    , cloudWatchLogsConfig
+    , cwlcGroupName
+    , cwlcStreamName
+    , cwlcStatus
 
     -- * EnvironmentImage
     , EnvironmentImage
@@ -139,10 +177,19 @@ module Network.AWS.CodeBuild.Types
     , evName
     , evValue
 
+    -- * LogsConfig
+    , LogsConfig
+    , logsConfig
+    , lcS3Logs
+    , lcCloudWatchLogs
+
     -- * LogsLocation
     , LogsLocation
     , logsLocation
     , llDeepLink
+    , llS3Logs
+    , llCloudWatchLogs
+    , llS3DeepLink
     , llGroupName
     , llStreamName
 
@@ -161,15 +208,19 @@ module Network.AWS.CodeBuild.Types
     -- * Project
     , Project
     , project
+    , pSecondaryArtifacts
     , pArn
     , pArtifacts
     , pEnvironment
     , pCreated
+    , pQueuedTimeoutInMinutes
     , pCache
+    , pSecondarySources
     , pName
     , pVpcConfig
     , pSource
     , pBadge
+    , pLogsConfig
     , pEncryptionKey
     , pLastModified
     , pWebhook
@@ -185,6 +236,9 @@ module Network.AWS.CodeBuild.Types
     , paPath
     , paLocation
     , paName
+    , paEncryptionDisabled
+    , paOverrideArtifactName
+    , paArtifactIdentifier
     , paNamespaceType
     , paType
 
@@ -198,12 +252,15 @@ module Network.AWS.CodeBuild.Types
     , ProjectCache
     , projectCache
     , pcLocation
+    , pcModes
     , pcType
 
     -- * ProjectEnvironment
     , ProjectEnvironment
     , projectEnvironment
+    , peImagePullCredentialsType
     , pePrivilegedMode
+    , peRegistryCredential
     , peCertificate
     , peEnvironmentVariables
     , peType
@@ -213,18 +270,45 @@ module Network.AWS.CodeBuild.Types
     -- * ProjectSource
     , ProjectSource
     , projectSource
+    , psReportBuildStatus
     , psInsecureSSL
     , psLocation
     , psAuth
     , psBuildspec
+    , psSourceIdentifier
     , psGitCloneDepth
     , psType
+
+    -- * ProjectSourceVersion
+    , ProjectSourceVersion
+    , projectSourceVersion
+    , psvSourceIdentifier
+    , psvSourceVersion
+
+    -- * RegistryCredential
+    , RegistryCredential
+    , registryCredential
+    , rcCredential
+    , rcCredentialProvider
+
+    -- * S3LogsConfig
+    , S3LogsConfig
+    , s3LogsConfig
+    , slcLocation
+    , slcStatus
 
     -- * SourceAuth
     , SourceAuth
     , sourceAuth
     , saResource
     , saType
+
+    -- * SourceCredentialsInfo
+    , SourceCredentialsInfo
+    , sourceCredentialsInfo
+    , sciArn
+    , sciServerType
+    , sciAuthType
 
     -- * Tag
     , Tag
@@ -246,7 +330,15 @@ module Network.AWS.CodeBuild.Types
     , wLastModifiedSecret
     , wUrl
     , wSecret
+    , wFilterGroups
     , wPayloadURL
+
+    -- * WebhookFilter
+    , WebhookFilter
+    , webhookFilter
+    , wfExcludeMatchedPattern
+    , wfType
+    , wfPattern
     ) where
 
 import Network.AWS.CodeBuild.Types.Product

@@ -39,17 +39,18 @@ module Network.AWS.ELBv2.CreateTargetGroup
     -- * Request Lenses
     , ctgMatcher
     , ctgHealthCheckPath
+    , ctgHealthCheckEnabled
     , ctgUnhealthyThresholdCount
+    , ctgVPCId
+    , ctgProtocol
     , ctgHealthCheckIntervalSeconds
     , ctgTargetType
     , ctgHealthyThresholdCount
     , ctgHealthCheckProtocol
     , ctgHealthCheckTimeoutSeconds
     , ctgHealthCheckPort
-    , ctgName
-    , ctgProtocol
     , ctgPort
-    , ctgVPCId
+    , ctgName
 
     -- * Destructuring the Response
     , createTargetGroupResponse
@@ -70,17 +71,18 @@ import Network.AWS.Response
 data CreateTargetGroup = CreateTargetGroup'
   { _ctgMatcher                    :: !(Maybe Matcher)
   , _ctgHealthCheckPath            :: !(Maybe Text)
+  , _ctgHealthCheckEnabled         :: !(Maybe Bool)
   , _ctgUnhealthyThresholdCount    :: !(Maybe Nat)
+  , _ctgVPCId                      :: !(Maybe Text)
+  , _ctgProtocol                   :: !(Maybe ProtocolEnum)
   , _ctgHealthCheckIntervalSeconds :: !(Maybe Nat)
   , _ctgTargetType                 :: !(Maybe TargetTypeEnum)
   , _ctgHealthyThresholdCount      :: !(Maybe Nat)
   , _ctgHealthCheckProtocol        :: !(Maybe ProtocolEnum)
   , _ctgHealthCheckTimeoutSeconds  :: !(Maybe Nat)
   , _ctgHealthCheckPort            :: !(Maybe Text)
+  , _ctgPort                       :: !(Maybe Nat)
   , _ctgName                       :: !Text
-  , _ctgProtocol                   :: !ProtocolEnum
-  , _ctgPort                       :: !Nat
-  , _ctgVPCId                      :: !Text
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -92,48 +94,48 @@ data CreateTargetGroup = CreateTargetGroup'
 --
 -- * 'ctgHealthCheckPath' - [HTTP/HTTPS health checks] The ping path that is the destination on the targets for health checks. The default is /.
 --
+-- * 'ctgHealthCheckEnabled' - Indicates whether health checks are enabled. If the target type is @instance@ or @ip@ , the default is @true@ . If the target type is @lambda@ , the default is @false@ .
+--
 -- * 'ctgUnhealthyThresholdCount' - The number of consecutive health check failures required before considering a target unhealthy. For Application Load Balancers, the default is 2. For Network Load Balancers, this value must be the same as the healthy threshold count.
 --
--- * 'ctgHealthCheckIntervalSeconds' - The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5 to 300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds. The default is 30 seconds.
+-- * 'ctgVPCId' - The identifier of the virtual private cloud (VPC). If the target is a Lambda function, this parameter does not apply.
 --
--- * 'ctgTargetType' - The type of target that you must specify when registering targets with this target group. The possible values are @instance@ (targets are specified by instance ID) or @ip@ (targets are specified by IP address). The default is @instance@ . Note that you can't specify targets for a target group using both instance IDs and IP addresses. If the target type is @ip@ , specify IP addresses from the subnets of the virtual private cloud (VPC) for the target group, the RFC 1918 range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10). You can't specify publicly routable IP addresses.
+-- * 'ctgProtocol' - The protocol to use for routing traffic to the targets. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocols are TCP and TLS. If the target is a Lambda function, this parameter does not apply.
+--
+-- * 'ctgHealthCheckIntervalSeconds' - The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5–300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds. If the target type is @instance@ or @ip@ , the default is 30 seconds. If the target type is @lambda@ , the default is 35 seconds.
+--
+-- * 'ctgTargetType' - The type of target that you must specify when registering targets with this target group. You can't specify targets for a target group using more than one target type.     * @instance@ - Targets are specified by instance ID. This is the default value.     * @ip@ - Targets are specified by IP address. You can specify IP addresses from the subnets of the virtual private cloud (VPC) for the target group, the RFC 1918 range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10). You can't specify publicly routable IP addresses.     * @lambda@ - The target groups contains a single Lambda function.
 --
 -- * 'ctgHealthyThresholdCount' - The number of consecutive health checks successes required before considering an unhealthy target healthy. For Application Load Balancers, the default is 5. For Network Load Balancers, the default is 3.
 --
--- * 'ctgHealthCheckProtocol' - The protocol the load balancer uses when performing health checks on targets. The TCP protocol is supported only if the protocol of the target group is TCP. For Application Load Balancers, the default is HTTP. For Network Load Balancers, the default is TCP.
+-- * 'ctgHealthCheckProtocol' - The protocol the load balancer uses when performing health checks on targets. For Application Load Balancers, the default is HTTP. For Network Load Balancers, the default is TCP. The TCP protocol is supported for health checks only if the protocol of the target group is TCP or TLS. The TLS protocol is not supported for health checks.
 --
--- * 'ctgHealthCheckTimeoutSeconds' - The amount of time, in seconds, during which no response from a target means a failed health check. For Application Load Balancers, the range is 2 to 60 seconds and the default is 5 seconds. For Network Load Balancers, this is 10 seconds for TCP and HTTPS health checks and 6 seconds for HTTP health checks.
+-- * 'ctgHealthCheckTimeoutSeconds' - The amount of time, in seconds, during which no response from a target means a failed health check. For Application Load Balancers, the range is 2–120 seconds and the default is 5 seconds if the target type is @instance@ or @ip@ and 30 seconds if the target type is @lambda@ . For Network Load Balancers, this is 10 seconds for TCP and HTTPS health checks and 6 seconds for HTTP health checks.
 --
 -- * 'ctgHealthCheckPort' - The port the load balancer uses when performing health checks on targets. The default is @traffic-port@ , which is the port on which each target receives traffic from the load balancer.
 --
+-- * 'ctgPort' - The port on which the targets receive traffic. This port is used unless you specify a port override when registering the target. If the target is a Lambda function, this parameter does not apply.
+--
 -- * 'ctgName' - The name of the target group. This name must be unique per region per account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.
---
--- * 'ctgProtocol' - The protocol to use for routing traffic to the targets. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocol is TCP.
---
--- * 'ctgPort' - The port on which the targets receive traffic. This port is used unless you specify a port override when registering the target.
---
--- * 'ctgVPCId' - The identifier of the virtual private cloud (VPC).
 createTargetGroup
     :: Text -- ^ 'ctgName'
-    -> ProtocolEnum -- ^ 'ctgProtocol'
-    -> Natural -- ^ 'ctgPort'
-    -> Text -- ^ 'ctgVPCId'
     -> CreateTargetGroup
-createTargetGroup pName_ pProtocol_ pPort_ pVPCId_ =
+createTargetGroup pName_ =
   CreateTargetGroup'
     { _ctgMatcher = Nothing
     , _ctgHealthCheckPath = Nothing
+    , _ctgHealthCheckEnabled = Nothing
     , _ctgUnhealthyThresholdCount = Nothing
+    , _ctgVPCId = Nothing
+    , _ctgProtocol = Nothing
     , _ctgHealthCheckIntervalSeconds = Nothing
     , _ctgTargetType = Nothing
     , _ctgHealthyThresholdCount = Nothing
     , _ctgHealthCheckProtocol = Nothing
     , _ctgHealthCheckTimeoutSeconds = Nothing
     , _ctgHealthCheckPort = Nothing
+    , _ctgPort = Nothing
     , _ctgName = pName_
-    , _ctgProtocol = pProtocol_
-    , _ctgPort = _Nat # pPort_
-    , _ctgVPCId = pVPCId_
     }
 
 
@@ -145,15 +147,27 @@ ctgMatcher = lens _ctgMatcher (\ s a -> s{_ctgMatcher = a})
 ctgHealthCheckPath :: Lens' CreateTargetGroup (Maybe Text)
 ctgHealthCheckPath = lens _ctgHealthCheckPath (\ s a -> s{_ctgHealthCheckPath = a})
 
+-- | Indicates whether health checks are enabled. If the target type is @instance@ or @ip@ , the default is @true@ . If the target type is @lambda@ , the default is @false@ .
+ctgHealthCheckEnabled :: Lens' CreateTargetGroup (Maybe Bool)
+ctgHealthCheckEnabled = lens _ctgHealthCheckEnabled (\ s a -> s{_ctgHealthCheckEnabled = a})
+
 -- | The number of consecutive health check failures required before considering a target unhealthy. For Application Load Balancers, the default is 2. For Network Load Balancers, this value must be the same as the healthy threshold count.
 ctgUnhealthyThresholdCount :: Lens' CreateTargetGroup (Maybe Natural)
 ctgUnhealthyThresholdCount = lens _ctgUnhealthyThresholdCount (\ s a -> s{_ctgUnhealthyThresholdCount = a}) . mapping _Nat
 
--- | The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5 to 300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds. The default is 30 seconds.
+-- | The identifier of the virtual private cloud (VPC). If the target is a Lambda function, this parameter does not apply.
+ctgVPCId :: Lens' CreateTargetGroup (Maybe Text)
+ctgVPCId = lens _ctgVPCId (\ s a -> s{_ctgVPCId = a})
+
+-- | The protocol to use for routing traffic to the targets. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocols are TCP and TLS. If the target is a Lambda function, this parameter does not apply.
+ctgProtocol :: Lens' CreateTargetGroup (Maybe ProtocolEnum)
+ctgProtocol = lens _ctgProtocol (\ s a -> s{_ctgProtocol = a})
+
+-- | The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5–300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds. If the target type is @instance@ or @ip@ , the default is 30 seconds. If the target type is @lambda@ , the default is 35 seconds.
 ctgHealthCheckIntervalSeconds :: Lens' CreateTargetGroup (Maybe Natural)
 ctgHealthCheckIntervalSeconds = lens _ctgHealthCheckIntervalSeconds (\ s a -> s{_ctgHealthCheckIntervalSeconds = a}) . mapping _Nat
 
--- | The type of target that you must specify when registering targets with this target group. The possible values are @instance@ (targets are specified by instance ID) or @ip@ (targets are specified by IP address). The default is @instance@ . Note that you can't specify targets for a target group using both instance IDs and IP addresses. If the target type is @ip@ , specify IP addresses from the subnets of the virtual private cloud (VPC) for the target group, the RFC 1918 range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10). You can't specify publicly routable IP addresses.
+-- | The type of target that you must specify when registering targets with this target group. You can't specify targets for a target group using more than one target type.     * @instance@ - Targets are specified by instance ID. This is the default value.     * @ip@ - Targets are specified by IP address. You can specify IP addresses from the subnets of the virtual private cloud (VPC) for the target group, the RFC 1918 range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range (100.64.0.0/10). You can't specify publicly routable IP addresses.     * @lambda@ - The target groups contains a single Lambda function.
 ctgTargetType :: Lens' CreateTargetGroup (Maybe TargetTypeEnum)
 ctgTargetType = lens _ctgTargetType (\ s a -> s{_ctgTargetType = a})
 
@@ -161,11 +175,11 @@ ctgTargetType = lens _ctgTargetType (\ s a -> s{_ctgTargetType = a})
 ctgHealthyThresholdCount :: Lens' CreateTargetGroup (Maybe Natural)
 ctgHealthyThresholdCount = lens _ctgHealthyThresholdCount (\ s a -> s{_ctgHealthyThresholdCount = a}) . mapping _Nat
 
--- | The protocol the load balancer uses when performing health checks on targets. The TCP protocol is supported only if the protocol of the target group is TCP. For Application Load Balancers, the default is HTTP. For Network Load Balancers, the default is TCP.
+-- | The protocol the load balancer uses when performing health checks on targets. For Application Load Balancers, the default is HTTP. For Network Load Balancers, the default is TCP. The TCP protocol is supported for health checks only if the protocol of the target group is TCP or TLS. The TLS protocol is not supported for health checks.
 ctgHealthCheckProtocol :: Lens' CreateTargetGroup (Maybe ProtocolEnum)
 ctgHealthCheckProtocol = lens _ctgHealthCheckProtocol (\ s a -> s{_ctgHealthCheckProtocol = a})
 
--- | The amount of time, in seconds, during which no response from a target means a failed health check. For Application Load Balancers, the range is 2 to 60 seconds and the default is 5 seconds. For Network Load Balancers, this is 10 seconds for TCP and HTTPS health checks and 6 seconds for HTTP health checks.
+-- | The amount of time, in seconds, during which no response from a target means a failed health check. For Application Load Balancers, the range is 2–120 seconds and the default is 5 seconds if the target type is @instance@ or @ip@ and 30 seconds if the target type is @lambda@ . For Network Load Balancers, this is 10 seconds for TCP and HTTPS health checks and 6 seconds for HTTP health checks.
 ctgHealthCheckTimeoutSeconds :: Lens' CreateTargetGroup (Maybe Natural)
 ctgHealthCheckTimeoutSeconds = lens _ctgHealthCheckTimeoutSeconds (\ s a -> s{_ctgHealthCheckTimeoutSeconds = a}) . mapping _Nat
 
@@ -173,21 +187,13 @@ ctgHealthCheckTimeoutSeconds = lens _ctgHealthCheckTimeoutSeconds (\ s a -> s{_c
 ctgHealthCheckPort :: Lens' CreateTargetGroup (Maybe Text)
 ctgHealthCheckPort = lens _ctgHealthCheckPort (\ s a -> s{_ctgHealthCheckPort = a})
 
+-- | The port on which the targets receive traffic. This port is used unless you specify a port override when registering the target. If the target is a Lambda function, this parameter does not apply.
+ctgPort :: Lens' CreateTargetGroup (Maybe Natural)
+ctgPort = lens _ctgPort (\ s a -> s{_ctgPort = a}) . mapping _Nat
+
 -- | The name of the target group. This name must be unique per region per account, can have a maximum of 32 characters, must contain only alphanumeric characters or hyphens, and must not begin or end with a hyphen.
 ctgName :: Lens' CreateTargetGroup Text
 ctgName = lens _ctgName (\ s a -> s{_ctgName = a})
-
--- | The protocol to use for routing traffic to the targets. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocol is TCP.
-ctgProtocol :: Lens' CreateTargetGroup ProtocolEnum
-ctgProtocol = lens _ctgProtocol (\ s a -> s{_ctgProtocol = a})
-
--- | The port on which the targets receive traffic. This port is used unless you specify a port override when registering the target.
-ctgPort :: Lens' CreateTargetGroup Natural
-ctgPort = lens _ctgPort (\ s a -> s{_ctgPort = a}) . _Nat
-
--- | The identifier of the virtual private cloud (VPC).
-ctgVPCId :: Lens' CreateTargetGroup Text
-ctgVPCId = lens _ctgVPCId (\ s a -> s{_ctgVPCId = a})
 
 instance AWSRequest CreateTargetGroup where
         type Rs CreateTargetGroup = CreateTargetGroupResponse
@@ -217,8 +223,10 @@ instance ToQuery CreateTargetGroup where
                "Version" =: ("2015-12-01" :: ByteString),
                "Matcher" =: _ctgMatcher,
                "HealthCheckPath" =: _ctgHealthCheckPath,
+               "HealthCheckEnabled" =: _ctgHealthCheckEnabled,
                "UnhealthyThresholdCount" =:
                  _ctgUnhealthyThresholdCount,
+               "VpcId" =: _ctgVPCId, "Protocol" =: _ctgProtocol,
                "HealthCheckIntervalSeconds" =:
                  _ctgHealthCheckIntervalSeconds,
                "TargetType" =: _ctgTargetType,
@@ -227,8 +235,7 @@ instance ToQuery CreateTargetGroup where
                "HealthCheckTimeoutSeconds" =:
                  _ctgHealthCheckTimeoutSeconds,
                "HealthCheckPort" =: _ctgHealthCheckPort,
-               "Name" =: _ctgName, "Protocol" =: _ctgProtocol,
-               "Port" =: _ctgPort, "VpcId" =: _ctgVPCId]
+               "Port" =: _ctgPort, "Name" =: _ctgName]
 
 -- | /See:/ 'createTargetGroupResponse' smart constructor.
 data CreateTargetGroupResponse = CreateTargetGroupResponse'

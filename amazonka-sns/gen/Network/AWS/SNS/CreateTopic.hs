@@ -27,6 +27,7 @@ module Network.AWS.SNS.CreateTopic
       createTopic
     , CreateTopic
     -- * Request Lenses
+    , ctAttributes
     , ctName
 
     -- * Destructuring the Response
@@ -49,8 +50,9 @@ import Network.AWS.SNS.Types.Product
 --
 --
 -- /See:/ 'createTopic' smart constructor.
-newtype CreateTopic = CreateTopic'
-  { _ctName :: Text
+data CreateTopic = CreateTopic'
+  { _ctAttributes :: !(Maybe (Map Text Text))
+  , _ctName       :: !Text
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -58,12 +60,18 @@ newtype CreateTopic = CreateTopic'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ctAttributes' - A map of attributes with their corresponding values. The following lists the names, descriptions, and values of the special request parameters that the @CreateTopic@ action uses:     * @DeliveryPolicy@ – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.     * @DisplayName@ – The display name to use for a topic with SMS subscriptions.     * @Policy@ – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.
+--
 -- * 'ctName' - The name of the topic you want to create. Constraints: Topic names must be made up of only uppercase and lowercase ASCII letters, numbers, underscores, and hyphens, and must be between 1 and 256 characters long.
 createTopic
     :: Text -- ^ 'ctName'
     -> CreateTopic
-createTopic pName_ = CreateTopic' {_ctName = pName_}
+createTopic pName_ = CreateTopic' {_ctAttributes = Nothing, _ctName = pName_}
 
+
+-- | A map of attributes with their corresponding values. The following lists the names, descriptions, and values of the special request parameters that the @CreateTopic@ action uses:     * @DeliveryPolicy@ – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.     * @DisplayName@ – The display name to use for a topic with SMS subscriptions.     * @Policy@ – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.
+ctAttributes :: Lens' CreateTopic (HashMap Text Text)
+ctAttributes = lens _ctAttributes (\ s a -> s{_ctAttributes = a}) . _Default . _Map
 
 -- | The name of the topic you want to create. Constraints: Topic names must be made up of only uppercase and lowercase ASCII letters, numbers, underscores, and hyphens, and must be between 1 and 256 characters long.
 ctName :: Lens' CreateTopic Text
@@ -93,6 +101,9 @@ instance ToQuery CreateTopic where
           = mconcat
               ["Action" =: ("CreateTopic" :: ByteString),
                "Version" =: ("2010-03-31" :: ByteString),
+               "Attributes" =:
+                 toQuery
+                   (toQueryMap "entry" "key" "value" <$> _ctAttributes),
                "Name" =: _ctName]
 
 -- | Response from CreateTopic action.

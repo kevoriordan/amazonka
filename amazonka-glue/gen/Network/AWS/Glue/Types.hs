@@ -21,6 +21,7 @@ module Network.AWS.Glue.Types
     , _CrawlerRunningException
     , _SchedulerTransitioningException
     , _SchedulerRunningException
+    , _ConditionCheckFailureException
     , _ConcurrentRunsExceededException
     , _NoScheduleException
     , _OperationTimeoutException
@@ -32,9 +33,16 @@ module Network.AWS.Glue.Types
     , _InternalServiceException
     , _InvalidInputException
     , _ResourceNumberLimitExceededException
+    , _GlueEncryptionException
     , _IdempotentParameterMismatchException
     , _CrawlerStoppingException
     , _AlreadyExistsException
+
+    -- * CatalogEncryptionMode
+    , CatalogEncryptionMode (..)
+
+    -- * CloudWatchEncryptionMode
+    , CloudWatchEncryptionMode (..)
 
     -- * ConnectionPropertyKey
     , ConnectionPropertyKey (..)
@@ -47,6 +55,12 @@ module Network.AWS.Glue.Types
 
     -- * DeleteBehavior
     , DeleteBehavior (..)
+
+    -- * ExistCondition
+    , ExistCondition (..)
+
+    -- * JobBookmarksEncryptionMode
+    , JobBookmarksEncryptionMode (..)
 
     -- * JobRunState
     , JobRunState (..)
@@ -69,6 +83,9 @@ module Network.AWS.Glue.Types
     -- * ResourceType
     , ResourceType (..)
 
+    -- * S3EncryptionMode
+    , S3EncryptionMode (..)
+
     -- * ScheduleState
     , ScheduleState (..)
 
@@ -84,8 +101,10 @@ module Network.AWS.Glue.Types
     -- * Action
     , Action
     , action
+    , aNotificationProperty
     , aArguments
     , aJobName
+    , aSecurityConfiguration
     , aTimeout
 
     -- * BatchStopJobRunError
@@ -120,6 +139,12 @@ module Network.AWS.Glue.Types
     , cGrokClassifier
     , cXMLClassifier
     , cJSONClassifier
+
+    -- * CloudWatchEncryption
+    , CloudWatchEncryption
+    , cloudWatchEncryption
+    , cweCloudWatchEncryptionMode
+    , cweKMSKeyARN
 
     -- * CodeGenEdge
     , CodeGenEdge
@@ -180,6 +205,12 @@ module Network.AWS.Glue.Types
     , ciConnectionType
     , ciConnectionProperties
 
+    -- * ConnectionPasswordEncryption
+    , ConnectionPasswordEncryption
+    , connectionPasswordEncryption
+    , cpeAWSKMSKeyId
+    , cpeReturnConnectionPasswordEncrypted
+
     -- * ConnectionsList
     , ConnectionsList
     , connectionsList
@@ -201,6 +232,7 @@ module Network.AWS.Glue.Types
     , craTargets
     , craVersion
     , craDatabaseName
+    , craCrawlerSecurityConfiguration
     , craConfiguration
     , craTablePrefix
     , craDescription
@@ -220,6 +252,7 @@ module Network.AWS.Glue.Types
     -- * CrawlerTargets
     , CrawlerTargets
     , crawlerTargets
+    , ctDynamoDBTargets
     , ctS3Targets
     , ctJdbcTargets
 
@@ -243,6 +276,12 @@ module Network.AWS.Glue.Types
     , cxcrRowTag
     , cxcrClassification
     , cxcrName
+
+    -- * DataCatalogEncryptionSettings
+    , DataCatalogEncryptionSettings
+    , dataCatalogEncryptionSettings
+    , dcesEncryptionAtRest
+    , dcesConnectionPasswordEncryption
 
     -- * Database
     , Database
@@ -271,8 +310,10 @@ module Network.AWS.Glue.Types
     , deLastUpdateStatus
     , deSecurityGroupIds
     , deLastModifiedTimestamp
+    , dePublicKeys
     , deVPCId
     , dePrivateAddress
+    , deSecurityConfiguration
     , dePublicKey
     , deSubnetId
     , deNumberOfNodes
@@ -289,6 +330,24 @@ module Network.AWS.Glue.Types
     , devEndpointCustomLibraries
     , declExtraPythonLibsS3Path
     , declExtraJARsS3Path
+
+    -- * DynamoDBTarget
+    , DynamoDBTarget
+    , dynamoDBTarget
+    , ddtPath
+
+    -- * EncryptionAtRest
+    , EncryptionAtRest
+    , encryptionAtRest
+    , earSseAWSKMSKeyId
+    , earCatalogEncryptionMode
+
+    -- * EncryptionConfiguration
+    , EncryptionConfiguration
+    , encryptionConfiguration
+    , ecS3Encryption
+    , ecJobBookmarksEncryption
+    , ecCloudWatchEncryption
 
     -- * ErrorDetail
     , ErrorDetail
@@ -338,14 +397,17 @@ module Network.AWS.Glue.Types
     , Job
     , job
     , jCommand
+    , jNotificationProperty
     , jLastModifiedOn
     , jConnections
+    , jSecurityConfiguration
     , jRole
     , jName
     , jLogURI
     , jMaxRetries
     , jExecutionProperty
     , jAllocatedCapacity
+    , jMaxCapacity
     , jTimeout
     , jDefaultArguments
     , jDescription
@@ -360,6 +422,12 @@ module Network.AWS.Glue.Types
     , jbeAttempt
     , jbeJobBookmark
 
+    -- * JobBookmarksEncryption
+    , JobBookmarksEncryption
+    , jobBookmarksEncryption
+    , jbeJobBookmarksEncryptionMode
+    , jbeKMSKeyARN
+
     -- * JobCommand
     , JobCommand
     , jobCommand
@@ -371,17 +439,21 @@ module Network.AWS.Glue.Types
     , jobRun
     , jrCompletedOn
     , jrTriggerName
+    , jrNotificationProperty
     , jrLastModifiedOn
     , jrArguments
     , jrJobName
     , jrStartedOn
+    , jrSecurityConfiguration
     , jrJobRunState
+    , jrLogGroupName
     , jrExecutionTime
     , jrPredecessorRuns
     , jrPreviousRunId
     , jrId
     , jrAttempt
     , jrAllocatedCapacity
+    , jrMaxCapacity
     , jrTimeout
     , jrErrorMessage
 
@@ -389,12 +461,15 @@ module Network.AWS.Glue.Types
     , JobUpdate
     , jobUpdate
     , juCommand
+    , juNotificationProperty
     , juConnections
+    , juSecurityConfiguration
     , juRole
     , juLogURI
     , juMaxRetries
     , juExecutionProperty
     , juAllocatedCapacity
+    , juMaxCapacity
     , juTimeout
     , juDefaultArguments
     , juDescription
@@ -412,6 +487,7 @@ module Network.AWS.Glue.Types
     -- * Location
     , Location
     , location
+    , lDynamoDB
     , lJdbc
     , lS3
 
@@ -424,6 +500,11 @@ module Network.AWS.Glue.Types
     , meTargetType
     , meTargetPath
     , meSourcePath
+
+    -- * NotificationProperty
+    , NotificationProperty
+    , notificationProperty
+    , npNotifyDelayAfter
 
     -- * Order
     , Order
@@ -488,6 +569,12 @@ module Network.AWS.Glue.Types
     , ruResourceType
     , ruURI
 
+    -- * S3Encryption
+    , S3Encryption
+    , s3Encryption
+    , seS3EncryptionMode
+    , seKMSKeyARN
+
     -- * S3Target
     , S3Target
     , s3Target
@@ -505,6 +592,13 @@ module Network.AWS.Glue.Types
     , schemaChangePolicy
     , scpDeleteBehavior
     , scpUpdateBehavior
+
+    -- * SecurityConfiguration
+    , SecurityConfiguration
+    , securityConfiguration
+    , sName
+    , sEncryptionConfiguration
+    , sCreatedTimeStamp
 
     -- * Segment
     , Segment
@@ -750,6 +844,14 @@ _SchedulerRunningException :: AsError a => Getting (First ServiceError) a Servic
 _SchedulerRunningException = _MatchServiceError glue "SchedulerRunningException"
 
 
+-- | A specified condition was not satisfied.
+--
+--
+_ConditionCheckFailureException :: AsError a => Getting (First ServiceError) a ServiceError
+_ConditionCheckFailureException =
+  _MatchServiceError glue "ConditionCheckFailureException"
+
+
 -- | Too many jobs are being run concurrently.
 --
 --
@@ -830,6 +932,13 @@ _InvalidInputException = _MatchServiceError glue "InvalidInputException"
 _ResourceNumberLimitExceededException :: AsError a => Getting (First ServiceError) a ServiceError
 _ResourceNumberLimitExceededException =
   _MatchServiceError glue "ResourceNumberLimitExceededException"
+
+
+-- | An encryption operation failed.
+--
+--
+_GlueEncryptionException :: AsError a => Getting (First ServiceError) a ServiceError
+_GlueEncryptionException = _MatchServiceError glue "GlueEncryptionException"
 
 
 -- | The same unique identifier was associated with two different records.

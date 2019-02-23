@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- This operation is useful to determine if a bucket exists and you have permission to access it.
+--
+--
 module Network.AWS.S3.HeadBucket
     (
     -- * Creating a Request

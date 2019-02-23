@@ -27,11 +27,14 @@ module Network.AWS.Glue.CreateJob
       createJob
     , CreateJob
     -- * Request Lenses
+    , cjNotificationProperty
     , cjConnections
+    , cjSecurityConfiguration
     , cjLogURI
     , cjMaxRetries
     , cjExecutionProperty
     , cjAllocatedCapacity
+    , cjMaxCapacity
     , cjTimeout
     , cjDefaultArguments
     , cjDescription
@@ -56,17 +59,20 @@ import Network.AWS.Response
 
 -- | /See:/ 'createJob' smart constructor.
 data CreateJob = CreateJob'
-  { _cjConnections       :: !(Maybe ConnectionsList)
-  , _cjLogURI            :: !(Maybe Text)
-  , _cjMaxRetries        :: !(Maybe Int)
-  , _cjExecutionProperty :: !(Maybe ExecutionProperty)
-  , _cjAllocatedCapacity :: !(Maybe Int)
-  , _cjTimeout           :: !(Maybe Nat)
-  , _cjDefaultArguments  :: !(Maybe (Map Text Text))
-  , _cjDescription       :: !(Maybe Text)
-  , _cjName              :: !Text
-  , _cjRole              :: !Text
-  , _cjCommand           :: !JobCommand
+  { _cjNotificationProperty  :: !(Maybe NotificationProperty)
+  , _cjConnections           :: !(Maybe ConnectionsList)
+  , _cjSecurityConfiguration :: !(Maybe Text)
+  , _cjLogURI                :: !(Maybe Text)
+  , _cjMaxRetries            :: !(Maybe Int)
+  , _cjExecutionProperty     :: !(Maybe ExecutionProperty)
+  , _cjAllocatedCapacity     :: !(Maybe Int)
+  , _cjMaxCapacity           :: !(Maybe Double)
+  , _cjTimeout               :: !(Maybe Nat)
+  , _cjDefaultArguments      :: !(Maybe (Map Text Text))
+  , _cjDescription           :: !(Maybe Text)
+  , _cjName                  :: !Text
+  , _cjRole                  :: !Text
+  , _cjCommand               :: !JobCommand
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -74,7 +80,11 @@ data CreateJob = CreateJob'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cjNotificationProperty' - Specifies configuration properties of a job notification.
+--
 -- * 'cjConnections' - The connections used for this job.
+--
+-- * 'cjSecurityConfiguration' - The name of the SecurityConfiguration structure to be used with this job.
 --
 -- * 'cjLogURI' - This field is reserved for future use.
 --
@@ -82,9 +92,11 @@ data CreateJob = CreateJob'
 --
 -- * 'cjExecutionProperty' - An ExecutionProperty specifying the maximum number of concurrent runs allowed for this job.
 --
--- * 'cjAllocatedCapacity' - The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <https://aws.amazon.com/glue/pricing/ AWS Glue pricing page> .
+-- * 'cjAllocatedCapacity' - This parameter is deprecated. Use @MaxCapacity@ instead. The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <https://aws.amazon.com/glue/pricing/ AWS Glue pricing page> .
 --
--- * 'cjTimeout' - The job timeout in minutes. The default is 2880 minutes (48 hours).
+-- * 'cjMaxCapacity' - AWS Glue supports running jobs on a @JobCommand.Name@ ="pythonshell" with allocated processing as low as 0.0625 DPU, which can be specified using @MaxCapacity@ . Glue ETL jobs running in any other way cannot have fractional DPU allocations.
+--
+-- * 'cjTimeout' - The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters @TIMEOUT@ status. The default is 2,880 minutes (48 hours).
 --
 -- * 'cjDefaultArguments' - The default arguments for this job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the <http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html Calling AWS Glue APIs in Python> topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the <http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html Special Parameters Used by AWS Glue> topic in the developer guide.
 --
@@ -102,11 +114,14 @@ createJob
     -> CreateJob
 createJob pName_ pRole_ pCommand_ =
   CreateJob'
-    { _cjConnections = Nothing
+    { _cjNotificationProperty = Nothing
+    , _cjConnections = Nothing
+    , _cjSecurityConfiguration = Nothing
     , _cjLogURI = Nothing
     , _cjMaxRetries = Nothing
     , _cjExecutionProperty = Nothing
     , _cjAllocatedCapacity = Nothing
+    , _cjMaxCapacity = Nothing
     , _cjTimeout = Nothing
     , _cjDefaultArguments = Nothing
     , _cjDescription = Nothing
@@ -116,9 +131,17 @@ createJob pName_ pRole_ pCommand_ =
     }
 
 
+-- | Specifies configuration properties of a job notification.
+cjNotificationProperty :: Lens' CreateJob (Maybe NotificationProperty)
+cjNotificationProperty = lens _cjNotificationProperty (\ s a -> s{_cjNotificationProperty = a})
+
 -- | The connections used for this job.
 cjConnections :: Lens' CreateJob (Maybe ConnectionsList)
 cjConnections = lens _cjConnections (\ s a -> s{_cjConnections = a})
+
+-- | The name of the SecurityConfiguration structure to be used with this job.
+cjSecurityConfiguration :: Lens' CreateJob (Maybe Text)
+cjSecurityConfiguration = lens _cjSecurityConfiguration (\ s a -> s{_cjSecurityConfiguration = a})
 
 -- | This field is reserved for future use.
 cjLogURI :: Lens' CreateJob (Maybe Text)
@@ -132,11 +155,15 @@ cjMaxRetries = lens _cjMaxRetries (\ s a -> s{_cjMaxRetries = a})
 cjExecutionProperty :: Lens' CreateJob (Maybe ExecutionProperty)
 cjExecutionProperty = lens _cjExecutionProperty (\ s a -> s{_cjExecutionProperty = a})
 
--- | The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <https://aws.amazon.com/glue/pricing/ AWS Glue pricing page> .
+-- | This parameter is deprecated. Use @MaxCapacity@ instead. The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <https://aws.amazon.com/glue/pricing/ AWS Glue pricing page> .
 cjAllocatedCapacity :: Lens' CreateJob (Maybe Int)
 cjAllocatedCapacity = lens _cjAllocatedCapacity (\ s a -> s{_cjAllocatedCapacity = a})
 
--- | The job timeout in minutes. The default is 2880 minutes (48 hours).
+-- | AWS Glue supports running jobs on a @JobCommand.Name@ ="pythonshell" with allocated processing as low as 0.0625 DPU, which can be specified using @MaxCapacity@ . Glue ETL jobs running in any other way cannot have fractional DPU allocations.
+cjMaxCapacity :: Lens' CreateJob (Maybe Double)
+cjMaxCapacity = lens _cjMaxCapacity (\ s a -> s{_cjMaxCapacity = a})
+
+-- | The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters @TIMEOUT@ status. The default is 2,880 minutes (48 hours).
 cjTimeout :: Lens' CreateJob (Maybe Natural)
 cjTimeout = lens _cjTimeout (\ s a -> s{_cjTimeout = a}) . mapping _Nat
 
@@ -186,11 +213,16 @@ instance ToJSON CreateJob where
         toJSON CreateJob'{..}
           = object
               (catMaybes
-                 [("Connections" .=) <$> _cjConnections,
+                 [("NotificationProperty" .=) <$>
+                    _cjNotificationProperty,
+                  ("Connections" .=) <$> _cjConnections,
+                  ("SecurityConfiguration" .=) <$>
+                    _cjSecurityConfiguration,
                   ("LogUri" .=) <$> _cjLogURI,
                   ("MaxRetries" .=) <$> _cjMaxRetries,
                   ("ExecutionProperty" .=) <$> _cjExecutionProperty,
                   ("AllocatedCapacity" .=) <$> _cjAllocatedCapacity,
+                  ("MaxCapacity" .=) <$> _cjMaxCapacity,
                   ("Timeout" .=) <$> _cjTimeout,
                   ("DefaultArguments" .=) <$> _cjDefaultArguments,
                   ("Description" .=) <$> _cjDescription,

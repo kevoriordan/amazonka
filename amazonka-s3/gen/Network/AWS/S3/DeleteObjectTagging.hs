@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Removes the tag-set from an existing object.
+--
+--
 module Network.AWS.S3.DeleteObjectTagging
     (
     -- * Creating a Request

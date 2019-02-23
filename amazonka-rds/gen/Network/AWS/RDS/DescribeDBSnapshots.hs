@@ -37,6 +37,7 @@ module Network.AWS.RDS.DescribeDBSnapshots
     , ddsMarker
     , ddsMaxRecords
     , ddsIncludePublic
+    , ddsDBiResourceId
 
     -- * Destructuring the Response
     , describeDBSnapshotsResponse
@@ -69,6 +70,7 @@ data DescribeDBSnapshots = DescribeDBSnapshots'
   , _ddsMarker               :: !(Maybe Text)
   , _ddsMaxRecords           :: !(Maybe Int)
   , _ddsIncludePublic        :: !(Maybe Bool)
+  , _ddsDBiResourceId        :: !(Maybe Text)
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -91,6 +93,8 @@ data DescribeDBSnapshots = DescribeDBSnapshots'
 -- * 'ddsMaxRecords' - The maximum number of records to include in the response. If more records exist than the specified @MaxRecords@ value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
 --
 -- * 'ddsIncludePublic' - True to include manual DB snapshots that are public and can be copied or restored by any AWS account, and otherwise false. The default is false. You can share a manual DB snapshot as public by using the 'ModifyDBSnapshotAttribute' API.
+--
+-- * 'ddsDBiResourceId' - A specific DB resource ID to describe.
 describeDBSnapshots
     :: DescribeDBSnapshots
 describeDBSnapshots =
@@ -103,6 +107,7 @@ describeDBSnapshots =
     , _ddsMarker = Nothing
     , _ddsMaxRecords = Nothing
     , _ddsIncludePublic = Nothing
+    , _ddsDBiResourceId = Nothing
     }
 
 
@@ -137,6 +142,10 @@ ddsMaxRecords = lens _ddsMaxRecords (\ s a -> s{_ddsMaxRecords = a})
 -- | True to include manual DB snapshots that are public and can be copied or restored by any AWS account, and otherwise false. The default is false. You can share a manual DB snapshot as public by using the 'ModifyDBSnapshotAttribute' API.
 ddsIncludePublic :: Lens' DescribeDBSnapshots (Maybe Bool)
 ddsIncludePublic = lens _ddsIncludePublic (\ s a -> s{_ddsIncludePublic = a})
+
+-- | A specific DB resource ID to describe.
+ddsDBiResourceId :: Lens' DescribeDBSnapshots (Maybe Text)
+ddsDBiResourceId = lens _ddsDBiResourceId (\ s a -> s{_ddsDBiResourceId = a})
 
 instance AWSPager DescribeDBSnapshots where
         page rq rs
@@ -181,7 +190,8 @@ instance ToQuery DescribeDBSnapshots where
                "DBInstanceIdentifier" =: _ddsDBInstanceIdentifier,
                "Marker" =: _ddsMarker,
                "MaxRecords" =: _ddsMaxRecords,
-               "IncludePublic" =: _ddsIncludePublic]
+               "IncludePublic" =: _ddsIncludePublic,
+               "DbiResourceId" =: _ddsDBiResourceId]
 
 -- | Contains the result of a successful invocation of the 'DescribeDBSnapshots' action.
 --

@@ -21,7 +21,7 @@
 -- Describes the current Auto Scaling resource limits for your AWS account.
 --
 --
--- For information about requesting an increase in these limits, see <http://docs.aws.amazon.com/autoscaling/latest/userguide/as-account-limits.html Auto Scaling Limits> in the /Auto Scaling User Guide/ .
+-- For information about requesting an increase in these limits, see <http://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html Auto Scaling Limits> in the /Amazon EC2 Auto Scaling User Guide/ .
 --
 module Network.AWS.AutoScaling.DescribeAccountLimits
     (

@@ -47,9 +47,13 @@ module Network.AWS.SageMaker.CreateNotebookInstance
       createNotebookInstance
     , CreateNotebookInstance
     -- * Request Lenses
+    , cniAcceleratorTypes
     , cniSecurityGroupIds
+    , cniAdditionalCodeRepositories
     , cniLifecycleConfigName
     , cniSubnetId
+    , cniDefaultCodeRepository
+    , cniVolumeSizeInGB
     , cniKMSKeyId
     , cniDirectInternetAccess
     , cniTags
@@ -74,15 +78,19 @@ import Network.AWS.SageMaker.Types.Product
 
 -- | /See:/ 'createNotebookInstance' smart constructor.
 data CreateNotebookInstance = CreateNotebookInstance'
-  { _cniSecurityGroupIds     :: !(Maybe [Text])
-  , _cniLifecycleConfigName  :: !(Maybe Text)
-  , _cniSubnetId             :: !(Maybe Text)
-  , _cniKMSKeyId             :: !(Maybe Text)
-  , _cniDirectInternetAccess :: !(Maybe DirectInternetAccess)
-  , _cniTags                 :: !(Maybe [Tag])
-  , _cniNotebookInstanceName :: !Text
-  , _cniInstanceType         :: !InstanceType
-  , _cniRoleARN              :: !Text
+  { _cniAcceleratorTypes           :: !(Maybe [NotebookInstanceAcceleratorType])
+  , _cniSecurityGroupIds           :: !(Maybe [Text])
+  , _cniAdditionalCodeRepositories :: !(Maybe [Text])
+  , _cniLifecycleConfigName        :: !(Maybe Text)
+  , _cniSubnetId                   :: !(Maybe Text)
+  , _cniDefaultCodeRepository      :: !(Maybe Text)
+  , _cniVolumeSizeInGB             :: !(Maybe Nat)
+  , _cniKMSKeyId                   :: !(Maybe Text)
+  , _cniDirectInternetAccess       :: !(Maybe DirectInternetAccess)
+  , _cniTags                       :: !(Maybe [Tag])
+  , _cniNotebookInstanceName       :: !Text
+  , _cniInstanceType               :: !InstanceType
+  , _cniRoleARN                    :: !Text
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -90,15 +98,23 @@ data CreateNotebookInstance = CreateNotebookInstance'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cniAcceleratorTypes' - A list of Elastic Inference (EI) instance types to associate with this notebook instance. Currently, only one instance type can be associated with a notebook instance. For more information, see <http://docs.aws.amazon.com/sagemaker/latest/dg/ei.html Using Elastic Inference in Amazon SageMaker> .
+--
 -- * 'cniSecurityGroupIds' - The VPC security group IDs, in the form sg-xxxxxxxx. The security groups must be for the same VPC as specified in the subnet.
 --
--- * 'cniLifecycleConfigName' - The name of a lifecycle configuration to associate with the notebook instance. For information about lifestyle configurations, see 'notebook-lifecycle-config' .
+-- * 'cniAdditionalCodeRepositories' - An array of up to three Git repositories to associate with the notebook instance. These can be either the names of Git repositories stored as resources in your account, or the URL of Git repositories in <http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html AWS CodeCommit> or in any other Git repository. These repositories are cloned at the same level as the default repository of your notebook instance. For more information, see <http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html Associating Git Repositories with Amazon SageMaker Notebook Instances> .
+--
+-- * 'cniLifecycleConfigName' - The name of a lifecycle configuration to associate with the notebook instance. For information about lifestyle configurations, see <http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html Step 2.1: (Optional) Customize a Notebook Instance> .
 --
 -- * 'cniSubnetId' - The ID of the subnet in a VPC to which you would like to have a connectivity from your ML compute instance.
 --
--- * 'cniKMSKeyId' - If you provide a AWS KMS key ID, Amazon SageMaker uses it to encrypt data at rest on the ML storage volume that is attached to your notebook instance.
+-- * 'cniDefaultCodeRepository' - A Git repository to associate with the notebook instance as its default code repository. This can be either the name of a Git repository stored as a resource in your account, or the URL of a Git repository in <http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html AWS CodeCommit> or in any other Git repository. When you open a notebook instance, it opens in the directory that contains this repository. For more information, see <http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html Associating Git Repositories with Amazon SageMaker Notebook Instances> .
 --
--- * 'cniDirectInternetAccess' - Sets whether Amazon SageMaker provides internet access to the notebook instance. If you set this to @Disabled@ this notebook instance will be able to access resources only in your VPC, and will not be able to connect to Amazon SageMaker training and endpoint services unless your configure a NAT Gateway in your VPC. For more information, see 'appendix-notebook-and-internet-access' . You can set the value of this parameter to @Disabled@ only if you set a value for the @SubnetId@ parameter.
+-- * 'cniVolumeSizeInGB' - The size, in GB, of the ML storage volume to attach to the notebook instance. The default value is 5 GB.
+--
+-- * 'cniKMSKeyId' - If you provide a AWS KMS key ID, Amazon SageMaker uses it to encrypt data at rest on the ML storage volume that is attached to your notebook instance. The KMS key you provide must be enabled. For information, see <http://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html Enabling and Disabling Keys> in the /AWS Key Management Service Developer Guide/ .
+--
+-- * 'cniDirectInternetAccess' - Sets whether Amazon SageMaker provides internet access to the notebook instance. If you set this to @Disabled@ this notebook instance will be able to access resources only in your VPC, and will not be able to connect to Amazon SageMaker training and endpoint services unless your configure a NAT Gateway in your VPC. For more information, see <http://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access Notebook Instances Are Internet-Enabled by Default> . You can set the value of this parameter to @Disabled@ only if you set a value for the @SubnetId@ parameter.
 --
 -- * 'cniTags' - A list of tags to associate with the notebook instance. You can add tags later by using the @CreateTags@ API.
 --
@@ -114,9 +130,13 @@ createNotebookInstance
     -> CreateNotebookInstance
 createNotebookInstance pNotebookInstanceName_ pInstanceType_ pRoleARN_ =
   CreateNotebookInstance'
-    { _cniSecurityGroupIds = Nothing
+    { _cniAcceleratorTypes = Nothing
+    , _cniSecurityGroupIds = Nothing
+    , _cniAdditionalCodeRepositories = Nothing
     , _cniLifecycleConfigName = Nothing
     , _cniSubnetId = Nothing
+    , _cniDefaultCodeRepository = Nothing
+    , _cniVolumeSizeInGB = Nothing
     , _cniKMSKeyId = Nothing
     , _cniDirectInternetAccess = Nothing
     , _cniTags = Nothing
@@ -126,11 +146,19 @@ createNotebookInstance pNotebookInstanceName_ pInstanceType_ pRoleARN_ =
     }
 
 
+-- | A list of Elastic Inference (EI) instance types to associate with this notebook instance. Currently, only one instance type can be associated with a notebook instance. For more information, see <http://docs.aws.amazon.com/sagemaker/latest/dg/ei.html Using Elastic Inference in Amazon SageMaker> .
+cniAcceleratorTypes :: Lens' CreateNotebookInstance [NotebookInstanceAcceleratorType]
+cniAcceleratorTypes = lens _cniAcceleratorTypes (\ s a -> s{_cniAcceleratorTypes = a}) . _Default . _Coerce
+
 -- | The VPC security group IDs, in the form sg-xxxxxxxx. The security groups must be for the same VPC as specified in the subnet.
 cniSecurityGroupIds :: Lens' CreateNotebookInstance [Text]
 cniSecurityGroupIds = lens _cniSecurityGroupIds (\ s a -> s{_cniSecurityGroupIds = a}) . _Default . _Coerce
 
--- | The name of a lifecycle configuration to associate with the notebook instance. For information about lifestyle configurations, see 'notebook-lifecycle-config' .
+-- | An array of up to three Git repositories to associate with the notebook instance. These can be either the names of Git repositories stored as resources in your account, or the URL of Git repositories in <http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html AWS CodeCommit> or in any other Git repository. These repositories are cloned at the same level as the default repository of your notebook instance. For more information, see <http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html Associating Git Repositories with Amazon SageMaker Notebook Instances> .
+cniAdditionalCodeRepositories :: Lens' CreateNotebookInstance [Text]
+cniAdditionalCodeRepositories = lens _cniAdditionalCodeRepositories (\ s a -> s{_cniAdditionalCodeRepositories = a}) . _Default . _Coerce
+
+-- | The name of a lifecycle configuration to associate with the notebook instance. For information about lifestyle configurations, see <http://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html Step 2.1: (Optional) Customize a Notebook Instance> .
 cniLifecycleConfigName :: Lens' CreateNotebookInstance (Maybe Text)
 cniLifecycleConfigName = lens _cniLifecycleConfigName (\ s a -> s{_cniLifecycleConfigName = a})
 
@@ -138,11 +166,19 @@ cniLifecycleConfigName = lens _cniLifecycleConfigName (\ s a -> s{_cniLifecycleC
 cniSubnetId :: Lens' CreateNotebookInstance (Maybe Text)
 cniSubnetId = lens _cniSubnetId (\ s a -> s{_cniSubnetId = a})
 
--- | If you provide a AWS KMS key ID, Amazon SageMaker uses it to encrypt data at rest on the ML storage volume that is attached to your notebook instance.
+-- | A Git repository to associate with the notebook instance as its default code repository. This can be either the name of a Git repository stored as a resource in your account, or the URL of a Git repository in <http://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html AWS CodeCommit> or in any other Git repository. When you open a notebook instance, it opens in the directory that contains this repository. For more information, see <http://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html Associating Git Repositories with Amazon SageMaker Notebook Instances> .
+cniDefaultCodeRepository :: Lens' CreateNotebookInstance (Maybe Text)
+cniDefaultCodeRepository = lens _cniDefaultCodeRepository (\ s a -> s{_cniDefaultCodeRepository = a})
+
+-- | The size, in GB, of the ML storage volume to attach to the notebook instance. The default value is 5 GB.
+cniVolumeSizeInGB :: Lens' CreateNotebookInstance (Maybe Natural)
+cniVolumeSizeInGB = lens _cniVolumeSizeInGB (\ s a -> s{_cniVolumeSizeInGB = a}) . mapping _Nat
+
+-- | If you provide a AWS KMS key ID, Amazon SageMaker uses it to encrypt data at rest on the ML storage volume that is attached to your notebook instance. The KMS key you provide must be enabled. For information, see <http://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html Enabling and Disabling Keys> in the /AWS Key Management Service Developer Guide/ .
 cniKMSKeyId :: Lens' CreateNotebookInstance (Maybe Text)
 cniKMSKeyId = lens _cniKMSKeyId (\ s a -> s{_cniKMSKeyId = a})
 
--- | Sets whether Amazon SageMaker provides internet access to the notebook instance. If you set this to @Disabled@ this notebook instance will be able to access resources only in your VPC, and will not be able to connect to Amazon SageMaker training and endpoint services unless your configure a NAT Gateway in your VPC. For more information, see 'appendix-notebook-and-internet-access' . You can set the value of this parameter to @Disabled@ only if you set a value for the @SubnetId@ parameter.
+-- | Sets whether Amazon SageMaker provides internet access to the notebook instance. If you set this to @Disabled@ this notebook instance will be able to access resources only in your VPC, and will not be able to connect to Amazon SageMaker training and endpoint services unless your configure a NAT Gateway in your VPC. For more information, see <http://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access Notebook Instances Are Internet-Enabled by Default> . You can set the value of this parameter to @Disabled@ only if you set a value for the @SubnetId@ parameter.
 cniDirectInternetAccess :: Lens' CreateNotebookInstance (Maybe DirectInternetAccess)
 cniDirectInternetAccess = lens _cniDirectInternetAccess (\ s a -> s{_cniDirectInternetAccess = a})
 
@@ -190,10 +226,16 @@ instance ToJSON CreateNotebookInstance where
         toJSON CreateNotebookInstance'{..}
           = object
               (catMaybes
-                 [("SecurityGroupIds" .=) <$> _cniSecurityGroupIds,
+                 [("AcceleratorTypes" .=) <$> _cniAcceleratorTypes,
+                  ("SecurityGroupIds" .=) <$> _cniSecurityGroupIds,
+                  ("AdditionalCodeRepositories" .=) <$>
+                    _cniAdditionalCodeRepositories,
                   ("LifecycleConfigName" .=) <$>
                     _cniLifecycleConfigName,
                   ("SubnetId" .=) <$> _cniSubnetId,
+                  ("DefaultCodeRepository" .=) <$>
+                    _cniDefaultCodeRepository,
+                  ("VolumeSizeInGB" .=) <$> _cniVolumeSizeInGB,
                   ("KmsKeyId" .=) <$> _cniKMSKeyId,
                   ("DirectInternetAccess" .=) <$>
                     _cniDirectInternetAccess,

@@ -11,14 +11,14 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- You can use the ACM PCA API to create a private certificate authority (CA). You must first call the 'CreateCertificateAuthority' function. If successful, the function returns an Amazon Resource Name (ARN) for your private CA. Use this ARN as input to the 'GetCertificateAuthorityCsr' function to retrieve the certificate signing request (CSR) for your private CA certificate. Sign the CSR using the root or an intermediate CA in your on-premises PKI hierarchy, and call the 'ImportCertificateAuthorityCertificate' to import your signed private CA certificate into ACM PCA.
+-- You can use the ACM PCA API to create a private certificate authority (CA). You must first call the 'CreateCertificateAuthority' operation. If successful, the operation returns an Amazon Resource Name (ARN) for your private CA. Use this ARN as input to the 'GetCertificateAuthorityCsr' operation to retrieve the certificate signing request (CSR) for your private CA certificate. Sign the CSR using the root or an intermediate CA in your on-premises PKI hierarchy, and call the 'ImportCertificateAuthorityCertificate' to import your signed private CA certificate into ACM PCA.
 --
 --
--- Use your private CA to issue and revoke certificates. These are private certificates that identify and secure client computers, servers, applications, services, devices, and users over SSLS/TLS connections within your organization. Call the 'IssueCertificate' function to issue a certificate. Call the 'RevokeCertificate' function to revoke a certificate.
+-- Use your private CA to issue and revoke certificates. These are private certificates that identify and secure client computers, servers, applications, services, devices, and users over SSLS/TLS connections within your organization. Call the 'IssueCertificate' operation to issue a certificate. Call the 'RevokeCertificate' operation to revoke a certificate.
 --
--- Your private CA can optionally create a certificate revocation list (CRL) to track the certificates you revoke. To create a CRL, you must specify a 'RevocationConfiguration' object when you call the 'CreateCertificateAuthority' function. ACM PCA writes the CRL to an S3 bucket that you specify. You must specify a bucket policy that grants ACM PCA write permission.
+-- Your private CA can optionally create a certificate revocation list (CRL) to track the certificates you revoke. To create a CRL, you must specify a 'RevocationConfiguration' object when you call the 'CreateCertificateAuthority' operation. ACM PCA writes the CRL to an S3 bucket that you specify. You must specify a bucket policy that grants ACM PCA write permission.
 --
--- You can also call the 'CreateCertificateAuthorityAuditReport' to create an optional audit report that lists every time the CA private key is used. The private key is used for signing when the __IssueCertificate__ or __RevokeCertificate__ function is called.
+-- You can also call the 'CreateCertificateAuthorityAuditReport' to create an optional audit report, which enumerates all of the issued, valid, expired, and revoked certificates from the CA.
 --
 module Network.AWS.CertificateManagerPCA
     (
@@ -103,7 +103,7 @@ module Network.AWS.CertificateManagerPCA
     -- ** CreateCertificateAuthority
     , module Network.AWS.CertificateManagerPCA.CreateCertificateAuthority
 
-    -- ** ListCertificateAuthorities
+    -- ** ListCertificateAuthorities (Paginated)
     , module Network.AWS.CertificateManagerPCA.ListCertificateAuthorities
 
     -- ** GetCertificate
@@ -114,6 +114,9 @@ module Network.AWS.CertificateManagerPCA
 
     -- ** DescribeCertificateAuthority
     , module Network.AWS.CertificateManagerPCA.DescribeCertificateAuthority
+
+    -- ** RestoreCertificateAuthority
+    , module Network.AWS.CertificateManagerPCA.RestoreCertificateAuthority
 
     -- ** IssueCertificate
     , module Network.AWS.CertificateManagerPCA.IssueCertificate
@@ -127,7 +130,7 @@ module Network.AWS.CertificateManagerPCA
     -- ** CreateCertificateAuthorityAuditReport
     , module Network.AWS.CertificateManagerPCA.CreateCertificateAuthorityAuditReport
 
-    -- ** ListTags
+    -- ** ListTags (Paginated)
     , module Network.AWS.CertificateManagerPCA.ListTags
 
     -- * Types
@@ -187,6 +190,7 @@ module Network.AWS.CertificateManagerPCA
     , caCreatedAt
     , caSerial
     , caNotBefore
+    , caRestorableUntil
     , caType
     , caRevocationConfiguration
     , caLastStateChangeAt
@@ -237,6 +241,7 @@ import Network.AWS.CertificateManagerPCA.ImportCertificateAuthorityCertificate
 import Network.AWS.CertificateManagerPCA.IssueCertificate
 import Network.AWS.CertificateManagerPCA.ListCertificateAuthorities
 import Network.AWS.CertificateManagerPCA.ListTags
+import Network.AWS.CertificateManagerPCA.RestoreCertificateAuthority
 import Network.AWS.CertificateManagerPCA.RevokeCertificate
 import Network.AWS.CertificateManagerPCA.TagCertificateAuthority
 import Network.AWS.CertificateManagerPCA.Types

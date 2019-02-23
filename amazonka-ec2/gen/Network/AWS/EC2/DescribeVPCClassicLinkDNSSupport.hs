@@ -18,9 +18,11 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Describes the ClassicLink DNS support status of one or more VPCs. If enabled, the DNS hostname of a linked EC2-Classic instance resolves to its private IP address when addressed from an instance in the VPC to which it's linked. Similarly, the DNS hostname of an instance in a VPC resolves to its private IP address when addressed from a linked EC2-Classic instance. For more information, see <http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html ClassicLink> in the /Amazon Elastic Compute Cloud User Guide/ .
+-- Describes the ClassicLink DNS support status of one or more VPCs. If enabled, the DNS hostname of a linked EC2-Classic instance resolves to its private IP address when addressed from an instance in the VPC to which it's linked. Similarly, the DNS hostname of an instance in a VPC resolves to its private IP address when addressed from a linked EC2-Classic instance. For more information, see <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html ClassicLink> in the /Amazon Elastic Compute Cloud User Guide/ .
 --
 --
+--
+-- This operation returns paginated results.
 module Network.AWS.EC2.DescribeVPCClassicLinkDNSSupport
     (
     -- * Creating a Request
@@ -43,15 +45,12 @@ module Network.AWS.EC2.DescribeVPCClassicLinkDNSSupport
 import Network.AWS.EC2.Types
 import Network.AWS.EC2.Types.Product
 import Network.AWS.Lens
+import Network.AWS.Pager
 import Network.AWS.Prelude
 import Network.AWS.Request
 import Network.AWS.Response
 
--- | Contains the parameters for DescribeVpcClassicLinkDnsSupport.
---
---
---
--- /See:/ 'describeVPCClassicLinkDNSSupport' smart constructor.
+-- | /See:/ 'describeVPCClassicLinkDNSSupport' smart constructor.
 data DescribeVPCClassicLinkDNSSupport = DescribeVPCClassicLinkDNSSupport'
   { _dvcldsNextToken  :: !(Maybe Text)
   , _dvcldsVPCIds     :: !(Maybe [Text])
@@ -89,6 +88,15 @@ dvcldsVPCIds = lens _dvcldsVPCIds (\ s a -> s{_dvcldsVPCIds = a}) . _Default . _
 -- | The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.
 dvcldsMaxResults :: Lens' DescribeVPCClassicLinkDNSSupport (Maybe Natural)
 dvcldsMaxResults = lens _dvcldsMaxResults (\ s a -> s{_dvcldsMaxResults = a}) . mapping _Nat
+
+instance AWSPager DescribeVPCClassicLinkDNSSupport
+         where
+        page rq rs
+          | stop (rs ^. dvpccldnssrsNextToken) = Nothing
+          | stop (rs ^. dvpccldnssrsVPCs) = Nothing
+          | otherwise =
+            Just $ rq &
+              dvcldsNextToken .~ rs ^. dvpccldnssrsNextToken
 
 instance AWSRequest DescribeVPCClassicLinkDNSSupport
          where
@@ -129,11 +137,7 @@ instance ToQuery DescribeVPCClassicLinkDNSSupport
                toQuery (toQueryList "VpcIds" <$> _dvcldsVPCIds),
                "MaxResults" =: _dvcldsMaxResults]
 
--- | Contains the output of DescribeVpcClassicLinkDnsSupport.
---
---
---
--- /See:/ 'describeVPCClassicLinkDNSSupportResponse' smart constructor.
+-- | /See:/ 'describeVPCClassicLinkDNSSupportResponse' smart constructor.
 data DescribeVPCClassicLinkDNSSupportResponse = DescribeVPCClassicLinkDNSSupportResponse'
   { _dvpccldnssrsVPCs           :: !(Maybe [ClassicLinkDNSSupport])
   , _dvpccldnssrsNextToken      :: !(Maybe Text)

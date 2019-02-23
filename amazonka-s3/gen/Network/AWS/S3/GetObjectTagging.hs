@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Returns the tag-set of an object.
+--
+--
 module Network.AWS.S3.GetObjectTagging
     (
     -- * Creating a Request

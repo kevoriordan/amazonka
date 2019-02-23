@@ -11,12 +11,12 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Amazon CloudWatch Events helps you to respond to state changes in your AWS resources. When your resources change state, they automatically send events into an event stream. You can create rules that match selected events in the stream and route them to targets to take action. You can also use rules to take action on a pre-determined schedule. For example, you can configure rules to:
+-- Amazon CloudWatch Events helps you to respond to state changes in your AWS resources. When your resources change state, they automatically send events into an event stream. You can create rules that match selected events in the stream and route them to targets to take action. You can also use rules to take action on a predetermined schedule. For example, you can configure rules to:
 --
 --
 --     * Automatically invoke an AWS Lambda function to update DNS entries when an event notifies you that Amazon EC2 instance enters the running state.
 --
---     * Direct specific API records from CloudTrail to an Amazon Kinesis stream for detailed analysis of potential security or availability risks.
+--     * Direct specific API records from AWS CloudTrail to an Amazon Kinesis data stream for detailed analysis of potential security or availability risks.
 --
 --     * Periodically invoke a built-in target to create a snapshot of an Amazon EBS volume.
 --
@@ -31,6 +31,9 @@ module Network.AWS.CloudWatchEvents
 
     -- * Errors
     -- $errors
+
+    -- ** ManagedRuleException
+    , _ManagedRuleException
 
     -- ** PolicyLengthExceededException
     , _PolicyLengthExceededException
@@ -62,7 +65,7 @@ module Network.AWS.CloudWatchEvents
     -- ** DeleteRule
     , module Network.AWS.CloudWatchEvents.DeleteRule
 
-    -- ** ListRules
+    -- ** ListRules (Paginated)
     , module Network.AWS.CloudWatchEvents.ListRules
 
     -- ** PutRule
@@ -74,7 +77,7 @@ module Network.AWS.CloudWatchEvents
     -- ** PutPermission
     , module Network.AWS.CloudWatchEvents.PutPermission
 
-    -- ** ListTargetsByRule
+    -- ** ListTargetsByRule (Paginated)
     , module Network.AWS.CloudWatchEvents.ListTargetsByRule
 
     -- ** RemovePermission
@@ -86,7 +89,7 @@ module Network.AWS.CloudWatchEvents
     -- ** EnableRule
     , module Network.AWS.CloudWatchEvents.EnableRule
 
-    -- ** ListRuleNamesByTarget
+    -- ** ListRuleNamesByTarget (Paginated)
     , module Network.AWS.CloudWatchEvents.ListRuleNamesByTarget
 
     -- ** TestEventPattern
@@ -103,8 +106,21 @@ module Network.AWS.CloudWatchEvents
 
     -- * Types
 
+    -- ** AssignPublicIP
+    , AssignPublicIP (..)
+
+    -- ** LaunchType
+    , LaunchType (..)
+
     -- ** RuleState
     , RuleState (..)
+
+    -- ** AWSVPCConfiguration
+    , AWSVPCConfiguration
+    , awsVPCConfiguration
+    , avcSecurityGroups
+    , avcAssignPublicIP
+    , avcSubnets
 
     -- ** BatchArrayProperties
     , BatchArrayProperties
@@ -124,10 +140,21 @@ module Network.AWS.CloudWatchEvents
     , batchRetryStrategy
     , brsAttempts
 
+    -- ** Condition
+    , Condition
+    , condition
+    , cType
+    , cKey
+    , cValue
+
     -- ** EcsParameters
     , EcsParameters
     , ecsParameters
+    , epGroup
+    , epPlatformVersion
+    , epLaunchType
     , epTaskCount
+    , epNetworkConfiguration
     , epTaskDefinitionARN
 
     -- ** InputTransformer
@@ -140,6 +167,11 @@ module Network.AWS.CloudWatchEvents
     , KinesisParameters
     , kinesisParameters
     , kpPartitionKeyPath
+
+    -- ** NetworkConfiguration
+    , NetworkConfiguration
+    , networkConfiguration
+    , ncAwsvpcConfiguration
 
     -- ** PutEventsRequestEntry
     , PutEventsRequestEntry
@@ -180,6 +212,7 @@ module Network.AWS.CloudWatchEvents
     , rScheduleExpression
     , rName
     , rDescription
+    , rManagedBy
     , rRoleARN
 
     -- ** RunCommandParameters

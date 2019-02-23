@@ -31,7 +31,9 @@ module Network.AWS.StorageGateway.CreateCachediSCSIVolume
       createCachediSCSIVolume
     , CreateCachediSCSIVolume
     -- * Request Lenses
+    , ccscsivKMSKey
     , ccscsivSourceVolumeARN
+    , ccscsivKMSEncrypted
     , ccscsivSnapshotId
     , ccscsivGatewayARN
     , ccscsivVolumeSizeInBytes
@@ -57,7 +59,9 @@ import Network.AWS.StorageGateway.Types.Product
 
 -- | /See:/ 'createCachediSCSIVolume' smart constructor.
 data CreateCachediSCSIVolume = CreateCachediSCSIVolume'
-  { _ccscsivSourceVolumeARN    :: !(Maybe Text)
+  { _ccscsivKMSKey             :: !(Maybe Text)
+  , _ccscsivSourceVolumeARN    :: !(Maybe Text)
+  , _ccscsivKMSEncrypted       :: !(Maybe Bool)
   , _ccscsivSnapshotId         :: !(Maybe Text)
   , _ccscsivGatewayARN         :: !Text
   , _ccscsivVolumeSizeInBytes  :: !Integer
@@ -71,19 +75,23 @@ data CreateCachediSCSIVolume = CreateCachediSCSIVolume'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'ccscsivKMSKey' - The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+--
 -- * 'ccscsivSourceVolumeARN' - The ARN for an existing volume. Specifying this ARN makes the new volume into an exact copy of the specified existing volume's latest recovery point. The @VolumeSizeInBytes@ value for this new volume must be equal to or larger than the size of the existing volume, in bytes.
 --
--- * 'ccscsivSnapshotId' - Undocumented member.
+-- * 'ccscsivKMSEncrypted' - True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.
+--
+-- * 'ccscsivSnapshotId' - The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as the new cached volume. Specify this field if you want to create the iSCSI storage volume from a snapshot otherwise do not include this field. To list snapshots for your account use <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html DescribeSnapshots> in the /Amazon Elastic Compute Cloud API Reference/ .
 --
 -- * 'ccscsivGatewayARN' - Undocumented member.
 --
--- * 'ccscsivVolumeSizeInBytes' - Undocumented member.
+-- * 'ccscsivVolumeSizeInBytes' - The size of the volume in bytes.
 --
--- * 'ccscsivTargetName' - Undocumented member.
+-- * 'ccscsivTargetName' - The name of the iSCSI target used by initiators to connect to the target and as a suffix for the target ARN. For example, specifying @TargetName@ as /myvolume/ results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume. The target name must be unique across all volumes of a gateway.
 --
--- * 'ccscsivNetworkInterfaceId' - Undocumented member.
+-- * 'ccscsivNetworkInterfaceId' - The network interface of the gateway on which to expose the iSCSI target. Only IPv4 addresses are accepted. Use 'DescribeGatewayInformation' to get a list of the network interfaces available on a gateway. Valid Values: A valid IP address.
 --
--- * 'ccscsivClientToken' - Undocumented member.
+-- * 'ccscsivClientToken' - A unique identifier that you use to retry a request. If you retry a request, use the same @ClientToken@ you specified in the initial request.
 createCachediSCSIVolume
     :: Text -- ^ 'ccscsivGatewayARN'
     -> Integer -- ^ 'ccscsivVolumeSizeInBytes'
@@ -93,7 +101,9 @@ createCachediSCSIVolume
     -> CreateCachediSCSIVolume
 createCachediSCSIVolume pGatewayARN_ pVolumeSizeInBytes_ pTargetName_ pNetworkInterfaceId_ pClientToken_ =
   CreateCachediSCSIVolume'
-    { _ccscsivSourceVolumeARN = Nothing
+    { _ccscsivKMSKey = Nothing
+    , _ccscsivSourceVolumeARN = Nothing
+    , _ccscsivKMSEncrypted = Nothing
     , _ccscsivSnapshotId = Nothing
     , _ccscsivGatewayARN = pGatewayARN_
     , _ccscsivVolumeSizeInBytes = pVolumeSizeInBytes_
@@ -103,11 +113,19 @@ createCachediSCSIVolume pGatewayARN_ pVolumeSizeInBytes_ pTargetName_ pNetworkIn
     }
 
 
+-- | The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+ccscsivKMSKey :: Lens' CreateCachediSCSIVolume (Maybe Text)
+ccscsivKMSKey = lens _ccscsivKMSKey (\ s a -> s{_ccscsivKMSKey = a})
+
 -- | The ARN for an existing volume. Specifying this ARN makes the new volume into an exact copy of the specified existing volume's latest recovery point. The @VolumeSizeInBytes@ value for this new volume must be equal to or larger than the size of the existing volume, in bytes.
 ccscsivSourceVolumeARN :: Lens' CreateCachediSCSIVolume (Maybe Text)
 ccscsivSourceVolumeARN = lens _ccscsivSourceVolumeARN (\ s a -> s{_ccscsivSourceVolumeARN = a})
 
--- | Undocumented member.
+-- | True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.
+ccscsivKMSEncrypted :: Lens' CreateCachediSCSIVolume (Maybe Bool)
+ccscsivKMSEncrypted = lens _ccscsivKMSEncrypted (\ s a -> s{_ccscsivKMSEncrypted = a})
+
+-- | The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as the new cached volume. Specify this field if you want to create the iSCSI storage volume from a snapshot otherwise do not include this field. To list snapshots for your account use <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html DescribeSnapshots> in the /Amazon Elastic Compute Cloud API Reference/ .
 ccscsivSnapshotId :: Lens' CreateCachediSCSIVolume (Maybe Text)
 ccscsivSnapshotId = lens _ccscsivSnapshotId (\ s a -> s{_ccscsivSnapshotId = a})
 
@@ -115,19 +133,19 @@ ccscsivSnapshotId = lens _ccscsivSnapshotId (\ s a -> s{_ccscsivSnapshotId = a})
 ccscsivGatewayARN :: Lens' CreateCachediSCSIVolume Text
 ccscsivGatewayARN = lens _ccscsivGatewayARN (\ s a -> s{_ccscsivGatewayARN = a})
 
--- | Undocumented member.
+-- | The size of the volume in bytes.
 ccscsivVolumeSizeInBytes :: Lens' CreateCachediSCSIVolume Integer
 ccscsivVolumeSizeInBytes = lens _ccscsivVolumeSizeInBytes (\ s a -> s{_ccscsivVolumeSizeInBytes = a})
 
--- | Undocumented member.
+-- | The name of the iSCSI target used by initiators to connect to the target and as a suffix for the target ARN. For example, specifying @TargetName@ as /myvolume/ results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume. The target name must be unique across all volumes of a gateway.
 ccscsivTargetName :: Lens' CreateCachediSCSIVolume Text
 ccscsivTargetName = lens _ccscsivTargetName (\ s a -> s{_ccscsivTargetName = a})
 
--- | Undocumented member.
+-- | The network interface of the gateway on which to expose the iSCSI target. Only IPv4 addresses are accepted. Use 'DescribeGatewayInformation' to get a list of the network interfaces available on a gateway. Valid Values: A valid IP address.
 ccscsivNetworkInterfaceId :: Lens' CreateCachediSCSIVolume Text
 ccscsivNetworkInterfaceId = lens _ccscsivNetworkInterfaceId (\ s a -> s{_ccscsivNetworkInterfaceId = a})
 
--- | Undocumented member.
+-- | A unique identifier that you use to retry a request. If you retry a request, use the same @ClientToken@ you specified in the initial request.
 ccscsivClientToken :: Lens' CreateCachediSCSIVolume Text
 ccscsivClientToken = lens _ccscsivClientToken (\ s a -> s{_ccscsivClientToken = a})
 
@@ -160,7 +178,9 @@ instance ToJSON CreateCachediSCSIVolume where
         toJSON CreateCachediSCSIVolume'{..}
           = object
               (catMaybes
-                 [("SourceVolumeARN" .=) <$> _ccscsivSourceVolumeARN,
+                 [("KMSKey" .=) <$> _ccscsivKMSKey,
+                  ("SourceVolumeARN" .=) <$> _ccscsivSourceVolumeARN,
+                  ("KMSEncrypted" .=) <$> _ccscsivKMSEncrypted,
                   ("SnapshotId" .=) <$> _ccscsivSnapshotId,
                   Just ("GatewayARN" .= _ccscsivGatewayARN),
                   Just
@@ -188,9 +208,9 @@ data CreateCachediSCSIVolumeResponse = CreateCachediSCSIVolumeResponse'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ccscsivrsTargetARN' - Undocumented member.
+-- * 'ccscsivrsTargetARN' - The Amazon Resource Name (ARN) of the volume target, which includes the iSCSI name that initiators can use to connect to the target.
 --
--- * 'ccscsivrsVolumeARN' - Undocumented member.
+-- * 'ccscsivrsVolumeARN' - The Amazon Resource Name (ARN) of the configured volume.
 --
 -- * 'ccscsivrsResponseStatus' - -- | The response status code.
 createCachediSCSIVolumeResponse
@@ -204,11 +224,11 @@ createCachediSCSIVolumeResponse pResponseStatus_ =
     }
 
 
--- | Undocumented member.
+-- | The Amazon Resource Name (ARN) of the volume target, which includes the iSCSI name that initiators can use to connect to the target.
 ccscsivrsTargetARN :: Lens' CreateCachediSCSIVolumeResponse (Maybe Text)
 ccscsivrsTargetARN = lens _ccscsivrsTargetARN (\ s a -> s{_ccscsivrsTargetARN = a})
 
--- | Undocumented member.
+-- | The Amazon Resource Name (ARN) of the configured volume.
 ccscsivrsVolumeARN :: Lens' CreateCachediSCSIVolumeResponse (Maybe Text)
 ccscsivrsVolumeARN = lens _ccscsivrsVolumeARN (\ s a -> s{_ccscsivrsVolumeARN = a})
 

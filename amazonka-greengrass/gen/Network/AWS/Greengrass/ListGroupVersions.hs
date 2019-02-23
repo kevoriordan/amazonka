@@ -61,7 +61,7 @@ data ListGroupVersions = ListGroupVersions'
 --
 -- * 'lgvMaxResults' - The maximum number of results to be returned per request.
 --
--- * 'lgvGroupId' - The ID of the AWS Greengrass group.
+-- * 'lgvGroupId' - The ID of the Greengrass group.
 listGroupVersions
     :: Text -- ^ 'lgvGroupId'
     -> ListGroupVersions
@@ -78,7 +78,7 @@ lgvNextToken = lens _lgvNextToken (\ s a -> s{_lgvNextToken = a})
 lgvMaxResults :: Lens' ListGroupVersions (Maybe Text)
 lgvMaxResults = lens _lgvMaxResults (\ s a -> s{_lgvMaxResults = a})
 
--- | The ID of the AWS Greengrass group.
+-- | The ID of the Greengrass group.
 lgvGroupId :: Lens' ListGroupVersions Text
 lgvGroupId = lens _lgvGroupId (\ s a -> s{_lgvGroupId = a})
 

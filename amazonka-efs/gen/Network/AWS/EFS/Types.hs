@@ -22,6 +22,7 @@ module Network.AWS.EFS.Types
     , _MountTargetConflict
     , _UnsupportedAvailabilityZone
     , _FileSystemLimitExceeded
+    , _TooManyRequests
     , _NetworkInterfaceLimitExceeded
     , _FileSystemAlreadyExists
     , _SubnetNotFound
@@ -29,11 +30,13 @@ module Network.AWS.EFS.Types
     , _IncorrectFileSystemLifeCycleState
     , _BadRequest
     , _NoFreeAddressesInSubnet
+    , _ThroughputLimitExceeded
     , _DependencyTimeout
     , _FileSystemInUse
     , _IncorrectMountTargetState
     , _InternalServerError
     , _IPAddressInUse
+    , _InsufficientThroughputCapacity
 
     -- * LifeCycleState
     , LifeCycleState (..)
@@ -41,10 +44,18 @@ module Network.AWS.EFS.Types
     -- * PerformanceMode
     , PerformanceMode (..)
 
+    -- * ThroughputMode
+    , ThroughputMode (..)
+
+    -- * TransitionToIARules
+    , TransitionToIARules (..)
+
     -- * FileSystemDescription
     , FileSystemDescription
     , fileSystemDescription
+    , fsdProvisionedThroughputInMibps
     , fsdEncrypted
+    , fsdThroughputMode
     , fsdKMSKeyId
     , fsdName
     , fsdOwnerId
@@ -55,12 +66,25 @@ module Network.AWS.EFS.Types
     , fsdNumberOfMountTargets
     , fsdSizeInBytes
     , fsdPerformanceMode
+    , fsdTags
 
     -- * FileSystemSize
     , FileSystemSize
     , fileSystemSize
+    , fssValueInIA
+    , fssValueInStandard
     , fssTimestamp
     , fssValue
+
+    -- * LifecycleConfigurationDescription
+    , LifecycleConfigurationDescription
+    , lifecycleConfigurationDescription
+    , lcdLifecyclePolicies
+
+    -- * LifecyclePolicy
+    , LifecyclePolicy
+    , lifecyclePolicy
+    , lpTransitionToIA
 
     -- * MountTargetDescription
     , MountTargetDescription
@@ -141,7 +165,7 @@ _SecurityGroupLimitExceeded =
   _MatchServiceError efs "SecurityGroupLimitExceeded" . hasStatus 400
 
 
--- | Returned if one of the specified security groups does not exist in the subnet's VPC.
+-- | Returned if one of the specified security groups doesn't exist in the subnet's VPC.
 --
 --
 _SecurityGroupNotFound :: AsError a => Getting (First ServiceError) a ServiceError
@@ -165,7 +189,7 @@ _UnsupportedAvailabilityZone =
   _MatchServiceError efs "UnsupportedAvailabilityZone" . hasStatus 400
 
 
--- | Returned if the AWS account has already created maximum number of file systems allowed per account.
+-- | Returned if the AWS account has already created the maximum number of file systems allowed per account.
 --
 --
 _FileSystemLimitExceeded :: AsError a => Getting (First ServiceError) a ServiceError
@@ -173,7 +197,14 @@ _FileSystemLimitExceeded =
   _MatchServiceError efs "FileSystemLimitExceeded" . hasStatus 403
 
 
--- | The calling account has reached the ENI limit for the specific AWS region. Client should try to delete some ENIs or get its account limit raised. For more information, see <http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html Amazon VPC Limits> in the Amazon Virtual Private Cloud User Guide (see the Network interfaces per VPC entry in the table).
+-- | Returned if you don’t wait at least 24 hours before changing the throughput mode, or decreasing the Provisioned Throughput value.
+--
+--
+_TooManyRequests :: AsError a => Getting (First ServiceError) a ServiceError
+_TooManyRequests = _MatchServiceError efs "TooManyRequests" . hasStatus 429
+
+
+-- | The calling account has reached the limit for elastic network interfaces for the specific AWS Region. The client should try to delete some elastic network interfaces or get the account limit raised. For more information, see <https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html Amazon VPC Limits> in the /Amazon VPC User Guide / (see the Network interfaces per VPC entry in the table).
 --
 --
 _NetworkInterfaceLimitExceeded :: AsError a => Getting (First ServiceError) a ServiceError
@@ -196,7 +227,7 @@ _SubnetNotFound :: AsError a => Getting (First ServiceError) a ServiceError
 _SubnetNotFound = _MatchServiceError efs "SubnetNotFound" . hasStatus 400
 
 
--- | Returned if the specified @FileSystemId@ does not exist in the requester's AWS account.
+-- | Returned if the specified @FileSystemId@ value doesn't exist in the requester's AWS account.
 --
 --
 _FileSystemNotFound :: AsError a => Getting (First ServiceError) a ServiceError
@@ -204,7 +235,7 @@ _FileSystemNotFound =
   _MatchServiceError efs "FileSystemNotFound" . hasStatus 404
 
 
--- | Returned if the file system's life cycle state is not "created".
+-- | Returned if the file system's lifecycle state is not "available".
 --
 --
 _IncorrectFileSystemLifeCycleState :: AsError a => Getting (First ServiceError) a ServiceError
@@ -225,6 +256,14 @@ _BadRequest = _MatchServiceError efs "BadRequest" . hasStatus 400
 _NoFreeAddressesInSubnet :: AsError a => Getting (First ServiceError) a ServiceError
 _NoFreeAddressesInSubnet =
   _MatchServiceError efs "NoFreeAddressesInSubnet" . hasStatus 409
+
+
+-- | Returned if the throughput mode or amount of provisioned throughput can't be changed because the throughput limit of 1024 MiB/s has been reached.
+--
+--
+_ThroughputLimitExceeded :: AsError a => Getting (First ServiceError) a ServiceError
+_ThroughputLimitExceeded =
+  _MatchServiceError efs "ThroughputLimitExceeded" . hasStatus 400
 
 
 -- | The service timed out trying to fulfill the request, and the client should try the call again.
@@ -262,4 +301,12 @@ _InternalServerError =
 --
 _IPAddressInUse :: AsError a => Getting (First ServiceError) a ServiceError
 _IPAddressInUse = _MatchServiceError efs "IpAddressInUse" . hasStatus 409
+
+
+-- | Returned if there's not enough capacity to provision additional throughput. This value might be returned when you try to create a file system in provisioned throughput mode, when you attempt to increase the provisioned throughput of an existing file system, or when you attempt to change an existing file system from bursting to provisioned throughput mode.
+--
+--
+_InsufficientThroughputCapacity :: AsError a => Getting (First ServiceError) a ServiceError
+_InsufficientThroughputCapacity =
+  _MatchServiceError efs "InsufficientThroughputCapacity" . hasStatus 503
 

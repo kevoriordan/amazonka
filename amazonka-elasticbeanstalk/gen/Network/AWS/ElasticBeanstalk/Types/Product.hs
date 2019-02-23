@@ -236,7 +236,7 @@ data ApplicationResourceLifecycleConfig = ApplicationResourceLifecycleConfig'
 --
 -- * 'arlcVersionLifecycleConfig' - The application version lifecycle configuration.
 --
--- * 'arlcServiceRole' - The ARN of an IAM service role that Elastic Beanstalk has permission to assume.
+-- * 'arlcServiceRole' - The ARN of an IAM service role that Elastic Beanstalk has permission to assume. The @ServiceRole@ property is required the first time that you provide a @VersionLifecycleConfig@ for the application in one of the supporting calls (@CreateApplication@ or @UpdateApplicationResourceLifecycle@ ). After you provide it once, in either one of the calls, Elastic Beanstalk persists the Service Role with the application, and you don't need to specify it again in subsequent @UpdateApplicationResourceLifecycle@ calls. You can, however, specify it in subsequent calls to change the Service Role to another value.
 applicationResourceLifecycleConfig
     :: ApplicationResourceLifecycleConfig
 applicationResourceLifecycleConfig =
@@ -248,7 +248,7 @@ applicationResourceLifecycleConfig =
 arlcVersionLifecycleConfig :: Lens' ApplicationResourceLifecycleConfig (Maybe ApplicationVersionLifecycleConfig)
 arlcVersionLifecycleConfig = lens _arlcVersionLifecycleConfig (\ s a -> s{_arlcVersionLifecycleConfig = a})
 
--- | The ARN of an IAM service role that Elastic Beanstalk has permission to assume.
+-- | The ARN of an IAM service role that Elastic Beanstalk has permission to assume. The @ServiceRole@ property is required the first time that you provide a @VersionLifecycleConfig@ for the application in one of the supporting calls (@CreateApplication@ or @UpdateApplicationResourceLifecycle@ ). After you provide it once, in either one of the calls, Elastic Beanstalk persists the Service Role with the application, and you don't need to specify it again in subsequent @UpdateApplicationResourceLifecycle@ calls. You can, however, specify it in subsequent calls to change the Service Role to another value.
 arlcServiceRole :: Lens' ApplicationResourceLifecycleConfig (Maybe Text)
 arlcServiceRole = lens _arlcServiceRole (\ s a -> s{_arlcServiceRole = a})
 
@@ -296,7 +296,7 @@ data ApplicationVersionDescription = ApplicationVersionDescription'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'avdStatus' - The processing status of the application version.
+-- * 'avdStatus' - The processing status of the application version. Reflects the state of the application version during its creation. Many of the values are only applicable if you specified @True@ for the @Process@ parameter of the @CreateApplicationVersion@ action. The following list describes the possible values.     * @Unprocessed@ – Application version wasn't pre-processed or validated. Elastic Beanstalk will validate configuration files during deployment of the application version to an environment.     * @Processing@ – Elastic Beanstalk is currently processing the application version.     * @Building@ – Application version is currently undergoing an AWS CodeBuild build.     * @Processed@ – Elastic Beanstalk was successfully pre-processed and validated.     * @Failed@ – Either the AWS CodeBuild build failed or configuration files didn't pass validation. This application version isn't usable.
 --
 -- * 'avdSourceBundle' - The storage location of the application version's source bundle in Amazon S3.
 --
@@ -332,7 +332,7 @@ applicationVersionDescription =
     }
 
 
--- | The processing status of the application version.
+-- | The processing status of the application version. Reflects the state of the application version during its creation. Many of the values are only applicable if you specified @True@ for the @Process@ parameter of the @CreateApplicationVersion@ action. The following list describes the possible values.     * @Unprocessed@ – Application version wasn't pre-processed or validated. Elastic Beanstalk will validate configuration files during deployment of the application version to an environment.     * @Processing@ – Elastic Beanstalk is currently processing the application version.     * @Building@ – Application version is currently undergoing an AWS CodeBuild build.     * @Processed@ – Elastic Beanstalk was successfully pre-processed and validated.     * @Failed@ – Either the AWS CodeBuild build failed or configuration files didn't pass validation. This application version isn't usable.
 avdStatus :: Lens' ApplicationVersionDescription (Maybe ApplicationVersionStatus)
 avdStatus = lens _avdStatus (\ s a -> s{_avdStatus = a})
 
@@ -623,13 +623,14 @@ instance NFData Builder where
 --
 -- /See:/ 'cpuUtilization' smart constructor.
 data CPUUtilization = CPUUtilization'
-  { _cuSoftIRQ :: !(Maybe Double)
-  , _cuIdle    :: !(Maybe Double)
-  , _cuIRQ     :: !(Maybe Double)
-  , _cuSystem  :: !(Maybe Double)
-  , _cuUser    :: !(Maybe Double)
-  , _cuIOWait  :: !(Maybe Double)
-  , _cuNice    :: !(Maybe Double)
+  { _cuSoftIRQ    :: !(Maybe Double)
+  , _cuIdle       :: !(Maybe Double)
+  , _cuIRQ        :: !(Maybe Double)
+  , _cuSystem     :: !(Maybe Double)
+  , _cuPrivileged :: !(Maybe Double)
+  , _cuUser       :: !(Maybe Double)
+  , _cuIOWait     :: !(Maybe Double)
+  , _cuNice       :: !(Maybe Double)
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
 
@@ -637,19 +638,21 @@ data CPUUtilization = CPUUtilization'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cuSoftIRQ' - Percentage of time that the CPU has spent in the @SoftIRQ@ state over the last 10 seconds.
+-- * 'cuSoftIRQ' - Available on Linux environments only. Percentage of time that the CPU has spent in the @SoftIRQ@ state over the last 10 seconds.
 --
 -- * 'cuIdle' - Percentage of time that the CPU has spent in the @Idle@ state over the last 10 seconds.
 --
--- * 'cuIRQ' - Percentage of time that the CPU has spent in the @IRQ@ state over the last 10 seconds.
+-- * 'cuIRQ' - Available on Linux environments only. Percentage of time that the CPU has spent in the @IRQ@ state over the last 10 seconds.
 --
--- * 'cuSystem' - Percentage of time that the CPU has spent in the @System@ state over the last 10 seconds.
+-- * 'cuSystem' - Available on Linux environments only. Percentage of time that the CPU has spent in the @System@ state over the last 10 seconds.
+--
+-- * 'cuPrivileged' - Available on Windows environments only. Percentage of time that the CPU has spent in the @Privileged@ state over the last 10 seconds.
 --
 -- * 'cuUser' - Percentage of time that the CPU has spent in the @User@ state over the last 10 seconds.
 --
--- * 'cuIOWait' - Percentage of time that the CPU has spent in the @I/O Wait@ state over the last 10 seconds.
+-- * 'cuIOWait' - Available on Linux environments only. Percentage of time that the CPU has spent in the @I/O Wait@ state over the last 10 seconds.
 --
--- * 'cuNice' - Percentage of time that the CPU has spent in the @Nice@ state over the last 10 seconds.
+-- * 'cuNice' - Available on Linux environments only. Percentage of time that the CPU has spent in the @Nice@ state over the last 10 seconds.
 cpuUtilization
     :: CPUUtilization
 cpuUtilization =
@@ -658,13 +661,14 @@ cpuUtilization =
     , _cuIdle = Nothing
     , _cuIRQ = Nothing
     , _cuSystem = Nothing
+    , _cuPrivileged = Nothing
     , _cuUser = Nothing
     , _cuIOWait = Nothing
     , _cuNice = Nothing
     }
 
 
--- | Percentage of time that the CPU has spent in the @SoftIRQ@ state over the last 10 seconds.
+-- | Available on Linux environments only. Percentage of time that the CPU has spent in the @SoftIRQ@ state over the last 10 seconds.
 cuSoftIRQ :: Lens' CPUUtilization (Maybe Double)
 cuSoftIRQ = lens _cuSoftIRQ (\ s a -> s{_cuSoftIRQ = a})
 
@@ -672,23 +676,27 @@ cuSoftIRQ = lens _cuSoftIRQ (\ s a -> s{_cuSoftIRQ = a})
 cuIdle :: Lens' CPUUtilization (Maybe Double)
 cuIdle = lens _cuIdle (\ s a -> s{_cuIdle = a})
 
--- | Percentage of time that the CPU has spent in the @IRQ@ state over the last 10 seconds.
+-- | Available on Linux environments only. Percentage of time that the CPU has spent in the @IRQ@ state over the last 10 seconds.
 cuIRQ :: Lens' CPUUtilization (Maybe Double)
 cuIRQ = lens _cuIRQ (\ s a -> s{_cuIRQ = a})
 
--- | Percentage of time that the CPU has spent in the @System@ state over the last 10 seconds.
+-- | Available on Linux environments only. Percentage of time that the CPU has spent in the @System@ state over the last 10 seconds.
 cuSystem :: Lens' CPUUtilization (Maybe Double)
 cuSystem = lens _cuSystem (\ s a -> s{_cuSystem = a})
+
+-- | Available on Windows environments only. Percentage of time that the CPU has spent in the @Privileged@ state over the last 10 seconds.
+cuPrivileged :: Lens' CPUUtilization (Maybe Double)
+cuPrivileged = lens _cuPrivileged (\ s a -> s{_cuPrivileged = a})
 
 -- | Percentage of time that the CPU has spent in the @User@ state over the last 10 seconds.
 cuUser :: Lens' CPUUtilization (Maybe Double)
 cuUser = lens _cuUser (\ s a -> s{_cuUser = a})
 
--- | Percentage of time that the CPU has spent in the @I/O Wait@ state over the last 10 seconds.
+-- | Available on Linux environments only. Percentage of time that the CPU has spent in the @I/O Wait@ state over the last 10 seconds.
 cuIOWait :: Lens' CPUUtilization (Maybe Double)
 cuIOWait = lens _cuIOWait (\ s a -> s{_cuIOWait = a})
 
--- | Percentage of time that the CPU has spent in the @Nice@ state over the last 10 seconds.
+-- | Available on Linux environments only. Percentage of time that the CPU has spent in the @Nice@ state over the last 10 seconds.
 cuNice :: Lens' CPUUtilization (Maybe Double)
 cuNice = lens _cuNice (\ s a -> s{_cuNice = a})
 
@@ -698,6 +706,7 @@ instance FromXML CPUUtilization where
               (x .@? "SoftIRQ") <*> (x .@? "Idle") <*>
                 (x .@? "IRQ")
                 <*> (x .@? "System")
+                <*> (x .@? "Privileged")
                 <*> (x .@? "User")
                 <*> (x .@? "IOWait")
                 <*> (x .@? "Nice")
@@ -1175,7 +1184,7 @@ data EnvironmentDescription = EnvironmentDescription'
 --
 -- * 'eDateCreated' - The creation date for this environment.
 --
--- * 'eHealth' - Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment:     * @Red@ : Indicates the environment is not responsive. Occurs when three or more consecutive failures occur for an environment.     * @Yellow@ : Indicates that something is wrong. Occurs when two consecutive failures occur for an environment.     * @Green@ : Indicates the environment is healthy and fully functional.     * @Grey@ : Default health for a new environment. The environment is not fully launched and health checks have not started or health checks are suspended during an @UpdateEnvironment@ or @RestartEnvironement@ request. Default: @Grey@
+-- * 'eHealth' - Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment:     * @Red@ : Indicates the environment is not responsive. Occurs when three or more consecutive failures occur for an environment.     * @Yellow@ : Indicates that something is wrong. Occurs when two consecutive failures occur for an environment.     * @Green@ : Indicates the environment is healthy and fully functional.     * @Grey@ : Default health for a new environment. The environment is not fully launched and health checks have not started or health checks are suspended during an @UpdateEnvironment@ or @RestartEnvironment@ request. Default: @Grey@
 --
 -- * 'eVersionLabel' - The application version deployed in this environment.
 --
@@ -1257,7 +1266,7 @@ eDateUpdated = lens _eDateUpdated (\ s a -> s{_eDateUpdated = a}) . mapping _Tim
 eDateCreated :: Lens' EnvironmentDescription (Maybe UTCTime)
 eDateCreated = lens _eDateCreated (\ s a -> s{_eDateCreated = a}) . mapping _Time
 
--- | Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment:     * @Red@ : Indicates the environment is not responsive. Occurs when three or more consecutive failures occur for an environment.     * @Yellow@ : Indicates that something is wrong. Occurs when two consecutive failures occur for an environment.     * @Green@ : Indicates the environment is healthy and fully functional.     * @Grey@ : Default health for a new environment. The environment is not fully launched and health checks have not started or health checks are suspended during an @UpdateEnvironment@ or @RestartEnvironement@ request. Default: @Grey@
+-- | Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment:     * @Red@ : Indicates the environment is not responsive. Occurs when three or more consecutive failures occur for an environment.     * @Yellow@ : Indicates that something is wrong. Occurs when two consecutive failures occur for an environment.     * @Green@ : Indicates the environment is healthy and fully functional.     * @Grey@ : Default health for a new environment. The environment is not fully launched and health checks have not started or health checks are suspended during an @UpdateEnvironment@ or @RestartEnvironment@ request. Default: @Grey@
 eHealth :: Lens' EnvironmentDescription (Maybe EnvironmentHealth)
 eHealth = lens _eHealth (\ s a -> s{_eHealth = a})
 
@@ -1402,7 +1411,7 @@ data EnvironmentInfoDescription = EnvironmentInfoDescription'
 --
 -- * 'eidInfoType' - The type of information retrieved.
 --
--- * 'eidMessage' - The retrieved information.
+-- * 'eidMessage' - The retrieved information. Currently contains a presigned Amazon S3 URL. The files are deleted after 15 minutes. Anyone in possession of this URL can access the files before they are deleted. Make the URL available only to trusted parties.
 environmentInfoDescription
     :: EnvironmentInfoDescription
 environmentInfoDescription =
@@ -1426,7 +1435,7 @@ eidEC2InstanceId = lens _eidEC2InstanceId (\ s a -> s{_eidEC2InstanceId = a})
 eidInfoType :: Lens' EnvironmentInfoDescription (Maybe EnvironmentInfoType)
 eidInfoType = lens _eidInfoType (\ s a -> s{_eidInfoType = a})
 
--- | The retrieved information.
+-- | The retrieved information. Currently contains a presigned Amazon S3 URL. The files are deleted after 15 minutes. Anyone in possession of this URL can access the files before they are deleted. Make the URL available only to trusted parties.
 eidMessage :: Lens' EnvironmentInfoDescription (Maybe Text)
 eidMessage = lens _eidMessage (\ s a -> s{_eidMessage = a})
 
@@ -1490,6 +1499,7 @@ instance NFData EnvironmentLink where
 data EnvironmentResourceDescription = EnvironmentResourceDescription'
   { _erdQueues               :: !(Maybe [Queue])
   , _erdTriggers             :: !(Maybe [Trigger])
+  , _erdLaunchTemplates      :: !(Maybe [LaunchTemplate])
   , _erdLoadBalancers        :: !(Maybe [LoadBalancer])
   , _erdEnvironmentName      :: !(Maybe Text)
   , _erdInstances            :: !(Maybe [Instance])
@@ -1506,6 +1516,8 @@ data EnvironmentResourceDescription = EnvironmentResourceDescription'
 --
 -- * 'erdTriggers' - The @AutoScaling@ triggers in use by this environment.
 --
+-- * 'erdLaunchTemplates' - The Amazon EC2 launch templates in use by this environment.
+--
 -- * 'erdLoadBalancers' - The LoadBalancers in use by this environment.
 --
 -- * 'erdEnvironmentName' - The name of the environment.
@@ -1521,6 +1533,7 @@ environmentResourceDescription =
   EnvironmentResourceDescription'
     { _erdQueues = Nothing
     , _erdTriggers = Nothing
+    , _erdLaunchTemplates = Nothing
     , _erdLoadBalancers = Nothing
     , _erdEnvironmentName = Nothing
     , _erdInstances = Nothing
@@ -1536,6 +1549,10 @@ erdQueues = lens _erdQueues (\ s a -> s{_erdQueues = a}) . _Default . _Coerce
 -- | The @AutoScaling@ triggers in use by this environment.
 erdTriggers :: Lens' EnvironmentResourceDescription [Trigger]
 erdTriggers = lens _erdTriggers (\ s a -> s{_erdTriggers = a}) . _Default . _Coerce
+
+-- | The Amazon EC2 launch templates in use by this environment.
+erdLaunchTemplates :: Lens' EnvironmentResourceDescription [LaunchTemplate]
+erdLaunchTemplates = lens _erdLaunchTemplates (\ s a -> s{_erdLaunchTemplates = a}) . _Default . _Coerce
 
 -- | The LoadBalancers in use by this environment.
 erdLoadBalancers :: Lens' EnvironmentResourceDescription [LoadBalancer]
@@ -1564,6 +1581,9 @@ instance FromXML EnvironmentResourceDescription where
                  may (parseXMLList "member"))
                 <*>
                 (x .@? "Triggers" .!@ mempty >>=
+                   may (parseXMLList "member"))
+                <*>
+                (x .@? "LaunchTemplates" .!@ mempty >>=
                    may (parseXMLList "member"))
                 <*>
                 (x .@? "LoadBalancers" .!@ mempty >>=
@@ -1636,26 +1656,26 @@ data EnvironmentTier = EnvironmentTier'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'etName' - The name of this environment tier.
+-- * 'etName' - The name of this environment tier. Valid values:     * For /Web server tier/ – @WebServer@      * For /Worker tier/ – @Worker@
 --
--- * 'etVersion' - The version of this environment tier.
+-- * 'etVersion' - The version of this environment tier. When you don't set a value to it, Elastic Beanstalk uses the latest compatible worker tier version.
 --
--- * 'etType' - The type of this environment tier.
+-- * 'etType' - The type of this environment tier. Valid values:     * For /Web server tier/ – @Standard@      * For /Worker tier/ – @SQS/HTTP@
 environmentTier
     :: EnvironmentTier
 environmentTier =
   EnvironmentTier' {_etName = Nothing, _etVersion = Nothing, _etType = Nothing}
 
 
--- | The name of this environment tier.
+-- | The name of this environment tier. Valid values:     * For /Web server tier/ – @WebServer@      * For /Worker tier/ – @Worker@
 etName :: Lens' EnvironmentTier (Maybe Text)
 etName = lens _etName (\ s a -> s{_etName = a})
 
--- | The version of this environment tier.
+-- | The version of this environment tier. When you don't set a value to it, Elastic Beanstalk uses the latest compatible worker tier version.
 etVersion :: Lens' EnvironmentTier (Maybe Text)
 etVersion = lens _etVersion (\ s a -> s{_etVersion = a})
 
--- | The type of this environment tier.
+-- | The type of this environment tier. Valid values:     * For /Web server tier/ – @Standard@      * For /Worker tier/ – @SQS/HTTP@
 etType :: Lens' EnvironmentTier (Maybe Text)
 etType = lens _etType (\ s a -> s{_etType = a})
 
@@ -2038,6 +2058,37 @@ instance FromXML LaunchConfiguration where
 instance Hashable LaunchConfiguration where
 
 instance NFData LaunchConfiguration where
+
+-- | Describes an Amazon EC2 launch template.
+--
+--
+--
+-- /See:/ 'launchTemplate' smart constructor.
+newtype LaunchTemplate = LaunchTemplate'
+  { _ltId :: Maybe Text
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'LaunchTemplate' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ltId' - The ID of the launch template.
+launchTemplate
+    :: LaunchTemplate
+launchTemplate = LaunchTemplate' {_ltId = Nothing}
+
+
+-- | The ID of the launch template.
+ltId :: Lens' LaunchTemplate (Maybe Text)
+ltId = lens _ltId (\ s a -> s{_ltId = a})
+
+instance FromXML LaunchTemplate where
+        parseXML x = LaunchTemplate' <$> (x .@? "Id")
+
+instance Hashable LaunchTemplate where
+
+instance NFData LaunchTemplate where
 
 -- | Describes the properties of a Listener for the LoadBalancer.
 --

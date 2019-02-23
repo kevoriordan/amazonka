@@ -60,6 +60,7 @@ library
         , Network.AWS.Glue.CreateJob
         , Network.AWS.Glue.CreatePartition
         , Network.AWS.Glue.CreateScript
+        , Network.AWS.Glue.CreateSecurityConfiguration
         , Network.AWS.Glue.CreateTable
         , Network.AWS.Glue.CreateTrigger
         , Network.AWS.Glue.CreateUserDefinedFunction
@@ -70,6 +71,8 @@ library
         , Network.AWS.Glue.DeleteDevEndpoint
         , Network.AWS.Glue.DeleteJob
         , Network.AWS.Glue.DeletePartition
+        , Network.AWS.Glue.DeleteResourcePolicy
+        , Network.AWS.Glue.DeleteSecurityConfiguration
         , Network.AWS.Glue.DeleteTable
         , Network.AWS.Glue.DeleteTableVersion
         , Network.AWS.Glue.DeleteTrigger
@@ -82,6 +85,7 @@ library
         , Network.AWS.Glue.GetCrawler
         , Network.AWS.Glue.GetCrawlerMetrics
         , Network.AWS.Glue.GetCrawlers
+        , Network.AWS.Glue.GetDataCatalogEncryptionSettings
         , Network.AWS.Glue.GetDatabase
         , Network.AWS.Glue.GetDatabases
         , Network.AWS.Glue.GetDataflowGraph
@@ -95,6 +99,9 @@ library
         , Network.AWS.Glue.GetPartition
         , Network.AWS.Glue.GetPartitions
         , Network.AWS.Glue.GetPlan
+        , Network.AWS.Glue.GetResourcePolicy
+        , Network.AWS.Glue.GetSecurityConfiguration
+        , Network.AWS.Glue.GetSecurityConfigurations
         , Network.AWS.Glue.GetTable
         , Network.AWS.Glue.GetTableVersion
         , Network.AWS.Glue.GetTableVersions
@@ -104,6 +111,8 @@ library
         , Network.AWS.Glue.GetUserDefinedFunction
         , Network.AWS.Glue.GetUserDefinedFunctions
         , Network.AWS.Glue.ImportCatalogToGlue
+        , Network.AWS.Glue.PutDataCatalogEncryptionSettings
+        , Network.AWS.Glue.PutResourcePolicy
         , Network.AWS.Glue.ResetJobBookmark
         , Network.AWS.Glue.StartCrawler
         , Network.AWS.Glue.StartCrawlerSchedule

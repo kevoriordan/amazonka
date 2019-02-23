@@ -238,7 +238,7 @@ module Network.AWS.CodePipeline
     -- ** GetJobDetails
     , module Network.AWS.CodePipeline.GetJobDetails
 
-    -- ** ListPipelines
+    -- ** ListPipelines (Paginated)
     , module Network.AWS.CodePipeline.ListPipelines
 
     -- ** RetryStageExecution
@@ -262,7 +262,7 @@ module Network.AWS.CodePipeline
     -- ** DisableStageTransition
     , module Network.AWS.CodePipeline.DisableStageTransition
 
-    -- ** ListActionTypes
+    -- ** ListActionTypes (Paginated)
     , module Network.AWS.CodePipeline.ListActionTypes
 
     -- ** AcknowledgeJob
@@ -277,7 +277,7 @@ module Network.AWS.CodePipeline
     -- ** PutWebhook
     , module Network.AWS.CodePipeline.PutWebhook
 
-    -- ** ListWebhooks
+    -- ** ListWebhooks (Paginated)
     , module Network.AWS.CodePipeline.ListWebhooks
 
     -- ** CreatePipeline
@@ -292,7 +292,7 @@ module Network.AWS.CodePipeline
     -- ** CreateCustomActionType
     , module Network.AWS.CodePipeline.CreateCustomActionType
 
-    -- ** ListPipelineExecutions
+    -- ** ListPipelineExecutions (Paginated)
     , module Network.AWS.CodePipeline.ListPipelineExecutions
 
     -- * Types
@@ -378,6 +378,7 @@ module Network.AWS.CodePipeline
     , actionDeclaration
     , adOutputArtifacts
     , adRunOrder
+    , adRegion
     , adConfiguration
     , adInputArtifacts
     , adRoleARN
@@ -577,10 +578,11 @@ module Network.AWS.CodePipeline
     -- ** PipelineDeclaration
     , PipelineDeclaration
     , pipelineDeclaration
+    , pdArtifactStores
+    , pdArtifactStore
     , pdVersion
     , pdName
     , pdRoleARN
-    , pdArtifactStore
     , pdStages
 
     -- ** PipelineExecution

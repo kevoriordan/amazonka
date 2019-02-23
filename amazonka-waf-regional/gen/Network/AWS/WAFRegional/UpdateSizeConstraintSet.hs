@@ -27,6 +27,8 @@
 --
 --     * Whether to perform any transformations on the request, such as converting it to lowercase, before checking its length. Note that transformations of the request body are not supported because the AWS resource forwards only the first @8192@ bytes of your request to AWS WAF.
 --
+-- You can only specify a single type of TextTransformation.
+--
 --     * A @ComparisonOperator@ used for evaluating the selected part of the request against the specified @Size@ , such as equals, greater than, less than, and so on.
 --
 --     * The length, in bytes, that you want AWS WAF to watch for in selected part of the request. The length is computed after applying the transformation.

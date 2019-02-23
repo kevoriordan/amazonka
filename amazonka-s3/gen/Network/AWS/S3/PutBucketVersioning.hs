@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets the versioning state of an existing bucket. To set the versioning state, you must be the bucket owner.
+--
+--
 module Network.AWS.S3.PutBucketVersioning
     (
     -- * Creating a Request

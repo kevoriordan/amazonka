@@ -62,7 +62,7 @@ data ListTranscriptionJobs = ListTranscriptionJobs'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ltjStatus' - When specified, returns only transcription jobs with the specified status.
+-- * 'ltjStatus' - When specified, returns only transcription jobs with the specified status. Jobs are ordered by creation date, with the newest jobs returned first. If you don’t specify a status, Amazon Transcribe returns all transcription jobs ordered by creation date.
 --
 -- * 'ltjNextToken' - If the result of the previous request to @ListTranscriptionJobs@ was truncated, include the @NextToken@ to fetch the next set of jobs.
 --
@@ -80,7 +80,7 @@ listTranscriptionJobs =
     }
 
 
--- | When specified, returns only transcription jobs with the specified status.
+-- | When specified, returns only transcription jobs with the specified status. Jobs are ordered by creation date, with the newest jobs returned first. If you don’t specify a status, Amazon Transcribe returns all transcription jobs ordered by creation date.
 ltjStatus :: Lens' ListTranscriptionJobs (Maybe TranscriptionJobStatus)
 ltjStatus = lens _ltjStatus (\ s a -> s{_ltjStatus = a})
 

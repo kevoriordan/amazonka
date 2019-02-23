@@ -55,6 +55,9 @@ import Test.Tasty
 --         , requestGetUserDefinedFunctions $
 --             getUserDefinedFunctions
 --
+--         , requestGetDataCatalogEncryptionSettings $
+--             getDataCatalogEncryptionSettings
+--
 --         , requestBatchCreatePartition $
 --             batchCreatePartition
 --
@@ -63,6 +66,9 @@ import Test.Tasty
 --
 --         , requestGetTableVersion $
 --             getTableVersion
+--
+--         , requestCreateSecurityConfiguration $
+--             createSecurityConfiguration
 --
 --         , requestGetJobs $
 --             getJobs
@@ -87,6 +93,9 @@ import Test.Tasty
 --
 --         , requestUpdateCrawler $
 --             updateCrawler
+--
+--         , requestGetSecurityConfiguration $
+--             getSecurityConfiguration
 --
 --         , requestGetConnection $
 --             getConnection
@@ -157,6 +166,9 @@ import Test.Tasty
 --         , requestGetUserDefinedFunction $
 --             getUserDefinedFunction
 --
+--         , requestGetResourcePolicy $
+--             getResourcePolicy
+--
 --         , requestDeleteDatabase $
 --             deleteDatabase
 --
@@ -165,6 +177,9 @@ import Test.Tasty
 --
 --         , requestStopCrawler $
 --             stopCrawler
+--
+--         , requestDeleteSecurityConfiguration $
+--             deleteSecurityConfiguration
 --
 --         , requestGetPartitions $
 --             getPartitions
@@ -214,6 +229,9 @@ import Test.Tasty
 --         , requestCreateDevEndpoint $
 --             createDevEndpoint
 --
+--         , requestPutDataCatalogEncryptionSettings $
+--             putDataCatalogEncryptionSettings
+--
 --         , requestGetDatabase $
 --             getDatabase
 --
@@ -225,6 +243,15 @@ import Test.Tasty
 --
 --         , requestCreateScript $
 --             createScript
+--
+--         , requestPutResourcePolicy $
+--             putResourcePolicy
+--
+--         , requestGetSecurityConfigurations $
+--             getSecurityConfigurations
+--
+--         , requestDeleteResourcePolicy $
+--             deleteResourcePolicy
 --
 --         , requestGetConnections $
 --             getConnections
@@ -292,6 +319,9 @@ import Test.Tasty
 --         , responseGetUserDefinedFunctions $
 --             getUserDefinedFunctionsResponse
 --
+--         , responseGetDataCatalogEncryptionSettings $
+--             getDataCatalogEncryptionSettingsResponse
+--
 --         , responseBatchCreatePartition $
 --             batchCreatePartitionResponse
 --
@@ -300,6 +330,9 @@ import Test.Tasty
 --
 --         , responseGetTableVersion $
 --             getTableVersionResponse
+--
+--         , responseCreateSecurityConfiguration $
+--             createSecurityConfigurationResponse
 --
 --         , responseGetJobs $
 --             getJobsResponse
@@ -324,6 +357,9 @@ import Test.Tasty
 --
 --         , responseUpdateCrawler $
 --             updateCrawlerResponse
+--
+--         , responseGetSecurityConfiguration $
+--             getSecurityConfigurationResponse
 --
 --         , responseGetConnection $
 --             getConnectionResponse
@@ -394,6 +430,9 @@ import Test.Tasty
 --         , responseGetUserDefinedFunction $
 --             getUserDefinedFunctionResponse
 --
+--         , responseGetResourcePolicy $
+--             getResourcePolicyResponse
+--
 --         , responseDeleteDatabase $
 --             deleteDatabaseResponse
 --
@@ -402,6 +441,9 @@ import Test.Tasty
 --
 --         , responseStopCrawler $
 --             stopCrawlerResponse
+--
+--         , responseDeleteSecurityConfiguration $
+--             deleteSecurityConfigurationResponse
 --
 --         , responseGetPartitions $
 --             getPartitionsResponse
@@ -451,6 +493,9 @@ import Test.Tasty
 --         , responseCreateDevEndpoint $
 --             createDevEndpointResponse
 --
+--         , responsePutDataCatalogEncryptionSettings $
+--             putDataCatalogEncryptionSettingsResponse
+--
 --         , responseGetDatabase $
 --             getDatabaseResponse
 --
@@ -462,6 +507,15 @@ import Test.Tasty
 --
 --         , responseCreateScript $
 --             createScriptResponse
+--
+--         , responsePutResourcePolicy $
+--             putResourcePolicyResponse
+--
+--         , responseGetSecurityConfigurations $
+--             getSecurityConfigurationsResponse
+--
+--         , responseDeleteResourcePolicy $
+--             deleteResourcePolicyResponse
 --
 --         , responseGetConnections $
 --             getConnectionsResponse
@@ -549,6 +603,11 @@ requestGetUserDefinedFunctions = req
     "GetUserDefinedFunctions"
     "fixture/GetUserDefinedFunctions.yaml"
 
+requestGetDataCatalogEncryptionSettings :: GetDataCatalogEncryptionSettings -> TestTree
+requestGetDataCatalogEncryptionSettings = req
+    "GetDataCatalogEncryptionSettings"
+    "fixture/GetDataCatalogEncryptionSettings.yaml"
+
 requestBatchCreatePartition :: BatchCreatePartition -> TestTree
 requestBatchCreatePartition = req
     "BatchCreatePartition"
@@ -563,6 +622,11 @@ requestGetTableVersion :: GetTableVersion -> TestTree
 requestGetTableVersion = req
     "GetTableVersion"
     "fixture/GetTableVersion.yaml"
+
+requestCreateSecurityConfiguration :: CreateSecurityConfiguration -> TestTree
+requestCreateSecurityConfiguration = req
+    "CreateSecurityConfiguration"
+    "fixture/CreateSecurityConfiguration.yaml"
 
 requestGetJobs :: GetJobs -> TestTree
 requestGetJobs = req
@@ -603,6 +667,11 @@ requestUpdateCrawler :: UpdateCrawler -> TestTree
 requestUpdateCrawler = req
     "UpdateCrawler"
     "fixture/UpdateCrawler.yaml"
+
+requestGetSecurityConfiguration :: GetSecurityConfiguration -> TestTree
+requestGetSecurityConfiguration = req
+    "GetSecurityConfiguration"
+    "fixture/GetSecurityConfiguration.yaml"
 
 requestGetConnection :: GetConnection -> TestTree
 requestGetConnection = req
@@ -719,6 +788,11 @@ requestGetUserDefinedFunction = req
     "GetUserDefinedFunction"
     "fixture/GetUserDefinedFunction.yaml"
 
+requestGetResourcePolicy :: GetResourcePolicy -> TestTree
+requestGetResourcePolicy = req
+    "GetResourcePolicy"
+    "fixture/GetResourcePolicy.yaml"
+
 requestDeleteDatabase :: DeleteDatabase -> TestTree
 requestDeleteDatabase = req
     "DeleteDatabase"
@@ -733,6 +807,11 @@ requestStopCrawler :: StopCrawler -> TestTree
 requestStopCrawler = req
     "StopCrawler"
     "fixture/StopCrawler.yaml"
+
+requestDeleteSecurityConfiguration :: DeleteSecurityConfiguration -> TestTree
+requestDeleteSecurityConfiguration = req
+    "DeleteSecurityConfiguration"
+    "fixture/DeleteSecurityConfiguration.yaml"
 
 requestGetPartitions :: GetPartitions -> TestTree
 requestGetPartitions = req
@@ -814,6 +893,11 @@ requestCreateDevEndpoint = req
     "CreateDevEndpoint"
     "fixture/CreateDevEndpoint.yaml"
 
+requestPutDataCatalogEncryptionSettings :: PutDataCatalogEncryptionSettings -> TestTree
+requestPutDataCatalogEncryptionSettings = req
+    "PutDataCatalogEncryptionSettings"
+    "fixture/PutDataCatalogEncryptionSettings.yaml"
+
 requestGetDatabase :: GetDatabase -> TestTree
 requestGetDatabase = req
     "GetDatabase"
@@ -833,6 +917,21 @@ requestCreateScript :: CreateScript -> TestTree
 requestCreateScript = req
     "CreateScript"
     "fixture/CreateScript.yaml"
+
+requestPutResourcePolicy :: PutResourcePolicy -> TestTree
+requestPutResourcePolicy = req
+    "PutResourcePolicy"
+    "fixture/PutResourcePolicy.yaml"
+
+requestGetSecurityConfigurations :: GetSecurityConfigurations -> TestTree
+requestGetSecurityConfigurations = req
+    "GetSecurityConfigurations"
+    "fixture/GetSecurityConfigurations.yaml"
+
+requestDeleteResourcePolicy :: DeleteResourcePolicy -> TestTree
+requestDeleteResourcePolicy = req
+    "DeleteResourcePolicy"
+    "fixture/DeleteResourcePolicy.yaml"
 
 requestGetConnections :: GetConnections -> TestTree
 requestGetConnections = req
@@ -959,6 +1058,13 @@ responseGetUserDefinedFunctions = res
     glue
     (Proxy :: Proxy GetUserDefinedFunctions)
 
+responseGetDataCatalogEncryptionSettings :: GetDataCatalogEncryptionSettingsResponse -> TestTree
+responseGetDataCatalogEncryptionSettings = res
+    "GetDataCatalogEncryptionSettingsResponse"
+    "fixture/GetDataCatalogEncryptionSettingsResponse.proto"
+    glue
+    (Proxy :: Proxy GetDataCatalogEncryptionSettings)
+
 responseBatchCreatePartition :: BatchCreatePartitionResponse -> TestTree
 responseBatchCreatePartition = res
     "BatchCreatePartitionResponse"
@@ -979,6 +1085,13 @@ responseGetTableVersion = res
     "fixture/GetTableVersionResponse.proto"
     glue
     (Proxy :: Proxy GetTableVersion)
+
+responseCreateSecurityConfiguration :: CreateSecurityConfigurationResponse -> TestTree
+responseCreateSecurityConfiguration = res
+    "CreateSecurityConfigurationResponse"
+    "fixture/CreateSecurityConfigurationResponse.proto"
+    glue
+    (Proxy :: Proxy CreateSecurityConfiguration)
 
 responseGetJobs :: GetJobsResponse -> TestTree
 responseGetJobs = res
@@ -1035,6 +1148,13 @@ responseUpdateCrawler = res
     "fixture/UpdateCrawlerResponse.proto"
     glue
     (Proxy :: Proxy UpdateCrawler)
+
+responseGetSecurityConfiguration :: GetSecurityConfigurationResponse -> TestTree
+responseGetSecurityConfiguration = res
+    "GetSecurityConfigurationResponse"
+    "fixture/GetSecurityConfigurationResponse.proto"
+    glue
+    (Proxy :: Proxy GetSecurityConfiguration)
 
 responseGetConnection :: GetConnectionResponse -> TestTree
 responseGetConnection = res
@@ -1197,6 +1317,13 @@ responseGetUserDefinedFunction = res
     glue
     (Proxy :: Proxy GetUserDefinedFunction)
 
+responseGetResourcePolicy :: GetResourcePolicyResponse -> TestTree
+responseGetResourcePolicy = res
+    "GetResourcePolicyResponse"
+    "fixture/GetResourcePolicyResponse.proto"
+    glue
+    (Proxy :: Proxy GetResourcePolicy)
+
 responseDeleteDatabase :: DeleteDatabaseResponse -> TestTree
 responseDeleteDatabase = res
     "DeleteDatabaseResponse"
@@ -1217,6 +1344,13 @@ responseStopCrawler = res
     "fixture/StopCrawlerResponse.proto"
     glue
     (Proxy :: Proxy StopCrawler)
+
+responseDeleteSecurityConfiguration :: DeleteSecurityConfigurationResponse -> TestTree
+responseDeleteSecurityConfiguration = res
+    "DeleteSecurityConfigurationResponse"
+    "fixture/DeleteSecurityConfigurationResponse.proto"
+    glue
+    (Proxy :: Proxy DeleteSecurityConfiguration)
 
 responseGetPartitions :: GetPartitionsResponse -> TestTree
 responseGetPartitions = res
@@ -1330,6 +1464,13 @@ responseCreateDevEndpoint = res
     glue
     (Proxy :: Proxy CreateDevEndpoint)
 
+responsePutDataCatalogEncryptionSettings :: PutDataCatalogEncryptionSettingsResponse -> TestTree
+responsePutDataCatalogEncryptionSettings = res
+    "PutDataCatalogEncryptionSettingsResponse"
+    "fixture/PutDataCatalogEncryptionSettingsResponse.proto"
+    glue
+    (Proxy :: Proxy PutDataCatalogEncryptionSettings)
+
 responseGetDatabase :: GetDatabaseResponse -> TestTree
 responseGetDatabase = res
     "GetDatabaseResponse"
@@ -1357,6 +1498,27 @@ responseCreateScript = res
     "fixture/CreateScriptResponse.proto"
     glue
     (Proxy :: Proxy CreateScript)
+
+responsePutResourcePolicy :: PutResourcePolicyResponse -> TestTree
+responsePutResourcePolicy = res
+    "PutResourcePolicyResponse"
+    "fixture/PutResourcePolicyResponse.proto"
+    glue
+    (Proxy :: Proxy PutResourcePolicy)
+
+responseGetSecurityConfigurations :: GetSecurityConfigurationsResponse -> TestTree
+responseGetSecurityConfigurations = res
+    "GetSecurityConfigurationsResponse"
+    "fixture/GetSecurityConfigurationsResponse.proto"
+    glue
+    (Proxy :: Proxy GetSecurityConfigurations)
+
+responseDeleteResourcePolicy :: DeleteResourcePolicyResponse -> TestTree
+responseDeleteResourcePolicy = res
+    "DeleteResourcePolicyResponse"
+    "fixture/DeleteResourcePolicyResponse.proto"
+    glue
+    (Proxy :: Proxy DeleteResourcePolicy)
 
 responseGetConnections :: GetConnectionsResponse -> TestTree
 responseGetConnections = res

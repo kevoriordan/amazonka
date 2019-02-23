@@ -79,8 +79,6 @@ instance NFData AWSCredentials where
 -- | Properties describing a fleet alias.
 --
 --
--- Alias-related operations include:
---
 --     * 'CreateAlias'
 --
 --     * 'ListAliases'
@@ -253,8 +251,6 @@ instance ToJSON AttributeValue where
 -- | Properties describing a game build.
 --
 --
--- Build-related operations include:
---
 --     * 'CreateBuild'
 --
 --     * 'ListBuilds'
@@ -400,8 +396,6 @@ instance ToJSON DesiredPlayerSession where
 
 -- | Current status of fleet capacity. The number of active instances should match or be in the process of matching the number of desired instances. Pending and terminating counts are non-zero only if fleet capacity is adjusting to an 'UpdateFleetCapacity' request, or if access to resources is temporarily affected.
 --
---
--- Fleet-related operations include:
 --
 --     * 'CreateFleet'
 --
@@ -620,7 +614,7 @@ data Event = Event'
 --
 -- * 'eMessage' - Additional information related to the event.
 --
--- * 'eEventCode' - Type of event being logged. The following events are currently in use: __Fleet creation events:__      * FLEET_CREATED -- A fleet record was successfully created with a status of @NEW@ . Event messaging includes the fleet ID.     * FLEET_STATE_DOWNLOADING -- Fleet status changed from @NEW@ to @DOWNLOADING@ . The compressed build has started downloading to a fleet instance for installation.     * FLEET_BINARY_DOWNLOAD_FAILED -- The build failed to download to the fleet instance.     * FLEET_CREATION_EXTRACTING_BUILD – The game server build was successfully downloaded to an instance, and the build files are now being extracted from the uploaded build and saved to an instance. Failure at this stage prevents a fleet from moving to @ACTIVE@ status. Logs for this stage display a list of the files that are extracted and saved on the instance. Access the logs by using the URL in /PreSignedLogUrl/ .     * FLEET_CREATION_RUNNING_INSTALLER – The game server build files were successfully extracted, and the Amazon GameLift is now running the build's install script (if one is included). Failure in this stage prevents a fleet from moving to @ACTIVE@ status. Logs for this stage list the installation steps and whether or not the install completed successfully. Access the logs by using the URL in /PreSignedLogUrl/ .      * FLEET_CREATION_VALIDATING_RUNTIME_CONFIG -- The build process was successful, and the Amazon GameLift is now verifying that the game server launch paths, which are specified in the fleet's run-time configuration, exist. If any listed launch path exists, Amazon GameLift tries to launch a game server process and waits for the process to report ready. Failures in this stage prevent a fleet from moving to @ACTIVE@ status. Logs for this stage list the launch paths in the run-time configuration and indicate whether each is found. Access the logs by using the URL in /PreSignedLogUrl/ .      * FLEET_STATE_VALIDATING -- Fleet status changed from @DOWNLOADING@ to @VALIDATING@ .     * FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND -- Validation of the run-time configuration failed because the executable specified in a launch path does not exist on the instance.     * FLEET_STATE_BUILDING -- Fleet status changed from @VALIDATING@ to @BUILDING@ .     * FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE -- Validation of the run-time configuration failed because the executable specified in a launch path failed to run on the fleet instance.     * FLEET_STATE_ACTIVATING -- Fleet status changed from @BUILDING@ to @ACTIVATING@ .      * FLEET_ACTIVATION_FAILED - The fleet failed to successfully complete one of the steps in the fleet activation process. This event code indicates that the game build was successfully downloaded to a fleet instance, built, and validated, but was not able to start a server process. A possible reason for failure is that the game server is not reporting "process ready" to the Amazon GameLift service.     * FLEET_STATE_ACTIVE -- The fleet's status changed from @ACTIVATING@ to @ACTIVE@ . The fleet is now ready to host game sessions. __VPC peering events:__      * FLEET_VPC_PEERING_SUCCEEDED -- A VPC peering connection has been established between the VPC for an Amazon GameLift fleet and a VPC in your AWS account.     * FLEET_VPC_PEERING_FAILED -- A requested VPC peering connection has failed. Event details and status information (see 'DescribeVpcPeeringConnections' ) provide additional detail. A common reason for peering failure is that the two VPCs have overlapping CIDR blocks of IPv4 addresses. To resolve this, change the CIDR block for the VPC in your AWS account. For more information on VPC peering failures, see <http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html>      * FLEET_VPC_PEERING_DELETED -- A VPC peering connection has been successfully deleted. __Spot instance events:__      * INSTANCE_INTERRUPTED -- A spot instance was interrupted by EC2 with a two-minute notification. __Other fleet events:__      * FLEET_SCALING_EVENT -- A change was made to the fleet's capacity settings (desired instances, minimum/maximum scaling limits). Event messaging includes the new capacity settings.     * FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED -- A change was made to the fleet's game session protection policy setting. Event messaging includes both the old and new policy setting.      * FLEET_DELETED -- A request to delete a fleet was initiated.     * GENERIC_EVENT -- An unspecified event has occurred.
+-- * 'eEventCode' - Type of event being logged. The following events are currently in use: __Fleet creation events:__      * FLEET_CREATED -- A fleet record was successfully created with a status of @NEW@ . Event messaging includes the fleet ID.     * FLEET_STATE_DOWNLOADING -- Fleet status changed from @NEW@ to @DOWNLOADING@ . The compressed build has started downloading to a fleet instance for installation.     * FLEET_BINARY_DOWNLOAD_FAILED -- The build failed to download to the fleet instance.     * FLEET_CREATION_EXTRACTING_BUILD – The game server build was successfully downloaded to an instance, and the build files are now being extracted from the uploaded build and saved to an instance. Failure at this stage prevents a fleet from moving to @ACTIVE@ status. Logs for this stage display a list of the files that are extracted and saved on the instance. Access the logs by using the URL in /PreSignedLogUrl/ .     * FLEET_CREATION_RUNNING_INSTALLER – The game server build files were successfully extracted, and the Amazon GameLift is now running the build's install script (if one is included). Failure in this stage prevents a fleet from moving to @ACTIVE@ status. Logs for this stage list the installation steps and whether or not the install completed successfully. Access the logs by using the URL in /PreSignedLogUrl/ .      * FLEET_CREATION_VALIDATING_RUNTIME_CONFIG -- The build process was successful, and the Amazon GameLift is now verifying that the game server launch paths, which are specified in the fleet's run-time configuration, exist. If any listed launch path exists, Amazon GameLift tries to launch a game server process and waits for the process to report ready. Failures in this stage prevent a fleet from moving to @ACTIVE@ status. Logs for this stage list the launch paths in the run-time configuration and indicate whether each is found. Access the logs by using the URL in /PreSignedLogUrl/ .      * FLEET_STATE_VALIDATING -- Fleet status changed from @DOWNLOADING@ to @VALIDATING@ .     * FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND -- Validation of the run-time configuration failed because the executable specified in a launch path does not exist on the instance.     * FLEET_STATE_BUILDING -- Fleet status changed from @VALIDATING@ to @BUILDING@ .     * FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE -- Validation of the run-time configuration failed because the executable specified in a launch path failed to run on the fleet instance.     * FLEET_STATE_ACTIVATING -- Fleet status changed from @BUILDING@ to @ACTIVATING@ .      * FLEET_ACTIVATION_FAILED - The fleet failed to successfully complete one of the steps in the fleet activation process. This event code indicates that the game build was successfully downloaded to a fleet instance, built, and validated, but was not able to start a server process. A possible reason for failure is that the game server is not reporting "process ready" to the Amazon GameLift service.     * FLEET_STATE_ACTIVE -- The fleet's status changed from @ACTIVATING@ to @ACTIVE@ . The fleet is now ready to host game sessions. __VPC peering events:__      * FLEET_VPC_PEERING_SUCCEEDED -- A VPC peering connection has been established between the VPC for an Amazon GameLift fleet and a VPC in your AWS account.     * FLEET_VPC_PEERING_FAILED -- A requested VPC peering connection has failed. Event details and status information (see 'DescribeVpcPeeringConnections' ) provide additional detail. A common reason for peering failure is that the two VPCs have overlapping CIDR blocks of IPv4 addresses. To resolve this, change the CIDR block for the VPC in your AWS account. For more information on VPC peering failures, see <https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html>      * FLEET_VPC_PEERING_DELETED -- A VPC peering connection has been successfully deleted. __Spot instance events:__      * INSTANCE_INTERRUPTED -- A spot instance was interrupted by EC2 with a two-minute notification. __Other fleet events:__      * FLEET_SCALING_EVENT -- A change was made to the fleet's capacity settings (desired instances, minimum/maximum scaling limits). Event messaging includes the new capacity settings.     * FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED -- A change was made to the fleet's game session protection policy setting. Event messaging includes both the old and new policy setting.      * FLEET_DELETED -- A request to delete a fleet was initiated.     * GENERIC_EVENT -- An unspecified event has occurred.
 --
 -- * 'eEventId' - Unique identifier for a fleet event.
 event
@@ -652,7 +646,7 @@ eEventTime = lens _eEventTime (\ s a -> s{_eEventTime = a}) . mapping _Time
 eMessage :: Lens' Event (Maybe Text)
 eMessage = lens _eMessage (\ s a -> s{_eMessage = a})
 
--- | Type of event being logged. The following events are currently in use: __Fleet creation events:__      * FLEET_CREATED -- A fleet record was successfully created with a status of @NEW@ . Event messaging includes the fleet ID.     * FLEET_STATE_DOWNLOADING -- Fleet status changed from @NEW@ to @DOWNLOADING@ . The compressed build has started downloading to a fleet instance for installation.     * FLEET_BINARY_DOWNLOAD_FAILED -- The build failed to download to the fleet instance.     * FLEET_CREATION_EXTRACTING_BUILD – The game server build was successfully downloaded to an instance, and the build files are now being extracted from the uploaded build and saved to an instance. Failure at this stage prevents a fleet from moving to @ACTIVE@ status. Logs for this stage display a list of the files that are extracted and saved on the instance. Access the logs by using the URL in /PreSignedLogUrl/ .     * FLEET_CREATION_RUNNING_INSTALLER – The game server build files were successfully extracted, and the Amazon GameLift is now running the build's install script (if one is included). Failure in this stage prevents a fleet from moving to @ACTIVE@ status. Logs for this stage list the installation steps and whether or not the install completed successfully. Access the logs by using the URL in /PreSignedLogUrl/ .      * FLEET_CREATION_VALIDATING_RUNTIME_CONFIG -- The build process was successful, and the Amazon GameLift is now verifying that the game server launch paths, which are specified in the fleet's run-time configuration, exist. If any listed launch path exists, Amazon GameLift tries to launch a game server process and waits for the process to report ready. Failures in this stage prevent a fleet from moving to @ACTIVE@ status. Logs for this stage list the launch paths in the run-time configuration and indicate whether each is found. Access the logs by using the URL in /PreSignedLogUrl/ .      * FLEET_STATE_VALIDATING -- Fleet status changed from @DOWNLOADING@ to @VALIDATING@ .     * FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND -- Validation of the run-time configuration failed because the executable specified in a launch path does not exist on the instance.     * FLEET_STATE_BUILDING -- Fleet status changed from @VALIDATING@ to @BUILDING@ .     * FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE -- Validation of the run-time configuration failed because the executable specified in a launch path failed to run on the fleet instance.     * FLEET_STATE_ACTIVATING -- Fleet status changed from @BUILDING@ to @ACTIVATING@ .      * FLEET_ACTIVATION_FAILED - The fleet failed to successfully complete one of the steps in the fleet activation process. This event code indicates that the game build was successfully downloaded to a fleet instance, built, and validated, but was not able to start a server process. A possible reason for failure is that the game server is not reporting "process ready" to the Amazon GameLift service.     * FLEET_STATE_ACTIVE -- The fleet's status changed from @ACTIVATING@ to @ACTIVE@ . The fleet is now ready to host game sessions. __VPC peering events:__      * FLEET_VPC_PEERING_SUCCEEDED -- A VPC peering connection has been established between the VPC for an Amazon GameLift fleet and a VPC in your AWS account.     * FLEET_VPC_PEERING_FAILED -- A requested VPC peering connection has failed. Event details and status information (see 'DescribeVpcPeeringConnections' ) provide additional detail. A common reason for peering failure is that the two VPCs have overlapping CIDR blocks of IPv4 addresses. To resolve this, change the CIDR block for the VPC in your AWS account. For more information on VPC peering failures, see <http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html http://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html>      * FLEET_VPC_PEERING_DELETED -- A VPC peering connection has been successfully deleted. __Spot instance events:__      * INSTANCE_INTERRUPTED -- A spot instance was interrupted by EC2 with a two-minute notification. __Other fleet events:__      * FLEET_SCALING_EVENT -- A change was made to the fleet's capacity settings (desired instances, minimum/maximum scaling limits). Event messaging includes the new capacity settings.     * FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED -- A change was made to the fleet's game session protection policy setting. Event messaging includes both the old and new policy setting.      * FLEET_DELETED -- A request to delete a fleet was initiated.     * GENERIC_EVENT -- An unspecified event has occurred.
+-- | Type of event being logged. The following events are currently in use: __Fleet creation events:__      * FLEET_CREATED -- A fleet record was successfully created with a status of @NEW@ . Event messaging includes the fleet ID.     * FLEET_STATE_DOWNLOADING -- Fleet status changed from @NEW@ to @DOWNLOADING@ . The compressed build has started downloading to a fleet instance for installation.     * FLEET_BINARY_DOWNLOAD_FAILED -- The build failed to download to the fleet instance.     * FLEET_CREATION_EXTRACTING_BUILD – The game server build was successfully downloaded to an instance, and the build files are now being extracted from the uploaded build and saved to an instance. Failure at this stage prevents a fleet from moving to @ACTIVE@ status. Logs for this stage display a list of the files that are extracted and saved on the instance. Access the logs by using the URL in /PreSignedLogUrl/ .     * FLEET_CREATION_RUNNING_INSTALLER – The game server build files were successfully extracted, and the Amazon GameLift is now running the build's install script (if one is included). Failure in this stage prevents a fleet from moving to @ACTIVE@ status. Logs for this stage list the installation steps and whether or not the install completed successfully. Access the logs by using the URL in /PreSignedLogUrl/ .      * FLEET_CREATION_VALIDATING_RUNTIME_CONFIG -- The build process was successful, and the Amazon GameLift is now verifying that the game server launch paths, which are specified in the fleet's run-time configuration, exist. If any listed launch path exists, Amazon GameLift tries to launch a game server process and waits for the process to report ready. Failures in this stage prevent a fleet from moving to @ACTIVE@ status. Logs for this stage list the launch paths in the run-time configuration and indicate whether each is found. Access the logs by using the URL in /PreSignedLogUrl/ .      * FLEET_STATE_VALIDATING -- Fleet status changed from @DOWNLOADING@ to @VALIDATING@ .     * FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND -- Validation of the run-time configuration failed because the executable specified in a launch path does not exist on the instance.     * FLEET_STATE_BUILDING -- Fleet status changed from @VALIDATING@ to @BUILDING@ .     * FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE -- Validation of the run-time configuration failed because the executable specified in a launch path failed to run on the fleet instance.     * FLEET_STATE_ACTIVATING -- Fleet status changed from @BUILDING@ to @ACTIVATING@ .      * FLEET_ACTIVATION_FAILED - The fleet failed to successfully complete one of the steps in the fleet activation process. This event code indicates that the game build was successfully downloaded to a fleet instance, built, and validated, but was not able to start a server process. A possible reason for failure is that the game server is not reporting "process ready" to the Amazon GameLift service.     * FLEET_STATE_ACTIVE -- The fleet's status changed from @ACTIVATING@ to @ACTIVE@ . The fleet is now ready to host game sessions. __VPC peering events:__      * FLEET_VPC_PEERING_SUCCEEDED -- A VPC peering connection has been established between the VPC for an Amazon GameLift fleet and a VPC in your AWS account.     * FLEET_VPC_PEERING_FAILED -- A requested VPC peering connection has failed. Event details and status information (see 'DescribeVpcPeeringConnections' ) provide additional detail. A common reason for peering failure is that the two VPCs have overlapping CIDR blocks of IPv4 addresses. To resolve this, change the CIDR block for the VPC in your AWS account. For more information on VPC peering failures, see <https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html>      * FLEET_VPC_PEERING_DELETED -- A VPC peering connection has been successfully deleted. __Spot instance events:__      * INSTANCE_INTERRUPTED -- A spot instance was interrupted by EC2 with a two-minute notification. __Other fleet events:__      * FLEET_SCALING_EVENT -- A change was made to the fleet's capacity settings (desired instances, minimum/maximum scaling limits). Event messaging includes the new capacity settings.     * FLEET_NEW_GAME_SESSION_PROTECTION_POLICY_UPDATED -- A change was made to the fleet's game session protection policy setting. Event messaging includes both the old and new policy setting.      * FLEET_DELETED -- A request to delete a fleet was initiated.     * GENERIC_EVENT -- An unspecified event has occurred.
 eEventCode :: Lens' Event (Maybe EventCode)
 eEventCode = lens _eEventCode (\ s a -> s{_eEventCode = a})
 
@@ -677,8 +671,6 @@ instance NFData Event where
 
 -- | General properties describing a fleet.
 --
---
--- Fleet-related operations include:
 --
 --     * 'CreateFleet'
 --
@@ -760,7 +752,7 @@ data FleetAttributes = FleetAttributes'
 --
 -- * 'faServerLaunchParameters' - Game server launch parameters specified for fleets created before 2016-08-04 (or AWS SDK v. 0.12.16). Server launch parameters for fleets created after this date are specified in the fleet's 'RuntimeConfiguration' .
 --
--- * 'faLogPaths' - Location of default log files. When a server process is shut down, Amazon GameLift captures and stores any log files in this location. These logs are in addition to game session logs; see more on game session logs in the <http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-api-server-code Amazon GameLift Developer Guide> . If no default log path for a fleet is specified, Amazon GameLift automatically uploads logs that are stored on each instance at @C:\game\logs@ (for Windows) or @/local/game/logs@ (for Linux). Use the Amazon GameLift console to access stored logs.
+-- * 'faLogPaths' - Location of default log files. When a server process is shut down, Amazon GameLift captures and stores any log files in this location. These logs are in addition to game session logs; see more on game session logs in the <https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-api-server-code Amazon GameLift Developer Guide> . If no default log path for a fleet is specified, Amazon GameLift automatically uploads logs that are stored on each instance at @C:\game\logs@ (for Windows) or @/local/game/logs@ (for Linux). Use the Amazon GameLift console to access stored logs.
 --
 -- * 'faOperatingSystem' - Operating system of the fleet's computing resources. A fleet's operating system depends on the OS specified for the build that is deployed on this fleet.
 --
@@ -826,7 +818,7 @@ faStatus = lens _faStatus (\ s a -> s{_faStatus = a})
 faServerLaunchParameters :: Lens' FleetAttributes (Maybe Text)
 faServerLaunchParameters = lens _faServerLaunchParameters (\ s a -> s{_faServerLaunchParameters = a})
 
--- | Location of default log files. When a server process is shut down, Amazon GameLift captures and stores any log files in this location. These logs are in addition to game session logs; see more on game session logs in the <http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-api-server-code Amazon GameLift Developer Guide> . If no default log path for a fleet is specified, Amazon GameLift automatically uploads logs that are stored on each instance at @C:\game\logs@ (for Windows) or @/local/game/logs@ (for Linux). Use the Amazon GameLift console to access stored logs.
+-- | Location of default log files. When a server process is shut down, Amazon GameLift captures and stores any log files in this location. These logs are in addition to game session logs; see more on game session logs in the <https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-api-server-code Amazon GameLift Developer Guide> . If no default log path for a fleet is specified, Amazon GameLift automatically uploads logs that are stored on each instance at @C:\game\logs@ (for Windows) or @/local/game/logs@ (for Linux). Use the Amazon GameLift console to access stored logs.
 faLogPaths :: Lens' FleetAttributes [Text]
 faLogPaths = lens _faLogPaths (\ s a -> s{_faLogPaths = a}) . _Default . _Coerce
 
@@ -915,8 +907,6 @@ instance NFData FleetAttributes where
 
 -- | Information about the fleet's capacity. Fleet capacity is measured in EC2 instances. By default, new fleets have a capacity of one instance, but can be updated as needed. The maximum number of instances for a fleet is determined by the fleet's instance type.
 --
---
--- Fleet-related operations include:
 --
 --     * 'CreateFleet'
 --
@@ -1018,8 +1008,6 @@ instance NFData FleetCapacity where
 
 -- | Current status of fleet utilization, including the number of game and player sessions being hosted.
 --
---
--- Fleet-related operations include:
 --
 --     * 'CreateFleet'
 --
@@ -1138,7 +1126,7 @@ instance Hashable FleetUtilization where
 
 instance NFData FleetUtilization where
 
--- | Set of key-value pairs that contain information about a game session. When included in a game session request, these properties communicate details to be used when setting up the new game session, such as to specify a game mode, level, or map. Game properties are passed to the game server process when initiating a new game session; the server process uses the properties as appropriate. For more information, see the <http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#gamelift-sdk-client-api-create Amazon GameLift Developer Guide> .
+-- | Set of key-value pairs that contain information about a game session. When included in a game session request, these properties communicate details to be used when setting up the new game session, such as to specify a game mode, level, or map. Game properties are passed to the game server process when initiating a new game session; the server process uses the properties as appropriate. For more information, see the <https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#gamelift-sdk-client-api-create Amazon GameLift Developer Guide> .
 --
 --
 --
@@ -1194,8 +1182,6 @@ instance ToJSON GameProperty where
 --
 -- Once the session ends, the game session object is retained for 30 days. This means you can reuse idempotency token values after this time. Game session logs are retained for 14 days.
 --
--- Game-session-related operations include:
---
 --     * 'CreateGameSession'
 --
 --     * 'DescribeGameSessions'
@@ -1250,13 +1236,13 @@ data GameSession = GameSession'
 --
 -- * 'gsStatus' - Current status of the game session. A game session must have an @ACTIVE@ status to have player sessions.
 --
--- * 'gsGameProperties' - Set of custom properties for a game session, formatted as key:value pairs. These properties are passed to a game server process in the 'GameSession' object with a request to start a new game session (see <http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ). You can search for active game sessions based on this custom data with 'SearchGameSessions' .
+-- * 'gsGameProperties' - Set of custom properties for a game session, formatted as key:value pairs. These properties are passed to a game server process in the 'GameSession' object with a request to start a new game session (see <https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ). You can search for active game sessions based on this custom data with 'SearchGameSessions' .
 --
 -- * 'gsIPAddress' - IP address of the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number.
 --
 -- * 'gsGameSessionId' - Unique identifier for the game session. A game session ARN has the following format: @arn:aws:gamelift:<region>::gamesession/<fleet ID>/<custom ID string or idempotency token>@ .
 --
--- * 'gsMatchmakerData' - Information about the matchmaking process that was used to create the game session. It is in JSON syntax, formatted as a string. In addition the matchmaking configuration used, it contains data on all players assigned to the match, including player attributes and team assignments. For more details on matchmaker data, see <http://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data Match Data> . Matchmaker data is useful when requesting match backfills, and is updated whenever new players are added during a successful backfill (see 'StartMatchBackfill' ).
+-- * 'gsMatchmakerData' - Information about the matchmaking process that was used to create the game session. It is in JSON syntax, formatted as a string. In addition the matchmaking configuration used, it contains data on all players assigned to the match, including player attributes and team assignments. For more details on matchmaker data, see <https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data Match Data> . Matchmaker data is useful when requesting match backfills, and is updated whenever new players are added during a successful backfill (see 'StartMatchBackfill' ).
 --
 -- * 'gsMaximumPlayerSessionCount' - Maximum number of players that can be connected simultaneously to the game session.
 --
@@ -1270,7 +1256,7 @@ data GameSession = GameSession'
 --
 -- * 'gsStatusReason' - Provides additional information about game session status. @INTERRUPTED@ indicates that the game session was hosted on a spot instance that was reclaimed, causing the active game session to be terminated.
 --
--- * 'gsGameSessionData' - Set of custom game session properties, formatted as a single string value. This data is passed to a game server process in the 'GameSession' object with a request to start a new game session (see <http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ).
+-- * 'gsGameSessionData' - Set of custom game session properties, formatted as a single string value. This data is passed to a game server process in the 'GameSession' object with a request to start a new game session (see <https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ).
 --
 -- * 'gsFleetId' - Unique identifier for a fleet that the game session is running on.
 --
@@ -1308,7 +1294,7 @@ gsCreationTime = lens _gsCreationTime (\ s a -> s{_gsCreationTime = a}) . mappin
 gsStatus :: Lens' GameSession (Maybe GameSessionStatus)
 gsStatus = lens _gsStatus (\ s a -> s{_gsStatus = a})
 
--- | Set of custom properties for a game session, formatted as key:value pairs. These properties are passed to a game server process in the 'GameSession' object with a request to start a new game session (see <http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ). You can search for active game sessions based on this custom data with 'SearchGameSessions' .
+-- | Set of custom properties for a game session, formatted as key:value pairs. These properties are passed to a game server process in the 'GameSession' object with a request to start a new game session (see <https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ). You can search for active game sessions based on this custom data with 'SearchGameSessions' .
 gsGameProperties :: Lens' GameSession [GameProperty]
 gsGameProperties = lens _gsGameProperties (\ s a -> s{_gsGameProperties = a}) . _Default . _Coerce
 
@@ -1320,7 +1306,7 @@ gsIPAddress = lens _gsIPAddress (\ s a -> s{_gsIPAddress = a})
 gsGameSessionId :: Lens' GameSession (Maybe Text)
 gsGameSessionId = lens _gsGameSessionId (\ s a -> s{_gsGameSessionId = a})
 
--- | Information about the matchmaking process that was used to create the game session. It is in JSON syntax, formatted as a string. In addition the matchmaking configuration used, it contains data on all players assigned to the match, including player attributes and team assignments. For more details on matchmaker data, see <http://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data Match Data> . Matchmaker data is useful when requesting match backfills, and is updated whenever new players are added during a successful backfill (see 'StartMatchBackfill' ).
+-- | Information about the matchmaking process that was used to create the game session. It is in JSON syntax, formatted as a string. In addition the matchmaking configuration used, it contains data on all players assigned to the match, including player attributes and team assignments. For more details on matchmaker data, see <https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data Match Data> . Matchmaker data is useful when requesting match backfills, and is updated whenever new players are added during a successful backfill (see 'StartMatchBackfill' ).
 gsMatchmakerData :: Lens' GameSession (Maybe Text)
 gsMatchmakerData = lens _gsMatchmakerData (\ s a -> s{_gsMatchmakerData = a})
 
@@ -1348,7 +1334,7 @@ gsCurrentPlayerSessionCount = lens _gsCurrentPlayerSessionCount (\ s a -> s{_gsC
 gsStatusReason :: Lens' GameSession (Maybe GameSessionStatusReason)
 gsStatusReason = lens _gsStatusReason (\ s a -> s{_gsStatusReason = a})
 
--- | Set of custom game session properties, formatted as a single string value. This data is passed to a game server process in the 'GameSession' object with a request to start a new game session (see <http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ).
+-- | Set of custom game session properties, formatted as a single string value. This data is passed to a game server process in the 'GameSession' object with a request to start a new game session (see <https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ).
 gsGameSessionData :: Lens' GameSession (Maybe Text)
 gsGameSessionData = lens _gsGameSessionData (\ s a -> s{_gsGameSessionData = a})
 
@@ -1410,7 +1396,7 @@ data GameSessionConnectionInfo = GameSessionConnectionInfo'
 --
 -- * 'gsciIPAddress' - IP address of the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number.
 --
--- * 'gsciGameSessionARN' - Amazon Resource Name (<http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html ARN> ) that is assigned to a game session and uniquely identifies it.
+-- * 'gsciGameSessionARN' - Amazon Resource Name (<https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html ARN> ) that is assigned to a game session and uniquely identifies it.
 --
 -- * 'gsciPort' - Port number for the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number.
 gameSessionConnectionInfo
@@ -1432,7 +1418,7 @@ gsciMatchedPlayerSessions = lens _gsciMatchedPlayerSessions (\ s a -> s{_gsciMat
 gsciIPAddress :: Lens' GameSessionConnectionInfo (Maybe Text)
 gsciIPAddress = lens _gsciIPAddress (\ s a -> s{_gsciIPAddress = a})
 
--- | Amazon Resource Name (<http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html ARN> ) that is assigned to a game session and uniquely identifies it.
+-- | Amazon Resource Name (<https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html ARN> ) that is assigned to a game session and uniquely identifies it.
 gsciGameSessionARN :: Lens' GameSessionConnectionInfo (Maybe Text)
 gsciGameSessionARN = lens _gsciGameSessionARN (\ s a -> s{_gsciGameSessionARN = a})
 
@@ -1541,7 +1527,7 @@ data GameSessionPlacement = GameSessionPlacement'
 --
 -- * 'gspPlacementId' - Unique identifier for a game session placement.
 --
--- * 'gspGameProperties' - Set of custom properties for a game session, formatted as key:value pairs. These properties are passed to a game server process in the 'GameSession' object with a request to start a new game session (see <http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ).
+-- * 'gspGameProperties' - Set of custom properties for a game session, formatted as key:value pairs. These properties are passed to a game server process in the 'GameSession' object with a request to start a new game session (see <https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ).
 --
 -- * 'gspIPAddress' - IP address of the game session. To connect to a Amazon GameLift game server, an app needs both the IP address and port number. This value is set once the new game session is placed (placement status is @FULFILLED@ ).
 --
@@ -1553,7 +1539,7 @@ data GameSessionPlacement = GameSessionPlacement'
 --
 -- * 'gspGameSessionRegion' - Name of the region where the game session created by this placement request is running. This value is set once the new game session is placed (placement status is @FULFILLED@ ).
 --
--- * 'gspMatchmakerData' - Information on the matchmaking process for this game. Data is in JSON syntax, formatted as a string. It identifies the matchmaking configuration used to create the match, and contains data on all players assigned to the match, including player attributes and team assignments. For more details on matchmaker data, see <http://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data Match Data> .
+-- * 'gspMatchmakerData' - Information on the matchmaking process for this game. Data is in JSON syntax, formatted as a string. It identifies the matchmaking configuration used to create the match, and contains data on all players assigned to the match, including player attributes and team assignments. For more details on matchmaker data, see <https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data Match Data> .
 --
 -- * 'gspMaximumPlayerSessionCount' - Maximum number of players that can be connected simultaneously to the game session.
 --
@@ -1563,7 +1549,7 @@ data GameSessionPlacement = GameSessionPlacement'
 --
 -- * 'gspPlayerLatencies' - Set of values, expressed in milliseconds, indicating the amount of latency that a player experiences when connected to AWS regions.
 --
--- * 'gspGameSessionData' - Set of custom game session properties, formatted as a single string value. This data is passed to a game server process in the 'GameSession' object with a request to start a new game session (see <http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ).
+-- * 'gspGameSessionData' - Set of custom game session properties, formatted as a single string value. This data is passed to a game server process in the 'GameSession' object with a request to start a new game session (see <https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ).
 --
 -- * 'gspGameSessionQueueName' - Descriptive label that is associated with game session queue. Queue names must be unique within each region.
 --
@@ -1602,7 +1588,7 @@ gspStatus = lens _gspStatus (\ s a -> s{_gspStatus = a})
 gspPlacementId :: Lens' GameSessionPlacement (Maybe Text)
 gspPlacementId = lens _gspPlacementId (\ s a -> s{_gspPlacementId = a})
 
--- | Set of custom properties for a game session, formatted as key:value pairs. These properties are passed to a game server process in the 'GameSession' object with a request to start a new game session (see <http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ).
+-- | Set of custom properties for a game session, formatted as key:value pairs. These properties are passed to a game server process in the 'GameSession' object with a request to start a new game session (see <https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ).
 gspGameProperties :: Lens' GameSessionPlacement [GameProperty]
 gspGameProperties = lens _gspGameProperties (\ s a -> s{_gspGameProperties = a}) . _Default . _Coerce
 
@@ -1626,7 +1612,7 @@ gspGameSessionId = lens _gspGameSessionId (\ s a -> s{_gspGameSessionId = a})
 gspGameSessionRegion :: Lens' GameSessionPlacement (Maybe Text)
 gspGameSessionRegion = lens _gspGameSessionRegion (\ s a -> s{_gspGameSessionRegion = a})
 
--- | Information on the matchmaking process for this game. Data is in JSON syntax, formatted as a string. It identifies the matchmaking configuration used to create the match, and contains data on all players assigned to the match, including player attributes and team assignments. For more details on matchmaker data, see <http://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data Match Data> .
+-- | Information on the matchmaking process for this game. Data is in JSON syntax, formatted as a string. It identifies the matchmaking configuration used to create the match, and contains data on all players assigned to the match, including player attributes and team assignments. For more details on matchmaker data, see <https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data Match Data> .
 gspMatchmakerData :: Lens' GameSessionPlacement (Maybe Text)
 gspMatchmakerData = lens _gspMatchmakerData (\ s a -> s{_gspMatchmakerData = a})
 
@@ -1646,7 +1632,7 @@ gspGameSessionARN = lens _gspGameSessionARN (\ s a -> s{_gspGameSessionARN = a})
 gspPlayerLatencies :: Lens' GameSessionPlacement [PlayerLatency]
 gspPlayerLatencies = lens _gspPlayerLatencies (\ s a -> s{_gspPlayerLatencies = a}) . _Default . _Coerce
 
--- | Set of custom game session properties, formatted as a single string value. This data is passed to a game server process in the 'GameSession' object with a request to start a new game session (see <http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ).
+-- | Set of custom game session properties, formatted as a single string value. This data is passed to a game server process in the 'GameSession' object with a request to start a new game session (see <https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ).
 gspGameSessionData :: Lens' GameSessionPlacement (Maybe Text)
 gspGameSessionData = lens _gspGameSessionData (\ s a -> s{_gspGameSessionData = a})
 
@@ -1699,8 +1685,6 @@ instance NFData GameSessionPlacement where
 --
 --
 --
--- Queue-related operations include:
---
 --     * 'CreateGameSessionQueue'
 --
 --     * 'DescribeGameSessionQueues'
@@ -1726,7 +1710,7 @@ data GameSessionQueue = GameSessionQueue'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gsqGameSessionQueueARN' - Amazon Resource Name (<http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html ARN> ) that is assigned to a game session queue and uniquely identifies it. Format is @arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912@ .
+-- * 'gsqGameSessionQueueARN' - Amazon Resource Name (<https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html ARN> ) that is assigned to a game session queue and uniquely identifies it. Format is @arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912@ .
 --
 -- * 'gsqPlayerLatencyPolicies' - Collection of latency policies to apply when processing game sessions placement requests with player latency information. Multiple policies are evaluated in order of the maximum latency value, starting with the lowest latency values. With just one policy, it is enforced at the start of the game session placement for the duration period. With multiple policies, each policy is enforced consecutively for its duration period. For example, a queue might enforce a 60-second policy followed by a 120-second policy, and then no policy for the remainder of the placement.
 --
@@ -1747,7 +1731,7 @@ gameSessionQueue =
     }
 
 
--- | Amazon Resource Name (<http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html ARN> ) that is assigned to a game session queue and uniquely identifies it. Format is @arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912@ .
+-- | Amazon Resource Name (<https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html ARN> ) that is assigned to a game session queue and uniquely identifies it. Format is @arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912@ .
 gsqGameSessionQueueARN :: Lens' GameSessionQueue (Maybe Text)
 gsqGameSessionQueueARN = lens _gsqGameSessionQueueARN (\ s a -> s{_gsqGameSessionQueueARN = a})
 
@@ -1784,8 +1768,6 @@ instance NFData GameSessionQueue where
 
 -- | Fleet designated in a game session queue. Requests for new game sessions in the queue are fulfilled by starting a new game session on any destination configured for a queue.
 --
---
--- Queue-related operations include:
 --
 --     * 'CreateGameSessionQueue'
 --
@@ -2193,7 +2175,7 @@ data MatchmakingConfiguration = MatchmakingConfiguration'
 --
 -- * 'mcCreationTime' - Time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
 --
--- * 'mcGameProperties' - Set of custom properties for a game session, formatted as key:value pairs. These properties are passed to a game server process in the 'GameSession' object with a request to start a new game session (see <http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ). This information is added to the new 'GameSession' object that is created for a successful match.
+-- * 'mcGameProperties' - Set of custom properties for a game session, formatted as key:value pairs. These properties are passed to a game server process in the 'GameSession' object with a request to start a new game session (see <https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ). This information is added to the new 'GameSession' object that is created for a successful match.
 --
 -- * 'mcRuleSetName' - Unique identifier for a matchmaking rule set to use with this configuration. A matchmaking configuration can only use rule sets that are defined in the same region.
 --
@@ -2203,7 +2185,7 @@ data MatchmakingConfiguration = MatchmakingConfiguration'
 --
 -- * 'mcNotificationTarget' - SNS topic ARN that is set up to receive matchmaking notifications.
 --
--- * 'mcGameSessionQueueARNs' - Amazon Resource Name (<http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html ARN> ) that is assigned to a game session queue and uniquely identifies it. Format is @arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912@ . These queues are used when placing game sessions for matches that are created with this matchmaking configuration. Queues can be located in any region.
+-- * 'mcGameSessionQueueARNs' - Amazon Resource Name (<https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html ARN> ) that is assigned to a game session queue and uniquely identifies it. Format is @arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912@ . These queues are used when placing game sessions for matches that are created with this matchmaking configuration. Queues can be located in any region.
 --
 -- * 'mcName' - Unique identifier for a matchmaking configuration. This name is used to identify the configuration associated with a matchmaking request or ticket.
 --
@@ -2211,7 +2193,7 @@ data MatchmakingConfiguration = MatchmakingConfiguration'
 --
 -- * 'mcAcceptanceRequired' - Flag that determines whether or not a match that was created with this configuration must be accepted by the matched players. To require acceptance, set to TRUE.
 --
--- * 'mcGameSessionData' - Set of custom game session properties, formatted as a single string value. This data is passed to a game server process in the 'GameSession' object with a request to start a new game session (see <http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ). This information is added to the new 'GameSession' object that is created for a successful match.
+-- * 'mcGameSessionData' - Set of custom game session properties, formatted as a single string value. This data is passed to a game server process in the 'GameSession' object with a request to start a new game session (see <https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ). This information is added to the new 'GameSession' object that is created for a successful match.
 --
 -- * 'mcDescription' - Descriptive label that is associated with matchmaking configuration.
 --
@@ -2240,7 +2222,7 @@ matchmakingConfiguration =
 mcCreationTime :: Lens' MatchmakingConfiguration (Maybe UTCTime)
 mcCreationTime = lens _mcCreationTime (\ s a -> s{_mcCreationTime = a}) . mapping _Time
 
--- | Set of custom properties for a game session, formatted as key:value pairs. These properties are passed to a game server process in the 'GameSession' object with a request to start a new game session (see <http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ). This information is added to the new 'GameSession' object that is created for a successful match.
+-- | Set of custom properties for a game session, formatted as key:value pairs. These properties are passed to a game server process in the 'GameSession' object with a request to start a new game session (see <https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ). This information is added to the new 'GameSession' object that is created for a successful match.
 mcGameProperties :: Lens' MatchmakingConfiguration [GameProperty]
 mcGameProperties = lens _mcGameProperties (\ s a -> s{_mcGameProperties = a}) . _Default . _Coerce
 
@@ -2260,7 +2242,7 @@ mcRequestTimeoutSeconds = lens _mcRequestTimeoutSeconds (\ s a -> s{_mcRequestTi
 mcNotificationTarget :: Lens' MatchmakingConfiguration (Maybe Text)
 mcNotificationTarget = lens _mcNotificationTarget (\ s a -> s{_mcNotificationTarget = a})
 
--- | Amazon Resource Name (<http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html ARN> ) that is assigned to a game session queue and uniquely identifies it. Format is @arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912@ . These queues are used when placing game sessions for matches that are created with this matchmaking configuration. Queues can be located in any region.
+-- | Amazon Resource Name (<https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html ARN> ) that is assigned to a game session queue and uniquely identifies it. Format is @arn:aws:gamelift:<region>::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912@ . These queues are used when placing game sessions for matches that are created with this matchmaking configuration. Queues can be located in any region.
 mcGameSessionQueueARNs :: Lens' MatchmakingConfiguration [Text]
 mcGameSessionQueueARNs = lens _mcGameSessionQueueARNs (\ s a -> s{_mcGameSessionQueueARNs = a}) . _Default . _Coerce
 
@@ -2276,7 +2258,7 @@ mcCustomEventData = lens _mcCustomEventData (\ s a -> s{_mcCustomEventData = a})
 mcAcceptanceRequired :: Lens' MatchmakingConfiguration (Maybe Bool)
 mcAcceptanceRequired = lens _mcAcceptanceRequired (\ s a -> s{_mcAcceptanceRequired = a})
 
--- | Set of custom game session properties, formatted as a single string value. This data is passed to a game server process in the 'GameSession' object with a request to start a new game session (see <http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ). This information is added to the new 'GameSession' object that is created for a successful match.
+-- | Set of custom game session properties, formatted as a single string value. This data is passed to a game server process in the 'GameSession' object with a request to start a new game session (see <https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession Start a Game Session> ). This information is added to the new 'GameSession' object that is created for a successful match.
 mcGameSessionData :: Lens' MatchmakingConfiguration (Maybe Text)
 mcGameSessionData = lens _mcGameSessionData (\ s a -> s{_mcGameSessionData = a})
 
@@ -2314,7 +2296,7 @@ instance NFData MatchmakingConfiguration where
 -- | Set of rule statements, used with FlexMatch, that determine how to build a certain kind of player match. Each rule set describes a type of group to be created and defines the parameters for acceptable player matches. Rule sets are used in 'MatchmakingConfiguration' objects.
 --
 --
--- A rule set may define the following elements for a match. For detailed information and examples showing how to construct a rule set, see <http://docs.aws.amazon.com/gamelift/latest/developerguide/match-rulesets.html Build a FlexMatch Rule Set> .
+-- A rule set may define the following elements for a match. For detailed information and examples showing how to construct a rule set, see <https://docs.aws.amazon.com/gamelift/latest/developerguide/match-rulesets.html Build a FlexMatch Rule Set> .
 --
 --     * Teams -- Required. A rule set must define one or multiple teams for the match and set minimum and maximum team sizes. For example, a rule set might describe a 4x4 match that requires all eight slots to be filled.
 --
@@ -2499,8 +2481,6 @@ instance NFData MatchmakingTicket where
 
 -- | Information about a player session that was created as part of a 'StartGameSessionPlacement' request. This object contains only the player ID and player session ID. To retrieve full details on a player session, call 'DescribePlayerSessions' with the player session ID.
 --
---
--- Player-session-related operations include:
 --
 --     * 'CreatePlayerSession'
 --
@@ -2702,8 +2682,6 @@ instance ToJSON PlayerLatency where
 -- | Queue setting that determines the highest latency allowed for individual players when placing a game session. When a latency policy is in force, a game session cannot be placed at any destination in a region where a player is reporting latency higher than the cap. Latency policies are only enforced when the placement request contains player latency information.
 --
 --
--- Queue-related operations include:
---
 --     * 'CreateGameSessionQueue'
 --
 --     * 'DescribeGameSessionQueues'
@@ -2771,8 +2749,6 @@ instance ToJSON PlayerLatencyPolicy where
 --
 --
 -- When a player disconnects, the player session status changes to @COMPLETED@ . Once the session ends, the player session object is retained for 30 days and then removed.
---
--- Player-session-related operations include:
 --
 --     * 'CreatePlayerSession'
 --
@@ -2968,8 +2944,6 @@ instance ToJSON ResourceCreationLimitPolicy where
 -- | Routing configuration for a fleet alias.
 --
 --
--- Fleet-related operations include:
---
 --     * 'CreateFleet'
 --
 --     * 'ListFleets'
@@ -3080,8 +3054,6 @@ instance ToJSON RoutingStrategy where
 --
 -- A Amazon GameLift instance is limited to 50 processes running simultaneously. A run-time configuration must specify fewer than this limit. To calculate the total number of processes specified in a run-time configuration, add the values of the @ConcurrentExecutions@ parameter for each @'ServerProcess' @ object in the run-time configuration.
 --
--- Fleet-related operations include:
---
 --     * 'CreateFleet'
 --
 --     * 'ListFleets'
@@ -3191,7 +3163,7 @@ instance ToJSON RuntimeConfiguration where
                   ("MaxConcurrentGameSessionActivations" .=) <$>
                     _rcMaxConcurrentGameSessionActivations])
 
--- | Location in Amazon Simple Storage Service (Amazon S3) where build files can be stored for access by Amazon GameLift. This location is specified in a 'CreateBuild' request. For more details, see the <http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build Create a Build with Files in Amazon S3> .
+-- | Location in Amazon Simple Storage Service (Amazon S3) where build files can be stored for access by Amazon GameLift. This location is specified in a 'CreateBuild' request. For more details, see the <https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build Create a Build with Files in Amazon S3> .
 --
 --
 --
@@ -3211,7 +3183,7 @@ data S3Location = S3Location'
 --
 -- * 'slKey' - Name of the zip file containing your build files.
 --
--- * 'slRoleARN' - Amazon Resource Name (<http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html ARN> ) for the access role that allows Amazon GameLift to access your S3 bucket.
+-- * 'slRoleARN' - Amazon Resource Name (<https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html ARN> ) for the access role that allows Amazon GameLift to access your S3 bucket.
 s3Location
     :: S3Location
 s3Location =
@@ -3226,7 +3198,7 @@ slBucket = lens _slBucket (\ s a -> s{_slBucket = a})
 slKey :: Lens' S3Location (Maybe Text)
 slKey = lens _slKey (\ s a -> s{_slKey = a})
 
--- | Amazon Resource Name (<http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html ARN> ) for the access role that allows Amazon GameLift to access your S3 bucket.
+-- | Amazon Resource Name (<https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html ARN> ) for the access role that allows Amazon GameLift to access your S3 bucket.
 slRoleARN :: Lens' S3Location (Maybe Text)
 slRoleARN = lens _slRoleARN (\ s a -> s{_slRoleARN = a})
 
@@ -3251,8 +3223,6 @@ instance ToJSON S3Location where
 
 -- | Rule that controls how a fleet is scaled. Scaling policies are uniquely identified by the combination of name and fleet ID.
 --
---
--- Operations related to fleet capacity scaling include:
 --
 --     * 'DescribeFleetCapacity'
 --
@@ -3309,7 +3279,7 @@ data ScalingPolicy = ScalingPolicy'
 --
 -- * 'spPolicyType' - Type of scaling policy to create. For a target-based policy, set the parameter /MetricName/ to 'PercentAvailableGameSessions' and specify a /TargetConfiguration/ . For a rule-based policy set the following parameters: /MetricName/ , /ComparisonOperator/ , /Threshold/ , /EvaluationPeriods/ , /ScalingAdjustmentType/ , and /ScalingAdjustment/ .
 --
--- * 'spMetricName' - Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment. For detailed descriptions of fleet metrics, see <http://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html Monitor Amazon GameLift with Amazon CloudWatch> .      * __ActivatingGameSessions__ -- Game sessions in the process of being created.     * __ActiveGameSessions__ -- Game sessions that are currently running.     * __ActiveInstances__ -- Fleet instances that are currently running at least one game session.     * __AvailableGameSessions__ -- Additional game sessions that fleet could host simultaneously, given current capacity.     * __AvailablePlayerSessions__ -- Empty player slots in currently active game sessions. This includes game sessions that are not currently accepting players. Reserved player slots are not included.     * __CurrentPlayerSessions__ -- Player slots in active game sessions that are being used by a player or are reserved for a player.      * __IdleInstances__ -- Active instances that are currently hosting zero game sessions.      * __PercentAvailableGameSessions__ -- Unused percentage of the total number of game sessions that a fleet could host simultaneously, given current capacity. Use this metric for a target-based scaling policy.     * __PercentIdleInstances__ -- Percentage of the total number of active instances that are hosting zero game sessions.     * __QueueDepth__ -- Pending game session placement requests, in any queue, where the current fleet is the top-priority destination.     * __WaitTime__ -- Current wait time for pending game session placement requests, in any queue, where the current fleet is the top-priority destination.
+-- * 'spMetricName' - Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment. For detailed descriptions of fleet metrics, see <https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html Monitor Amazon GameLift with Amazon CloudWatch> .      * __ActivatingGameSessions__ -- Game sessions in the process of being created.     * __ActiveGameSessions__ -- Game sessions that are currently running.     * __ActiveInstances__ -- Fleet instances that are currently running at least one game session.     * __AvailableGameSessions__ -- Additional game sessions that fleet could host simultaneously, given current capacity.     * __AvailablePlayerSessions__ -- Empty player slots in currently active game sessions. This includes game sessions that are not currently accepting players. Reserved player slots are not included.     * __CurrentPlayerSessions__ -- Player slots in active game sessions that are being used by a player or are reserved for a player.      * __IdleInstances__ -- Active instances that are currently hosting zero game sessions.      * __PercentAvailableGameSessions__ -- Unused percentage of the total number of game sessions that a fleet could host simultaneously, given current capacity. Use this metric for a target-based scaling policy.     * __PercentIdleInstances__ -- Percentage of the total number of active instances that are hosting zero game sessions.     * __QueueDepth__ -- Pending game session placement requests, in any queue, where the current fleet is the top-priority destination.     * __WaitTime__ -- Current wait time for pending game session placement requests, in any queue, where the current fleet is the top-priority destination.
 --
 -- * 'spComparisonOperator' - Comparison operator to use when measuring a metric against the threshold value.
 --
@@ -3356,7 +3326,7 @@ spEvaluationPeriods = lens _spEvaluationPeriods (\ s a -> s{_spEvaluationPeriods
 spPolicyType :: Lens' ScalingPolicy (Maybe PolicyType)
 spPolicyType = lens _spPolicyType (\ s a -> s{_spPolicyType = a})
 
--- | Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment. For detailed descriptions of fleet metrics, see <http://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html Monitor Amazon GameLift with Amazon CloudWatch> .      * __ActivatingGameSessions__ -- Game sessions in the process of being created.     * __ActiveGameSessions__ -- Game sessions that are currently running.     * __ActiveInstances__ -- Fleet instances that are currently running at least one game session.     * __AvailableGameSessions__ -- Additional game sessions that fleet could host simultaneously, given current capacity.     * __AvailablePlayerSessions__ -- Empty player slots in currently active game sessions. This includes game sessions that are not currently accepting players. Reserved player slots are not included.     * __CurrentPlayerSessions__ -- Player slots in active game sessions that are being used by a player or are reserved for a player.      * __IdleInstances__ -- Active instances that are currently hosting zero game sessions.      * __PercentAvailableGameSessions__ -- Unused percentage of the total number of game sessions that a fleet could host simultaneously, given current capacity. Use this metric for a target-based scaling policy.     * __PercentIdleInstances__ -- Percentage of the total number of active instances that are hosting zero game sessions.     * __QueueDepth__ -- Pending game session placement requests, in any queue, where the current fleet is the top-priority destination.     * __WaitTime__ -- Current wait time for pending game session placement requests, in any queue, where the current fleet is the top-priority destination.
+-- | Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment. For detailed descriptions of fleet metrics, see <https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html Monitor Amazon GameLift with Amazon CloudWatch> .      * __ActivatingGameSessions__ -- Game sessions in the process of being created.     * __ActiveGameSessions__ -- Game sessions that are currently running.     * __ActiveInstances__ -- Fleet instances that are currently running at least one game session.     * __AvailableGameSessions__ -- Additional game sessions that fleet could host simultaneously, given current capacity.     * __AvailablePlayerSessions__ -- Empty player slots in currently active game sessions. This includes game sessions that are not currently accepting players. Reserved player slots are not included.     * __CurrentPlayerSessions__ -- Player slots in active game sessions that are being used by a player or are reserved for a player.      * __IdleInstances__ -- Active instances that are currently hosting zero game sessions.      * __PercentAvailableGameSessions__ -- Unused percentage of the total number of game sessions that a fleet could host simultaneously, given current capacity. Use this metric for a target-based scaling policy.     * __PercentIdleInstances__ -- Percentage of the total number of active instances that are hosting zero game sessions.     * __QueueDepth__ -- Pending game session placement requests, in any queue, where the current fleet is the top-priority destination.     * __WaitTime__ -- Current wait time for pending game session placement requests, in any queue, where the current fleet is the top-priority destination.
 spMetricName :: Lens' ScalingPolicy (Maybe MetricName)
 spMetricName = lens _spMetricName (\ s a -> s{_spMetricName = a})
 
@@ -3473,8 +3443,6 @@ instance ToJSON ServerProcess where
 -- | Settings for a target-based scaling policy (see 'ScalingPolicy' . A target-based policy tracks a particular fleet metric specifies a target value for the metric. As player usage changes, the policy triggers Amazon GameLift to adjust capacity so that the metric returns to the target value. The target configuration specifies settings as needed for the target based policy, including the target value.
 --
 --
--- Operations related to fleet capacity scaling include:
---
 --     * 'DescribeFleetCapacity'
 --
 --     * 'UpdateFleetCapacity'
@@ -3542,8 +3510,6 @@ instance ToJSON TargetConfiguration where
 -- | Represents an authorization for a VPC peering connection between the VPC for an Amazon GameLift fleet and another VPC on an account you have access to. This authorization must exist and be valid for the peering connection to be established. Authorizations are valid for 24 hours after they are issued.
 --
 --
--- VPC peering connection operations include:
---
 --     * 'CreateVpcPeeringAuthorization'
 --
 --     * 'DescribeVpcPeeringAuthorizations'
@@ -3575,7 +3541,7 @@ data VPCPeeringAuthorization = VPCPeeringAuthorization'
 --
 -- * 'vpaCreationTime' - Time stamp indicating when this authorization was issued. Format is a number expressed in Unix time as milliseconds (for example "1469498468.057").
 --
--- * 'vpaPeerVPCId' - Unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The VPC must be in the same region where your fleet is deployed. To get VPC information, including IDs, use the Virtual Private Cloud service tools, including the VPC Dashboard in the AWS Management Console.
+-- * 'vpaPeerVPCId' - Unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The VPC must be in the same region where your fleet is deployed. Look up a VPC ID using the <https://console.aws.amazon.com/vpc/ VPC Dashboard> in the AWS Management Console. Learn more about VPC peering in <https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html VPC Peering with Amazon GameLift Fleets> .
 --
 -- * 'vpaPeerVPCAWSAccountId' -
 --
@@ -3598,7 +3564,7 @@ vpcPeeringAuthorization =
 vpaCreationTime :: Lens' VPCPeeringAuthorization (Maybe UTCTime)
 vpaCreationTime = lens _vpaCreationTime (\ s a -> s{_vpaCreationTime = a}) . mapping _Time
 
--- | Unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The VPC must be in the same region where your fleet is deployed. To get VPC information, including IDs, use the Virtual Private Cloud service tools, including the VPC Dashboard in the AWS Management Console.
+-- | Unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The VPC must be in the same region where your fleet is deployed. Look up a VPC ID using the <https://console.aws.amazon.com/vpc/ VPC Dashboard> in the AWS Management Console. Learn more about VPC peering in <https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html VPC Peering with Amazon GameLift Fleets> .
 vpaPeerVPCId :: Lens' VPCPeeringAuthorization (Maybe Text)
 vpaPeerVPCId = lens _vpaPeerVPCId (\ s a -> s{_vpaPeerVPCId = a})
 
@@ -3630,8 +3596,6 @@ instance NFData VPCPeeringAuthorization where
 
 -- | Represents a peering connection between a VPC on one of your AWS accounts and the VPC for your Amazon GameLift fleets. This record may be for an active peering connection or a pending connection that has not yet been established.
 --
---
--- VPC peering connection operations include:
 --
 --     * 'CreateVpcPeeringAuthorization'
 --
@@ -3667,7 +3631,7 @@ data VPCPeeringConnection = VPCPeeringConnection'
 --
 -- * 'vpcStatus' - Object that contains status information about the connection. Status indicates if a connection is pending, successful, or failed.
 --
--- * 'vpcPeerVPCId' - Unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The VPC must be in the same region where your fleet is deployed. To get VPC information, including IDs, use the Virtual Private Cloud service tools, including the VPC Dashboard in the AWS Management Console.
+-- * 'vpcPeerVPCId' - Unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The VPC must be in the same region where your fleet is deployed. Look up a VPC ID using the <https://console.aws.amazon.com/vpc/ VPC Dashboard> in the AWS Management Console. Learn more about VPC peering in <https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html VPC Peering with Amazon GameLift Fleets> .
 --
 -- * 'vpcIPV4CidrBlock' - CIDR block of IPv4 addresses assigned to the VPC peering connection for the GameLift VPC. The peered VPC also has an IPv4 CIDR block associated with it; these blocks cannot overlap or the peering connection cannot be created.
 --
@@ -3695,7 +3659,7 @@ vpcVPCPeeringConnectionId = lens _vpcVPCPeeringConnectionId (\ s a -> s{_vpcVPCP
 vpcStatus :: Lens' VPCPeeringConnection (Maybe VPCPeeringConnectionStatus)
 vpcStatus = lens _vpcStatus (\ s a -> s{_vpcStatus = a})
 
--- | Unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The VPC must be in the same region where your fleet is deployed. To get VPC information, including IDs, use the Virtual Private Cloud service tools, including the VPC Dashboard in the AWS Management Console.
+-- | Unique identifier for a VPC with resources to be accessed by your Amazon GameLift fleet. The VPC must be in the same region where your fleet is deployed. Look up a VPC ID using the <https://console.aws.amazon.com/vpc/ VPC Dashboard> in the AWS Management Console. Learn more about VPC peering in <https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html VPC Peering with Amazon GameLift Fleets> .
 vpcPeerVPCId :: Lens' VPCPeeringConnection (Maybe Text)
 vpcPeerVPCId = lens _vpcPeerVPCId (\ s a -> s{_vpcPeerVPCId = a})
 
@@ -3726,7 +3690,7 @@ instance Hashable VPCPeeringConnection where
 
 instance NFData VPCPeeringConnection where
 
--- | Represents status information for a VPC peering connection. Status is associated with a 'VpcPeeringConnection' object. Status codes and messages are provided from EC2 (see <http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_VpcPeeringConnectionStateReason.html VpcPeeringConnectionStateReason> ). Connection status information is also communicated as a fleet 'Event' .
+-- | Represents status information for a VPC peering connection. Status is associated with a 'VpcPeeringConnection' object. Status codes and messages are provided from EC2 (see <https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_VpcPeeringConnectionStateReason.html VpcPeeringConnectionStateReason> ). Connection status information is also communicated as a fleet 'Event' .
 --
 --
 --

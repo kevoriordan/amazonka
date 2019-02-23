@@ -46,10 +46,16 @@ module Network.AWS.MediaStore
     -- * Operations
     -- $operations
 
+    -- ** PutLifecyclePolicy
+    , module Network.AWS.MediaStore.PutLifecyclePolicy
+
+    -- ** DeleteLifecyclePolicy
+    , module Network.AWS.MediaStore.DeleteLifecyclePolicy
+
     -- ** CreateContainer
     , module Network.AWS.MediaStore.CreateContainer
 
-    -- ** ListContainers
+    -- ** ListContainers (Paginated)
     , module Network.AWS.MediaStore.ListContainers
 
     -- ** DeleteContainer
@@ -63,6 +69,9 @@ module Network.AWS.MediaStore
 
     -- ** DescribeContainer
     , module Network.AWS.MediaStore.DescribeContainer
+
+    -- ** GetLifecyclePolicy
+    , module Network.AWS.MediaStore.GetLifecyclePolicy
 
     -- ** GetCORSPolicy
     , module Network.AWS.MediaStore.GetCORSPolicy
@@ -89,9 +98,9 @@ module Network.AWS.MediaStore
     , corsRule
     , crAllowedMethods
     , crMaxAgeSeconds
-    , crAllowedHeaders
-    , crAllowedOrigins
     , crExposeHeaders
+    , crAllowedOrigins
+    , crAllowedHeaders
 
     -- ** Container
     , Container
@@ -107,12 +116,15 @@ import Network.AWS.MediaStore.CreateContainer
 import Network.AWS.MediaStore.DeleteContainer
 import Network.AWS.MediaStore.DeleteContainerPolicy
 import Network.AWS.MediaStore.DeleteCORSPolicy
+import Network.AWS.MediaStore.DeleteLifecyclePolicy
 import Network.AWS.MediaStore.DescribeContainer
 import Network.AWS.MediaStore.GetContainerPolicy
 import Network.AWS.MediaStore.GetCORSPolicy
+import Network.AWS.MediaStore.GetLifecyclePolicy
 import Network.AWS.MediaStore.ListContainers
 import Network.AWS.MediaStore.PutContainerPolicy
 import Network.AWS.MediaStore.PutCORSPolicy
+import Network.AWS.MediaStore.PutLifecyclePolicy
 import Network.AWS.MediaStore.Types
 import Network.AWS.MediaStore.Waiters
 

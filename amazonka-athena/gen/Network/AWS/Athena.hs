@@ -14,7 +14,9 @@
 -- Amazon Athena is an interactive query service that lets you use standard SQL to analyze data directly in Amazon S3. You can point Athena at your data in Amazon S3 and run ad-hoc queries and get results in seconds. Athena is serverless, so there is no infrastructure to set up or manage. You pay only for the queries you run. Athena scales automatically—executing queries in parallel—so results are fast, even with large datasets and complex queries. For more information, see <http://docs.aws.amazon.com/athena/latest/ug/what-is.html What is Amazon Athena> in the /Amazon Athena User Guide/ .
 --
 --
--- For code samples using the AWS SDK for Java, see <http://docs.aws.amazon.com/athena/latest/ug/code-samples.html Examples and Code Samples> in the /Amazon Athena User Guide/ .
+-- If you connect to Athena using the JDBC driver, use version 1.1.0 of the driver or later with the Amazon Athena API. Earlier version drivers do not support the API. For more information and to download the driver, see <https://docs.aws.amazon.com/athena/latest/ug/connect-with-jdbc.html Accessing Amazon Athena with JDBC> .
+--
+-- For code samples using the AWS SDK for Java, see <https://docs.aws.amazon.com/athena/latest/ug/code-samples.html Examples and Code Samples> in the /Amazon Athena User Guide/ .
 --
 module Network.AWS.Athena
     (
@@ -39,6 +41,12 @@ module Network.AWS.Athena
     -- * Operations
     -- $operations
 
+    -- ** DeleteWorkGroup
+    , module Network.AWS.Athena.DeleteWorkGroup
+
+    -- ** UpdateWorkGroup
+    , module Network.AWS.Athena.UpdateWorkGroup
+
     -- ** GetNamedQuery
     , module Network.AWS.Athena.GetNamedQuery
 
@@ -60,11 +68,20 @@ module Network.AWS.Athena
     -- ** GetQueryExecution
     , module Network.AWS.Athena.GetQueryExecution
 
+    -- ** ListWorkGroups
+    , module Network.AWS.Athena.ListWorkGroups
+
+    -- ** CreateWorkGroup
+    , module Network.AWS.Athena.CreateWorkGroup
+
     -- ** BatchGetQueryExecution
     , module Network.AWS.Athena.BatchGetQueryExecution
 
     -- ** StopQueryExecution
     , module Network.AWS.Athena.StopQueryExecution
+
+    -- ** GetWorkGroup
+    , module Network.AWS.Athena.GetWorkGroup
 
     -- ** GetQueryResults (Paginated)
     , module Network.AWS.Athena.GetQueryResults
@@ -82,6 +99,12 @@ module Network.AWS.Athena
 
     -- ** QueryExecutionState
     , QueryExecutionState (..)
+
+    -- ** StatementType
+    , StatementType (..)
+
+    -- ** WorkGroupState
+    , WorkGroupState (..)
 
     -- ** ColumnInfo
     , ColumnInfo
@@ -113,6 +136,7 @@ module Network.AWS.Athena
     , namedQuery
     , nqNamedQueryId
     , nqDescription
+    , nqWorkGroup
     , nqName
     , nqDatabase
     , nqQueryString
@@ -124,8 +148,10 @@ module Network.AWS.Athena
     , qeQueryExecutionContext
     , qeResultConfiguration
     , qeQuery
+    , qeStatementType
     , qeStatistics
     , qeQueryExecutionId
+    , qeWorkGroup
 
     -- ** QueryExecutionContext
     , QueryExecutionContext
@@ -151,6 +177,14 @@ module Network.AWS.Athena
     , resultConfiguration
     , rcEncryptionConfiguration
     , rcOutputLocation
+
+    -- ** ResultConfigurationUpdates
+    , ResultConfigurationUpdates
+    , resultConfigurationUpdates
+    , rcuRemoveOutputLocation
+    , rcuRemoveEncryptionConfiguration
+    , rcuEncryptionConfiguration
+    , rcuOutputLocation
 
     -- ** ResultSet
     , ResultSet
@@ -181,20 +215,59 @@ module Network.AWS.Athena
     , uqeiErrorCode
     , uqeiQueryExecutionId
     , uqeiErrorMessage
+
+    -- ** WorkGroup
+    , WorkGroup
+    , workGroup
+    , wgCreationTime
+    , wgState
+    , wgConfiguration
+    , wgDescription
+    , wgName
+
+    -- ** WorkGroupConfiguration
+    , WorkGroupConfiguration
+    , workGroupConfiguration
+    , wgcResultConfiguration
+    , wgcBytesScannedCutoffPerQuery
+    , wgcEnforceWorkGroupConfiguration
+    , wgcPublishCloudWatchMetricsEnabled
+
+    -- ** WorkGroupConfigurationUpdates
+    , WorkGroupConfigurationUpdates
+    , workGroupConfigurationUpdates
+    , wgcuResultConfigurationUpdates
+    , wgcuBytesScannedCutoffPerQuery
+    , wgcuRemoveBytesScannedCutoffPerQuery
+    , wgcuEnforceWorkGroupConfiguration
+    , wgcuPublishCloudWatchMetricsEnabled
+
+    -- ** WorkGroupSummary
+    , WorkGroupSummary
+    , workGroupSummary
+    , wgsCreationTime
+    , wgsState
+    , wgsName
+    , wgsDescription
     ) where
 
 import Network.AWS.Athena.BatchGetNamedQuery
 import Network.AWS.Athena.BatchGetQueryExecution
 import Network.AWS.Athena.CreateNamedQuery
+import Network.AWS.Athena.CreateWorkGroup
 import Network.AWS.Athena.DeleteNamedQuery
+import Network.AWS.Athena.DeleteWorkGroup
 import Network.AWS.Athena.GetNamedQuery
 import Network.AWS.Athena.GetQueryExecution
 import Network.AWS.Athena.GetQueryResults
+import Network.AWS.Athena.GetWorkGroup
 import Network.AWS.Athena.ListNamedQueries
 import Network.AWS.Athena.ListQueryExecutions
+import Network.AWS.Athena.ListWorkGroups
 import Network.AWS.Athena.StartQueryExecution
 import Network.AWS.Athena.StopQueryExecution
 import Network.AWS.Athena.Types
+import Network.AWS.Athena.UpdateWorkGroup
 import Network.AWS.Athena.Waiters
 
 {- $errors

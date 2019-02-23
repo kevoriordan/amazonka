@@ -21,16 +21,10 @@ import Network.AWS.EMR.Types.Sum
 import Network.AWS.Lens
 import Network.AWS.Prelude
 
--- | An application is any Amazon or third-party software that you can add to the cluster. This structure contains a list of strings that indicates the software to use with the cluster and accepts a user argument list. Amazon EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action argument. For more information, see <http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-mapr.html Using the MapR Distribution for Hadoop> . Currently supported values are:
+-- | With Amazon EMR release version 4.0 and later, the only accepted parameter is the application name. To pass arguments to applications, you use configuration classifications specified using configuration JSON objects. For more information, see <http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html Configuring Applications> .
 --
 --
---     * "mapr-m3" - launch the cluster using MapR M3 Edition.
---
---     * "mapr-m5" - launch the cluster using MapR M5 Edition.
---
---     * "mapr" with the user arguments specifying "--edition,m3" or "--edition,m5" - launch the cluster using MapR M3 or M5 Edition, respectively.
---
---
+-- With earlier Amazon EMR releases, the application is any Amazon or third-party software that you can add to the cluster. This structure contains a list of strings that indicates the software to use with the cluster and accepts a user argument list. Amazon EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action argument.
 --
 --
 -- /See:/ 'application' smart constructor.
@@ -576,7 +570,7 @@ data Cluster = Cluster'
 --
 -- * 'cluInstanceCollectionType' - The instance group configuration of the cluster. A value of @INSTANCE_GROUP@ indicates a uniform instance group configuration. A value of @INSTANCE_FLEET@ indicates an instance fleets configuration.
 --
--- * 'cluReleaseLabel' - The release label for the Amazon EMR release.
+-- * 'cluReleaseLabel' - The Amazon EMR release label, which determines the version of open-source application packages installed on the cluster. Release labels are in the form @emr-x.x.x@ , where x.x.x is an Amazon EMR release version, for example, @emr-5.14.0@ . For more information about Amazon EMR release versions and included application versions and features, see <http://docs.aws.amazon.com/emr/latest/ReleaseGuide/ http://docs.aws.amazon.com/emr/latest/ReleaseGuide/> . The release label applies only to Amazon EMR releases versions 4.x and later. Earlier versions use @AmiVersion@ .
 --
 -- * 'cluRepoUpgradeOnBoot' - Applies only when @CustomAmiID@ is used. Specifies the type of updates that are applied from the Amazon Linux AMI package repositories when an instance boots using the AMI.
 --
@@ -680,7 +674,7 @@ cluScaleDownBehavior = lens _cluScaleDownBehavior (\ s a -> s{_cluScaleDownBehav
 cluInstanceCollectionType :: Lens' Cluster (Maybe InstanceCollectionType)
 cluInstanceCollectionType = lens _cluInstanceCollectionType (\ s a -> s{_cluInstanceCollectionType = a})
 
--- | The release label for the Amazon EMR release.
+-- | The Amazon EMR release label, which determines the version of open-source application packages installed on the cluster. Release labels are in the form @emr-x.x.x@ , where x.x.x is an Amazon EMR release version, for example, @emr-5.14.0@ . For more information about Amazon EMR release versions and included application versions and features, see <http://docs.aws.amazon.com/emr/latest/ReleaseGuide/ http://docs.aws.amazon.com/emr/latest/ReleaseGuide/> . The release label applies only to Amazon EMR releases versions 4.x and later. Earlier versions use @AmiVersion@ .
 cluReleaseLabel :: Lens' Cluster (Maybe Text)
 cluReleaseLabel = lens _cluReleaseLabel (\ s a -> s{_cluReleaseLabel = a})
 
@@ -1310,9 +1304,9 @@ data EC2InstanceAttributes = EC2InstanceAttributes'
 --
 -- * 'eiaEC2KeyName' - The name of the Amazon EC2 key pair to use when connecting with SSH into the master node as a user named "hadoop".
 --
--- * 'eiaEmrManagedSlaveSecurityGroup' - The identifier of the Amazon EC2 security group for the slave nodes.
+-- * 'eiaEmrManagedSlaveSecurityGroup' - The identifier of the Amazon EC2 security group for the core and task nodes.
 --
--- * 'eiaAdditionalSlaveSecurityGroups' - A list of additional Amazon EC2 security group IDs for the slave nodes.
+-- * 'eiaAdditionalSlaveSecurityGroups' - A list of additional Amazon EC2 security group IDs for the core and task nodes.
 --
 -- * 'eiaRequestedEC2SubnetIds' - Applies to clusters configured with the instance fleets option. Specifies the unique identifier of one or more Amazon EC2 subnets in which to launch EC2 cluster instances. Subnets must exist within the same VPC. Amazon EMR chooses the EC2 subnet with the best fit from among the list of @RequestedEc2SubnetIds@ , and then launches all cluster instances within that Subnet. If this value is not specified, and the account and region support EC2-Classic networks, the cluster launches instances in the EC2-Classic network and uses @RequestedEc2AvailabilityZones@ instead of this setting. If EC2-Classic is not supported, and no Subnet is specified, Amazon EMR chooses the subnet for you. @RequestedEc2SubnetIDs@ and @RequestedEc2AvailabilityZones@ cannot be specified together.
 --
@@ -1351,11 +1345,11 @@ ec2InstanceAttributes =
 eiaEC2KeyName :: Lens' EC2InstanceAttributes (Maybe Text)
 eiaEC2KeyName = lens _eiaEC2KeyName (\ s a -> s{_eiaEC2KeyName = a})
 
--- | The identifier of the Amazon EC2 security group for the slave nodes.
+-- | The identifier of the Amazon EC2 security group for the core and task nodes.
 eiaEmrManagedSlaveSecurityGroup :: Lens' EC2InstanceAttributes (Maybe Text)
 eiaEmrManagedSlaveSecurityGroup = lens _eiaEmrManagedSlaveSecurityGroup (\ s a -> s{_eiaEmrManagedSlaveSecurityGroup = a})
 
--- | A list of additional Amazon EC2 security group IDs for the slave nodes.
+-- | A list of additional Amazon EC2 security group IDs for the core and task nodes.
 eiaAdditionalSlaveSecurityGroups :: Lens' EC2InstanceAttributes [Text]
 eiaAdditionalSlaveSecurityGroups = lens _eiaAdditionalSlaveSecurityGroups (\ s a -> s{_eiaAdditionalSlaveSecurityGroups = a}) . _Default . _Coerce
 
@@ -2235,7 +2229,7 @@ data InstanceGroup = InstanceGroup'
 --
 -- * 'igStatus' - The current status of the instance group.
 --
--- * 'igBidPrice' - The bid price for each EC2 instance in the instance group when launching nodes as Spot Instances, expressed in USD.
+-- * 'igBidPrice' - The maximum Spot price your are willing to pay for EC2 instances. An optional, nullable field that applies if the @MarketType@ for the instance group is specified as @SPOT@ . Specify the maximum spot price in USD. If the value is NULL and @SPOT@ is specified, the maximum Spot price is set equal to the On-Demand price.
 --
 -- * 'igRequestedInstanceCount' - The target number of instances for the instance group.
 --
@@ -2285,7 +2279,7 @@ instanceGroup =
 igStatus :: Lens' InstanceGroup (Maybe InstanceGroupStatus)
 igStatus = lens _igStatus (\ s a -> s{_igStatus = a})
 
--- | The bid price for each EC2 instance in the instance group when launching nodes as Spot Instances, expressed in USD.
+-- | The maximum Spot price your are willing to pay for EC2 instances. An optional, nullable field that applies if the @MarketType@ for the instance group is specified as @SPOT@ . Specify the maximum spot price in USD. If the value is NULL and @SPOT@ is specified, the maximum Spot price is set equal to the On-Demand price.
 igBidPrice :: Lens' InstanceGroup (Maybe Text)
 igBidPrice = lens _igBidPrice (\ s a -> s{_igBidPrice = a})
 
@@ -2384,7 +2378,7 @@ data InstanceGroupConfig = InstanceGroupConfig'
 --
 -- * 'igcEBSConfiguration' - EBS configurations that will be attached to each EC2 instance in the instance group.
 --
--- * 'igcBidPrice' - Bid price for each EC2 instance in the instance group when launching nodes as Spot Instances, expressed in USD.
+-- * 'igcBidPrice' - The maximum Spot price your are willing to pay for EC2 instances. An optional, nullable field that applies if the @MarketType@ for the instance group is specified as @SPOT@ . Specify the maximum spot price in USD. If the value is NULL and @SPOT@ is specified, the maximum Spot price is set equal to the On-Demand price.
 --
 -- * 'igcConfigurations' - The list of configurations supplied for an EMR cluster instance group. You can specify a separate configuration for each instance group (master, core, and task).
 --
@@ -2422,7 +2416,7 @@ instanceGroupConfig pInstanceRole_ pInstanceType_ pInstanceCount_ =
 igcEBSConfiguration :: Lens' InstanceGroupConfig (Maybe EBSConfiguration)
 igcEBSConfiguration = lens _igcEBSConfiguration (\ s a -> s{_igcEBSConfiguration = a})
 
--- | Bid price for each EC2 instance in the instance group when launching nodes as Spot Instances, expressed in USD.
+-- | The maximum Spot price your are willing to pay for EC2 instances. An optional, nullable field that applies if the @MarketType@ for the instance group is specified as @SPOT@ . Specify the maximum spot price in USD. If the value is NULL and @SPOT@ is specified, the maximum Spot price is set equal to the On-Demand price.
 igcBidPrice :: Lens' InstanceGroupConfig (Maybe Text)
 igcBidPrice = lens _igcBidPrice (\ s a -> s{_igcBidPrice = a})
 
@@ -3122,17 +3116,17 @@ data JobFlowInstancesConfig = JobFlowInstancesConfig'
 --
 -- * 'jficEC2KeyName' - The name of the EC2 key pair that can be used to ssh to the master node as the user called "hadoop."
 --
--- * 'jficSlaveInstanceType' - The EC2 instance type of the slave nodes.
+-- * 'jficSlaveInstanceType' - The EC2 instance type of the core and task nodes.
 --
 -- * 'jficInstanceCount' - The number of EC2 instances in the cluster.
 --
--- * 'jficEmrManagedSlaveSecurityGroup' - The identifier of the Amazon EC2 security group for the slave nodes.
+-- * 'jficEmrManagedSlaveSecurityGroup' - The identifier of the Amazon EC2 security group for the core and task nodes.
 --
--- * 'jficAdditionalSlaveSecurityGroups' - A list of additional Amazon EC2 security group IDs for the slave nodes.
+-- * 'jficAdditionalSlaveSecurityGroups' - A list of additional Amazon EC2 security group IDs for the core and task nodes.
 --
 -- * 'jficEC2SubnetIds' - Applies to clusters that use the instance fleet configuration. When multiple EC2 subnet IDs are specified, Amazon EMR evaluates them and launches instances in the optimal subnet.
 --
--- * 'jficHadoopVersion' - The Hadoop version for the cluster. Valid inputs are "0.18" (deprecated), "0.20" (deprecated), "0.20.205" (deprecated), "1.0.3", "2.2.0", or "2.4.0". If you do not set this value, the default of 0.18 is used, unless the AmiVersion parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.
+-- * 'jficHadoopVersion' - Applies only to Amazon EMR release versions earlier than 4.0. The Hadoop version for the cluster. Valid inputs are "0.18" (deprecated), "0.20" (deprecated), "0.20.205" (deprecated), "1.0.3", "2.2.0", or "2.4.0". If you do not set this value, the default of 0.18 is used, unless the @AmiVersion@ parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.
 --
 -- * 'jficAdditionalMasterSecurityGroups' - A list of additional Amazon EC2 security group IDs for the master node.
 --
@@ -3183,7 +3177,7 @@ jficInstanceFleets = lens _jficInstanceFleets (\ s a -> s{_jficInstanceFleets = 
 jficEC2KeyName :: Lens' JobFlowInstancesConfig (Maybe Text)
 jficEC2KeyName = lens _jficEC2KeyName (\ s a -> s{_jficEC2KeyName = a})
 
--- | The EC2 instance type of the slave nodes.
+-- | The EC2 instance type of the core and task nodes.
 jficSlaveInstanceType :: Lens' JobFlowInstancesConfig (Maybe Text)
 jficSlaveInstanceType = lens _jficSlaveInstanceType (\ s a -> s{_jficSlaveInstanceType = a})
 
@@ -3191,11 +3185,11 @@ jficSlaveInstanceType = lens _jficSlaveInstanceType (\ s a -> s{_jficSlaveInstan
 jficInstanceCount :: Lens' JobFlowInstancesConfig (Maybe Int)
 jficInstanceCount = lens _jficInstanceCount (\ s a -> s{_jficInstanceCount = a})
 
--- | The identifier of the Amazon EC2 security group for the slave nodes.
+-- | The identifier of the Amazon EC2 security group for the core and task nodes.
 jficEmrManagedSlaveSecurityGroup :: Lens' JobFlowInstancesConfig (Maybe Text)
 jficEmrManagedSlaveSecurityGroup = lens _jficEmrManagedSlaveSecurityGroup (\ s a -> s{_jficEmrManagedSlaveSecurityGroup = a})
 
--- | A list of additional Amazon EC2 security group IDs for the slave nodes.
+-- | A list of additional Amazon EC2 security group IDs for the core and task nodes.
 jficAdditionalSlaveSecurityGroups :: Lens' JobFlowInstancesConfig [Text]
 jficAdditionalSlaveSecurityGroups = lens _jficAdditionalSlaveSecurityGroups (\ s a -> s{_jficAdditionalSlaveSecurityGroups = a}) . _Default . _Coerce
 
@@ -3203,7 +3197,7 @@ jficAdditionalSlaveSecurityGroups = lens _jficAdditionalSlaveSecurityGroups (\ s
 jficEC2SubnetIds :: Lens' JobFlowInstancesConfig [Text]
 jficEC2SubnetIds = lens _jficEC2SubnetIds (\ s a -> s{_jficEC2SubnetIds = a}) . _Default . _Coerce
 
--- | The Hadoop version for the cluster. Valid inputs are "0.18" (deprecated), "0.20" (deprecated), "0.20.205" (deprecated), "1.0.3", "2.2.0", or "2.4.0". If you do not set this value, the default of 0.18 is used, unless the AmiVersion parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.
+-- | Applies only to Amazon EMR release versions earlier than 4.0. The Hadoop version for the cluster. Valid inputs are "0.18" (deprecated), "0.20" (deprecated), "0.20.205" (deprecated), "1.0.3", "2.2.0", or "2.4.0". If you do not set this value, the default of 0.18 is used, unless the @AmiVersion@ parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.
 jficHadoopVersion :: Lens' JobFlowInstancesConfig (Maybe Text)
 jficHadoopVersion = lens _jficHadoopVersion (\ s a -> s{_jficHadoopVersion = a})
 
@@ -3956,7 +3950,7 @@ data SpotProvisioningSpecification = SpotProvisioningSpecification'
 --
 -- * 'spsTimeoutDurationMinutes' - The spot provisioning timeout period in minutes. If Spot instances are not provisioned within this time period, the @TimeOutAction@ is taken. Minimum value is 5 and maximum value is 1440. The timeout applies only during initial provisioning, when the cluster is first created.
 --
--- * 'spsTimeoutAction' - The action to take when @TargetSpotCapacity@ has not been fulfilled when the @TimeoutDurationMinutes@ has expired. Spot instances are not uprovisioned within the Spot provisioining timeout. Valid values are @TERMINATE_CLUSTER@ and @SWITCH_TO_ON_DEMAND@ . SWITCH_TO_ON_DEMAND specifies that if no Spot instances are available, On-Demand Instances should be provisioned to fulfill any remaining Spot capacity.
+-- * 'spsTimeoutAction' - The action to take when @TargetSpotCapacity@ has not been fulfilled when the @TimeoutDurationMinutes@ has expired; that is, when all Spot instances could not be provisioned within the Spot provisioning timeout. Valid values are @TERMINATE_CLUSTER@ and @SWITCH_TO_ON_DEMAND@ . SWITCH_TO_ON_DEMAND specifies that if no Spot instances are available, On-Demand Instances should be provisioned to fulfill any remaining Spot capacity.
 spotProvisioningSpecification
     :: Natural -- ^ 'spsTimeoutDurationMinutes'
     -> SpotProvisioningTimeoutAction -- ^ 'spsTimeoutAction'
@@ -3977,7 +3971,7 @@ spsBlockDurationMinutes = lens _spsBlockDurationMinutes (\ s a -> s{_spsBlockDur
 spsTimeoutDurationMinutes :: Lens' SpotProvisioningSpecification Natural
 spsTimeoutDurationMinutes = lens _spsTimeoutDurationMinutes (\ s a -> s{_spsTimeoutDurationMinutes = a}) . _Nat
 
--- | The action to take when @TargetSpotCapacity@ has not been fulfilled when the @TimeoutDurationMinutes@ has expired. Spot instances are not uprovisioned within the Spot provisioining timeout. Valid values are @TERMINATE_CLUSTER@ and @SWITCH_TO_ON_DEMAND@ . SWITCH_TO_ON_DEMAND specifies that if no Spot instances are available, On-Demand Instances should be provisioned to fulfill any remaining Spot capacity.
+-- | The action to take when @TargetSpotCapacity@ has not been fulfilled when the @TimeoutDurationMinutes@ has expired; that is, when all Spot instances could not be provisioned within the Spot provisioning timeout. Valid values are @TERMINATE_CLUSTER@ and @SWITCH_TO_ON_DEMAND@ . SWITCH_TO_ON_DEMAND specifies that if no Spot instances are available, On-Demand Instances should be provisioned to fulfill any remaining Spot capacity.
 spsTimeoutAction :: Lens' SpotProvisioningSpecification SpotProvisioningTimeoutAction
 spsTimeoutAction = lens _spsTimeoutAction (\ s a -> s{_spsTimeoutAction = a})
 
@@ -4025,7 +4019,7 @@ data Step = Step'
 --
 -- * 'sStatus' - The current execution status details of the cluster step.
 --
--- * 'sActionOnFailure' - This specifies what action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE.
+-- * 'sActionOnFailure' - The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided for backward compatibility. We recommend using TERMINATE_CLUSTER instead.
 --
 -- * 'sConfig' - The Hadoop job configuration of the cluster step.
 --
@@ -4048,7 +4042,7 @@ step =
 sStatus :: Lens' Step (Maybe StepStatus)
 sStatus = lens _sStatus (\ s a -> s{_sStatus = a})
 
--- | This specifies what action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE.
+-- | The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided for backward compatibility. We recommend using TERMINATE_CLUSTER instead.
 sActionOnFailure :: Lens' Step (Maybe ActionOnFailure)
 sActionOnFailure = lens _sActionOnFailure (\ s a -> s{_sActionOnFailure = a})
 
@@ -4094,7 +4088,7 @@ data StepConfig = StepConfig'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'scActionOnFailure' - The action to take if the step fails.
+-- * 'scActionOnFailure' - The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided for backward compatibility. We recommend using TERMINATE_CLUSTER instead.
 --
 -- * 'scName' - The name of the step.
 --
@@ -4111,7 +4105,7 @@ stepConfig pName_ pHadoopJARStep_ =
     }
 
 
--- | The action to take if the step fails.
+-- | The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided for backward compatibility. We recommend using TERMINATE_CLUSTER instead.
 scActionOnFailure :: Lens' StepConfig (Maybe ActionOnFailure)
 scActionOnFailure = lens _scActionOnFailure (\ s a -> s{_scActionOnFailure = a})
 
@@ -4262,7 +4256,7 @@ data StepSummary = StepSummary'
 --
 -- * 'ssStatus' - The current execution status details of the cluster step.
 --
--- * 'ssActionOnFailure' - This specifies what action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE.
+-- * 'ssActionOnFailure' - The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is available for backward compatibility. We recommend using TERMINATE_CLUSTER instead.
 --
 -- * 'ssConfig' - The Hadoop job configuration of the cluster step.
 --
@@ -4285,7 +4279,7 @@ stepSummary =
 ssStatus :: Lens' StepSummary (Maybe StepStatus)
 ssStatus = lens _ssStatus (\ s a -> s{_ssStatus = a})
 
--- | This specifies what action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE.
+-- | The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is available for backward compatibility. We recommend using TERMINATE_CLUSTER instead.
 ssActionOnFailure :: Lens' StepSummary (Maybe ActionOnFailure)
 ssActionOnFailure = lens _ssActionOnFailure (\ s a -> s{_ssActionOnFailure = a})
 

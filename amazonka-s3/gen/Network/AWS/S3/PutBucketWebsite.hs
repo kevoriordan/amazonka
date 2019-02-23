@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Set the website configuration for a bucket.
+--
+--
 module Network.AWS.S3.PutBucketWebsite
     (
     -- * Creating a Request

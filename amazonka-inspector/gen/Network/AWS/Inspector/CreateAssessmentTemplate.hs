@@ -18,7 +18,7 @@
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- Creates an assessment template for the assessment target that is specified by the ARN of the assessment target. If the <https://docs.aws.amazon.com/inspector/latest/userguide/inspector_slr.html service-linked role> isn’t already registered, also creates and registers a service-linked role to grant Amazon Inspector access to AWS Services needed to perform security assessments.
+-- Creates an assessment template for the assessment target that is specified by the ARN of the assessment target. If the <https://docs.aws.amazon.com/inspector/latest/userguide/inspector_slr.html service-linked role> isn’t already registered, this action also creates and registers a service-linked role to grant Amazon Inspector access to AWS Services needed to perform security assessments.
 --
 --
 module Network.AWS.Inspector.CreateAssessmentTemplate
@@ -68,7 +68,7 @@ data CreateAssessmentTemplate = CreateAssessmentTemplate'
 --
 -- * 'catAssessmentTemplateName' - The user-defined name that identifies the assessment template that you want to create. You can create several assessment templates for an assessment target. The names of the assessment templates that correspond to a particular assessment target must be unique.
 --
--- * 'catDurationInSeconds' - The duration of the assessment run in seconds. The default value is 3600 seconds (one hour).
+-- * 'catDurationInSeconds' - The duration of the assessment run in seconds.
 --
 -- * 'catRulesPackageARNs' - The ARNs that specify the rules packages that you want to attach to the assessment template.
 createAssessmentTemplate
@@ -98,7 +98,7 @@ catAssessmentTargetARN = lens _catAssessmentTargetARN (\ s a -> s{_catAssessment
 catAssessmentTemplateName :: Lens' CreateAssessmentTemplate Text
 catAssessmentTemplateName = lens _catAssessmentTemplateName (\ s a -> s{_catAssessmentTemplateName = a})
 
--- | The duration of the assessment run in seconds. The default value is 3600 seconds (one hour).
+-- | The duration of the assessment run in seconds.
 catDurationInSeconds :: Lens' CreateAssessmentTemplate Natural
 catDurationInSeconds = lens _catDurationInSeconds (\ s a -> s{_catDurationInSeconds = a}) . _Nat
 

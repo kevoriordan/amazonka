@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Retrieves objects from Amazon S3.
+--
+--
 module Network.AWS.S3.GetObject
     (
     -- * Creating a Request
@@ -54,6 +56,7 @@ module Network.AWS.S3.GetObject
     , gorsETag
     , gorsVersionId
     , gorsContentLength
+    , gorsObjectLockMode
     , gorsExpires
     , gorsRestore
     , gorsExpiration
@@ -67,11 +70,13 @@ module Network.AWS.S3.GetObject
     , gorsSSECustomerKeyMD5
     , gorsSSEKMSKeyId
     , gorsContentEncoding
+    , gorsObjectLockRetainUntilDate
     , gorsMetadata
     , gorsReplicationStatus
     , gorsCacheControl
     , gorsContentLanguage
     , gorsLastModified
+    , gorsObjectLockLegalHoldStatus
     , gorsContentDisposition
     , gorsContentRange
     , gorsServerSideEncryption
@@ -98,13 +103,13 @@ data GetObject = GetObject'
   , _goSSECustomerKey             :: !(Maybe (Sensitive Text))
   , _goRequestPayer               :: !(Maybe RequestPayer)
   , _goResponseContentEncoding    :: !(Maybe Text)
-  , _goIfModifiedSince            :: !(Maybe RFC822)
+  , _goIfModifiedSince            :: !(Maybe ISO8601)
   , _goPartNumber                 :: !(Maybe Int)
   , _goRange                      :: !(Maybe Text)
-  , _goIfUnmodifiedSince          :: !(Maybe RFC822)
+  , _goIfUnmodifiedSince          :: !(Maybe ISO8601)
   , _goSSECustomerKeyMD5          :: !(Maybe Text)
   , _goResponseCacheControl       :: !(Maybe Text)
-  , _goResponseExpires            :: !(Maybe RFC822)
+  , _goResponseExpires            :: !(Maybe ISO8601)
   , _goIfNoneMatch                :: !(Maybe Text)
   , _goBucket                     :: !BucketName
   , _goKey                        :: !ObjectKey
@@ -268,6 +273,7 @@ instance AWSRequest GetObject where
                      <*> (h .#? "ETag")
                      <*> (h .#? "x-amz-version-id")
                      <*> (h .#? "Content-Length")
+                     <*> (h .#? "x-amz-object-lock-mode")
                      <*> (h .#? "Expires")
                      <*> (h .#? "x-amz-restore")
                      <*> (h .#? "x-amz-expiration")
@@ -286,11 +292,13 @@ instance AWSRequest GetObject where
                      <*>
                      (h .#? "x-amz-server-side-encryption-aws-kms-key-id")
                      <*> (h .#? "Content-Encoding")
+                     <*> (h .#? "x-amz-object-lock-retain-until-date")
                      <*> (parseHeadersMap "x-amz-meta-" h)
                      <*> (h .#? "x-amz-replication-status")
                      <*> (h .#? "Cache-Control")
                      <*> (h .#? "Content-Language")
                      <*> (h .#? "Last-Modified")
+                     <*> (h .#? "x-amz-object-lock-legal-hold")
                      <*> (h .#? "Content-Disposition")
                      <*> (h .#? "Content-Range")
                      <*> (h .#? "x-amz-server-side-encryption")
@@ -339,35 +347,38 @@ instance ToQuery GetObject where
 
 -- | /See:/ 'getObjectResponse' smart constructor.
 data GetObjectResponse = GetObjectResponse'
-  { _gorsRequestCharged          :: !(Maybe RequestCharged)
-  , _gorsPartsCount              :: !(Maybe Int)
-  , _gorsETag                    :: !(Maybe ETag)
-  , _gorsVersionId               :: !(Maybe ObjectVersionId)
-  , _gorsContentLength           :: !(Maybe Integer)
-  , _gorsExpires                 :: !(Maybe RFC822)
-  , _gorsRestore                 :: !(Maybe Text)
-  , _gorsExpiration              :: !(Maybe Text)
-  , _gorsDeleteMarker            :: !(Maybe Bool)
-  , _gorsSSECustomerAlgorithm    :: !(Maybe Text)
-  , _gorsTagCount                :: !(Maybe Int)
-  , _gorsMissingMeta             :: !(Maybe Int)
-  , _gorsWebsiteRedirectLocation :: !(Maybe Text)
-  , _gorsAcceptRanges            :: !(Maybe Text)
-  , _gorsStorageClass            :: !(Maybe StorageClass)
-  , _gorsSSECustomerKeyMD5       :: !(Maybe Text)
-  , _gorsSSEKMSKeyId             :: !(Maybe (Sensitive Text))
-  , _gorsContentEncoding         :: !(Maybe Text)
-  , _gorsMetadata                :: !(Map Text Text)
-  , _gorsReplicationStatus       :: !(Maybe ReplicationStatus)
-  , _gorsCacheControl            :: !(Maybe Text)
-  , _gorsContentLanguage         :: !(Maybe Text)
-  , _gorsLastModified            :: !(Maybe RFC822)
-  , _gorsContentDisposition      :: !(Maybe Text)
-  , _gorsContentRange            :: !(Maybe Text)
-  , _gorsServerSideEncryption    :: !(Maybe ServerSideEncryption)
-  , _gorsContentType             :: !(Maybe Text)
-  , _gorsResponseStatus          :: !Int
-  , _gorsBody                    :: !RsBody
+  { _gorsRequestCharged            :: !(Maybe RequestCharged)
+  , _gorsPartsCount                :: !(Maybe Int)
+  , _gorsETag                      :: !(Maybe ETag)
+  , _gorsVersionId                 :: !(Maybe ObjectVersionId)
+  , _gorsContentLength             :: !(Maybe Integer)
+  , _gorsObjectLockMode            :: !(Maybe ObjectLockMode)
+  , _gorsExpires                   :: !(Maybe ISO8601)
+  , _gorsRestore                   :: !(Maybe Text)
+  , _gorsExpiration                :: !(Maybe Text)
+  , _gorsDeleteMarker              :: !(Maybe Bool)
+  , _gorsSSECustomerAlgorithm      :: !(Maybe Text)
+  , _gorsTagCount                  :: !(Maybe Int)
+  , _gorsMissingMeta               :: !(Maybe Int)
+  , _gorsWebsiteRedirectLocation   :: !(Maybe Text)
+  , _gorsAcceptRanges              :: !(Maybe Text)
+  , _gorsStorageClass              :: !(Maybe StorageClass)
+  , _gorsSSECustomerKeyMD5         :: !(Maybe Text)
+  , _gorsSSEKMSKeyId               :: !(Maybe (Sensitive Text))
+  , _gorsContentEncoding           :: !(Maybe Text)
+  , _gorsObjectLockRetainUntilDate :: !(Maybe ISO8601)
+  , _gorsMetadata                  :: !(Map Text Text)
+  , _gorsReplicationStatus         :: !(Maybe ReplicationStatus)
+  , _gorsCacheControl              :: !(Maybe Text)
+  , _gorsContentLanguage           :: !(Maybe Text)
+  , _gorsLastModified              :: !(Maybe ISO8601)
+  , _gorsObjectLockLegalHoldStatus :: !(Maybe ObjectLockLegalHoldStatus)
+  , _gorsContentDisposition        :: !(Maybe Text)
+  , _gorsContentRange              :: !(Maybe Text)
+  , _gorsServerSideEncryption      :: !(Maybe ServerSideEncryption)
+  , _gorsContentType               :: !(Maybe Text)
+  , _gorsResponseStatus            :: !Int
+  , _gorsBody                      :: !RsBody
   } deriving (Show, Generic)
 
 
@@ -384,6 +395,8 @@ data GetObjectResponse = GetObjectResponse'
 -- * 'gorsVersionId' - Version of the object.
 --
 -- * 'gorsContentLength' - Size of the body in bytes.
+--
+-- * 'gorsObjectLockMode' - The Object Lock mode currently in place for this object.
 --
 -- * 'gorsExpires' - The date and time at which the object is no longer cacheable.
 --
@@ -411,6 +424,8 @@ data GetObjectResponse = GetObjectResponse'
 --
 -- * 'gorsContentEncoding' - Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
 --
+-- * 'gorsObjectLockRetainUntilDate' - The date and time when this object's Object Lock will expire.
+--
 -- * 'gorsMetadata' - A map of metadata to store with the object in S3.
 --
 -- * 'gorsReplicationStatus' - Undocumented member.
@@ -420,6 +435,8 @@ data GetObjectResponse = GetObjectResponse'
 -- * 'gorsContentLanguage' - The language the content is in.
 --
 -- * 'gorsLastModified' - Last modified date of the object
+--
+-- * 'gorsObjectLockLegalHoldStatus' - Indicates whether this object has an active legal hold. This field is only returned if you have permission to view an object's legal hold status.
 --
 -- * 'gorsContentDisposition' - Specifies presentational information for the object.
 --
@@ -443,6 +460,7 @@ getObjectResponse pResponseStatus_ pBody_ =
     , _gorsETag = Nothing
     , _gorsVersionId = Nothing
     , _gorsContentLength = Nothing
+    , _gorsObjectLockMode = Nothing
     , _gorsExpires = Nothing
     , _gorsRestore = Nothing
     , _gorsExpiration = Nothing
@@ -456,11 +474,13 @@ getObjectResponse pResponseStatus_ pBody_ =
     , _gorsSSECustomerKeyMD5 = Nothing
     , _gorsSSEKMSKeyId = Nothing
     , _gorsContentEncoding = Nothing
+    , _gorsObjectLockRetainUntilDate = Nothing
     , _gorsMetadata = mempty
     , _gorsReplicationStatus = Nothing
     , _gorsCacheControl = Nothing
     , _gorsContentLanguage = Nothing
     , _gorsLastModified = Nothing
+    , _gorsObjectLockLegalHoldStatus = Nothing
     , _gorsContentDisposition = Nothing
     , _gorsContentRange = Nothing
     , _gorsServerSideEncryption = Nothing
@@ -489,6 +509,10 @@ gorsVersionId = lens _gorsVersionId (\ s a -> s{_gorsVersionId = a})
 -- | Size of the body in bytes.
 gorsContentLength :: Lens' GetObjectResponse (Maybe Integer)
 gorsContentLength = lens _gorsContentLength (\ s a -> s{_gorsContentLength = a})
+
+-- | The Object Lock mode currently in place for this object.
+gorsObjectLockMode :: Lens' GetObjectResponse (Maybe ObjectLockMode)
+gorsObjectLockMode = lens _gorsObjectLockMode (\ s a -> s{_gorsObjectLockMode = a})
 
 -- | The date and time at which the object is no longer cacheable.
 gorsExpires :: Lens' GetObjectResponse (Maybe UTCTime)
@@ -542,6 +566,10 @@ gorsSSEKMSKeyId = lens _gorsSSEKMSKeyId (\ s a -> s{_gorsSSEKMSKeyId = a}) . map
 gorsContentEncoding :: Lens' GetObjectResponse (Maybe Text)
 gorsContentEncoding = lens _gorsContentEncoding (\ s a -> s{_gorsContentEncoding = a})
 
+-- | The date and time when this object's Object Lock will expire.
+gorsObjectLockRetainUntilDate :: Lens' GetObjectResponse (Maybe UTCTime)
+gorsObjectLockRetainUntilDate = lens _gorsObjectLockRetainUntilDate (\ s a -> s{_gorsObjectLockRetainUntilDate = a}) . mapping _Time
+
 -- | A map of metadata to store with the object in S3.
 gorsMetadata :: Lens' GetObjectResponse (HashMap Text Text)
 gorsMetadata = lens _gorsMetadata (\ s a -> s{_gorsMetadata = a}) . _Map
@@ -561,6 +589,10 @@ gorsContentLanguage = lens _gorsContentLanguage (\ s a -> s{_gorsContentLanguage
 -- | Last modified date of the object
 gorsLastModified :: Lens' GetObjectResponse (Maybe UTCTime)
 gorsLastModified = lens _gorsLastModified (\ s a -> s{_gorsLastModified = a}) . mapping _Time
+
+-- | Indicates whether this object has an active legal hold. This field is only returned if you have permission to view an object's legal hold status.
+gorsObjectLockLegalHoldStatus :: Lens' GetObjectResponse (Maybe ObjectLockLegalHoldStatus)
+gorsObjectLockLegalHoldStatus = lens _gorsObjectLockLegalHoldStatus (\ s a -> s{_gorsObjectLockLegalHoldStatus = a})
 
 -- | Specifies presentational information for the object.
 gorsContentDisposition :: Lens' GetObjectResponse (Maybe Text)

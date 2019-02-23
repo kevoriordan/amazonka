@@ -1231,6 +1231,92 @@ instance Hashable BatchDetachTypedLinkResponse where
 
 instance NFData BatchDetachTypedLinkResponse where
 
+-- | Retrieves attributes that are associated with a typed link inside a 'BatchRead' operation. For more information, see 'GetLinkAttributes' and 'BatchReadRequest$Operations' .
+--
+--
+--
+-- /See:/ 'batchGetLinkAttributes' smart constructor.
+data BatchGetLinkAttributes = BatchGetLinkAttributes'
+  { _bglaTypedLinkSpecifier :: !TypedLinkSpecifier
+  , _bglaAttributeNames     :: ![Text]
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BatchGetLinkAttributes' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bglaTypedLinkSpecifier' - Allows a typed link specifier to be accepted as input.
+--
+-- * 'bglaAttributeNames' - A list of attribute names whose values will be retrieved.
+batchGetLinkAttributes
+    :: TypedLinkSpecifier -- ^ 'bglaTypedLinkSpecifier'
+    -> BatchGetLinkAttributes
+batchGetLinkAttributes pTypedLinkSpecifier_ =
+  BatchGetLinkAttributes'
+    { _bglaTypedLinkSpecifier = pTypedLinkSpecifier_
+    , _bglaAttributeNames = mempty
+    }
+
+
+-- | Allows a typed link specifier to be accepted as input.
+bglaTypedLinkSpecifier :: Lens' BatchGetLinkAttributes TypedLinkSpecifier
+bglaTypedLinkSpecifier = lens _bglaTypedLinkSpecifier (\ s a -> s{_bglaTypedLinkSpecifier = a})
+
+-- | A list of attribute names whose values will be retrieved.
+bglaAttributeNames :: Lens' BatchGetLinkAttributes [Text]
+bglaAttributeNames = lens _bglaAttributeNames (\ s a -> s{_bglaAttributeNames = a}) . _Coerce
+
+instance Hashable BatchGetLinkAttributes where
+
+instance NFData BatchGetLinkAttributes where
+
+instance ToJSON BatchGetLinkAttributes where
+        toJSON BatchGetLinkAttributes'{..}
+          = object
+              (catMaybes
+                 [Just
+                    ("TypedLinkSpecifier" .= _bglaTypedLinkSpecifier),
+                  Just ("AttributeNames" .= _bglaAttributeNames)])
+
+-- | Represents the output of a 'GetLinkAttributes' response operation.
+--
+--
+--
+-- /See:/ 'batchGetLinkAttributesResponse' smart constructor.
+newtype BatchGetLinkAttributesResponse = BatchGetLinkAttributesResponse'
+  { _bglaAttributes :: Maybe [AttributeKeyAndValue]
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BatchGetLinkAttributesResponse' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bglaAttributes' - The attributes that are associated with the typed link.
+batchGetLinkAttributesResponse
+    :: BatchGetLinkAttributesResponse
+batchGetLinkAttributesResponse =
+  BatchGetLinkAttributesResponse' {_bglaAttributes = Nothing}
+
+
+-- | The attributes that are associated with the typed link.
+bglaAttributes :: Lens' BatchGetLinkAttributesResponse [AttributeKeyAndValue]
+bglaAttributes = lens _bglaAttributes (\ s a -> s{_bglaAttributes = a}) . _Default . _Coerce
+
+instance FromJSON BatchGetLinkAttributesResponse
+         where
+        parseJSON
+          = withObject "BatchGetLinkAttributesResponse"
+              (\ x ->
+                 BatchGetLinkAttributesResponse' <$>
+                   (x .:? "Attributes" .!= mempty))
+
+instance Hashable BatchGetLinkAttributesResponse
+         where
+
+instance NFData BatchGetLinkAttributesResponse where
+
 -- | Retrieves attributes within a facet that are associated with an object inside an 'BatchRead' operation. For more information, see 'GetObjectAttributes' and 'BatchReadRequest$Operations' .
 --
 --
@@ -2556,6 +2642,7 @@ data BatchReadOperation = BatchReadOperation'
   , _broListObjectParentPaths  :: !(Maybe BatchListObjectParentPaths)
   , _broListObjectAttributes   :: !(Maybe BatchListObjectAttributes)
   , _broListIncomingTypedLinks :: !(Maybe BatchListIncomingTypedLinks)
+  , _broGetLinkAttributes      :: !(Maybe BatchGetLinkAttributes)
   , _broGetObjectAttributes    :: !(Maybe BatchGetObjectAttributes)
   , _broListObjectChildren     :: !(Maybe BatchListObjectChildren)
   , _broListPolicyAttachments  :: !(Maybe BatchListPolicyAttachments)
@@ -2582,6 +2669,8 @@ data BatchReadOperation = BatchReadOperation'
 --
 -- * 'broListIncomingTypedLinks' - Returns a paginated list of all the incoming 'TypedLinkSpecifier' information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink Typed link> .
 --
+-- * 'broGetLinkAttributes' - Retrieves attributes that are associated with a typed link.
+--
 -- * 'broGetObjectAttributes' - Retrieves attributes within a facet that are associated with an object.
 --
 -- * 'broListObjectChildren' - Returns a paginated list of child objects that are associated with a given object.
@@ -2602,6 +2691,7 @@ batchReadOperation =
     , _broListObjectParentPaths = Nothing
     , _broListObjectAttributes = Nothing
     , _broListIncomingTypedLinks = Nothing
+    , _broGetLinkAttributes = Nothing
     , _broGetObjectAttributes = Nothing
     , _broListObjectChildren = Nothing
     , _broListPolicyAttachments = Nothing
@@ -2637,6 +2727,10 @@ broListObjectAttributes = lens _broListObjectAttributes (\ s a -> s{_broListObje
 -- | Returns a paginated list of all the incoming 'TypedLinkSpecifier' information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink Typed link> .
 broListIncomingTypedLinks :: Lens' BatchReadOperation (Maybe BatchListIncomingTypedLinks)
 broListIncomingTypedLinks = lens _broListIncomingTypedLinks (\ s a -> s{_broListIncomingTypedLinks = a})
+
+-- | Retrieves attributes that are associated with a typed link.
+broGetLinkAttributes :: Lens' BatchReadOperation (Maybe BatchGetLinkAttributes)
+broGetLinkAttributes = lens _broGetLinkAttributes (\ s a -> s{_broGetLinkAttributes = a})
 
 -- | Retrieves attributes within a facet that are associated with an object.
 broGetObjectAttributes :: Lens' BatchReadOperation (Maybe BatchGetObjectAttributes)
@@ -2678,6 +2772,7 @@ instance ToJSON BatchReadOperation where
                     _broListObjectAttributes,
                   ("ListIncomingTypedLinks" .=) <$>
                     _broListIncomingTypedLinks,
+                  ("GetLinkAttributes" .=) <$> _broGetLinkAttributes,
                   ("GetObjectAttributes" .=) <$>
                     _broGetObjectAttributes,
                   ("ListObjectChildren" .=) <$> _broListObjectChildren,
@@ -2746,6 +2841,7 @@ data BatchReadSuccessfulResponse = BatchReadSuccessfulResponse'
   , _brsListObjectParentPaths  :: !(Maybe BatchListObjectParentPathsResponse)
   , _brsListObjectAttributes   :: !(Maybe BatchListObjectAttributesResponse)
   , _brsListIncomingTypedLinks :: !(Maybe BatchListIncomingTypedLinksResponse)
+  , _brsGetLinkAttributes      :: !(Maybe BatchGetLinkAttributesResponse)
   , _brsGetObjectAttributes    :: !(Maybe BatchGetObjectAttributesResponse)
   , _brsListObjectChildren     :: !(Maybe BatchListObjectChildrenResponse)
   , _brsListPolicyAttachments  :: !(Maybe BatchListPolicyAttachmentsResponse)
@@ -2772,6 +2868,8 @@ data BatchReadSuccessfulResponse = BatchReadSuccessfulResponse'
 --
 -- * 'brsListIncomingTypedLinks' - Returns a paginated list of all the incoming 'TypedLinkSpecifier' information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink Typed link> .
 --
+-- * 'brsGetLinkAttributes' - The list of attributes to retrieve from the typed link.
+--
 -- * 'brsGetObjectAttributes' - Retrieves attributes within a facet that are associated with an object.
 --
 -- * 'brsListObjectChildren' - Returns a paginated list of child objects that are associated with a given object.
@@ -2792,6 +2890,7 @@ batchReadSuccessfulResponse =
     , _brsListObjectParentPaths = Nothing
     , _brsListObjectAttributes = Nothing
     , _brsListIncomingTypedLinks = Nothing
+    , _brsGetLinkAttributes = Nothing
     , _brsGetObjectAttributes = Nothing
     , _brsListObjectChildren = Nothing
     , _brsListPolicyAttachments = Nothing
@@ -2828,6 +2927,10 @@ brsListObjectAttributes = lens _brsListObjectAttributes (\ s a -> s{_brsListObje
 brsListIncomingTypedLinks :: Lens' BatchReadSuccessfulResponse (Maybe BatchListIncomingTypedLinksResponse)
 brsListIncomingTypedLinks = lens _brsListIncomingTypedLinks (\ s a -> s{_brsListIncomingTypedLinks = a})
 
+-- | The list of attributes to retrieve from the typed link.
+brsGetLinkAttributes :: Lens' BatchReadSuccessfulResponse (Maybe BatchGetLinkAttributesResponse)
+brsGetLinkAttributes = lens _brsGetLinkAttributes (\ s a -> s{_brsGetLinkAttributes = a})
+
 -- | Retrieves attributes within a facet that are associated with an object.
 brsGetObjectAttributes :: Lens' BatchReadSuccessfulResponse (Maybe BatchGetObjectAttributesResponse)
 brsGetObjectAttributes = lens _brsGetObjectAttributes (\ s a -> s{_brsGetObjectAttributes = a})
@@ -2860,6 +2963,7 @@ instance FromJSON BatchReadSuccessfulResponse where
                      <*> (x .:? "ListObjectParentPaths")
                      <*> (x .:? "ListObjectAttributes")
                      <*> (x .:? "ListIncomingTypedLinks")
+                     <*> (x .:? "GetLinkAttributes")
                      <*> (x .:? "GetObjectAttributes")
                      <*> (x .:? "ListObjectChildren")
                      <*> (x .:? "ListPolicyAttachments")
@@ -2945,6 +3049,83 @@ instance Hashable BatchRemoveFacetFromObjectResponse
          where
 
 instance NFData BatchRemoveFacetFromObjectResponse
+         where
+
+-- | Updates a given typed link’s attributes inside a 'BatchRead' operation. Attributes to be updated must not contribute to the typed link’s identity, as defined by its @IdentityAttributeOrder@ . For more information, see 'UpdateLinkAttributes' and 'BatchReadRequest$Operations' .
+--
+--
+--
+-- /See:/ 'batchUpdateLinkAttributes' smart constructor.
+data BatchUpdateLinkAttributes = BatchUpdateLinkAttributes'
+  { _bulaTypedLinkSpecifier :: !TypedLinkSpecifier
+  , _bulaAttributeUpdates   :: ![LinkAttributeUpdate]
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BatchUpdateLinkAttributes' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'bulaTypedLinkSpecifier' - Allows a typed link specifier to be accepted as input.
+--
+-- * 'bulaAttributeUpdates' - The attributes update structure.
+batchUpdateLinkAttributes
+    :: TypedLinkSpecifier -- ^ 'bulaTypedLinkSpecifier'
+    -> BatchUpdateLinkAttributes
+batchUpdateLinkAttributes pTypedLinkSpecifier_ =
+  BatchUpdateLinkAttributes'
+    { _bulaTypedLinkSpecifier = pTypedLinkSpecifier_
+    , _bulaAttributeUpdates = mempty
+    }
+
+
+-- | Allows a typed link specifier to be accepted as input.
+bulaTypedLinkSpecifier :: Lens' BatchUpdateLinkAttributes TypedLinkSpecifier
+bulaTypedLinkSpecifier = lens _bulaTypedLinkSpecifier (\ s a -> s{_bulaTypedLinkSpecifier = a})
+
+-- | The attributes update structure.
+bulaAttributeUpdates :: Lens' BatchUpdateLinkAttributes [LinkAttributeUpdate]
+bulaAttributeUpdates = lens _bulaAttributeUpdates (\ s a -> s{_bulaAttributeUpdates = a}) . _Coerce
+
+instance Hashable BatchUpdateLinkAttributes where
+
+instance NFData BatchUpdateLinkAttributes where
+
+instance ToJSON BatchUpdateLinkAttributes where
+        toJSON BatchUpdateLinkAttributes'{..}
+          = object
+              (catMaybes
+                 [Just
+                    ("TypedLinkSpecifier" .= _bulaTypedLinkSpecifier),
+                  Just ("AttributeUpdates" .= _bulaAttributeUpdates)])
+
+-- | Represents the output of a 'UpdateLinkAttributes' response operation.
+--
+--
+--
+-- /See:/ 'batchUpdateLinkAttributesResponse' smart constructor.
+data BatchUpdateLinkAttributesResponse =
+  BatchUpdateLinkAttributesResponse'
+  deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'BatchUpdateLinkAttributesResponse' with the minimum fields required to make a request.
+--
+batchUpdateLinkAttributesResponse
+    :: BatchUpdateLinkAttributesResponse
+batchUpdateLinkAttributesResponse = BatchUpdateLinkAttributesResponse'
+
+
+instance FromJSON BatchUpdateLinkAttributesResponse
+         where
+        parseJSON
+          = withObject "BatchUpdateLinkAttributesResponse"
+              (\ x -> pure BatchUpdateLinkAttributesResponse')
+
+instance Hashable BatchUpdateLinkAttributesResponse
+         where
+
+instance NFData BatchUpdateLinkAttributesResponse
          where
 
 -- | Represents the output of a @BatchUpdate@ operation.
@@ -3050,6 +3231,7 @@ data BatchWriteOperation = BatchWriteOperation'
   , _bDetachTypedLink        :: !(Maybe BatchDetachTypedLink)
   , _bUpdateObjectAttributes :: !(Maybe BatchUpdateObjectAttributes)
   , _bAttachPolicy           :: !(Maybe BatchAttachPolicy)
+  , _bUpdateLinkAttributes   :: !(Maybe BatchUpdateLinkAttributes)
   , _bAttachToIndex          :: !(Maybe BatchAttachToIndex)
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
@@ -3084,6 +3266,8 @@ data BatchWriteOperation = BatchWriteOperation'
 --
 -- * 'bAttachPolicy' - Attaches a policy object to a regular object. An object can have a limited number of attached policies.
 --
+-- * 'bUpdateLinkAttributes' - Updates a given object's attributes.
+--
 -- * 'bAttachToIndex' - Attaches the specified object to the specified index.
 batchWriteOperation
     :: BatchWriteOperation
@@ -3102,6 +3286,7 @@ batchWriteOperation =
     , _bDetachTypedLink = Nothing
     , _bUpdateObjectAttributes = Nothing
     , _bAttachPolicy = Nothing
+    , _bUpdateLinkAttributes = Nothing
     , _bAttachToIndex = Nothing
     }
 
@@ -3158,6 +3343,10 @@ bUpdateObjectAttributes = lens _bUpdateObjectAttributes (\ s a -> s{_bUpdateObje
 bAttachPolicy :: Lens' BatchWriteOperation (Maybe BatchAttachPolicy)
 bAttachPolicy = lens _bAttachPolicy (\ s a -> s{_bAttachPolicy = a})
 
+-- | Updates a given object's attributes.
+bUpdateLinkAttributes :: Lens' BatchWriteOperation (Maybe BatchUpdateLinkAttributes)
+bUpdateLinkAttributes = lens _bUpdateLinkAttributes (\ s a -> s{_bUpdateLinkAttributes = a})
+
 -- | Attaches the specified object to the specified index.
 bAttachToIndex :: Lens' BatchWriteOperation (Maybe BatchAttachToIndex)
 bAttachToIndex = lens _bAttachToIndex (\ s a -> s{_bAttachToIndex = a})
@@ -3185,6 +3374,8 @@ instance ToJSON BatchWriteOperation where
                   ("UpdateObjectAttributes" .=) <$>
                     _bUpdateObjectAttributes,
                   ("AttachPolicy" .=) <$> _bAttachPolicy,
+                  ("UpdateLinkAttributes" .=) <$>
+                    _bUpdateLinkAttributes,
                   ("AttachToIndex" .=) <$> _bAttachToIndex])
 
 -- | Represents the output of a @BatchWrite@ response operation.
@@ -3206,6 +3397,7 @@ data BatchWriteOperationResponse = BatchWriteOperationResponse'
   , _bwoDetachTypedLink        :: !(Maybe BatchDetachTypedLinkResponse)
   , _bwoUpdateObjectAttributes :: !(Maybe BatchUpdateObjectAttributesResponse)
   , _bwoAttachPolicy           :: !(Maybe BatchAttachPolicyResponse)
+  , _bwoUpdateLinkAttributes   :: !(Maybe BatchUpdateLinkAttributesResponse)
   , _bwoAttachToIndex          :: !(Maybe BatchAttachToIndexResponse)
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
@@ -3240,6 +3432,8 @@ data BatchWriteOperationResponse = BatchWriteOperationResponse'
 --
 -- * 'bwoAttachPolicy' - Attaches a policy object to a regular object. An object can have a limited number of attached policies.
 --
+-- * 'bwoUpdateLinkAttributes' - Represents the output of a @BatchWrite@ response operation.
+--
 -- * 'bwoAttachToIndex' - Attaches the specified object to the specified index.
 batchWriteOperationResponse
     :: BatchWriteOperationResponse
@@ -3258,6 +3452,7 @@ batchWriteOperationResponse =
     , _bwoDetachTypedLink = Nothing
     , _bwoUpdateObjectAttributes = Nothing
     , _bwoAttachPolicy = Nothing
+    , _bwoUpdateLinkAttributes = Nothing
     , _bwoAttachToIndex = Nothing
     }
 
@@ -3314,6 +3509,10 @@ bwoUpdateObjectAttributes = lens _bwoUpdateObjectAttributes (\ s a -> s{_bwoUpda
 bwoAttachPolicy :: Lens' BatchWriteOperationResponse (Maybe BatchAttachPolicyResponse)
 bwoAttachPolicy = lens _bwoAttachPolicy (\ s a -> s{_bwoAttachPolicy = a})
 
+-- | Represents the output of a @BatchWrite@ response operation.
+bwoUpdateLinkAttributes :: Lens' BatchWriteOperationResponse (Maybe BatchUpdateLinkAttributesResponse)
+bwoUpdateLinkAttributes = lens _bwoUpdateLinkAttributes (\ s a -> s{_bwoUpdateLinkAttributes = a})
+
 -- | Attaches the specified object to the specified index.
 bwoAttachToIndex :: Lens' BatchWriteOperationResponse (Maybe BatchAttachToIndexResponse)
 bwoAttachToIndex = lens _bwoAttachToIndex (\ s a -> s{_bwoAttachToIndex = a})
@@ -3335,6 +3534,7 @@ instance FromJSON BatchWriteOperationResponse where
                      <*> (x .:? "DetachTypedLink")
                      <*> (x .:? "UpdateObjectAttributes")
                      <*> (x .:? "AttachPolicy")
+                     <*> (x .:? "UpdateLinkAttributes")
                      <*> (x .:? "AttachToIndex"))
 
 instance Hashable BatchWriteOperationResponse where
@@ -3740,6 +3940,96 @@ instance FromJSON IndexAttachment where
 instance Hashable IndexAttachment where
 
 instance NFData IndexAttachment where
+
+-- | The action to take on a typed link attribute value. Updates are only supported for attributes which don’t contribute to link identity.
+--
+--
+--
+-- /See:/ 'linkAttributeAction' smart constructor.
+data LinkAttributeAction = LinkAttributeAction'
+  { _laaAttributeActionType  :: !(Maybe UpdateActionType)
+  , _laaAttributeUpdateValue :: !(Maybe TypedAttributeValue)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'LinkAttributeAction' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'laaAttributeActionType' - A type that can be either @UPDATE_OR_CREATE@ or @DELETE@ .
+--
+-- * 'laaAttributeUpdateValue' - The value that you want to update to.
+linkAttributeAction
+    :: LinkAttributeAction
+linkAttributeAction =
+  LinkAttributeAction'
+    {_laaAttributeActionType = Nothing, _laaAttributeUpdateValue = Nothing}
+
+
+-- | A type that can be either @UPDATE_OR_CREATE@ or @DELETE@ .
+laaAttributeActionType :: Lens' LinkAttributeAction (Maybe UpdateActionType)
+laaAttributeActionType = lens _laaAttributeActionType (\ s a -> s{_laaAttributeActionType = a})
+
+-- | The value that you want to update to.
+laaAttributeUpdateValue :: Lens' LinkAttributeAction (Maybe TypedAttributeValue)
+laaAttributeUpdateValue = lens _laaAttributeUpdateValue (\ s a -> s{_laaAttributeUpdateValue = a})
+
+instance Hashable LinkAttributeAction where
+
+instance NFData LinkAttributeAction where
+
+instance ToJSON LinkAttributeAction where
+        toJSON LinkAttributeAction'{..}
+          = object
+              (catMaybes
+                 [("AttributeActionType" .=) <$>
+                    _laaAttributeActionType,
+                  ("AttributeUpdateValue" .=) <$>
+                    _laaAttributeUpdateValue])
+
+-- | Structure that contains attribute update information.
+--
+--
+--
+-- /See:/ 'linkAttributeUpdate' smart constructor.
+data LinkAttributeUpdate = LinkAttributeUpdate'
+  { _lauAttributeAction :: !(Maybe LinkAttributeAction)
+  , _lauAttributeKey    :: !(Maybe AttributeKey)
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'LinkAttributeUpdate' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'lauAttributeAction' - The action to perform as part of the attribute update.
+--
+-- * 'lauAttributeKey' - The key of the attribute being updated.
+linkAttributeUpdate
+    :: LinkAttributeUpdate
+linkAttributeUpdate =
+  LinkAttributeUpdate'
+    {_lauAttributeAction = Nothing, _lauAttributeKey = Nothing}
+
+
+-- | The action to perform as part of the attribute update.
+lauAttributeAction :: Lens' LinkAttributeUpdate (Maybe LinkAttributeAction)
+lauAttributeAction = lens _lauAttributeAction (\ s a -> s{_lauAttributeAction = a})
+
+-- | The key of the attribute being updated.
+lauAttributeKey :: Lens' LinkAttributeUpdate (Maybe AttributeKey)
+lauAttributeKey = lens _lauAttributeKey (\ s a -> s{_lauAttributeKey = a})
+
+instance Hashable LinkAttributeUpdate where
+
+instance NFData LinkAttributeUpdate where
+
+instance ToJSON LinkAttributeUpdate where
+        toJSON LinkAttributeUpdate'{..}
+          = object
+              (catMaybes
+                 [("AttributeAction" .=) <$> _lauAttributeAction,
+                  ("AttributeKey" .=) <$> _lauAttributeKey])
 
 -- | The action to take on the object attribute.
 --

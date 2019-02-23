@@ -66,7 +66,7 @@ data DescribePolicies = DescribePolicies'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dpsPolicyNames' - The names of one or more policies. If you omit this parameter, all policies are described. If an group name is provided, the results are limited to that group. This list is limited to 50 items. If you specify an unknown policy name, it is ignored with no error.
+-- * 'dpsPolicyNames' - The names of one or more policies. If you omit this parameter, all policies are described. If a group name is provided, the results are limited to that group. This list is limited to 50 items. If you specify an unknown policy name, it is ignored with no error.
 --
 -- * 'dpsNextToken' - The token for the next set of items to return. (You received this token from a previous call.)
 --
@@ -87,7 +87,7 @@ describePolicies =
     }
 
 
--- | The names of one or more policies. If you omit this parameter, all policies are described. If an group name is provided, the results are limited to that group. This list is limited to 50 items. If you specify an unknown policy name, it is ignored with no error.
+-- | The names of one or more policies. If you omit this parameter, all policies are described. If a group name is provided, the results are limited to that group. This list is limited to 50 items. If you specify an unknown policy name, it is ignored with no error.
 dpsPolicyNames :: Lens' DescribePolicies [Text]
 dpsPolicyNames = lens _dpsPolicyNames (\ s a -> s{_dpsPolicyNames = a}) . _Default . _Coerce
 

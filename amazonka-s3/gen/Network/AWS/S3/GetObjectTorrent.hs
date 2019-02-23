@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Return torrent files from a bucket.
+--
+--
 module Network.AWS.S3.GetObjectTorrent
     (
     -- * Creating a Request

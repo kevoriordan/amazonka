@@ -159,7 +159,7 @@ data MeterUsageResponse = MeterUsageResponse'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mursMeteringRecordId' - Undocumented member.
+-- * 'mursMeteringRecordId' - Metering record id.
 --
 -- * 'mursResponseStatus' - -- | The response status code.
 meterUsageResponse
@@ -170,7 +170,7 @@ meterUsageResponse pResponseStatus_ =
     {_mursMeteringRecordId = Nothing, _mursResponseStatus = pResponseStatus_}
 
 
--- | Undocumented member.
+-- | Metering record id.
 mursMeteringRecordId :: Lens' MeterUsageResponse (Maybe Text)
 mursMeteringRecordId = lens _mursMeteringRecordId (\ s a -> s{_mursMeteringRecordId = a})
 

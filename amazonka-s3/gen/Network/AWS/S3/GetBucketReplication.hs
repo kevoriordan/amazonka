@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Returns the replication configuration of a bucket.
+--
+--
 module Network.AWS.S3.GetBucketReplication
     (
     -- * Creating a Request

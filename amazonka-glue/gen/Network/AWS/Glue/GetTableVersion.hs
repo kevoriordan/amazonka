@@ -60,7 +60,7 @@ data GetTableVersion = GetTableVersion'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gtvVersionId' - The ID value of the table version to be retrieved.
+-- * 'gtvVersionId' - The ID value of the table version to be retrieved. A @VersionID@ is a string representation of an integer. Each version is incremented by 1.
 --
 -- * 'gtvCatalogId' - The ID of the Data Catalog where the tables reside. If none is supplied, the AWS account ID is used by default.
 --
@@ -80,7 +80,7 @@ getTableVersion pDatabaseName_ pTableName_ =
     }
 
 
--- | The ID value of the table version to be retrieved.
+-- | The ID value of the table version to be retrieved. A @VersionID@ is a string representation of an integer. Each version is incremented by 1.
 gtvVersionId :: Lens' GetTableVersion (Maybe Text)
 gtvVersionId = lens _gtvVersionId (\ s a -> s{_gtvVersionId = a})
 

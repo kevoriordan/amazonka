@@ -23,7 +23,7 @@
 --
 -- You can copy a snapshot from one AWS Region to another. In that case, the AWS Region where you call the @CopyDBSnapshot@ action is the destination AWS Region for the DB snapshot copy.
 --
--- For more information about copying snapshots, see <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopyDBSnapshot.html Copying a DB Snapshot> in the Amazon RDS User Guide.
+-- For more information about copying snapshots, see <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopyDBSnapshot.html Copying a DB Snapshot> in the /Amazon RDS User Guide./
 --
 module Network.AWS.RDS.CopyDBSnapshot
     (
@@ -80,13 +80,13 @@ data CopyDBSnapshot = CopyDBSnapshot'
 --
 -- * 'cdsKMSKeyId' - The AWS KMS key ID for an encrypted DB snapshot. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.  If you copy an encrypted DB snapshot from your AWS account, you can specify a value for this parameter to encrypt the copy with a new KMS encryption key. If you don't specify a value for this parameter, then the copy of the DB snapshot is encrypted with the same KMS key as the source DB snapshot.  If you copy an encrypted DB snapshot that is shared from another AWS account, then you must specify a value for this parameter.  If you specify this parameter when you copy an unencrypted snapshot, the copy is encrypted.  If you copy an encrypted snapshot to a different AWS Region, then you must specify a KMS key for the destination AWS Region. KMS encryption keys are specific to the AWS Region that they are created in, and you can't use encryption keys from one AWS Region in another AWS Region.
 --
--- * 'cdsOptionGroupName' - The name of an option group to associate with the copy of the snapshot. Specify this option if you are copying a snapshot from one AWS Region to another, and your DB instance uses a nondefault option group. If your source DB instance uses Transparent Data Encryption for Oracle or Microsoft SQL Server, you must specify this option when copying across AWS Regions. For more information, see <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopySnapshot.Options Option Group Considerations> .
+-- * 'cdsOptionGroupName' - The name of an option group to associate with the copy of the snapshot. Specify this option if you are copying a snapshot from one AWS Region to another, and your DB instance uses a nondefault option group. If your source DB instance uses Transparent Data Encryption for Oracle or Microsoft SQL Server, you must specify this option when copying across AWS Regions. For more information, see <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopySnapshot.Options Option Group Considerations> in the /Amazon RDS User Guide./
 --
 -- * 'cdsTags' - Undocumented member.
 --
 -- * 'cdsSourceDBSnapshotIdentifier' - The identifier for the source DB snapshot. If the source snapshot is in the same AWS Region as the copy, specify a valid DB snapshot identifier. For example, you might specify @rds:mysql-instance1-snapshot-20130805@ .  If the source snapshot is in a different AWS Region than the copy, specify a valid DB snapshot ARN. For example, you might specify @arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20130805@ .  If you are copying from a shared manual DB snapshot, this parameter must be the Amazon Resource Name (ARN) of the shared DB snapshot.  If you are copying an encrypted snapshot this parameter must be in the ARN format for the source AWS Region, and must match the @SourceDBSnapshotIdentifier@ in the @PreSignedUrl@ parameter.  Constraints:     * Must specify a valid system snapshot in the "available" state. Example: @rds:mydb-2012-04-02-00-01@  Example: @arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20130805@
 --
--- * 'cdsTargetDBSnapshotIdentifier' - The identifier for the copy of the snapshot.  Constraints:     * Cannot be null, empty, or blank     * Must contain from 1 to 255 letters, numbers, or hyphens     * First character must be a letter     * Cannot end with a hyphen or contain two consecutive hyphens Example: @my-db-snapshot@
+-- * 'cdsTargetDBSnapshotIdentifier' - The identifier for the copy of the snapshot.  Constraints:     * Can't be null, empty, or blank     * Must contain from 1 to 255 letters, numbers, or hyphens     * First character must be a letter     * Can't end with a hyphen or contain two consecutive hyphens Example: @my-db-snapshot@
 copyDBSnapshot
     :: Text -- ^ 'cdsSourceDBSnapshotIdentifier'
     -> Text -- ^ 'cdsTargetDBSnapshotIdentifier'
@@ -115,7 +115,7 @@ cdsCopyTags = lens _cdsCopyTags (\ s a -> s{_cdsCopyTags = a})
 cdsKMSKeyId :: Lens' CopyDBSnapshot (Maybe Text)
 cdsKMSKeyId = lens _cdsKMSKeyId (\ s a -> s{_cdsKMSKeyId = a})
 
--- | The name of an option group to associate with the copy of the snapshot. Specify this option if you are copying a snapshot from one AWS Region to another, and your DB instance uses a nondefault option group. If your source DB instance uses Transparent Data Encryption for Oracle or Microsoft SQL Server, you must specify this option when copying across AWS Regions. For more information, see <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopySnapshot.Options Option Group Considerations> .
+-- | The name of an option group to associate with the copy of the snapshot. Specify this option if you are copying a snapshot from one AWS Region to another, and your DB instance uses a nondefault option group. If your source DB instance uses Transparent Data Encryption for Oracle or Microsoft SQL Server, you must specify this option when copying across AWS Regions. For more information, see <http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopySnapshot.Options Option Group Considerations> in the /Amazon RDS User Guide./
 cdsOptionGroupName :: Lens' CopyDBSnapshot (Maybe Text)
 cdsOptionGroupName = lens _cdsOptionGroupName (\ s a -> s{_cdsOptionGroupName = a})
 
@@ -127,7 +127,7 @@ cdsTags = lens _cdsTags (\ s a -> s{_cdsTags = a}) . _Default . _Coerce
 cdsSourceDBSnapshotIdentifier :: Lens' CopyDBSnapshot Text
 cdsSourceDBSnapshotIdentifier = lens _cdsSourceDBSnapshotIdentifier (\ s a -> s{_cdsSourceDBSnapshotIdentifier = a})
 
--- | The identifier for the copy of the snapshot.  Constraints:     * Cannot be null, empty, or blank     * Must contain from 1 to 255 letters, numbers, or hyphens     * First character must be a letter     * Cannot end with a hyphen or contain two consecutive hyphens Example: @my-db-snapshot@
+-- | The identifier for the copy of the snapshot.  Constraints:     * Can't be null, empty, or blank     * Must contain from 1 to 255 letters, numbers, or hyphens     * First character must be a letter     * Can't end with a hyphen or contain two consecutive hyphens Example: @my-db-snapshot@
 cdsTargetDBSnapshotIdentifier :: Lens' CopyDBSnapshot Text
 cdsTargetDBSnapshotIdentifier = lens _cdsTargetDBSnapshotIdentifier (\ s a -> s{_cdsTargetDBSnapshotIdentifier = a})
 

@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Uploads a part by copying data from an existing object as data source.
+--
+--
 module Network.AWS.S3.UploadPartCopy
     (
     -- * Creating a Request
@@ -66,8 +68,8 @@ import Network.AWS.S3.Types.Product
 
 -- | /See:/ 'uploadPartCopy' smart constructor.
 data UploadPartCopy = UploadPartCopy'
-  { _upcCopySourceIfModifiedSince      :: !(Maybe RFC822)
-  , _upcCopySourceIfUnmodifiedSince    :: !(Maybe RFC822)
+  { _upcCopySourceIfModifiedSince      :: !(Maybe ISO8601)
+  , _upcCopySourceIfUnmodifiedSince    :: !(Maybe ISO8601)
   , _upcCopySourceRange                :: !(Maybe Text)
   , _upcCopySourceSSECustomerKeyMD5    :: !(Maybe Text)
   , _upcCopySourceIfNoneMatch          :: !(Maybe Text)

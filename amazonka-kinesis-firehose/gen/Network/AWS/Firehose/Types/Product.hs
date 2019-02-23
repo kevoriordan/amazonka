@@ -285,22 +285,25 @@ instance ToJSON DataFormatConversionConfiguration
 --
 -- /See:/ 'deliveryStreamDescription' smart constructor.
 data DeliveryStreamDescription = DeliveryStreamDescription'
-  { _dsdCreateTimestamp      :: !(Maybe POSIX)
-  , _dsdSource               :: !(Maybe SourceDescription)
-  , _dsdLastUpdateTimestamp  :: !(Maybe POSIX)
-  , _dsdDeliveryStreamName   :: !Text
-  , _dsdDeliveryStreamARN    :: !Text
+  { _dsdDeliveryStreamEncryptionConfiguration :: !(Maybe DeliveryStreamEncryptionConfiguration)
+  , _dsdCreateTimestamp :: !(Maybe POSIX)
+  , _dsdSource :: !(Maybe SourceDescription)
+  , _dsdLastUpdateTimestamp :: !(Maybe POSIX)
+  , _dsdDeliveryStreamName :: !Text
+  , _dsdDeliveryStreamARN :: !Text
   , _dsdDeliveryStreamStatus :: !DeliveryStreamStatus
-  , _dsdDeliveryStreamType   :: !DeliveryStreamType
-  , _dsdVersionId            :: !Text
-  , _dsdDestinations         :: ![DestinationDescription]
-  , _dsdHasMoreDestinations  :: !Bool
+  , _dsdDeliveryStreamType :: !DeliveryStreamType
+  , _dsdVersionId :: !Text
+  , _dsdDestinations :: ![DestinationDescription]
+  , _dsdHasMoreDestinations :: !Bool
   } deriving (Eq, Show, Data, Typeable, Generic)
 
 
 -- | Creates a value of 'DeliveryStreamDescription' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dsdDeliveryStreamEncryptionConfiguration' - Indicates the server-side encryption (SSE) status for the delivery stream.
 --
 -- * 'dsdCreateTimestamp' - The date and time that the delivery stream was created.
 --
@@ -331,7 +334,8 @@ deliveryStreamDescription
     -> DeliveryStreamDescription
 deliveryStreamDescription pDeliveryStreamName_ pDeliveryStreamARN_ pDeliveryStreamStatus_ pDeliveryStreamType_ pVersionId_ pHasMoreDestinations_ =
   DeliveryStreamDescription'
-    { _dsdCreateTimestamp = Nothing
+    { _dsdDeliveryStreamEncryptionConfiguration = Nothing
+    , _dsdCreateTimestamp = Nothing
     , _dsdSource = Nothing
     , _dsdLastUpdateTimestamp = Nothing
     , _dsdDeliveryStreamName = pDeliveryStreamName_
@@ -343,6 +347,10 @@ deliveryStreamDescription pDeliveryStreamName_ pDeliveryStreamARN_ pDeliveryStre
     , _dsdHasMoreDestinations = pHasMoreDestinations_
     }
 
+
+-- | Indicates the server-side encryption (SSE) status for the delivery stream.
+dsdDeliveryStreamEncryptionConfiguration :: Lens' DeliveryStreamDescription (Maybe DeliveryStreamEncryptionConfiguration)
+dsdDeliveryStreamEncryptionConfiguration = lens _dsdDeliveryStreamEncryptionConfiguration (\ s a -> s{_dsdDeliveryStreamEncryptionConfiguration = a})
 
 -- | The date and time that the delivery stream was created.
 dsdCreateTimestamp :: Lens' DeliveryStreamDescription (Maybe UTCTime)
@@ -389,8 +397,10 @@ instance FromJSON DeliveryStreamDescription where
           = withObject "DeliveryStreamDescription"
               (\ x ->
                  DeliveryStreamDescription' <$>
-                   (x .:? "CreateTimestamp") <*> (x .:? "Source") <*>
-                     (x .:? "LastUpdateTimestamp")
+                   (x .:? "DeliveryStreamEncryptionConfiguration") <*>
+                     (x .:? "CreateTimestamp")
+                     <*> (x .:? "Source")
+                     <*> (x .:? "LastUpdateTimestamp")
                      <*> (x .: "DeliveryStreamName")
                      <*> (x .: "DeliveryStreamARN")
                      <*> (x .: "DeliveryStreamStatus")
@@ -402,6 +412,47 @@ instance FromJSON DeliveryStreamDescription where
 instance Hashable DeliveryStreamDescription where
 
 instance NFData DeliveryStreamDescription where
+
+-- | Indicates the server-side encryption (SSE) status for the delivery stream.
+--
+--
+--
+-- /See:/ 'deliveryStreamEncryptionConfiguration' smart constructor.
+newtype DeliveryStreamEncryptionConfiguration = DeliveryStreamEncryptionConfiguration'
+  { _dsecStatus :: Maybe DeliveryStreamEncryptionStatus
+  } deriving (Eq, Read, Show, Data, Typeable, Generic)
+
+
+-- | Creates a value of 'DeliveryStreamEncryptionConfiguration' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'dsecStatus' - For a full description of the different values of this status, see 'StartDeliveryStreamEncryption' and 'StopDeliveryStreamEncryption' .
+deliveryStreamEncryptionConfiguration
+    :: DeliveryStreamEncryptionConfiguration
+deliveryStreamEncryptionConfiguration =
+  DeliveryStreamEncryptionConfiguration' {_dsecStatus = Nothing}
+
+
+-- | For a full description of the different values of this status, see 'StartDeliveryStreamEncryption' and 'StopDeliveryStreamEncryption' .
+dsecStatus :: Lens' DeliveryStreamEncryptionConfiguration (Maybe DeliveryStreamEncryptionStatus)
+dsecStatus = lens _dsecStatus (\ s a -> s{_dsecStatus = a})
+
+instance FromJSON
+           DeliveryStreamEncryptionConfiguration
+         where
+        parseJSON
+          = withObject "DeliveryStreamEncryptionConfiguration"
+              (\ x ->
+                 DeliveryStreamEncryptionConfiguration' <$>
+                   (x .:? "Status"))
+
+instance Hashable
+           DeliveryStreamEncryptionConfiguration
+         where
+
+instance NFData DeliveryStreamEncryptionConfiguration
+         where
 
 -- | The deserializer you want Kinesis Data Firehose to use for converting the input data from JSON. Kinesis Data Firehose then serializes the data to its final format using the 'Serializer' . Kinesis Data Firehose supports two types of deserializers: the <https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-JSON Apache Hive JSON SerDe> and the <https://github.com/rcongiu/Hive-JSON-Serde OpenX JSON SerDe> .
 --
@@ -612,7 +663,7 @@ data ElasticsearchDestinationConfiguration = ElasticsearchDestinationConfigurati
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'edcIndexRotationPeriod' - The Elasticsearch index rotation period. Index rotation appends a time stamp to the @IndexName@ to facilitate the expiration of old data. For more information, see <http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation Index Rotation for the Amazon ES Destination> . The default value is @OneDay@ .
+-- * 'edcIndexRotationPeriod' - The Elasticsearch index rotation period. Index rotation appends a timestamp to the @IndexName@ to facilitate the expiration of old data. For more information, see <http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation Index Rotation for the Amazon ES Destination> . The default value is @OneDay@ .
 --
 -- * 'edcS3BackupMode' - Defines how documents should be delivered to Amazon S3. When it is set to @FailedDocumentsOnly@ , Kinesis Data Firehose writes any documents that could not be indexed to the configured Amazon S3 destination, with @elasticsearch-failed/@ appended to the key prefix. When set to @AllDocuments@ , Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents with @elasticsearch-failed/@ appended to the prefix. For more information, see <http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup Amazon S3 Backup for the Amazon ES Destination> . Default value is @FailedDocumentsOnly@ .
 --
@@ -656,7 +707,7 @@ elasticsearchDestinationConfiguration pRoleARN_ pDomainARN_ pIndexName_ pTypeNam
     }
 
 
--- | The Elasticsearch index rotation period. Index rotation appends a time stamp to the @IndexName@ to facilitate the expiration of old data. For more information, see <http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation Index Rotation for the Amazon ES Destination> . The default value is @OneDay@ .
+-- | The Elasticsearch index rotation period. Index rotation appends a timestamp to the @IndexName@ to facilitate the expiration of old data. For more information, see <http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation Index Rotation for the Amazon ES Destination> . The default value is @OneDay@ .
 edcIndexRotationPeriod :: Lens' ElasticsearchDestinationConfiguration (Maybe ElasticsearchIndexRotationPeriod)
 edcIndexRotationPeriod = lens _edcIndexRotationPeriod (\ s a -> s{_edcIndexRotationPeriod = a})
 
@@ -880,17 +931,17 @@ data ElasticsearchDestinationUpdate = ElasticsearchDestinationUpdate'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eduIndexRotationPeriod' - The Elasticsearch index rotation period. Index rotation appends a time stamp to @IndexName@ to facilitate the expiration of old data. For more information, see <http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation Index Rotation for the Amazon ES Destination> . Default value is @OneDay@ .
+-- * 'eduIndexRotationPeriod' - The Elasticsearch index rotation period. Index rotation appends a timestamp to @IndexName@ to facilitate the expiration of old data. For more information, see <http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation Index Rotation for the Amazon ES Destination> . Default value is @OneDay@ .
 --
 -- * 'eduTypeName' - The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type per index. If you try to specify a new type for an existing index that already has another type, Kinesis Data Firehose returns an error during runtime.
 --
--- * 'eduDomainARN' - The ARN of the Amazon ES domain. The IAM role must have permissions for @DescribeElasticsearchDomain@ , @DescribeElasticsearchDomains@ , and @DescribeElasticsearchDomainConfig@ after assuming the IAM role specified in __RoleARN__ . For more information, see <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and AWS Service Namespaces> .
+-- * 'eduDomainARN' - The ARN of the Amazon ES domain. The IAM role must have permissions for @DescribeElasticsearchDomain@ , @DescribeElasticsearchDomains@ , and @DescribeElasticsearchDomainConfig@ after assuming the IAM role specified in @RoleARN@ . For more information, see <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and AWS Service Namespaces> .
 --
 -- * 'eduCloudWatchLoggingOptions' - The CloudWatch logging options for your delivery stream.
 --
 -- * 'eduS3Update' - The Amazon S3 destination.
 --
--- * 'eduBufferingHints' - The buffering options. If no value is specified, __ElasticsearchBufferingHints__ object default values are used.
+-- * 'eduBufferingHints' - The buffering options. If no value is specified, @ElasticsearchBufferingHints@ object default values are used.
 --
 -- * 'eduRetryOptions' - The retry behavior in case Kinesis Data Firehose is unable to deliver documents to Amazon ES. The default value is 300 (5 minutes).
 --
@@ -916,7 +967,7 @@ elasticsearchDestinationUpdate =
     }
 
 
--- | The Elasticsearch index rotation period. Index rotation appends a time stamp to @IndexName@ to facilitate the expiration of old data. For more information, see <http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation Index Rotation for the Amazon ES Destination> . Default value is @OneDay@ .
+-- | The Elasticsearch index rotation period. Index rotation appends a timestamp to @IndexName@ to facilitate the expiration of old data. For more information, see <http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation Index Rotation for the Amazon ES Destination> . Default value is @OneDay@ .
 eduIndexRotationPeriod :: Lens' ElasticsearchDestinationUpdate (Maybe ElasticsearchIndexRotationPeriod)
 eduIndexRotationPeriod = lens _eduIndexRotationPeriod (\ s a -> s{_eduIndexRotationPeriod = a})
 
@@ -924,7 +975,7 @@ eduIndexRotationPeriod = lens _eduIndexRotationPeriod (\ s a -> s{_eduIndexRotat
 eduTypeName :: Lens' ElasticsearchDestinationUpdate (Maybe Text)
 eduTypeName = lens _eduTypeName (\ s a -> s{_eduTypeName = a})
 
--- | The ARN of the Amazon ES domain. The IAM role must have permissions for @DescribeElasticsearchDomain@ , @DescribeElasticsearchDomains@ , and @DescribeElasticsearchDomainConfig@ after assuming the IAM role specified in __RoleARN__ . For more information, see <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and AWS Service Namespaces> .
+-- | The ARN of the Amazon ES domain. The IAM role must have permissions for @DescribeElasticsearchDomain@ , @DescribeElasticsearchDomains@ , and @DescribeElasticsearchDomainConfig@ after assuming the IAM role specified in @RoleARN@ . For more information, see <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and AWS Service Namespaces> .
 eduDomainARN :: Lens' ElasticsearchDestinationUpdate (Maybe Text)
 eduDomainARN = lens _eduDomainARN (\ s a -> s{_eduDomainARN = a})
 
@@ -936,7 +987,7 @@ eduCloudWatchLoggingOptions = lens _eduCloudWatchLoggingOptions (\ s a -> s{_edu
 eduS3Update :: Lens' ElasticsearchDestinationUpdate (Maybe S3DestinationUpdate)
 eduS3Update = lens _eduS3Update (\ s a -> s{_eduS3Update = a})
 
--- | The buffering options. If no value is specified, __ElasticsearchBufferingHints__ object default values are used.
+-- | The buffering options. If no value is specified, @ElasticsearchBufferingHints@ object default values are used.
 eduBufferingHints :: Lens' ElasticsearchDestinationUpdate (Maybe ElasticsearchBufferingHints)
 eduBufferingHints = lens _eduBufferingHints (\ s a -> s{_eduBufferingHints = a})
 
@@ -1084,6 +1135,7 @@ data ExtendedS3DestinationConfiguration = ExtendedS3DestinationConfiguration'
   , _esdcPrefix :: !(Maybe Text)
   , _esdcCloudWatchLoggingOptions :: !(Maybe CloudWatchLoggingOptions)
   , _esdcS3BackupConfiguration :: !(Maybe S3DestinationConfiguration)
+  , _esdcErrorOutputPrefix :: !(Maybe Text)
   , _esdcEncryptionConfiguration :: !(Maybe EncryptionConfiguration)
   , _esdcCompressionFormat :: !(Maybe CompressionFormat)
   , _esdcBufferingHints :: !(Maybe BufferingHints)
@@ -1105,6 +1157,8 @@ data ExtendedS3DestinationConfiguration = ExtendedS3DestinationConfiguration'
 -- * 'esdcCloudWatchLoggingOptions' - The Amazon CloudWatch logging options for your delivery stream.
 --
 -- * 'esdcS3BackupConfiguration' - The configuration for backup in Amazon S3.
+--
+-- * 'esdcErrorOutputPrefix' - A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing them to S3. This prefix appears immediately following the bucket name.
 --
 -- * 'esdcEncryptionConfiguration' - The encryption configuration. If no value is specified, the default is no encryption.
 --
@@ -1129,6 +1183,7 @@ extendedS3DestinationConfiguration pRoleARN_ pBucketARN_ =
     , _esdcPrefix = Nothing
     , _esdcCloudWatchLoggingOptions = Nothing
     , _esdcS3BackupConfiguration = Nothing
+    , _esdcErrorOutputPrefix = Nothing
     , _esdcEncryptionConfiguration = Nothing
     , _esdcCompressionFormat = Nothing
     , _esdcBufferingHints = Nothing
@@ -1154,6 +1209,10 @@ esdcCloudWatchLoggingOptions = lens _esdcCloudWatchLoggingOptions (\ s a -> s{_e
 -- | The configuration for backup in Amazon S3.
 esdcS3BackupConfiguration :: Lens' ExtendedS3DestinationConfiguration (Maybe S3DestinationConfiguration)
 esdcS3BackupConfiguration = lens _esdcS3BackupConfiguration (\ s a -> s{_esdcS3BackupConfiguration = a})
+
+-- | A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing them to S3. This prefix appears immediately following the bucket name.
+esdcErrorOutputPrefix :: Lens' ExtendedS3DestinationConfiguration (Maybe Text)
+esdcErrorOutputPrefix = lens _esdcErrorOutputPrefix (\ s a -> s{_esdcErrorOutputPrefix = a})
 
 -- | The encryption configuration. If no value is specified, the default is no encryption.
 esdcEncryptionConfiguration :: Lens' ExtendedS3DestinationConfiguration (Maybe EncryptionConfiguration)
@@ -1200,6 +1259,7 @@ instance ToJSON ExtendedS3DestinationConfiguration
                     _esdcCloudWatchLoggingOptions,
                   ("S3BackupConfiguration" .=) <$>
                     _esdcS3BackupConfiguration,
+                  ("ErrorOutputPrefix" .=) <$> _esdcErrorOutputPrefix,
                   ("EncryptionConfiguration" .=) <$>
                     _esdcEncryptionConfiguration,
                   ("CompressionFormat" .=) <$> _esdcCompressionFormat,
@@ -1221,6 +1281,7 @@ data ExtendedS3DestinationDescription = ExtendedS3DestinationDescription'
   , _esddS3BackupDescription :: !(Maybe S3DestinationDescription)
   , _esddPrefix :: !(Maybe Text)
   , _esddCloudWatchLoggingOptions :: !(Maybe CloudWatchLoggingOptions)
+  , _esddErrorOutputPrefix :: !(Maybe Text)
   , _esddDataFormatConversionConfiguration :: !(Maybe DataFormatConversionConfiguration)
   , _esddProcessingConfiguration :: !(Maybe ProcessingConfiguration)
   , _esddRoleARN :: !Text
@@ -1242,6 +1303,8 @@ data ExtendedS3DestinationDescription = ExtendedS3DestinationDescription'
 -- * 'esddPrefix' - The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered Amazon S3 files. You can specify an extra prefix to be added in front of the time format prefix. If the prefix ends with a slash, it appears as a folder in the S3 bucket. For more information, see <http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name Amazon S3 Object Name Format> in the /Amazon Kinesis Data Firehose Developer Guide/ .
 --
 -- * 'esddCloudWatchLoggingOptions' - The Amazon CloudWatch logging options for your delivery stream.
+--
+-- * 'esddErrorOutputPrefix' - A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing them to S3. This prefix appears immediately following the bucket name.
 --
 -- * 'esddDataFormatConversionConfiguration' - The serializer, deserializer, and schema for converting data from the JSON format to the Parquet or ORC format before writing it to Amazon S3.
 --
@@ -1269,6 +1332,7 @@ extendedS3DestinationDescription pRoleARN_ pBucketARN_ pBufferingHints_ pCompres
     , _esddS3BackupDescription = Nothing
     , _esddPrefix = Nothing
     , _esddCloudWatchLoggingOptions = Nothing
+    , _esddErrorOutputPrefix = Nothing
     , _esddDataFormatConversionConfiguration = Nothing
     , _esddProcessingConfiguration = Nothing
     , _esddRoleARN = pRoleARN_
@@ -1294,6 +1358,10 @@ esddPrefix = lens _esddPrefix (\ s a -> s{_esddPrefix = a})
 -- | The Amazon CloudWatch logging options for your delivery stream.
 esddCloudWatchLoggingOptions :: Lens' ExtendedS3DestinationDescription (Maybe CloudWatchLoggingOptions)
 esddCloudWatchLoggingOptions = lens _esddCloudWatchLoggingOptions (\ s a -> s{_esddCloudWatchLoggingOptions = a})
+
+-- | A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing them to S3. This prefix appears immediately following the bucket name.
+esddErrorOutputPrefix :: Lens' ExtendedS3DestinationDescription (Maybe Text)
+esddErrorOutputPrefix = lens _esddErrorOutputPrefix (\ s a -> s{_esddErrorOutputPrefix = a})
 
 -- | The serializer, deserializer, and schema for converting data from the JSON format to the Parquet or ORC format before writing it to Amazon S3.
 esddDataFormatConversionConfiguration :: Lens' ExtendedS3DestinationDescription (Maybe DataFormatConversionConfiguration)
@@ -1333,6 +1401,7 @@ instance FromJSON ExtendedS3DestinationDescription
                      (x .:? "S3BackupDescription")
                      <*> (x .:? "Prefix")
                      <*> (x .:? "CloudWatchLoggingOptions")
+                     <*> (x .:? "ErrorOutputPrefix")
                      <*> (x .:? "DataFormatConversionConfiguration")
                      <*> (x .:? "ProcessingConfiguration")
                      <*> (x .: "RoleARN")
@@ -1356,6 +1425,7 @@ data ExtendedS3DestinationUpdate = ExtendedS3DestinationUpdate'
   { _esduS3BackupMode :: !(Maybe S3BackupMode)
   , _esduPrefix :: !(Maybe Text)
   , _esduCloudWatchLoggingOptions :: !(Maybe CloudWatchLoggingOptions)
+  , _esduErrorOutputPrefix :: !(Maybe Text)
   , _esduS3BackupUpdate :: !(Maybe S3DestinationUpdate)
   , _esduEncryptionConfiguration :: !(Maybe EncryptionConfiguration)
   , _esduCompressionFormat :: !(Maybe CompressionFormat)
@@ -1376,6 +1446,8 @@ data ExtendedS3DestinationUpdate = ExtendedS3DestinationUpdate'
 -- * 'esduPrefix' - The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered Amazon S3 files. You can specify an extra prefix to be added in front of the time format prefix. If the prefix ends with a slash, it appears as a folder in the S3 bucket. For more information, see <http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name Amazon S3 Object Name Format> in the /Amazon Kinesis Data Firehose Developer Guide/ .
 --
 -- * 'esduCloudWatchLoggingOptions' - The Amazon CloudWatch logging options for your delivery stream.
+--
+-- * 'esduErrorOutputPrefix' - A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing them to S3. This prefix appears immediately following the bucket name.
 --
 -- * 'esduS3BackupUpdate' - The Amazon S3 destination for backup.
 --
@@ -1399,6 +1471,7 @@ extendedS3DestinationUpdate =
     { _esduS3BackupMode = Nothing
     , _esduPrefix = Nothing
     , _esduCloudWatchLoggingOptions = Nothing
+    , _esduErrorOutputPrefix = Nothing
     , _esduS3BackupUpdate = Nothing
     , _esduEncryptionConfiguration = Nothing
     , _esduCompressionFormat = Nothing
@@ -1421,6 +1494,10 @@ esduPrefix = lens _esduPrefix (\ s a -> s{_esduPrefix = a})
 -- | The Amazon CloudWatch logging options for your delivery stream.
 esduCloudWatchLoggingOptions :: Lens' ExtendedS3DestinationUpdate (Maybe CloudWatchLoggingOptions)
 esduCloudWatchLoggingOptions = lens _esduCloudWatchLoggingOptions (\ s a -> s{_esduCloudWatchLoggingOptions = a})
+
+-- | A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing them to S3. This prefix appears immediately following the bucket name.
+esduErrorOutputPrefix :: Lens' ExtendedS3DestinationUpdate (Maybe Text)
+esduErrorOutputPrefix = lens _esduErrorOutputPrefix (\ s a -> s{_esduErrorOutputPrefix = a})
 
 -- | The Amazon S3 destination for backup.
 esduS3BackupUpdate :: Lens' ExtendedS3DestinationUpdate (Maybe S3DestinationUpdate)
@@ -1466,6 +1543,7 @@ instance ToJSON ExtendedS3DestinationUpdate where
                   ("Prefix" .=) <$> _esduPrefix,
                   ("CloudWatchLoggingOptions" .=) <$>
                     _esduCloudWatchLoggingOptions,
+                  ("ErrorOutputPrefix" .=) <$> _esduErrorOutputPrefix,
                   ("S3BackupUpdate" .=) <$> _esduS3BackupUpdate,
                   ("EncryptionConfiguration" .=) <$>
                     _esduEncryptionConfiguration,
@@ -1492,13 +1570,13 @@ newtype HiveJSONSerDe = HiveJSONSerDe'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'hjsdTimestampFormats' - Indicates how you want Kinesis Data Firehose to parse the date and time stamps that may be present in your input data JSON. To specify these format strings, follow the pattern syntax of JodaTime's DateTimeFormat format strings. For more information, see <https://www.joda.org/joda-time/apidocs/org/joda/time/format/DateTimeFormat.html Class DateTimeFormat> . You can also use the special value @millis@ to parse time stamps in epoch milliseconds. If you don't specify a format, Kinesis Data Firehose uses @java.sql.Timestamp::valueOf@ by default.
+-- * 'hjsdTimestampFormats' - Indicates how you want Kinesis Data Firehose to parse the date and timestamps that may be present in your input data JSON. To specify these format strings, follow the pattern syntax of JodaTime's DateTimeFormat format strings. For more information, see <https://www.joda.org/joda-time/apidocs/org/joda/time/format/DateTimeFormat.html Class DateTimeFormat> . You can also use the special value @millis@ to parse timestamps in epoch milliseconds. If you don't specify a format, Kinesis Data Firehose uses @java.sql.Timestamp::valueOf@ by default.
 hiveJSONSerDe
     :: HiveJSONSerDe
 hiveJSONSerDe = HiveJSONSerDe' {_hjsdTimestampFormats = Nothing}
 
 
--- | Indicates how you want Kinesis Data Firehose to parse the date and time stamps that may be present in your input data JSON. To specify these format strings, follow the pattern syntax of JodaTime's DateTimeFormat format strings. For more information, see <https://www.joda.org/joda-time/apidocs/org/joda/time/format/DateTimeFormat.html Class DateTimeFormat> . You can also use the special value @millis@ to parse time stamps in epoch milliseconds. If you don't specify a format, Kinesis Data Firehose uses @java.sql.Timestamp::valueOf@ by default.
+-- | Indicates how you want Kinesis Data Firehose to parse the date and timestamps that may be present in your input data JSON. To specify these format strings, follow the pattern syntax of JodaTime's DateTimeFormat format strings. For more information, see <https://www.joda.org/joda-time/apidocs/org/joda/time/format/DateTimeFormat.html Class DateTimeFormat> . You can also use the special value @millis@ to parse timestamps in epoch milliseconds. If you don't specify a format, Kinesis Data Firehose uses @java.sql.Timestamp::valueOf@ by default.
 hjsdTimestampFormats :: Lens' HiveJSONSerDe [Text]
 hjsdTimestampFormats = lens _hjsdTimestampFormats (\ s a -> s{_hjsdTimestampFormats = a}) . _Default . _Coerce
 
@@ -1667,7 +1745,7 @@ data KinesisStreamSourceDescription = KinesisStreamSourceDescription'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'kssdDeliveryStartTimestamp' - Kinesis Data Firehose starts retrieving records from the Kinesis data stream starting with this time stamp.
+-- * 'kssdDeliveryStartTimestamp' - Kinesis Data Firehose starts retrieving records from the Kinesis data stream starting with this timestamp.
 --
 -- * 'kssdKinesisStreamARN' - The Amazon Resource Name (ARN) of the source Kinesis data stream. For more information, see <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams Amazon Kinesis Data Streams ARN Format> .
 --
@@ -1682,7 +1760,7 @@ kinesisStreamSourceDescription =
     }
 
 
--- | Kinesis Data Firehose starts retrieving records from the Kinesis data stream starting with this time stamp.
+-- | Kinesis Data Firehose starts retrieving records from the Kinesis data stream starting with this timestamp.
 kssdDeliveryStartTimestamp :: Lens' KinesisStreamSourceDescription (Maybe UTCTime)
 kssdDeliveryStartTimestamp = lens _kssdDeliveryStartTimestamp (\ s a -> s{_kssdDeliveryStartTimestamp = a}) . mapping _Time
 
@@ -2268,14 +2346,14 @@ newtype Record = Record'
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rData' - The data blob, which is base64-encoded when the blob is serialized. The maximum size of the data blob, before base64-encoding, is 1,000 KB.-- /Note:/ This 'Lens' automatically encodes and decodes Base64 data. The underlying isomorphism will encode to Base64 representation during serialisation, and decode from Base64 representation during deserialisation. This 'Lens' accepts and returns only raw unencoded data.
+-- * 'rData' - The data blob, which is base64-encoded when the blob is serialized. The maximum size of the data blob, before base64-encoding, is 1,000 KiB.-- /Note:/ This 'Lens' automatically encodes and decodes Base64 data. The underlying isomorphism will encode to Base64 representation during serialisation, and decode from Base64 representation during deserialisation. This 'Lens' accepts and returns only raw unencoded data.
 record
     :: ByteString -- ^ 'rData'
     -> Record
 record pData_ = Record' {_rData = _Base64 # pData_}
 
 
--- | The data blob, which is base64-encoded when the blob is serialized. The maximum size of the data blob, before base64-encoding, is 1,000 KB.-- /Note:/ This 'Lens' automatically encodes and decodes Base64 data. The underlying isomorphism will encode to Base64 representation during serialisation, and decode from Base64 representation during deserialisation. This 'Lens' accepts and returns only raw unencoded data.
+-- | The data blob, which is base64-encoded when the blob is serialized. The maximum size of the data blob, before base64-encoding, is 1,000 KiB.-- /Note:/ This 'Lens' automatically encodes and decodes Base64 data. The underlying isomorphism will encode to Base64 representation during serialisation, and decode from Base64 representation during deserialisation. This 'Lens' accepts and returns only raw unencoded data.
 rData :: Lens' Record ByteString
 rData = lens _rData (\ s a -> s{_rData = a}) . _Base64
 
@@ -2730,6 +2808,7 @@ instance ToJSON RedshiftRetryOptions where
 data S3DestinationConfiguration = S3DestinationConfiguration'
   { _sdcPrefix                   :: !(Maybe Text)
   , _sdcCloudWatchLoggingOptions :: !(Maybe CloudWatchLoggingOptions)
+  , _sdcErrorOutputPrefix        :: !(Maybe Text)
   , _sdcEncryptionConfiguration  :: !(Maybe EncryptionConfiguration)
   , _sdcCompressionFormat        :: !(Maybe CompressionFormat)
   , _sdcBufferingHints           :: !(Maybe BufferingHints)
@@ -2745,6 +2824,8 @@ data S3DestinationConfiguration = S3DestinationConfiguration'
 -- * 'sdcPrefix' - The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered Amazon S3 files. You can specify an extra prefix to be added in front of the time format prefix. If the prefix ends with a slash, it appears as a folder in the S3 bucket. For more information, see <http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name Amazon S3 Object Name Format> in the /Amazon Kinesis Data Firehose Developer Guide/ .
 --
 -- * 'sdcCloudWatchLoggingOptions' - The CloudWatch logging options for your delivery stream.
+--
+-- * 'sdcErrorOutputPrefix' - A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing them to S3. This prefix appears immediately following the bucket name.
 --
 -- * 'sdcEncryptionConfiguration' - The encryption configuration. If no value is specified, the default is no encryption.
 --
@@ -2763,6 +2844,7 @@ s3DestinationConfiguration pRoleARN_ pBucketARN_ =
   S3DestinationConfiguration'
     { _sdcPrefix = Nothing
     , _sdcCloudWatchLoggingOptions = Nothing
+    , _sdcErrorOutputPrefix = Nothing
     , _sdcEncryptionConfiguration = Nothing
     , _sdcCompressionFormat = Nothing
     , _sdcBufferingHints = Nothing
@@ -2778,6 +2860,10 @@ sdcPrefix = lens _sdcPrefix (\ s a -> s{_sdcPrefix = a})
 -- | The CloudWatch logging options for your delivery stream.
 sdcCloudWatchLoggingOptions :: Lens' S3DestinationConfiguration (Maybe CloudWatchLoggingOptions)
 sdcCloudWatchLoggingOptions = lens _sdcCloudWatchLoggingOptions (\ s a -> s{_sdcCloudWatchLoggingOptions = a})
+
+-- | A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing them to S3. This prefix appears immediately following the bucket name.
+sdcErrorOutputPrefix :: Lens' S3DestinationConfiguration (Maybe Text)
+sdcErrorOutputPrefix = lens _sdcErrorOutputPrefix (\ s a -> s{_sdcErrorOutputPrefix = a})
 
 -- | The encryption configuration. If no value is specified, the default is no encryption.
 sdcEncryptionConfiguration :: Lens' S3DestinationConfiguration (Maybe EncryptionConfiguration)
@@ -2810,6 +2896,7 @@ instance ToJSON S3DestinationConfiguration where
                  [("Prefix" .=) <$> _sdcPrefix,
                   ("CloudWatchLoggingOptions" .=) <$>
                     _sdcCloudWatchLoggingOptions,
+                  ("ErrorOutputPrefix" .=) <$> _sdcErrorOutputPrefix,
                   ("EncryptionConfiguration" .=) <$>
                     _sdcEncryptionConfiguration,
                   ("CompressionFormat" .=) <$> _sdcCompressionFormat,
@@ -2825,6 +2912,7 @@ instance ToJSON S3DestinationConfiguration where
 data S3DestinationDescription = S3DestinationDescription'
   { _s3Prefix                   :: !(Maybe Text)
   , _s3CloudWatchLoggingOptions :: !(Maybe CloudWatchLoggingOptions)
+  , _s3ErrorOutputPrefix        :: !(Maybe Text)
   , _s3RoleARN                  :: !Text
   , _s3BucketARN                :: !Text
   , _s3BufferingHints           :: !BufferingHints
@@ -2840,6 +2928,8 @@ data S3DestinationDescription = S3DestinationDescription'
 -- * 's3Prefix' - The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered Amazon S3 files. You can specify an extra prefix to be added in front of the time format prefix. If the prefix ends with a slash, it appears as a folder in the S3 bucket. For more information, see <http://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#s3-object-name Amazon S3 Object Name Format> in the /Amazon Kinesis Data Firehose Developer Guide/ .
 --
 -- * 's3CloudWatchLoggingOptions' - The Amazon CloudWatch logging options for your delivery stream.
+--
+-- * 's3ErrorOutputPrefix' - A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing them to S3. This prefix appears immediately following the bucket name.
 --
 -- * 's3RoleARN' - The Amazon Resource Name (ARN) of the AWS credentials. For more information, see <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and AWS Service Namespaces> .
 --
@@ -2861,6 +2951,7 @@ s3DestinationDescription pRoleARN_ pBucketARN_ pBufferingHints_ pCompressionForm
   S3DestinationDescription'
     { _s3Prefix = Nothing
     , _s3CloudWatchLoggingOptions = Nothing
+    , _s3ErrorOutputPrefix = Nothing
     , _s3RoleARN = pRoleARN_
     , _s3BucketARN = pBucketARN_
     , _s3BufferingHints = pBufferingHints_
@@ -2876,6 +2967,10 @@ s3Prefix = lens _s3Prefix (\ s a -> s{_s3Prefix = a})
 -- | The Amazon CloudWatch logging options for your delivery stream.
 s3CloudWatchLoggingOptions :: Lens' S3DestinationDescription (Maybe CloudWatchLoggingOptions)
 s3CloudWatchLoggingOptions = lens _s3CloudWatchLoggingOptions (\ s a -> s{_s3CloudWatchLoggingOptions = a})
+
+-- | A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing them to S3. This prefix appears immediately following the bucket name.
+s3ErrorOutputPrefix :: Lens' S3DestinationDescription (Maybe Text)
+s3ErrorOutputPrefix = lens _s3ErrorOutputPrefix (\ s a -> s{_s3ErrorOutputPrefix = a})
 
 -- | The Amazon Resource Name (ARN) of the AWS credentials. For more information, see <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and AWS Service Namespaces> .
 s3RoleARN :: Lens' S3DestinationDescription Text
@@ -2904,6 +2999,7 @@ instance FromJSON S3DestinationDescription where
                  S3DestinationDescription' <$>
                    (x .:? "Prefix") <*>
                      (x .:? "CloudWatchLoggingOptions")
+                     <*> (x .:? "ErrorOutputPrefix")
                      <*> (x .: "RoleARN")
                      <*> (x .: "BucketARN")
                      <*> (x .: "BufferingHints")
@@ -2922,6 +3018,7 @@ instance NFData S3DestinationDescription where
 data S3DestinationUpdate = S3DestinationUpdate'
   { _sPrefix                   :: !(Maybe Text)
   , _sCloudWatchLoggingOptions :: !(Maybe CloudWatchLoggingOptions)
+  , _sErrorOutputPrefix        :: !(Maybe Text)
   , _sEncryptionConfiguration  :: !(Maybe EncryptionConfiguration)
   , _sCompressionFormat        :: !(Maybe CompressionFormat)
   , _sBufferingHints           :: !(Maybe BufferingHints)
@@ -2938,6 +3035,8 @@ data S3DestinationUpdate = S3DestinationUpdate'
 --
 -- * 'sCloudWatchLoggingOptions' - The CloudWatch logging options for your delivery stream.
 --
+-- * 'sErrorOutputPrefix' - A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing them to S3. This prefix appears immediately following the bucket name.
+--
 -- * 'sEncryptionConfiguration' - The encryption configuration. If no value is specified, the default is no encryption.
 --
 -- * 'sCompressionFormat' - The compression format. If no value is specified, the default is @UNCOMPRESSED@ . The compression formats @SNAPPY@ or @ZIP@ cannot be specified for Amazon Redshift destinations because they are not supported by the Amazon Redshift @COPY@ operation that reads from the S3 bucket.
@@ -2953,6 +3052,7 @@ s3DestinationUpdate =
   S3DestinationUpdate'
     { _sPrefix = Nothing
     , _sCloudWatchLoggingOptions = Nothing
+    , _sErrorOutputPrefix = Nothing
     , _sEncryptionConfiguration = Nothing
     , _sCompressionFormat = Nothing
     , _sBufferingHints = Nothing
@@ -2968,6 +3068,10 @@ sPrefix = lens _sPrefix (\ s a -> s{_sPrefix = a})
 -- | The CloudWatch logging options for your delivery stream.
 sCloudWatchLoggingOptions :: Lens' S3DestinationUpdate (Maybe CloudWatchLoggingOptions)
 sCloudWatchLoggingOptions = lens _sCloudWatchLoggingOptions (\ s a -> s{_sCloudWatchLoggingOptions = a})
+
+-- | A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing them to S3. This prefix appears immediately following the bucket name.
+sErrorOutputPrefix :: Lens' S3DestinationUpdate (Maybe Text)
+sErrorOutputPrefix = lens _sErrorOutputPrefix (\ s a -> s{_sErrorOutputPrefix = a})
 
 -- | The encryption configuration. If no value is specified, the default is no encryption.
 sEncryptionConfiguration :: Lens' S3DestinationUpdate (Maybe EncryptionConfiguration)
@@ -3000,6 +3104,7 @@ instance ToJSON S3DestinationUpdate where
                  [("Prefix" .=) <$> _sPrefix,
                   ("CloudWatchLoggingOptions" .=) <$>
                     _sCloudWatchLoggingOptions,
+                  ("ErrorOutputPrefix" .=) <$> _sErrorOutputPrefix,
                   ("EncryptionConfiguration" .=) <$>
                     _sEncryptionConfiguration,
                   ("CompressionFormat" .=) <$> _sCompressionFormat,

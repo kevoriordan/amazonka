@@ -19,6 +19,8 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Sets lifecycle configuration for your bucket. If a lifecycle configuration exists, it replaces it.
+--
+--
 module Network.AWS.S3.PutBucketLifecycleConfiguration
     (
     -- * Creating a Request
