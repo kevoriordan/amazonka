@@ -206,6 +206,7 @@ module Network.AWS.Batch.Types
     , jdCreatedAt
     , jdRetryStrategy
     , jdAttempts
+    , jdStartedAt
     , jdDependsOn
     , jdContainer
     , jdParameters
@@ -216,7 +217,6 @@ module Network.AWS.Batch.Types
     , jdJobId
     , jdJobQueue
     , jdStatus
-    , jdStartedAt
     , jdJobDefinition
 
     -- * JobQueueDetail
