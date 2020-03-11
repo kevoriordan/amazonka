@@ -1324,7 +1324,6 @@ data JobDetail = JobDetail'
   , _jdCreatedAt       :: !(Maybe Integer)
   , _jdRetryStrategy   :: !(Maybe RetryStrategy)
   , _jdAttempts        :: !(Maybe [AttemptDetail])
-  , _jdStartedAt       :: !(Maybe Integer)
   , _jdDependsOn       :: !(Maybe [JobDependency])
   , _jdContainer       :: !(Maybe ContainerDetail)
   , _jdParameters      :: !(Maybe (Map Text Text))
@@ -1335,6 +1334,7 @@ data JobDetail = JobDetail'
   , _jdJobId           :: !Text
   , _jdJobQueue        :: !Text
   , _jdStatus          :: !JobStatus
+  , _jdStartedAt       :: !Integer
   , _jdJobDefinition   :: !Text
   } deriving (Eq, Read, Show, Data, Typeable, Generic)
 
@@ -1350,8 +1350,6 @@ data JobDetail = JobDetail'
 -- * 'jdRetryStrategy' - The retry strategy to use for this job if an attempt fails.
 --
 -- * 'jdAttempts' - A list of job attempts associated with this job.
---
--- * 'jdStartedAt' - The Unix time stamp (in seconds and milliseconds) for when the job was started (when the job transitioned from the @STARTING@ state to the @RUNNING@ state).
 --
 -- * 'jdDependsOn' - A list of job names or IDs on which this job depends.
 --
@@ -1373,21 +1371,23 @@ data JobDetail = JobDetail'
 --
 -- * 'jdStatus' - The current status for the job.
 --
+-- * 'jdStartedAt' - The Unix time stamp (in seconds and milliseconds) for when the job was started (when the job transitioned from the @STARTING@ state to the @RUNNING@ state).
+--
 -- * 'jdJobDefinition' - The job definition that is used by this job.
 jobDetail
     :: Text -- ^ 'jdJobName'
     -> Text -- ^ 'jdJobId'
     -> Text -- ^ 'jdJobQueue'
     -> JobStatus -- ^ 'jdStatus'
+    -> Integer -- ^ 'jdStartedAt'
     -> Text -- ^ 'jdJobDefinition'
     -> JobDetail
-jobDetail pJobName_ pJobId_ pJobQueue_ pStatus_ pJobDefinition_ =
+jobDetail pJobName_ pJobId_ pJobQueue_ pStatus_ pStartedAt_ pJobDefinition_ =
   JobDetail'
     { _jdStoppedAt = Nothing
     , _jdCreatedAt = Nothing
     , _jdRetryStrategy = Nothing
     , _jdAttempts = Nothing
-    , _jdStartedAt = Nothing
     , _jdDependsOn = Nothing
     , _jdContainer = Nothing
     , _jdParameters = Nothing
@@ -1398,6 +1398,7 @@ jobDetail pJobName_ pJobId_ pJobQueue_ pStatus_ pJobDefinition_ =
     , _jdJobId = pJobId_
     , _jdJobQueue = pJobQueue_
     , _jdStatus = pStatus_
+    , _jdStartedAt = pStartedAt_
     , _jdJobDefinition = pJobDefinition_
     }
 
@@ -1417,10 +1418,6 @@ jdRetryStrategy = lens _jdRetryStrategy (\ s a -> s{_jdRetryStrategy = a})
 -- | A list of job attempts associated with this job.
 jdAttempts :: Lens' JobDetail [AttemptDetail]
 jdAttempts = lens _jdAttempts (\ s a -> s{_jdAttempts = a}) . _Default . _Coerce
-
--- | The Unix time stamp (in seconds and milliseconds) for when the job was started (when the job transitioned from the @STARTING@ state to the @RUNNING@ state).
-jdStartedAt :: Lens' JobDetail (Maybe Integer)
-jdStartedAt = lens _jdStartedAt (\ s a -> s{_jdStartedAt = a})
 
 -- | A list of job names or IDs on which this job depends.
 jdDependsOn :: Lens' JobDetail [JobDependency]
@@ -1462,6 +1459,10 @@ jdJobQueue = lens _jdJobQueue (\ s a -> s{_jdJobQueue = a})
 jdStatus :: Lens' JobDetail JobStatus
 jdStatus = lens _jdStatus (\ s a -> s{_jdStatus = a})
 
+-- | The Unix time stamp (in seconds and milliseconds) for when the job was started (when the job transitioned from the @STARTING@ state to the @RUNNING@ state).
+jdStartedAt :: Lens' JobDetail Integer
+jdStartedAt = lens _jdStartedAt (\ s a -> s{_jdStartedAt = a})
+
 -- | The job definition that is used by this job.
 jdJobDefinition :: Lens' JobDetail Text
 jdJobDefinition = lens _jdJobDefinition (\ s a -> s{_jdJobDefinition = a})
@@ -1474,7 +1475,6 @@ instance FromJSON JobDetail where
                    (x .:? "stoppedAt") <*> (x .:? "createdAt") <*>
                      (x .:? "retryStrategy")
                      <*> (x .:? "attempts" .!= mempty)
-                     <*> (x .:? "startedAt")
                      <*> (x .:? "dependsOn" .!= mempty)
                      <*> (x .:? "container")
                      <*> (x .:? "parameters" .!= mempty)
@@ -1485,6 +1485,7 @@ instance FromJSON JobDetail where
                      <*> (x .: "jobId")
                      <*> (x .: "jobQueue")
                      <*> (x .: "status")
+                     <*> (x .: "startedAt")
                      <*> (x .: "jobDefinition"))
 
 instance Hashable JobDetail where

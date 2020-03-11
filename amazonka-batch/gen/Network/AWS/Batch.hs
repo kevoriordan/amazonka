@@ -273,7 +273,6 @@ module Network.AWS.Batch
     , jdCreatedAt
     , jdRetryStrategy
     , jdAttempts
-    , jdStartedAt
     , jdDependsOn
     , jdContainer
     , jdParameters
@@ -284,6 +283,7 @@ module Network.AWS.Batch
     , jdJobId
     , jdJobQueue
     , jdStatus
+    , jdStartedAt
     , jdJobDefinition
 
     -- ** JobQueueDetail
