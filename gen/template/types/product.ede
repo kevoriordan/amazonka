@@ -14,7 +14,7 @@ module {{ moduleName }} where
 {% for import in moduleImports %}
 import {{ import.value }}
 {% endfor %}
-{% for shape in shapes %}
+{% for shape in productShapes %}
   {% case shape.value.type %}
   {% when "product" %}
 

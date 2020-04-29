@@ -24,6 +24,7 @@ module Gen.Tree
     , populate
     ) where
 
+
 import Control.Lens         (each, (^.), (^..))
 import Control.Monad
 import Control.Monad.Except
@@ -46,9 +47,15 @@ import System.Directory.Tree hiding (file)
 
 import Text.EDE hiding (failure, render)
 
-import qualified Data.Text      as Text
-import qualified Data.Text.Lazy as LText
-import qualified Gen.JSON       as JS
+import qualified Data.HashMap.Strict as Map
+import qualified Data.List           as List
+import qualified Data.Text           as Text
+import qualified Data.Text.Lazy      as LText
+import qualified Gen.JSON            as JS
+
+
+import Debug.Trace
+
 
 root :: AnchoredDirTree a -> Path
 root (p :/ d) = decodeString p </> decodeString (name d)
@@ -88,7 +95,9 @@ populate d Templates{..} l = (encodeString d :/) . dir lib <$> layout
                     [ dir svc $
                         [ dir "Types"
                             [ mod (l ^. sumNS) (sumImports l) sumTemplate
-                            , mod (l ^. productNS) (productImports l) productTemplate
+                            -- , mod (l ^. productNS) (productImports l) productTemplate
+                            , modEnv (l ^. productChunkNS 0) (productImports l) productTemplate (productEnvChunk 0)
+                            , modEnv (l ^. productChunkNS 1) (productImports l) productTemplate (productEnvChunk 1)
                             ]
                         , mod (l ^. typesNS) (typeImports l) typesTemplate
                         , mod (l ^. waitersNS) (waiterImports l) waitersTemplate
@@ -149,14 +158,38 @@ populate d Templates{..} l = (encodeString d :/) . dir lib <$> layout
       where
        n = typeId (_opName o)
 
+    modEnv :: NS -> [NS] -> Template -> Either Error Value -> DirTree (Either Error Touch)
+    modEnv n is t e = write $ module' n is t e
+
     mod :: NS -> [NS] -> Template -> DirTree (Either Error Touch)
-    mod n is t = write $ module' n is t (pure env)
+    mod n is t = modEnv n is t (pure env)
 
     file :: Path -> Template -> DirTree (Either Error Touch)
     file p t = write $ file' p t (pure env)
 
     env :: Value
     env = toJSON l
+
+    productShapes :: [SData]
+    productShapes =
+      filter (\s -> case s
+                      of Prod _ _ _ -> True
+                         _          -> False
+             ) (Map.elems $ l ^. service . shapes)
+
+    productEnv :: [SData] -> Either Error Value
+    productEnv shps = do
+      x <- JS.objectErr (show (l ^. metadata . serviceFullName)) l
+      pure $! Object $ x <> fromPairs [ "productShapes" .= shps ]
+
+    productEnvChunk :: Int -> Either Error Value
+    productEnvChunk i =
+      let (sd0, sd1) = List.splitAt (List.length productShapes `div` 2) productShapes
+       in case i
+            of 0 -> productEnv sd0
+               1 -> productEnv sd1
+               _ -> error "boo"
+
 
 operation' :: Library
            -> Template

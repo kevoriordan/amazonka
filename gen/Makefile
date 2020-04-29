@@ -4,7 +4,7 @@ MODEL_DIR := model
 OUT_DIR   := ..
 BIN_DIR   := ../bin
 GENERATE  := $(BIN_DIR)/amazonka-gen
-STYLISH   := $(BIN_DIR)/stylish-haskell
+STYLISH   := stylish-haskell
 
 define version =
 $(shell sed -n 's/^version: *\([0-9]*\.[0-9]*\.[0-9]\).*$$/\1/p' $(1))
@@ -36,7 +36,7 @@ gen: $(MODEL_DIR) $(GENERATE)
  --retry=$(MODEL_DIR)/_retry.json \
  $(addprefix --model=,$(MODELS))
 
-format: $(STYLISH)
+format:
 	@echo -e '\nFormatting...'
 	@find \
 	$(wildcard $(OUT_DIR)/amazonka-*/gen) \
@@ -46,10 +46,7 @@ format: $(STYLISH)
 	-exec sh -c "printf ' -> %s\n' $1 {}; $(STYLISH) -i {}" \;
 
 $(GENERATE): $(BIN_DIR)
-	stack install --nix amazonka-gen
-
-$(STYLISH): $(BIN_DIR)
-	stack install --nix stylish-haskell
+	stack install amazonka-gen
 
 $(BIN_DIR):
 	mkdir $@
@@ -59,7 +56,7 @@ clean:
 	rm -rf $(MODEL_DIR) $(OUT_DIR)/amazonka-*/gen
 
 full-clean: clean
-	rm -rf vendor $(GENERATE) $(STYLISH)
+	rm -rf vendor $(GENERATE)
 
 $(MODEL_DIR): vendor/botocore
 	cp -rf vendor/botocore/botocore/data/ $@

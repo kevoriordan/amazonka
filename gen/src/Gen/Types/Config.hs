@@ -36,6 +36,7 @@ import Data.Aeson
 import Data.List   (sort, sortOn, (\\))
 import Data.Monoid hiding (Product, Sum)
 import Data.Ord
+import Data.String
 import Data.Text   (Text)
 import Data.Time
 
@@ -56,6 +57,7 @@ import GHC.TypeLits
 
 import Text.EDE (Template)
 
+import qualified Data.Text                 as Text
 import qualified Data.Text.Lazy            as LText
 import qualified Data.Text.Lazy.Builder    as Build
 import qualified Filesystem.Path.CurrentOS as Path
@@ -205,6 +207,10 @@ sumNS      = typesNS       . to (<> "Sum")
 productNS  = typesNS       . to (<> "Product")
 waitersNS  = libraryNS     . to (<> "Waiters")
 fixturesNS = serviceAbbrev . to (mappend "Test.AWS.Gen" . mkNS)
+
+productChunkNS :: Int -> Getter Library NS
+productChunkNS i = typesNS . to (<> fromString ("Product" <> show i))
+
 
 otherModules :: Getter Library [NS]
 otherModules = to f
