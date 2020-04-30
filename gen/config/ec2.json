@@ -3,7 +3,13 @@
     "ignoredWaiters": [
         "ConsoleOutputAvailable",
         "KeyPairExists",
-        "ImageExists"
+        "ImageExists",
+	"SecurityGroupExists"
+    ],
+    "ignoredPaginators": [
+	"DescribePublicIpv4Pools",
+	"DescribeIpv6Pools",
+	"GetAssociatedIpv6PoolCidrs"
     ],
     "typeModules": [
         "Network.AWS.EC2.Internal"
