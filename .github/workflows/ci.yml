@@ -7,7 +7,7 @@ on:
 
 jobs:
   cabal:
-    name: ${{ matrix.os }} / ghc ${{ matrix.ghc }}
+    name: ${{ matrix.package }} / ${{ matrix.os }} / ghc ${{ matrix.ghc }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -20,6 +20,148 @@ jobs:
           - "8.6.5"
           - "8.8.3"
           # - "8.10.1"
+        package:
+          - core
+          - examples
+          - amazonka
+        # GENERATED
+          - amazonka-alexa-business
+          - amazonka-apigateway
+          - amazonka-application-autoscaling
+          - amazonka-appstream
+          - amazonka-appsync
+          - amazonka-athena
+          - amazonka-autoscaling
+          - amazonka-autoscaling-plans
+          - amazonka-batch
+          - amazonka-budgets
+          - amazonka-certificatemanager
+          - amazonka-certificatemanager-pca
+          - amazonka-cloud9
+          - amazonka-clouddirectory
+          - amazonka-cloudformation
+          - amazonka-cloudfront
+          - amazonka-cloudhsm
+          - amazonka-cloudhsmv2
+          - amazonka-cloudsearch
+          - amazonka-cloudsearch-domains
+          - amazonka-cloudtrail
+          - amazonka-cloudwatch
+          - amazonka-cloudwatch-events
+          - amazonka-cloudwatch-logs
+          - amazonka-codebuild
+          - amazonka-codecommit
+          - amazonka-codedeploy
+          - amazonka-codepipeline
+          - amazonka-codestar
+          - amazonka-cognito-identity
+          - amazonka-cognito-idp
+          - amazonka-cognito-sync
+          - amazonka-comprehend
+          - amazonka-config
+          - amazonka-connect
+          - amazonka-cost-explorer
+          - amazonka-cur
+          - amazonka-datapipeline
+          - amazonka-devicefarm
+          - amazonka-directconnect
+          - amazonka-discovery
+          - amazonka-dms
+          - amazonka-ds
+          - amazonka-dynamodb
+          - amazonka-dynamodb-dax
+          - amazonka-dynamodb-streams
+          - amazonka-ec2
+          - amazonka-ecr
+          - amazonka-ecs
+          - amazonka-efs
+          - amazonka-elasticache
+          - amazonka-elasticbeanstalk
+          - amazonka-elasticsearch
+          - amazonka-elastictranscoder
+          - amazonka-elb
+          - amazonka-elbv2
+          - amazonka-emr
+          - amazonka-fms
+          - amazonka-gamelift
+          - amazonka-glacier
+          - amazonka-glue
+          - amazonka-greengrass
+          - amazonka-guardduty
+          - amazonka-health
+          - amazonka-iam
+          - amazonka-importexport
+          - amazonka-inspector
+          - amazonka-iot
+          - amazonka-iot-analytics
+          - amazonka-iot-dataplane
+          - amazonka-iot-jobs-dataplane
+          - amazonka-kinesis
+          - amazonka-kinesis-analytics
+          - amazonka-kinesis-firehose
+          - amazonka-kinesis-video
+          - amazonka-kinesis-video-archived-media
+          - amazonka-kinesis-video-media
+          - amazonka-kms
+          - amazonka-lambda
+          - amazonka-lex-models
+          - amazonka-lex-runtime
+          - amazonka-lightsail
+          - amazonka-marketplace-analytics
+          - amazonka-marketplace-entitlement
+          - amazonka-marketplace-metering
+          - amazonka-mechanicalturk
+          - amazonka-mediaconvert
+          - amazonka-medialive
+          - amazonka-mediapackage
+          - amazonka-mediastore
+          - amazonka-mediastore-dataplane
+          - amazonka-migrationhub
+          - amazonka-ml
+          - amazonka-mobile
+          - amazonka-mq
+          - amazonka-opsworks
+          - amazonka-opsworks-cm
+          - amazonka-organizations
+          - amazonka-pinpoint
+          - amazonka-polly
+          - amazonka-pricing
+          - amazonka-rds
+          - amazonka-redshift
+          - amazonka-rekognition
+          - amazonka-resourcegroups
+          - amazonka-resourcegroupstagging
+          - amazonka-route53
+          - amazonka-route53-autonaming
+          - amazonka-route53-domains
+          - amazonka-s3
+          - amazonka-s3-encryption
+          - amazonka-sagemaker
+          - amazonka-sagemaker-runtime
+          - amazonka-sdb
+          - amazonka-secretsmanager
+          - amazonka-serverlessrepo
+          - amazonka-servicecatalog
+          - amazonka-ses
+          - amazonka-shield
+          - amazonka-sms
+          - amazonka-snowball
+          - amazonka-sns
+          - amazonka-sqs
+          - amazonka-ssm
+          - amazonka-stepfunctions
+          - amazonka-storagegateway
+          - amazonka-sts
+          - amazonka-support
+          - amazonka-swf
+          - amazonka-transcribe
+          - amazonka-translate
+          - amazonka-waf
+          - amazonka-waf-regional
+          - amazonka-workdocs
+          - amazonka-workmail
+          - amazonka-workspaces
+          - amazonka-xray
         exclude:
           - os: macOS-latest
             ghc: 8.8.3
@@ -45,16 +187,16 @@ jobs:
       name: Cache cabal-store
       with:
         path: ${{ steps.setup-haskell-cabal.outputs.cabal-store }}
-        key: ${{ runner.os }}-${{ matrix.ghc }}-cabal
+        key: ${{ runner.os }}-${{ matrix.ghc }}-${{ matrix.package }}-cabal
 
     - name: Build
       run: |
-        cabal update
-        cabal build all --enable-tests --enable-benchmarks --write-ghc-environment-files=always
+        cabal new-update
+        cabal new-build ${{ matrix.package }} --enable-tests --enable-benchmarks --write-ghc-environment-files=always 
 
     - name: Test
       run: |
-        cabal test all --enable-tests
+        cabal new-test ${{ matrix.package }} --enable-tests ${{ matrix.package }}
 
   stack:
     name: stack / ghc ${{ matrix.ghc }}
