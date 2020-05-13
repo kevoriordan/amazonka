@@ -199,6 +199,7 @@ jobs:
         cabal new-test ${{ matrix.package }} --enable-tests ${{ matrix.package }}
 
   stack:
+    if: false
     name: stack / ghc ${{ matrix.ghc }}
     runs-on: ubuntu-latest
     strategy:
