@@ -1,1 +1,1 @@
-packages: */
+packages: core/*.cabal examples/*.cabal test/*.cabal amazonka-*/*.cabal 
